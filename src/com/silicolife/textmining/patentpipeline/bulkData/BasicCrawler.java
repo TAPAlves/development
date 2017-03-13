@@ -1,4 +1,14 @@
-package com.silicolife.textmining.patentpipeline.bulkdata
+package com.silicolife.textmining.patentpipeline.bulkData;
+
+import java.util.Set;
+import java.util.regex.Pattern;
+
+import org.apache.http.Header;
+
+import edu.uci.ics.crawler4j.crawler.Page;
+import edu.uci.ics.crawler4j.crawler.WebCrawler;
+import edu.uci.ics.crawler4j.parser.HtmlParseData;
+import edu.uci.ics.crawler4j.url.WebURL;
 
 public class BasicCrawler extends WebCrawler {
 

@@ -1,4 +1,14 @@
-package com.silicolife.textmining.patentpipeline.bulkdata
+package com.silicolife.textmining.patentpipeline.bulkData;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import edu.uci.ics.crawler4j.crawler.CrawlConfig;
+import edu.uci.ics.crawler4j.crawler.CrawlController;
+import edu.uci.ics.crawler4j.fetcher.PageFetcher;
+import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
+import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
+
 
 public class BasicCrawlController {
     private static final Logger logger = LoggerFactory.getLogger(BasicCrawlController.class);
