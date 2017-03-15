@@ -38,6 +38,8 @@ public class BDSSYearFileDownloadHandler implements ResponseHandler<File> {
 
 		} catch (IOException e) {
 			e.printStackTrace();
+			file.delete();
+			
 		}
 		return file;
 	}
