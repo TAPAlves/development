@@ -51,6 +51,16 @@ public class BDSSUtils {
 	}
 
 
+	
+	public static void getBulkPatentFile(String filename){
+		
+	}
+	
+	
+	
+	
+	
+	
 	public static void getPatentIDs (){
 
 	}
