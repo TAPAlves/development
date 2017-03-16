@@ -24,6 +24,8 @@ public class BDSSXMLSAXparser extends DefaultHandler{
 	String inventors;
 	String patentID;
 	String claims;
+	boolean abstractInit=false;
+	String abtract;
 
 	boolean fillElement=false;
 	private String claimIdentifier;
@@ -53,6 +55,10 @@ public class BDSSXMLSAXparser extends DefaultHandler{
 		}
 		if (elementName.equalsIgnoreCase("claim")){
 			claimIdentifier=attributes.getValue("id");
+		}
+		
+		if (elementName.equalsIgnoreCase("abstract")){
+			abstractInit=true;
 		}
 
 
@@ -150,6 +156,12 @@ public class BDSSXMLSAXparser extends DefaultHandler{
 			}
 
 		}
+		
+		if (element.equalsIgnoreCase("p") && abstractInit){
+			if (abtract==null||abtract.isEmpty()){
+				abtract=tempString;
+			}
+		}
 
 		if (element.equalsIgnoreCase("claim-text")){
 			if (claims==null||claims.isEmpty()){
@@ -172,7 +184,13 @@ public class BDSSXMLSAXparser extends DefaultHandler{
 			actualPub.getPublicationFields().add(publicationFieldDescription);
 		}
 
-
+		if (element.equalsIgnoreCase("us-patent-grant")){
+			pubs.add(actualPub);
+			applicants="";
+			inventors="";
+			patentID="";
+			claims="";		
+		}
 
 
 
