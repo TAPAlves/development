@@ -4,6 +4,7 @@ import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -137,7 +138,6 @@ public class BDSSUtils {
 		if (!destDir.exists()) {
 			destDir.mkdir();
 		}
-
 		ZipInputStream zipIn = new ZipInputStream(new FileInputStream(zipFilePath));
 
 		ZipEntry entry = zipIn.getNextEntry();
@@ -171,6 +171,13 @@ public class BDSSUtils {
 	}
 
 
+	
+	
+	public static void parseXMLfile(String xmlPath) throws FileNotFoundException{
+		
+		InputStream rawData = new FileInputStream(new File(xmlPath));
+		
+	}
 
 
 
