@@ -174,8 +174,8 @@ public class BDSSUtils {
 	
 	
 	public static void parseXMLfile(String xmlPath) throws FileNotFoundException{
-		
 		InputStream rawData = new FileInputStream(new File(xmlPath));
+		
 		
 	}
 

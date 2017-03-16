@@ -6,11 +6,14 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import com.silicolife.textmining.core.datastructures.dataaccess.database.dataaccess.implementation.utils.PublicationFieldTypeEnum;
 import com.silicolife.textmining.core.datastructures.documents.PublicationExternalSourceLinkImpl;
 import com.silicolife.textmining.core.datastructures.documents.PublicationImpl;
 import com.silicolife.textmining.core.datastructures.documents.PublicationSourcesDefaultEnum;
+import com.silicolife.textmining.core.datastructures.documents.structure.PublicationFieldImpl;
 import com.silicolife.textmining.core.interfaces.core.document.IPublication;
 import com.silicolife.textmining.core.interfaces.core.document.IPublicationExternalSourceLink;
+import com.silicolife.textmining.core.interfaces.core.document.structure.IPublicationField;
 
 public class BDSSXMLSAXparser extends DefaultHandler{
 
@@ -20,7 +23,10 @@ public class BDSSXMLSAXparser extends DefaultHandler{
 	String applicants;
 	String inventors;
 	String patentID;
+	String claims;
+
 	boolean fillElement=false;
+	private String claimIdentifier;
 
 	public BDSSXMLSAXparser(Set<IPublication> pubs){
 		this.pubs=pubs;
@@ -40,6 +46,13 @@ public class BDSSXMLSAXparser extends DefaultHandler{
 		}
 		if (elementName.equalsIgnoreCase("inventors")){
 			fillElement=true;
+		}
+
+		if (elementName.equalsIgnoreCase("claims")){
+			fillElement=true;
+		}
+		if (elementName.equalsIgnoreCase("claim")){
+			claimIdentifier=attributes.getValue("id");
 		}
 
 
@@ -138,6 +151,26 @@ public class BDSSXMLSAXparser extends DefaultHandler{
 
 		}
 
+		if (element.equalsIgnoreCase("claim-text")){
+			if (claims==null||claims.isEmpty()){
+				claims=claimIdentifier + ": " + tempString;
+			}
+			else if(!claims.contains(tempString)){
+				claims+= " AND " + claimIdentifier + ": " + tempString;
+			}
+
+		}
+
+		if (element.equalsIgnoreCase("claims")){
+			fillElement=false;
+			int intEndAbstract = actualPub.getAbstractSection().length();
+			String claimsConnection = " CLAIMS: ";
+			int startClaims = intEndAbstract + 1;
+			String newAbstract = actualPub.getAbstractSection() + claimsConnection + claims;
+			int enddescritpion = newAbstract.length();
+			IPublicationField publicationFieldDescription = new PublicationFieldImpl(startClaims, enddescritpion, "Claims", PublicationFieldTypeEnum.abstracttext);
+			actualPub.getPublicationFields().add(publicationFieldDescription);
+		}
 
 
 
