@@ -20,17 +20,8 @@ public class BDSSXMLSAXparser extends DefaultHandler{
 	private String tempString;
 	private Set<IPublication> pubs;
 	private IPublication actualPub;
-	private String applicants;
-	private String inventors;
-	private String patentID;
-	private String claims;
-	private boolean abstractInit=false;
-	private String abtract;
-
-	private boolean fillElement=false;
-	private String claimIdentifier;
-	private boolean descriptionInit;
-	private String description;
+	private String applicants,inventors,patentID,claims,abtract,claimIdentifier,description;
+	private boolean fillElement,abstractInit,descriptionInit=false;
 
 	public BDSSXMLSAXparser(Set<IPublication> pubs){
 		this.pubs=pubs;
@@ -41,9 +32,9 @@ public class BDSSXMLSAXparser extends DefaultHandler{
 		if (elementName.equalsIgnoreCase("us-patent-grant")){
 			actualPub=new PublicationImpl();	
 		}
+
 		if (elementName.equalsIgnoreCase("publication-reference")){
 			fillElement=true;
-
 		}
 		if (elementName.equalsIgnoreCase("us-applicants")){
 			fillElement=true;
@@ -51,18 +42,15 @@ public class BDSSXMLSAXparser extends DefaultHandler{
 		if (elementName.equalsIgnoreCase("inventors")){
 			fillElement=true;
 		}
-
 		if (elementName.equalsIgnoreCase("claims")){
 			fillElement=true;
 		}
 		if (elementName.equalsIgnoreCase("claim")){
 			claimIdentifier=attributes.getValue("id");
 		}
-
 		if (elementName.equalsIgnoreCase("abstract")){
 			abstractInit=true;
 		}
-
 		if (elementName.equalsIgnoreCase("description")){
 			descriptionInit=true;
 		}
@@ -99,15 +87,6 @@ public class BDSSXMLSAXparser extends DefaultHandler{
 				description+= " " + attributes.getValue("description") + " ";;
 			}
 		}
-
-
-
-
-		if (elementName.equalsIgnoreCase("document-id") && fillElement){
-
-
-		}
-
 
 	}
 
@@ -169,7 +148,6 @@ public class BDSSXMLSAXparser extends DefaultHandler{
 
 		}
 
-
 		if (element.equalsIgnoreCase("last-name") && fillElement){
 			if (inventors==null||inventors.isEmpty()){
 				inventors="INVENTORS: " + tempString;
@@ -213,8 +191,6 @@ public class BDSSXMLSAXparser extends DefaultHandler{
 			}
 
 		}
-
-
 		if (element.equalsIgnoreCase("p") && descriptionInit){
 			if (description==null||description.isEmpty()){
 				description=tempString;
@@ -243,8 +219,6 @@ public class BDSSXMLSAXparser extends DefaultHandler{
 			actualPub.getPublicationFields().add(publicationFieldDescription);
 		}
 
-
-
 		if (element.equalsIgnoreCase("claim-text")){
 			if (claims==null||claims.isEmpty()){
 				claims=claimIdentifier + ": " + tempString;
@@ -252,7 +226,6 @@ public class BDSSXMLSAXparser extends DefaultHandler{
 			else if(!claims.contains(tempString)){
 				claims+= " AND " + claimIdentifier + ": " + tempString;
 			}
-
 		}
 
 		if (element.equalsIgnoreCase("claims")){
@@ -271,37 +244,10 @@ public class BDSSXMLSAXparser extends DefaultHandler{
 			applicants="";
 			inventors="";
 			patentID="";
-			claims="";		
-		}
-
-
-
-
-
-
-
-
-
-		if (element.equalsIgnoreCase("name")){
-			if (applicants==null||applicants.isEmpty()){
-				//pub.setAuthors(tempString);
-				applicants=tempString;
-			}
-			else if(!applicants.contains(tempString)){
-				//pub.setAuthors(pub.getAuthors()+" AND "+tempString);
-				applicants=applicants+" AND "+tempString;
-			}
-		}
-		if (element.equalsIgnoreCase("abstract")){
-			if (actualPub.getAbstractSection()==null||actualPub.getAbstractSection().isEmpty()){
-				actualPub.setAbstractSection(tempString);
-			}
-		}
-		if (element.equalsIgnoreCase("applicants")){
-			if (actualPub.getAuthors()==null||actualPub.getAuthors().isEmpty()){
-				actualPub.setAuthors(applicants);
-			}
-
+			claims="";
+			description="";
+			abtract="";
+			claimIdentifier="";
 		}
 
 	}

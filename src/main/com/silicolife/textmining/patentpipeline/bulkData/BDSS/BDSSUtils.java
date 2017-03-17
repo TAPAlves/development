@@ -8,6 +8,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.Files;
@@ -23,11 +25,16 @@ import java.util.zip.ZipInputStream;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 import org.apache.commons.io.IOUtils;
 import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import com.silicolife.textmining.core.interfaces.core.document.IPublication;
+import com.silicolife.textmining.processes.ir.patentpipeline.components.retrievalmodules.wipo.help.WIPOXMLSAXPHandler;
 import com.silicolife.textmining.utils.http.HTTPClient;
 import com.silicolife.textmining.utils.http.exceptions.ClientErrorException;
 import com.silicolife.textmining.utils.http.exceptions.ConnectionException;
@@ -173,8 +180,19 @@ public class BDSSUtils {
 
 	
 	
-	public static void parseXMLfile(String xmlPath) throws FileNotFoundException{
+	public static Set<IPublication> parseXMLfile(String xmlPath) throws SAXException, IOException, ParserConfigurationException{		
+		Set<IPublication> publications = new HashSet<>();
+		SAXParserFactory spf = SAXParserFactory.newInstance();//Using sax parser in order to read inputstream.
+		SAXParser sp = spf.newSAXParser();
+		BDSSXMLSAXparser parseEventsHandler = new BDSSXMLSAXparser(publications);
 		InputStream rawData = new FileInputStream(new File(xmlPath));
+		Reader reader = new InputStreamReader(rawData,"UTF-8");//conversion to inputstream reader in order to encoding to UTF-8
+		InputSource is = new InputSource(reader);
+		is.setEncoding("UTF-8");
+		sp.parse(is,parseEventsHandler);
+		return publications;
+
+		
 		
 		
 	}
