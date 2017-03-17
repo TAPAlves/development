@@ -17,18 +17,20 @@ import com.silicolife.textmining.core.interfaces.core.document.structure.IPublic
 
 public class BDSSXMLSAXparser extends DefaultHandler{
 
-	String tempString;
-	Set<IPublication> pubs;
-	IPublication actualPub;
-	String applicants;
-	String inventors;
-	String patentID;
-	String claims;
-	boolean abstractInit=false;
-	String abtract;
+	private String tempString;
+	private Set<IPublication> pubs;
+	private IPublication actualPub;
+	private String applicants;
+	private String inventors;
+	private String patentID;
+	private String claims;
+	private boolean abstractInit=false;
+	private String abtract;
 
-	boolean fillElement=false;
+	private boolean fillElement=false;
 	private String claimIdentifier;
+	private boolean descriptionInit;
+	private String description;
 
 	public BDSSXMLSAXparser(Set<IPublication> pubs){
 		this.pubs=pubs;
@@ -56,12 +58,47 @@ public class BDSSXMLSAXparser extends DefaultHandler{
 		if (elementName.equalsIgnoreCase("claim")){
 			claimIdentifier=attributes.getValue("id");
 		}
-		
+
 		if (elementName.equalsIgnoreCase("abstract")){
 			abstractInit=true;
 		}
 
+		if (elementName.equalsIgnoreCase("description")){
+			descriptionInit=true;
+		}
 
+
+
+		if (elementName.equalsIgnoreCase("?brief-description-of-drawings") && descriptionInit){
+
+			if (description==null||description.isEmpty()){
+				description= attributes.getValue("description") + " ";
+			}
+			else if(!inventors.contains(tempString)){
+				description+= " " + attributes.getValue("description") + " ";;
+			}
+		}
+
+
+		if (elementName.equalsIgnoreCase("?BRFSUM") && descriptionInit){
+
+			if (description==null||description.isEmpty()){
+				description= attributes.getValue("description");
+			}
+			else if(!inventors.contains(tempString)){
+				description+= " " + attributes.getValue("description") + " ";;
+			}
+		}
+
+		if (elementName.equalsIgnoreCase("?DETDESC") && descriptionInit){
+
+			if (description==null||description.isEmpty()){
+				description= attributes.getValue("description");
+			}
+			else if(!inventors.contains(tempString)){
+				description+= " " + attributes.getValue("description") + " ";;
+			}
+		}
 
 
 
@@ -156,12 +193,57 @@ public class BDSSXMLSAXparser extends DefaultHandler{
 			}
 
 		}
-		
+
 		if (element.equalsIgnoreCase("p") && abstractInit){
 			if (abtract==null||abtract.isEmpty()){
 				abtract=tempString;
 			}
+			else if(!abtract.contains(tempString)){
+				abtract+= " " + tempString;
+			}
 		}
+
+		if (element.equalsIgnoreCase("abstract")){
+			abstractInit=false;
+			if (actualPub.getAbstractSection()==null || actualPub.getAbstractSection().isEmpty()){
+				actualPub.setAbstractSection(abtract);
+			}
+			else if (!actualPub.getAbstractSection().contains(abtract)){
+				actualPub.setAbstractSection(abtract + actualPub.getAbstractSection());
+			}
+
+		}
+
+
+		if (element.equalsIgnoreCase("p") && descriptionInit){
+			if (description==null||description.isEmpty()){
+				description=tempString;
+			}
+			else if(!description.contains(tempString)){
+				description+= " " + tempString;
+			}
+		}
+
+		if (element.equalsIgnoreCase("heading") && descriptionInit){
+			if (description==null||description.isEmpty()){
+				description=tempString +" ";
+			}
+			else {
+				description+= " " + tempString + ": ";
+			}
+		}
+		if (element.equalsIgnoreCase("description")){
+			descriptionInit=false;
+			int intEndAbstract = actualPub.getAbstractSection().length();
+			String descriptionConnection = " DESCRIPTION: ";
+			int startDescription = intEndAbstract + 1;
+			String newAbstract = actualPub.getAbstractSection() + descriptionConnection + description;
+			int enddescritpion = newAbstract.length();
+			IPublicationField publicationFieldDescription = new PublicationFieldImpl(startDescription, enddescritpion, "Description", PublicationFieldTypeEnum.abstracttext);
+			actualPub.getPublicationFields().add(publicationFieldDescription);
+		}
+
+
 
 		if (element.equalsIgnoreCase("claim-text")){
 			if (claims==null||claims.isEmpty()){
@@ -179,9 +261,9 @@ public class BDSSXMLSAXparser extends DefaultHandler{
 			String claimsConnection = " CLAIMS: ";
 			int startClaims = intEndAbstract + 1;
 			String newAbstract = actualPub.getAbstractSection() + claimsConnection + claims;
-			int enddescritpion = newAbstract.length();
-			IPublicationField publicationFieldDescription = new PublicationFieldImpl(startClaims, enddescritpion, "Claims", PublicationFieldTypeEnum.abstracttext);
-			actualPub.getPublicationFields().add(publicationFieldDescription);
+			int endclaims = newAbstract.length();
+			IPublicationField publicationFieldClaims = new PublicationFieldImpl(startClaims, endclaims, "Claims", PublicationFieldTypeEnum.abstracttext);
+			actualPub.getPublicationFields().add(publicationFieldClaims);
 		}
 
 		if (element.equalsIgnoreCase("us-patent-grant")){
