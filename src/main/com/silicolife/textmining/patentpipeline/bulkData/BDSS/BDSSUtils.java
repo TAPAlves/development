@@ -4,7 +4,6 @@ import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,9 +31,9 @@ import org.apache.commons.io.IOUtils;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
 
 import com.silicolife.textmining.core.interfaces.core.document.IPublication;
-import com.silicolife.textmining.processes.ir.patentpipeline.components.retrievalmodules.wipo.help.WIPOXMLSAXPHandler;
 import com.silicolife.textmining.utils.http.HTTPClient;
 import com.silicolife.textmining.utils.http.exceptions.ClientErrorException;
 import com.silicolife.textmining.utils.http.exceptions.ConnectionException;
@@ -49,6 +48,9 @@ public class BDSSUtils {
 	private static String generalURL="https://bulkdata.uspto.gov/data2/patent/grant/redbook/fulltext/";
 
 	private static String outputDir="tempZipFiles/";
+
+	private static String splitOutputFolder="/patentXMLfiles/";
+
 
 
 	/**
@@ -141,10 +143,10 @@ public class BDSSUtils {
 
 
 	public static void unzipPatentFullTextFile(String zipFilePath, String destDirectory) throws IOException {
-		File destDir = new File(destDirectory);
-		if (!destDir.exists()) {
-			destDir.mkdir();
-		}
+		//		File destDir = new File(destDirectory);
+		//		if (!destDir.exists()) {
+		//			destDir.mkdir();
+		//		}
 		ZipInputStream zipIn = new ZipInputStream(new FileInputStream(zipFilePath));
 
 		ZipEntry entry = zipIn.getNextEntry();
@@ -177,9 +179,6 @@ public class BDSSUtils {
 		bos.close();
 	}
 
-
-	
-	
 	public static Set<IPublication> parseXMLfile(String xmlPath) throws SAXException, IOException, ParserConfigurationException{		
 		Set<IPublication> publications = new HashSet<>();
 		SAXParserFactory spf = SAXParserFactory.newInstance();//Using sax parser in order to read inputstream.
@@ -191,16 +190,58 @@ public class BDSSUtils {
 		is.setEncoding("UTF-8");
 		sp.parse(is,parseEventsHandler);
 		return publications;
-
-		
-		
-		
 	}
 
 
 
 
+//	public static void splitXML (String xmlPath) throws IOException, SAXException, ParserConfigurationException{
+//
+//		Path docPath = Paths.get(xmlPath.replace(".xml", ""));	
+//		if (!Files.exists(docPath)){
+//			Files.createDirectories(docPath);
+//		}
+//		//		FileInputStream rawData = new FileInputStream(new File(xmlPath));
+//		//		String xmlString = IOUtils.toString(rawData, "UTF-8");
+//
+//		BufferedReader in = new BufferedReader(new FileReader(xmlPath));
+//		StringBuffer xmlStringBuffer = new StringBuffer();
+//		String line;
+//
+//		while ((line=in.readLine()) != null) {
+//			if (!line.contains("</us-patent-grant>")){
+//				xmlStringBuffer.append(line);
+//			}
+//			else{
+//				xmlStringBuffer.append(line);
+//				String patentID = extractIDFromPatentXML(xmlStringBuffer.toString());
+//				PrintWriter writer = new PrintWriter(docPath.toString()+patentID+".xml", "UTF-8");
+//				writer.write(xmlStringBuffer.toString());
+//				writer.close();
+//				xmlStringBuffer=new StringBuffer();
+//			}
+//
+//		}
+//		in.close(); 
+//	}
 
+
+
+	public static String extractIDFromPatentXML(File file) throws ParserConfigurationException, SAXException, IOException{
+		String patentID=null;
+		SAXParserFactory spf = SAXParserFactory.newInstance();//Using sax parser in order to read inputstream.
+		SAXParser sp = spf.newSAXParser();
+		PatentIDXMLParser parseEventsHandler = new PatentIDXMLParser(patentID);
+//		InputStream in = IOUtils.toInputStream(patentRawData, "UTF-8");
+//		Reader reader = new InputStreamReader(in,"UTF-8");//conversion to inputstream reader in order to encoding to UTF-8
+//		InputSource is = new InputSource(reader);
+//		is.setEncoding("UTF-8");
+		XMLReader reader = sp.getXMLReader();
+		reader.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd",false);
+		sp.parse(file,parseEventsHandler);
+		return patentID;
+	}
+	
 
 
 }
