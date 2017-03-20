@@ -111,16 +111,6 @@ public class BDSSUtils {
 
 
 
-	public static void getPatentIDs (){
-
-	}
-
-
-	public static void getMapWithMetainformationFromAllPatents(){
-
-	}
-
-
 	public static Document createJDOMDocument(InputStream response) throws ParserConfigurationException, SAXException, IOException {
 		String stream = IOUtils.toString(response, "UTF-8");
 		stream = stream.replaceAll("\n", "");
@@ -167,18 +157,6 @@ public class BDSSUtils {
 	}
 
 
-
-	public static String extractIDFromPatentXML1(File file) throws ParserConfigurationException, SAXException, IOException{
-		String patentID=null;
-		SAXParserFactory spf = SAXParserFactory.newInstance();//Using sax parser in order to read inputstream.
-		SAXParser sp = spf.newSAXParser();
-		PatentIDXMLParser parseEventsHandler = new PatentIDXMLParser(patentID);
-		XMLReader reader = sp.getXMLReader();
-		reader.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd",false);
-		sp.parse(file,parseEventsHandler);
-		patentID=parseEventsHandler.getPatentIDString();
-		return patentID;
-	}
 
 
 	public static Set<IPublication> parseXMLfile(String xmlPath) throws SAXException, IOException, ParserConfigurationException{		
