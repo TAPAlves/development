@@ -9,9 +9,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.io.Reader;
 import java.io.StringReader;
 import java.net.URL;
 import java.net.URLConnection;
@@ -53,14 +51,7 @@ public class BDSSUtils {
 
 	private static String outputDir="tempZipFiles/";
 
-	private static String splitOutputFolder="/patentXMLfiles/";
-
-
-
-	/**
-	 * Size of the buffer to read/write data
-	 */
-	private static final int BUFFER_SIZE = 4096;
+	private static final int BUFFER_SIZE = 4096; //Size of the buffer to read/write data
 
 	private static HTTPClient client = new HTTPClient();
 
@@ -101,9 +92,6 @@ public class BDSSUtils {
 		} catch (RedirectionException | ClientErrorException | ServerErrorException | ConnectionException
 				| ResponseHandlingException e) {
 		}
-
-
-
 
 	}
 
@@ -147,12 +135,7 @@ public class BDSSUtils {
 
 
 	public static void unzipPatentFullTextFile(String zipFilePath, String destDirectory) throws IOException {
-		//		File destDir = new File(destDirectory);
-		//		if (!destDir.exists()) {
-		//			destDir.mkdir();
-		//		}
 		ZipInputStream zipIn = new ZipInputStream(new FileInputStream(zipFilePath));
-
 		ZipEntry entry = zipIn.getNextEntry();
 
 		// iterates over entries in the zip file
@@ -202,19 +185,22 @@ public class BDSSUtils {
 		Set<IPublication> publications = new HashSet<>();
 		SAXParserFactory spf = SAXParserFactory.newInstance();//Using sax parser in order to read inputstream.
 		SAXParser sp = spf.newSAXParser();
-		BDSSXMLSAXparser parseEventsHandler = new BDSSXMLSAXparser(publications);
-		InputStream rawData = new FileInputStream(new File(xmlPath));
-		Reader reader = new InputStreamReader(rawData,"UTF-8");//conversion to inputstream reader in order to encoding to UTF-8
-		InputSource is = new InputSource(reader);
-		is.setEncoding("UTF-8");
-		sp.parse(is,parseEventsHandler);
+		Path patentsPath = splitXML(xmlPath);
+		for (File file:patentsPath.toFile().listFiles()){
+			BDSSXMLSAXparser parseEventsHandler = new BDSSXMLSAXparser();
+			InputStream rawData = new FileInputStream(file);
+			XMLReader reader = sp.getXMLReader();
+			reader.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd",false);
+			sp.parse(rawData,parseEventsHandler);
+			publications.add(parseEventsHandler.getFilledIPublication());
+		}
 		return publications;
 	}
 
 
 
 
-	public static void splitXML (String xmlPath) throws IOException, SAXException, ParserConfigurationException{
+	public static Path splitXML (String xmlPath) throws IOException, SAXException, ParserConfigurationException{
 
 		Path docPath = Paths.get(xmlPath.replace(".xml", ""));	
 		if (!Files.exists(docPath)){
@@ -246,7 +232,8 @@ public class BDSSUtils {
 				}	
 			}
 		}
-		in.close(); 
+		in.close();
+		return docPath; 
 	}
 
 

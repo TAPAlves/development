@@ -1,7 +1,5 @@
 package main.com.silicolife.textmining.patentpipeline.bulkData.BDSS;
 
-import java.util.Set;
-
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -18,20 +16,20 @@ import com.silicolife.textmining.core.interfaces.core.document.structure.IPublic
 public class BDSSXMLSAXparser extends DefaultHandler{
 
 	private String tempString;
-	private Set<IPublication> pubs;
 	private IPublication actualPub;
 	private String applicants,inventors,patentID,claims,abtract,claimIdentifier,description;
 	private boolean fillElement,abstractInit,descriptionInit=false;
 
-	public BDSSXMLSAXparser(Set<IPublication> pubs){
-		this.pubs=pubs;
+	//	public BDSSXMLSAXparser(File patentXMLFile){
+	//		this.patentXMLFile=patentXMLFile;
+	//
+	//	}
 
+	public BDSSXMLSAXparser() {
+		actualPub=new PublicationImpl();
 	}
 
 	public void startElement(String s, String s1, String elementName, Attributes attributes) throws SAXException{
-		if (elementName.equalsIgnoreCase("us-patent-grant")){
-			actualPub=new PublicationImpl();	
-		}
 
 		if (elementName.equalsIgnoreCase("publication-reference")){
 			fillElement=true;
@@ -240,14 +238,15 @@ public class BDSSXMLSAXparser extends DefaultHandler{
 		}
 
 		if (element.equalsIgnoreCase("us-patent-grant")){
-			pubs.add(actualPub);
-			applicants="";
-			inventors="";
-			patentID="";
-			claims="";
-			description="";
-			abtract="";
-			claimIdentifier="";
+			endDocument();
+			//			pubs.add(actualPub);
+			//			applicants="";
+			//			inventors="";
+			//			patentID="";
+			//			claims="";
+			//			description="";
+			//			abtract="";
+			//			claimIdentifier="";
 		}
 
 	}
@@ -256,6 +255,11 @@ public class BDSSXMLSAXparser extends DefaultHandler{
 		tempString=new String(ac,i,j);//initialize the string with the correspondent information
 
 
+	}
+
+
+	public IPublication getFilledIPublication(){
+		return actualPub;
 	}
 
 }
