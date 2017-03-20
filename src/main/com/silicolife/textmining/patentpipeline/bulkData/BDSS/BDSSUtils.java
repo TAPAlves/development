@@ -76,7 +76,7 @@ public class BDSSUtils {
 
 
 
-	public static void getBulkPatentFile(String year, String filename) throws IOException{
+	public static String getBulkPatentFile(String year, String filename) throws IOException{
 		Path docPath = Paths.get(outputDir);	
 		if (!Files.exists(docPath)){
 			Files.createDirectories(docPath);
@@ -92,6 +92,7 @@ public class BDSSUtils {
 		} catch (RedirectionException | ClientErrorException | ServerErrorException | ConnectionException
 				| ResponseHandlingException e) {
 		}
+		return docPath.toString()+ "/" +filename;
 
 	}
 
@@ -125,6 +126,11 @@ public class BDSSUtils {
 
 
 	public static void unzipPatentFullTextFile(String zipFilePath, String destDirectory) throws IOException {
+		File destDir = new File(destDirectory);
+		if (!destDir.exists()) {
+			destDir.mkdir();
+		}
+		
 		ZipInputStream zipIn = new ZipInputStream(new FileInputStream(zipFilePath));
 		ZipEntry entry = zipIn.getNextEntry();
 

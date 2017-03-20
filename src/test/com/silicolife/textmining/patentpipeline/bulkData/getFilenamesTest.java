@@ -7,7 +7,6 @@ import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.junit.Test;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
@@ -22,7 +21,7 @@ public class getFilenamesTest {
 
 
 
-		@Test
+//		@Test
 	public void getFilenames() throws IOException, SAXException, ParserConfigurationException{
 		//		BDSSUtils.getFileNames("2016");
 		//		BDSSUtils.getBulkPatentFile("2017", (String) BDSSUtils.getFileNames("2017").toArray()[0]);
@@ -54,4 +53,7 @@ public class getFilenamesTest {
 	public void getxmlSplitted() throws IOException, SAXException, ParserConfigurationException{
 		BDSSUtils.splitXML("tempZipFiles/ipg170103/ipg170103.xml");
 	}
+
+
+
 }
