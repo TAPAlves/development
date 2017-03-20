@@ -61,4 +61,9 @@ public class PatentIDXMLParser extends DefaultHandler{
 	}
 	
 	
+	public String getPatentIDString(){
+		return patentID;
+		
+	}
+	
 }

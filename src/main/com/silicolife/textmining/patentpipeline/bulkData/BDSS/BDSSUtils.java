@@ -1,14 +1,18 @@
 package main.com.silicolife.textmining.patentpipeline.bulkData.BDSS;
 
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.io.Reader;
+import java.io.StringReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.Files;
@@ -179,6 +183,21 @@ public class BDSSUtils {
 		bos.close();
 	}
 
+
+
+	public static String extractIDFromPatentXML1(File file) throws ParserConfigurationException, SAXException, IOException{
+		String patentID=null;
+		SAXParserFactory spf = SAXParserFactory.newInstance();//Using sax parser in order to read inputstream.
+		SAXParser sp = spf.newSAXParser();
+		PatentIDXMLParser parseEventsHandler = new PatentIDXMLParser(patentID);
+		XMLReader reader = sp.getXMLReader();
+		reader.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd",false);
+		sp.parse(file,parseEventsHandler);
+		patentID=parseEventsHandler.getPatentIDString();
+		return patentID;
+	}
+
+
 	public static Set<IPublication> parseXMLfile(String xmlPath) throws SAXException, IOException, ParserConfigurationException{		
 		Set<IPublication> publications = new HashSet<>();
 		SAXParserFactory spf = SAXParserFactory.newInstance();//Using sax parser in order to read inputstream.
@@ -195,53 +214,55 @@ public class BDSSUtils {
 
 
 
-//	public static void splitXML (String xmlPath) throws IOException, SAXException, ParserConfigurationException{
-//
-//		Path docPath = Paths.get(xmlPath.replace(".xml", ""));	
-//		if (!Files.exists(docPath)){
-//			Files.createDirectories(docPath);
-//		}
-//		//		FileInputStream rawData = new FileInputStream(new File(xmlPath));
-//		//		String xmlString = IOUtils.toString(rawData, "UTF-8");
-//
-//		BufferedReader in = new BufferedReader(new FileReader(xmlPath));
-//		StringBuffer xmlStringBuffer = new StringBuffer();
-//		String line;
-//
-//		while ((line=in.readLine()) != null) {
-//			if (!line.contains("</us-patent-grant>")){
-//				xmlStringBuffer.append(line);
-//			}
-//			else{
-//				xmlStringBuffer.append(line);
-//				String patentID = extractIDFromPatentXML(xmlStringBuffer.toString());
-//				PrintWriter writer = new PrintWriter(docPath.toString()+patentID+".xml", "UTF-8");
-//				writer.write(xmlStringBuffer.toString());
-//				writer.close();
-//				xmlStringBuffer=new StringBuffer();
-//			}
-//
-//		}
-//		in.close(); 
-//	}
+	public static void splitXML (String xmlPath) throws IOException, SAXException, ParserConfigurationException{
+
+		Path docPath = Paths.get(xmlPath.replace(".xml", ""));	
+		if (!Files.exists(docPath)){
+			Files.createDirectories(docPath);
+		}
+		//		FileInputStream rawData = new FileInputStream(new File(xmlPath));
+		//		String xmlString = IOUtils.toString(rawData, "UTF-8");
+
+		BufferedReader in = new BufferedReader(new FileReader(xmlPath));
+		StringBuffer xmlStringBuffer = new StringBuffer();
+		String line;
+
+		while ((line=in.readLine()) != null) {
+			if (!line.contains("<?xml")){
+				xmlStringBuffer.append(line);
+			}
+			else{
+				if (xmlStringBuffer.toString().length()==0){
+					xmlStringBuffer.append(line);
+				}
+				else{
+					InputSource inputSource = new InputSource( new StringReader(xmlStringBuffer.toString()));
+					String patentID = extractIDFromPatentXML(inputSource);
+					PrintWriter writer = new PrintWriter(docPath.toString()+"/"+ patentID+".xml", "UTF-8");
+					writer.write(xmlStringBuffer.toString());
+					writer.close();
+					xmlStringBuffer=new StringBuffer();
+					xmlStringBuffer.append(line);
+				}	
+			}
+		}
+		in.close(); 
+	}
 
 
 
-	public static String extractIDFromPatentXML(File file) throws ParserConfigurationException, SAXException, IOException{
+	public static String extractIDFromPatentXML(InputSource inputSource) throws ParserConfigurationException, SAXException, IOException{
 		String patentID=null;
 		SAXParserFactory spf = SAXParserFactory.newInstance();//Using sax parser in order to read inputstream.
 		SAXParser sp = spf.newSAXParser();
 		PatentIDXMLParser parseEventsHandler = new PatentIDXMLParser(patentID);
-//		InputStream in = IOUtils.toInputStream(patentRawData, "UTF-8");
-//		Reader reader = new InputStreamReader(in,"UTF-8");//conversion to inputstream reader in order to encoding to UTF-8
-//		InputSource is = new InputSource(reader);
-//		is.setEncoding("UTF-8");
 		XMLReader reader = sp.getXMLReader();
 		reader.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd",false);
-		sp.parse(file,parseEventsHandler);
+		sp.parse(inputSource,parseEventsHandler);
+		patentID=parseEventsHandler.getPatentIDString();
 		return patentID;
 	}
-	
+
 
 
 }

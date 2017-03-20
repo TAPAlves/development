@@ -1,12 +1,14 @@
 package test.com.silicolife.textmining.patentpipeline.bulkData;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.junit.Test;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import com.silicolife.textmining.core.interfaces.core.document.IPublication;
@@ -36,11 +38,20 @@ public class getFilenamesTest {
 
 
 
-	@Test
+//	@Test
 	public void getXMLSplitted() throws IOException, SAXException, ParserConfigurationException{
 		//		BDSSUtils.splitXML("tempZipFiles/ipg170103/ipg170103.xml");
 		File file = new File("tempZipFiles/ipg170103/ipg170103_Modified.xml");
-		String id = BDSSUtils.extractIDFromPatentXML(file);
+		InputSource inputSource = new InputSource(new FileInputStream(file));
+		
+		String id = BDSSUtils.extractIDFromPatentXML(inputSource);
 		System.out.println(id);
+	}
+	
+	
+	
+	@Test
+	public void getxmlSplitted() throws IOException, SAXException, ParserConfigurationException{
+		BDSSUtils.splitXML("tempZipFiles/ipg170103/ipg170103.xml");
 	}
 }
