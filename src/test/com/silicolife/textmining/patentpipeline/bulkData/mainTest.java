@@ -1,7 +1,10 @@
 package test.com.silicolife.textmining.patentpipeline.bulkData;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -9,6 +12,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
+import com.silicolife.textmining.core.datastructures.documents.PublicationImpl;
+import com.silicolife.textmining.core.datastructures.documents.PublicationSourcesDefaultEnum;
 import com.silicolife.textmining.core.interfaces.core.document.IPublication;
 
 import main.com.silicolife.textmining.patentpipeline.bulkData.BDSS.BDSSUtils;
@@ -23,10 +28,21 @@ public class mainTest {
 			String patentsFolder = filePath.replace(".zip", "");
 			BDSSUtils.unzipPatentFullTextFile(filePath, patentsFolder);
 			Set<IPublication> pubs = BDSSUtils.parseXMLfile(new File(patentsFolder).listFiles()[0].toString());
+			String toSave="";
 			for(IPublication pub:pubs){
-				System.out.println(pub);	
+				toSave+="\n\n" + PublicationImpl.getPublicationExternalIDForSource(pub,PublicationSourcesDefaultEnum.patent.name()) +"\n";
+				toSave+=pub.toString();
+				System.out.println(pub);
 			}
+			saveToFile(patentsFolder + "/" + "pubTXTFiles.txt", toSave);
 		}
 	}
 
+
+
+	private static void saveToFile(String filename, String toSaveString) throws FileNotFoundException, UnsupportedEncodingException{
+		PrintWriter writer = new PrintWriter(filename, "UTF-8");
+		writer.write(toSaveString);
+		writer.close();
+	}
 }
