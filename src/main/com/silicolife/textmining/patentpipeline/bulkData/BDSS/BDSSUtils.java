@@ -130,7 +130,7 @@ public class BDSSUtils {
 		if (!destDir.exists()) {
 			destDir.mkdir();
 		}
-		
+
 		ZipInputStream zipIn = new ZipInputStream(new FileInputStream(zipFilePath));
 		ZipEntry entry = zipIn.getNextEntry();
 
@@ -234,8 +234,8 @@ public class BDSSUtils {
 		return patentID;
 	}
 
-	
-	
+
+
 
 
 }

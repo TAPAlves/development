@@ -17,7 +17,6 @@ public class PUGRestPatentIDParser extends DefaultHandler{
 
 	}
 
-@Override
 	public void startElement(String s, String s1, String elementName, Attributes attributes) throws SAXException{
 		if (elementName.equalsIgnoreCase("PatentID")){
 			tempString=new String();
@@ -26,27 +25,18 @@ public class PUGRestPatentIDParser extends DefaultHandler{
 	}
 
 
-
-@Override
 	public void endElement(String s, String s1, String element) throws SAXException{
 
 		if (element.equalsIgnoreCase("PatentID")){
-			patentIDs.add(tempString);
+			if (tempString.matches("[A-Z]{1,3}\\d+[A-Z]{0,1}\\d{0,1}") && tempString.length()>=5){
+				patentIDs.add(tempString);
+			}
 		}
-		
-		if (element.equalsIgnoreCase("Information")){
-			endDocument();
-		}
-
-		
 	}
 
 
-@Override
 	public void characters(char[] ac, int i, int j) throws SAXException {
 		tempString=new String(ac,i,j);
-
-
 	}
 
 
@@ -54,12 +44,5 @@ public class PUGRestPatentIDParser extends DefaultHandler{
 		return this.patentIDs;
 
 	}
-
-
-
-
-
-
-
 
 }
