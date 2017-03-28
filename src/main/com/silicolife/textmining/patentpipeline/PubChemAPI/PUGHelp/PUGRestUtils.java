@@ -23,29 +23,49 @@ public class PUGRestUtils {
 	private static HTTPClient client = new HTTPClient();
 
 
-	public static Set<String> getPatentIDs(String identifier){
-
-		Map<String, String> headers = new HashMap<String, String>();
+	public static Set<String> getPatentIDsUsingCID(String identifier){
 
 		String urlPatentsForAID= generalURL + SEPARATOR + database + SEPARATOR 
 				+ PUGRestInputEnum.compoundIdentifier.toString() + SEPARATOR + identifier
 				+ SEPARATOR + operation + SEPARATOR + outputFormat;
 
+		Set<String> patentIDs = httpClientGetRequest(urlPatentsForAID);
+		return patentIDs;
+
+	}
+
+	public static Set<String> getPatentIDsUsingCompoundName (String compound){
+
+		String urlPatentsForAID= generalURL + SEPARATOR + database + SEPARATOR 
+				+ PUGRestInputEnum.compoundName.toString() + SEPARATOR + compound
+				+ SEPARATOR + operation + SEPARATOR + outputFormat;
+		Set<String> patentIDs = httpClientGetRequest(urlPatentsForAID);
+		return patentIDs;
+
+
+
+	}
+
+	private static Set<String> httpClientGetRequest(String url){
+		Map<String, String> headers = new HashMap<String, String>();
+
 		Set<String> patentIDs = new HashSet<>();
 
 		try {
-			patentIDs=client.get(urlPatentsForAID,headers, new PUGRestPatentIDSHandler(patentIDs));
+			patentIDs=client.get(url,headers, new PUGRestPatentIDSHandler(patentIDs));
 		} catch (RedirectionException | ClientErrorException | ServerErrorException | ConnectionException
 				| ResponseHandlingException e) {
 		}
 		return patentIDs;
 
-
-
-
-
-
 	}
+
+
+
+
+
+
+
 
 
 

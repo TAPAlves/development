@@ -47,8 +47,6 @@ public class PUGRestPatentIDSHandler implements ResponseHandler<Set<String>>{
 
 		return patentIDs;
 
-
-
 	}
 
 }
