@@ -36,6 +36,11 @@ public class PUGRestUtils {
 
 	public static Set<String> getPatentIDsUsingCompoundName (String compound){
 
+		String[] cFractions = compound.split(" ");
+		if (cFractions.length>1){
+			compound=buildCompoundName(cFractions);
+			System.out.println(compound);
+		}
 		String urlPatentsForAID= generalURL + SEPARATOR + database + SEPARATOR 
 				+ PUGRestInputEnum.compoundName.toString() + SEPARATOR + compound
 				+ SEPARATOR + operation + SEPARATOR + outputFormat;
@@ -46,6 +51,17 @@ public class PUGRestUtils {
 
 	}
 
+	private static String buildCompoundName(String[] cFractions){
+		String resultStr = new String();
+		for (String frac:cFractions){
+			resultStr+=frac +"%20";
+		}
+		return resultStr.substring(0,resultStr.length()-3);
+	}
+	
+	
+	
+	
 	private static Set<String> httpClientGetRequest(String url){
 		Map<String, String> headers = new HashMap<String, String>();
 
