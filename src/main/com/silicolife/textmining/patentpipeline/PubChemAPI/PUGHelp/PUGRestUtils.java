@@ -14,6 +14,7 @@ import com.silicolife.textmining.utils.http.exceptions.ServerErrorException;
 
 public class PUGRestUtils {
 
+	public static final String PUGRestSearch = "PUG Rest Patent Search";
 	private static String SEPARATOR="/";
 	private static String generalURL="https://pubchem.ncbi.nlm.nih.gov/rest/pug";
 	private static String database= "compound";

@@ -32,11 +32,10 @@ public class PUGRestPatentIDSHandler implements ResponseHandler<Set<String>>{
 			Map<String, List<String>> headerFields, int status) throws ResponseHandlingException {
 
 		try {
-			InputStream respons = response;
 			SAXParserFactory spf = SAXParserFactory.newInstance();//Using sax parser in order to read inputstream.
 			SAXParser sp = spf.newSAXParser();
 			PUGRestPatentIDParser parseEventsHandler = new PUGRestPatentIDParser(patentIDs);
-			Reader reader = new InputStreamReader(respons,"UTF-8");//conversion to inputstream reader in order to encoding to UTF-8
+			Reader reader = new InputStreamReader(response,"UTF-8");//conversion to inputstream reader in order to encoding to UTF-8
 			InputSource is = new InputSource(reader);
 			is.setEncoding("UTF-8");
 			sp.parse(is,parseEventsHandler);
