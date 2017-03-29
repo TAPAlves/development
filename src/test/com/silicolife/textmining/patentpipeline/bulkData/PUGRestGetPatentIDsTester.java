@@ -10,9 +10,9 @@ import com.silicolife.textmining.processes.ir.patentpipeline.configuration.IIRPa
 import com.silicolife.textmining.processes.ir.patentpipeline.configuration.IRPatentPipelineSearchConfigurationImpl;
 import com.silicolife.textmining.processes.ir.patentpipeline.core.searchmodule.WrongIRPatentIDRecoverConfigurationException;
 
+import main.com.silicolife.textmining.patentpipeline.PubChemAPI.IIRPubChemPatentIDRetrievalConfiguration;
 import main.com.silicolife.textmining.patentpipeline.PubChemAPI.IRPubChemPatentIDRetrieval;
-import main.com.silicolife.textmining.patentpipeline.PubChemAPI.PUGHelp.IIRPubChemPatentIDRetrievalConfiguration;
-import main.com.silicolife.textmining.patentpipeline.PubChemAPI.PUGHelp.IRPubChemPatentIDRetrievalConfigurationImpl;
+import main.com.silicolife.textmining.patentpipeline.PubChemAPI.IRPubChemPatentIDRetrievalConfigurationImpl;
 import main.com.silicolife.textmining.patentpipeline.PubChemAPI.PUGHelp.PUGRestInputEnum;
 import main.com.silicolife.textmining.patentpipeline.PubChemAPI.PUGHelp.PUGRestUtils;
 
