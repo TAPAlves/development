@@ -77,7 +77,6 @@ public class PUGRestUtils {
 	}
 
 
-
 	private static String httpClientValidateResponse(String url){
 		Map<String, String> headers = new HashMap<String, String>();
 		String message = new String();
@@ -88,9 +87,6 @@ public class PUGRestUtils {
 			message= e.getMessage();
 		}
 		return message;
-
-
-
 
 	}
 
@@ -118,18 +114,5 @@ public class PUGRestUtils {
 
 
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

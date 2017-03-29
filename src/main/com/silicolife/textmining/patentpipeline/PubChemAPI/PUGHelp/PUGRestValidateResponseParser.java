@@ -14,7 +14,7 @@ public class PUGRestValidateResponseParser extends DefaultHandler{
 
 	public void startElement(String s, String s1, String elementName, Attributes attributes) throws SAXException{
 	}
-
+	
 
 	public void endElement(String s, String s1, String element) throws SAXException{
 
@@ -32,7 +32,6 @@ public class PUGRestValidateResponseParser extends DefaultHandler{
 
 	public String getMessage(){
 		return this.message;
-
 	}
 
 }
