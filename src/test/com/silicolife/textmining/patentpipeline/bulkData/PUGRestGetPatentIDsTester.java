@@ -67,5 +67,9 @@ public class PUGRestGetPatentIDsTester {
 		System.out.println(patentIds.size());
 		for(String patentID :patentIds)
 			System.out.println(patentID);
+		
+		System.out.println(Integer.parseInt("qss"));
+		
+		
 	}
 }

@@ -53,6 +53,30 @@ public class IRPubChemPatentIDRetrieval extends AIRPatentIDRecoverSource{
 			{
 				throw new WrongIRPatentIDRecoverConfigurationException("The input type for the PUG Rest system can not be null or empty!");
 			}
+			if(!(configurationPUGRestSearch.getPipelineConfiguration()==null)){
+				if (configurationPUGRestSearch.getPipelineConfiguration().getQuery()==null || configurationPUGRestSearch.getPipelineConfiguration().getQuery().isEmpty()){
+					throw new WrongIRPatentIDRecoverConfigurationException("The input keywords can not be empty!");
+				}
+				if (configurationPUGRestSearch.getInputType().name().equalsIgnoreCase("compoundName")){
+					if (!configurationPUGRestSearch.getPipelineConfiguration().getQuery().toLowerCase().matches("[a-z]+")){
+						throw new WrongIRPatentIDRecoverConfigurationException("The compound name is incorrectly defined!");
+					}
+
+				}
+				if (configurationPUGRestSearch.getInputType().name().equalsIgnoreCase("compoundIdentifier")){
+					try{
+						Integer.parseInt(configurationPUGRestSearch.getPipelineConfiguration().getQuery());
+
+					}catch (NumberFormatException e) {
+						throw new WrongIRPatentIDRecoverConfigurationException("The compound identifier must be an non-zero integer!");
+					}
+				}
+
+				String responseMessage = PUGRestUtils.verifyValideInputResponse(configurationPUGRestSearch.getPipelineConfiguration().getQuery());
+				if (!(responseMessage==null || responseMessage.isEmpty())){
+					throw new WrongIRPatentIDRecoverConfigurationException(responseMessage);					
+				}
+			}
 		}
 		else
 			throw new WrongIRPatentIDRecoverConfigurationException("Configuration is not a IRPubChemPatentIDRetrievalConfiguration");
