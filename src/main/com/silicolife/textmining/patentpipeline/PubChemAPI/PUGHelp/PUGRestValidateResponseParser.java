@@ -13,8 +13,11 @@ public class PUGRestValidateResponseParser extends DefaultHandler{
 	}
 
 	public void startElement(String s, String s1, String elementName, Attributes attributes) throws SAXException{
+		if (elementName.equalsIgnoreCase("InformationList")){
+			 throw new SAXException();
+		}
 	}
-	
+
 
 	public void endElement(String s, String s1, String element) throws SAXException{
 

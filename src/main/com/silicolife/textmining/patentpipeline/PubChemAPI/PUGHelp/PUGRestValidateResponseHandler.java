@@ -33,7 +33,6 @@ public class PUGRestValidateResponseHandler implements ResponseHandler<String>{
 
 		} catch (SAXException | IOException | ParserConfigurationException e) {
 		}
-
 		return message;
 
 	}
