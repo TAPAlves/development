@@ -23,7 +23,7 @@ public class PUGRestValidateResponseHandler implements ResponseHandler<String>{
 	@Override
 	public String buildResponse(InputStream response, String responseMessage,
 			Map<String, List<String>> headerFields, int status) throws ResponseHandlingException {
-		String message =new String();
+		String message = new String();
 		try {
 			SAXParserFactory spf = SAXParserFactory.newInstance();//Using sax parser in order to read inputstream.
 			SAXParser sp = spf.newSAXParser();

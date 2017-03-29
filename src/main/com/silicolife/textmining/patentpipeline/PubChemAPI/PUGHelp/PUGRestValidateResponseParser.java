@@ -10,7 +10,6 @@ public class PUGRestValidateResponseParser extends DefaultHandler{
 	private String message;
 
 	public PUGRestValidateResponseParser (){
-
 	}
 
 	public void startElement(String s, String s1, String elementName, Attributes attributes) throws SAXException{

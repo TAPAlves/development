@@ -74,7 +74,7 @@ public class IRPubChemPatentIDRetrieval extends AIRPatentIDRecoverSource{
 
 				String responseMessage = PUGRestUtils.verifyValideInputResponse(configurationPUGRestSearch.getPipelineConfiguration().getQuery());
 				if (!(responseMessage==null || responseMessage.isEmpty())){
-					throw new WrongIRPatentIDRecoverConfigurationException(responseMessage);					
+					throw new WrongIRPatentIDRecoverConfigurationException("The introduced compound is not valid: " + responseMessage);					
 				}
 			}
 		}

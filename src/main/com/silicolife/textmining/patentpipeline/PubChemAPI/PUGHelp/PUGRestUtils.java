@@ -58,10 +58,10 @@ public class PUGRestUtils {
 		}
 		return resultStr.substring(0,resultStr.length()-3);
 	}
-	
-	
-	
-	
+
+
+
+
 	private static Set<String> httpClientGetRequest(String url){
 		Map<String, String> headers = new HashMap<String, String>();
 
@@ -75,24 +75,26 @@ public class PUGRestUtils {
 		return patentIDs;
 
 	}
-	
-	
-	
+
+
+
 	private static String httpClientValidateResponse(String url){
 		Map<String, String> headers = new HashMap<String, String>();
-
 		String message = new String();
-
 		try {
-			message=client.get(url,headers, new PUGRestValidateResponseHandler());
+			message = client.get(url,headers, new PUGRestValidateResponseHandler());
 		} catch (RedirectionException | ClientErrorException | ServerErrorException | ConnectionException
 				| ResponseHandlingException e) {
+			message= e.getMessage();
 		}
 		return message;
 
+
+
+
 	}
-	
-	
+
+
 	public static String verifyValideInputResponse(String compound){
 		String message=new String();
 		try{
@@ -101,7 +103,7 @@ public class PUGRestUtils {
 					+ PUGRestInputEnum.compoundIdentifier.toString() + SEPARATOR + compound
 					+ SEPARATOR + operation + SEPARATOR + outputFormat;
 			message = httpClientValidateResponse(urlPatentsForAID);
-				
+
 		}catch (NumberFormatException e) {
 			String[] cFractions = compound.split(" ");
 			if (cFractions.length>1){
@@ -113,12 +115,12 @@ public class PUGRestUtils {
 			message = httpClientValidateResponse(urlPatentsForAID);
 		}
 		return message;
-		
-		
+
+
 	}
-	
-	
-	
+
+
+
 
 
 
