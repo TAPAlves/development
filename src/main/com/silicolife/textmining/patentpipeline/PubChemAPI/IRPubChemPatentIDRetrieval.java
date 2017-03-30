@@ -2,6 +2,7 @@ package main.com.silicolife.textmining.patentpipeline.PubChemAPI;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import com.silicolife.textmining.core.interfaces.core.dataaccess.exception.ANoteException;
 import com.silicolife.textmining.processes.ir.patentpipeline.configuration.IIRPatentPipelineSearchConfiguration;
@@ -57,7 +58,8 @@ public class IRPubChemPatentIDRetrieval extends AIRPatentIDRecoverSource{
 					throw new WrongIRPatentIDRecoverConfigurationException("The input keywords can not be empty!");
 				}
 				if (configurationPUGRestSearch.getInputType().name().equalsIgnoreCase("compoundName")){
-					if (!configurationPUGRestSearch.getPipelineConfiguration().getQuery().toLowerCase().matches("[a-z]+")){
+					Pattern pat= Pattern.compile("[a-z]+");			
+					if (!pat.matcher(configurationPUGRestSearch.getPipelineConfiguration().getQuery().toLowerCase()).find()){
 						throw new WrongIRPatentIDRecoverConfigurationException("The compound name is incorrectly defined!");
 					}
 

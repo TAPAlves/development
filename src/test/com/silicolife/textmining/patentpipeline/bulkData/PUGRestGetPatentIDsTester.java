@@ -69,22 +69,22 @@ public class PUGRestGetPatentIDsTester {
 			System.out.println(patentID);
 	}
 
-//	@Test
+	@Test
 	public void test5() throws WrongIRPatentIDRecoverConfigurationException, ANoteException{
-		String identifier="fucoxanthin";
+		String identifier="3-hydroxybutanoic acid";
 		PUGRestInputEnum inputType = PUGRestInputEnum.compoundName;
 		IIRPatentPipelineSearchConfiguration query = new IRPatentPipelineSearchConfigurationImpl(identifier);
 		IIRPubChemPatentIDRetrievalConfiguration configuration = new IRPubChemPatentIDRetrievalConfigurationImpl(inputType,query);
 		IRPubChemPatentIDRetrieval pugRestSearch = new IRPubChemPatentIDRetrieval(configuration);
 		Set<String> patentIds = pugRestSearch.retrievalPatentIds(query);
-		
-		System.out.println(patentIds.size());
 		for(String patentID :patentIds)
 			System.out.println(patentID);
+		
+		System.out.println(patentIds.size());
 	}
 	
 	
-	@Test
+//	@Test
 	public void test6() throws WrongIRPatentIDRecoverConfigurationException, ANoteException{
 		String identifier="5281239";
 		PUGRestInputEnum inputType = PUGRestInputEnum.compoundIdentifier;
