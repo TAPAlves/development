@@ -82,15 +82,15 @@ public class PUGRestUtils {
 	}
 
 
-	private static String httpClientValidateResponse(String url,boolean nameTypeRun){
+	private static String httpClientValidateResponse(String url,boolean nameTypeRun, boolean compoundName){
 		Map<String, String> headers = new HashMap<String, String>();
 		String message = new String();
 		try {
 			message = client.get(url,headers, new PUGRestValidateResponseHandler());
 		} catch (RedirectionException | ClientErrorException | ServerErrorException | ConnectionException
 				| ResponseHandlingException e) {
-			if (!nameTypeRun){
-				message=httpClientValidateResponse(url+"?name_type=word", true);
+			if (!nameTypeRun && compoundName){
+				message=httpClientValidateResponse(url+"?name_type=word", true,true);
 				nameTypeCompoundSign=true;
 			}
 			else{
@@ -111,7 +111,7 @@ public class PUGRestUtils {
 			String urlPatentsForAID= generalURL + SEPARATOR + database + SEPARATOR 
 					+ PUGRestInputEnum.compoundIdentifier.toString() + SEPARATOR + compound
 					+ SEPARATOR + operation + SEPARATOR + outputFormat;
-			message = httpClientValidateResponse(urlPatentsForAID,false);
+			message = httpClientValidateResponse(urlPatentsForAID,false,false);
 
 		}catch (NumberFormatException e) {
 			String[] cFractions = compound.split(" ");
@@ -121,11 +121,9 @@ public class PUGRestUtils {
 			String urlPatentsForAID= generalURL + SEPARATOR + database + SEPARATOR 
 					+ PUGRestInputEnum.compoundName.toString() + SEPARATOR + compound
 					+ SEPARATOR + operation + SEPARATOR + outputFormat;
-			message = httpClientValidateResponse(urlPatentsForAID,false);
+			message = httpClientValidateResponse(urlPatentsForAID,false,true);
 		}
 		return message;
-
-
 	}
 
 }
