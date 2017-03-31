@@ -66,8 +66,11 @@ public class IRPubChemPatentIDRetrieval extends AIRPatentIDRecoverSource{
 				}
 				if (configurationPUGRestSearch.getInputType().name().equalsIgnoreCase("compoundIdentifier")){
 					try{
-						Integer.parseInt(configurationPUGRestSearch.getPipelineConfiguration().getQuery());
-
+						String[] intList = configurationPUGRestSearch.getPipelineConfiguration().getQuery().split(",");
+						for (String intger:intList){
+							Integer.parseInt(intger);
+						}
+						
 					}catch (NumberFormatException e) {
 						throw new WrongIRPatentIDRecoverConfigurationException("The compound identifier must be an non-zero integer!");
 					}

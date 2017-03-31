@@ -71,7 +71,7 @@ public class PUGRestGetPatentIDsTester {
 
 	@Test
 	public void test5() throws WrongIRPatentIDRecoverConfigurationException, ANoteException{
-		String identifier="3-hydroxybutanoic acid";
+		String identifier="Polyhydroxybutyrate";
 		PUGRestInputEnum inputType = PUGRestInputEnum.compoundName;
 		IIRPatentPipelineSearchConfiguration query = new IRPatentPipelineSearchConfigurationImpl(identifier);
 		IIRPubChemPatentIDRetrievalConfiguration configuration = new IRPubChemPatentIDRetrievalConfigurationImpl(inputType,query);
@@ -86,7 +86,7 @@ public class PUGRestGetPatentIDsTester {
 	
 //	@Test
 	public void test6() throws WrongIRPatentIDRecoverConfigurationException, ANoteException{
-		String identifier="5281239";
+		String identifier="5281239,441";
 		PUGRestInputEnum inputType = PUGRestInputEnum.compoundIdentifier;
 		IIRPatentPipelineSearchConfiguration query = new IRPatentPipelineSearchConfigurationImpl(identifier);
 		IIRPubChemPatentIDRetrievalConfiguration configuration = new IRPubChemPatentIDRetrievalConfigurationImpl(inputType,query);

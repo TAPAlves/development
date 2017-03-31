@@ -20,6 +20,7 @@ public class PUGRestUtils {
 	private static String database= "compound";
 	private static String operation="xrefs/patentID";
 	private static String outputFormat="xml"; //xml,json,csv,sdf,txt,png
+	private static boolean nameTypeCompoundSign=false;
 
 	private static HTTPClient client = new HTTPClient();
 
@@ -60,45 +61,57 @@ public class PUGRestUtils {
 	}
 
 
-
-
 	private static Set<String> httpClientGetRequest(String url){
 		Map<String, String> headers = new HashMap<String, String>();
 
 		Set<String> patentIDs = new HashSet<>();
 
-		try {
-			patentIDs=client.get(url,headers, new PUGRestPatentIDSHandler(patentIDs));
-		} catch (RedirectionException | ClientErrorException | ServerErrorException | ConnectionException
-				| ResponseHandlingException e) {
+		if (!nameTypeCompoundSign){
+			try {
+				patentIDs=client.get(url,headers, new PUGRestPatentIDSHandler(patentIDs));
+			} catch (RedirectionException | ClientErrorException | ServerErrorException | ConnectionException
+					| ResponseHandlingException e) {
+			}
+		}
+		else{
+			nameTypeCompoundSign=false;
+			patentIDs=httpClientGetRequest(url+"?name_type=word");
 		}
 		return patentIDs;
 
 	}
 
 
-	private static String httpClientValidateResponse(String url){
+	private static String httpClientValidateResponse(String url,boolean nameTypeRun){
 		Map<String, String> headers = new HashMap<String, String>();
 		String message = new String();
 		try {
 			message = client.get(url,headers, new PUGRestValidateResponseHandler());
 		} catch (RedirectionException | ClientErrorException | ServerErrorException | ConnectionException
 				| ResponseHandlingException e) {
-			message= e.getMessage();
+			if (!nameTypeRun){
+				message=httpClientValidateResponse(url+"?name_type=word", true);
+				nameTypeCompoundSign=true;
+			}
+			else{
+				message= e.getMessage();
+			}
 		}
 		return message;
-
 	}
 
 
 	public static String verifyValideInputResponse(String compound){
 		String message=new String();
 		try{
-			Integer.parseInt(compound);
+			String[] cFractions = compound.split(",");
+			for (String identifier:cFractions){
+				Integer.parseInt(identifier);
+			}
 			String urlPatentsForAID= generalURL + SEPARATOR + database + SEPARATOR 
 					+ PUGRestInputEnum.compoundIdentifier.toString() + SEPARATOR + compound
 					+ SEPARATOR + operation + SEPARATOR + outputFormat;
-			message = httpClientValidateResponse(urlPatentsForAID);
+			message = httpClientValidateResponse(urlPatentsForAID,false);
 
 		}catch (NumberFormatException e) {
 			String[] cFractions = compound.split(" ");
@@ -108,7 +121,7 @@ public class PUGRestUtils {
 			String urlPatentsForAID= generalURL + SEPARATOR + database + SEPARATOR 
 					+ PUGRestInputEnum.compoundName.toString() + SEPARATOR + compound
 					+ SEPARATOR + operation + SEPARATOR + outputFormat;
-			message = httpClientValidateResponse(urlPatentsForAID);
+			message = httpClientValidateResponse(urlPatentsForAID,false);
 		}
 		return message;
 
