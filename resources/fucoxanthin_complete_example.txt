@@ -1,0 +1,1400 @@
+863
+337
+patent from set:WO2014035351A1
+patent from set:EP2575505A1
+patent from set:WO2009089496A2
+patent from set:EP2842950A4
+patent from set:WO2012104576A2
+patent from set:US20140148488A1
+patent from set:US20140179657A1
+patent from set:EP2111860A1
+patent from set:WO2009052629A1
+patent from set:EP2842950A1
+patent from set:WO2004056972A2
+patent from set:EP1470817A1
+patent from set:US7345091B2
+patent from set:US20050124033A1
+patent from set:US20140308248A1
+patent from set:US20110268759A1
+patent from set:WO2014025938A1
+patent from set:US20100272790A1
+patent from set:US20160331676A1
+patent from set:US7763649B2
+patent from set:WO2001017374A1
+patent from set:WO2006130174A2
+patent from set:US20070099888A1
+patent from set:WO1998028403A1
+patent from set:US7723327B2
+patent from set:EP2871973A1
+patent from set:US6969595B2
+patent from set:US9233081B2
+patent from set:EP2619304A2
+patent from set:WO2010081259A1
+patent from set:US20150150770A1
+patent from set:EP2741779A1
+patent from set:US20110113508A1
+patent from set:US20130209391A1
+patent from set:US20070224216A1
+patent from set:US20100291008A1
+patent from set:US20140037678A1
+patent from set:WO2011035179A1
+patent from set:US20150133552A1
+patent from set:EP2983498A1
+patent from set:JP2009072132A
+patent from set:EP1727530A2
+patent from set:JP2004035528A
+patent from set:WO2005087942A1
+patent from set:US7695931B2
+patent from set:US8211461B2
+patent from set:US20050287625A1
+patent from set:EP1919447A2
+patent from set:JP2011168573A
+patent from set:US20150157672A1
+patent from set:US20160310555A1
+patent from set:US9220741B2
+patent from set:WO2006126325A1
+patent from set:WO2011150229A2
+patent from set:US20150140031A1
+patent from set:WO2015004255A1
+patent from set:US20120128777A1
+patent from set:JP2010006783A
+patent from set:EP1664794A2
+patent from set:EP2664627B1
+patent from set:US20160045560A1
+patent from set:US20110118351A1
+patent from set:US20080260662A1
+patent from set:EP2098222A1
+patent from set:US6914075B2
+patent from set:US8834855B2
+patent from set:US20080161296A1
+patent from set:EP2803276A1
+patent from set:US7241463B2
+patent from set:WO2016004363A2
+patent from set:US20090004170A1
+patent from set:EP2627764A1
+patent from set:WO2016135400A1
+patent from set:US20080038241A1
+patent from set:US7026464B2
+patent from set:EP2568961A2
+patent from set:EP1625204A2
+patent from set:EP1693377B1
+patent from set:US6160617A
+patent from set:US20120058248A1
+patent from set:US20130337024A1
+patent from set:US20140248410A1
+patent from set:EP1693377A1
+patent from set:WO2006078284A2
+patent from set:WO2013068134A1
+patent from set:WO2016175670A1
+patent from set:WO2007060811A1
+patent from set:WO2009066799A1
+patent from set:US20080293673A1
+patent from set:US20160000737A1
+patent from set:EP2670392A2
+patent from set:US20160375150A1
+patent from set:US20140243254A1
+patent from set:EP2664627A1
+patent from set:US20160324933A1
+patent from set:WO2008053517A1
+patent from set:WO2013024048A1
+patent from set:US20150203612A1
+patent from set:WO2000068395A2
+patent from set:US20150335574A1
+patent from set:EP1463513A1
+patent from set:EP2197410A2
+patent from set:US20070065900A1
+patent from set:WO2009130895A1
+patent from set:JP2010275265A
+patent from set:US20040259835A1
+patent from set:WO2015073598A1
+patent from set:EP2825638A1
+patent from set:US20060121558A1
+patent from set:WO2012047120A1
+patent from set:US5591343A
+patent from set:US6929928B2
+patent from set:WO2015131152A1
+patent from set:US20070148727A1
+patent from set:US20040156802A1
+patent from set:WO2014096992A1
+patent from set:EP1982711A1
+patent from set:EP1463513B1
+patent from set:JP2010233517A
+patent from set:US8623924B2
+patent from set:US9480672B2
+patent from set:WO2011018501A2
+patent from set:EP2789245A1
+patent from set:US20100076091A1
+patent from set:EP2294193A2
+patent from set:US7064196B2
+patent from set:WO2016209732A1
+patent from set:EP2218447A1
+patent from set:WO2002000908A2
+patent from set:WO2010104908A1
+patent from set:WO2014161815A1
+patent from set:EP2553107A2
+patent from set:WO1998028407A2
+patent from set:JP2008280281A
+patent from set:EP1776427A1
+patent from set:US20110059192A1
+patent from set:US9096875B2
+patent from set:EP2441828B1
+patent from set:US20050009930A1
+patent from set:US20040146966A1
+patent from set:WO2014065640A3
+patent from set:EP2803276B1
+patent from set:WO2014065640A2
+patent from set:US7256014B2
+patent from set:EP1374831A1
+patent from set:US20050075337A1
+patent from set:US20150315162A1
+patent from set:US20050009758A1
+patent from set:WO2003051375A1
+patent from set:US20120220580A1
+patent from set:US20110021843A1
+patent from set:WO2007116980A1
+patent from set:EP1866428A2
+patent from set:US20150044737A1
+patent from set:EP2812005A1
+patent from set:US20110172185A1
+patent from set:EP2273977A2
+patent from set:US20090324800A1
+patent from set:WO2016096986A1
+patent from set:EP1138757A1
+patent from set:WO2005026269A1
+patent from set:US7070952B2
+patent from set:US20140274966A1
+patent from set:US20070065902A1
+patent from set:WO2007062415A1
+patent from set:WO2013144595A1
+patent from set:WO2014089174A2
+patent from set:US20130045504A1
+patent from set:WO2004056974A2
+patent from set:WO2016170784A1
+patent from set:WO2016172787A1
+patent from set:US20160074312A1
+patent from set:US7217537B2
+patent from set:US20050014219A1
+patent from set:WO2014028585A1
+patent from set:WO2014096990A1
+patent from set:WO1995000130A1
+patent from set:US20150065568A1
+patent from set:US7635469B2
+patent from set:WO2014074592A1
+patent from set:EP2047842A1
+patent from set:WO2004104180A2
+patent from set:WO2015041977A1
+patent from set:JP2009155331A
+patent from set:EP2825629A1
+patent from set:WO2011012715A1
+patent from set:EP2988783A1
+patent from set:EP2580966A1
+patent from set:WO2016172282A1
+patent from set:EP2890740A1
+patent from set:US20140044653A1
+patent from set:EP2832344A1
+patent from set:EP2841109A1
+patent from set:WO2010124391A1
+patent from set:EP1581632A2
+patent from set:WO2011123407A2
+patent from set:WO2008042338A2
+patent from set:WO2008063158A2
+patent from set:EP2340805A2
+patent from set:US20160082123A1
+patent from set:WO2008095182A2
+patent from set:US20090324637A1
+patent from set:US20040161364A1
+patent from set:US20130252236A1
+patent from set:US20130310772A1
+patent from set:WO2002018617A2
+patent from set:US7375133B2
+patent from set:US9161921B2
+patent from set:WO2009051470A1
+patent from set:US20140296257A1
+patent from set:EP2710153A1
+patent from set:EP2958890A1
+patent from set:US9339845B2
+patent from set:US20050065096A1
+patent from set:EP2129231A2
+patent from set:US20080241119A1
+patent from set:WO2015174910A1
+patent from set:EP1845927A1
+patent from set:US20140023602A1
+patent from set:US20140044677A1
+patent from set:US20130017284A1
+patent from set:US5350588A
+patent from set:EP2371967B1
+patent from set:WO2010124392A1
+patent from set:US20130172407A1
+patent from set:US20070026484A1
+patent from set:EP2902101A1
+patent from set:US20140234928A1
+patent from set:US20080015252A1
+patent from set:US8900602B2
+patent from set:US8816040B2
+patent from set:EP1377547A2
+patent from set:EP1646713A2
+patent from set:US20160060454A1
+patent from set:EP2371967A1
+patent from set:WO2012089615A1
+patent from set:EP2997956A1
+patent from set:EP2818154A1
+patent from set:EP1554372A2
+patent from set:US7521584B2
+patent from set:EP2806756A2
+patent from set:US20050226858A1
+patent from set:US20160067203A1
+patent from set:EP2676553A1
+patent from set:EP2477620A1
+patent from set:US20130189765A1
+patent from set:US20110039299A1
+patent from set:US20080058400A1
+patent from set:US20040253663A1
+patent from set:US7288387B2
+patent from set:US20150225539A1
+patent from set:EP2606881A1
+patent from set:EP2658962A1
+patent from set:WO2005044975A2
+patent from set:EP2305373A1
+patent from set:EP1890691A2
+patent from set:JP2010235574A
+patent from set:EP2532251A1
+patent from set:EP2172223A1
+patent from set:WO2011146833A1
+patent from set:US20120184612A1
+patent from set:EP2928315A2
+patent from set:JP2009033970A
+patent from set:US8871217B2
+patent from set:EP2301659A1
+patent from set:US20150157721A1
+patent from set:JPH10158156A
+patent from set:US9282759B2
+patent from set:US20080311175A1
+patent from set:US9096508B2
+patent from set:WO2009037947A2
+patent from set:US20100150853A1
+patent from set:US8574639B2
+patent from set:EP1620454A2
+patent from set:EP2074214A2
+patent from set:EP0719866B1
+patent from set:WO2012049306A1
+patent from set:EP2935570A1
+patent from set:WO2002068385A2
+patent from set:WO2012138885A1
+patent from set:US20100222422A1
+patent from set:JP2010120939A
+patent from set:WO1998028082A1
+patent from set:WO2002068385A9
+patent from set:EP2597156A1
+patent from set:US20090306222A1
+patent from set:WO2011143271A2
+patent from set:US20130108706A1
+patent from set:US20140274965A1
+patent from set:US20120156259A1
+patent from set:WO2007050769A2
+patent from set:US20160067201A1
+patent from set:US20070036742A1
+patent from set:US9284294B2
+patent from set:US20130071525A1
+patent from set:US20100137646A1
+patent from set:WO2013113027A2
+patent from set:US20150030662A1
+patent from set:WO2009126738A2
+patent from set:EP2215168B1
+patent from set:US7851199B2
+patent from set:EP0732378A2
+patent from set:WO2015187689A1
+patent from set:WO2007120423A9
+patent from set:JP2013540110A
+patent from set:US20080119551A1
+patent from set:US20160279130A1
+patent from set:US20110091569A1
+patent from set:US20150087688A1
+patent from set:WO2007120423A2
+patent from set:EP3077006A1
+patent from set:US20120282358A1
+patent from set:US20100215782A1
+patent from set:US9234204B2
+patent from set:EP2215168A1
+patent from set:US20080261896A1
+patent from set:US7393937B2
+patent from set:EP1074254A2
+patent from set:JP2001335480A
+patent from set:US20150174188A1
+patent from set:US20160281041A1
+patent from set:WO2009027850A2
+patent from set:US9198883B1
+patent from set:EP0719866A1
+patent from set:JPH06276956A
+patent from set:WO2008021574A2
+patent from set:EP1733720B1
+patent from set:EP1573013A2
+patent from set:US20060094077A1
+patent from set:EP1573013A4
+patent from set:US7192731B2
+patent from set:EP2214656A1
+patent from set:US20020110604A1
+patent from set:US20130344180A1
+patent from set:EP3068415A1
+patent from set:US20130203883A1
+patent from set:WO2009075383A1
+patent from set:US20130102040A1
+patent from set:US8952217B2
+patent from set:JP2008291004A
+patent from set:JPH083468A
+patent from set:US20090253164A1
+patent from set:US20160228400A1
+patent from set:WO2012097018A1
+patent from set:US20050113372A1
+patent from set:JP2009120494A
+patent from set:US9446055B2
+patent from set:US5910254A
+patent from set:US20090176673A1
+patent from set:WO2003087234A1
+patent from set:WO2014003740A1
+patent from set:WO2012024291A1
+patent from set:US9351967B2
+patent from set:EP2418270B1
+patent from set:EP2894191A1
+patent from set:US20060165734A1
+patent from set:US20120156261A1
+patent from set:EP2496525A1
+patent from set:US20150164843A1
+patent from set:EP2418270A1
+patent from set:US20070154575A1
+patent from set:US20160302462A1
+patent from set:JP2009201480A
+patent from set:US20130189382A1
+patent from set:WO2010058235A1
+patent from set:WO2008023283A2
+patent from set:WO2014138426A2
+patent from set:US9072692B2
+patent from set:US20030003528A1
+patent from set:WO2013171100A1
+patent from set:WO2002094982A2
+patent from set:US20130264934A1
+patent from set:US8445028B2
+patent from set:WO2004037998A2
+patent from set:US20060020127A1
+patent from set:WO2010051918A2
+patent from set:US20110059164A1
+patent from set:US8367072B2
+patent from set:US20150140619A1
+patent from set:WO2016174599A1
+patent from set:US20080206275A1
+patent from set:US20140113301A1
+patent from set:WO2012082731A2
+patent from set:US20020120001A1
+patent from set:EP2498602A1
+patent from set:WO2016098874A1
+patent from set:US20070122363A1
+patent from set:US20130071451A1
+patent from set:US20160023826A1
+patent from set:US20120045428A1
+patent from set:JP2009173597A
+patent from set:US20160338983A1
+patent from set:WO2011152692A3
+patent from set:US20140335123A1
+patent from set:JP2007297370A
+patent from set:US20120177806A1
+patent from set:US20120121743A1
+patent from set:EP2263641A2
+patent from set:EP2957166A1
+patent from set:EP2465539A1
+patent from set:EP1820538A1
+patent from set:US20130224240A1
+patent from set:US20050004235A1
+patent from set:EP0882709B1
+patent from set:US20100080785A1
+patent from set:WO2015101410A1
+patent from set:EP2007221A1
+patent from set:EP2968206A1
+patent from set:JP2009180565A
+patent from set:EP1361281A1
+patent from set:US20130115345A1
+patent from set:US20080160116A1
+patent from set:EP2227216A1
+patent from set:US5502041A
+patent from set:EP2977462A1
+patent from set:US20070009932A1
+patent from set:US20140162330A1
+patent from set:US20080058406A1
+patent from set:WO2012040698A2
+patent from set:EP0882709A1
+patent from set:US20050026874A1
+patent from set:EP2990035A1
+patent from set:US20150118329A1
+patent from set:US8633009B2
+patent from set:WO2011065412A1
+patent from set:US7232665B2
+patent from set:EP2741778A1
+patent from set:WO2008010788A2
+patent from set:US20110288125A1
+patent from set:US20050148517A1
+patent from set:JP2008231198A
+patent from set:US20080102131A1
+patent from set:EP2981557A1
+patent from set:US20130209392A1
+patent from set:WO2008010788A9
+patent from set:US9056049B2
+patent from set:US8197865B2
+patent from set:US9476082B2
+patent from set:WO2013119959A1
+patent from set:US9066973B2
+patent from set:EP2552413B1
+patent from set:US9297031B2
+patent from set:US20130337136A1
+patent from set:US20140087448A1
+patent from set:WO2009149374A2
+patent from set:WO2015085173A1
+patent from set:US20040126848A1
+patent from set:EP1806982A1
+patent from set:US20120094339A1
+patent from set:EP2464248A2
+patent from set:US7741070B2
+patent from set:EP1806982A4
+patent from set:US8007838B2
+patent from set:WO2013024047A1
+patent from set:US20110070258A1
+patent from set:US20020177181A1
+patent from set:EP2214625A1
+patent from set:WO2005072086A2
+patent from set:WO2015017625A1
+patent from set:US20130072574A1
+patent from set:US20130225868A1
+patent from set:EP0126991A1
+patent from set:US8735137B2
+patent from set:US20160249668A1
+patent from set:EP2210583A1
+patent from set:US8747915B1
+patent from set:US9056091B1
+patent from set:EP2380552A1
+patent from set:EP1497382A1
+patent from set:US8288149B2
+patent from set:WO2016073739A1
+patent from set:US20150191444A1
+patent from set:US20130273116A1
+patent from set:WO2015144831A1
+patent from set:EP1631660A2
+patent from set:WO1998028404A1
+patent from set:WO2009032987A1
+patent from set:US5859700A
+patent from set:EP2671596A1
+patent from set:WO2014173759A1
+patent from set:US5201930A
+patent from set:US20150290264A1
+patent from set:WO2015082688A1
+patent from set:EP2465540B1
+patent from set:JP2010270021A
+patent from set:US20110052754A1
+patent from set:WO2012091812A1
+patent from set:US20120149886A1
+patent from set:US20040109920A1
+patent from set:US20150322412A1
+patent from set:US20080274195A1
+patent from set:US20080031906A1
+patent from set:US20100269731A1
+patent from set:US8697418B1
+patent from set:WO2015021352A2
+patent from set:WO2009023803A2
+patent from set:US20160228391A1
+patent from set:US20160130542A1
+patent from set:EP2465540A1
+patent from set:EP2515107A1
+patent from set:US8974839B2
+patent from set:US20040219629A1
+patent from set:US7695932B2
+patent from set:US20070065901A1
+patent from set:US20120329978A1
+patent from set:WO2013161378A1
+patent from set:US20130156816A1
+patent from set:US20070248668A1
+patent from set:WO2014078459A1
+patent from set:EP2731599A1
+patent from set:US20150315550A1
+patent from set:US20140155961A1
+patent from set:US20150284487A1
+patent from set:EP2919772A1
+patent from set:EP2056835A2
+patent from set:WO2014151326A1
+patent from set:US8586107B2
+patent from set:US20160000117A1
+patent from set:US20070118916A1
+patent from set:EP2644020A1
+patent from set:US5229118A
+patent from set:US20050002879A1
+patent from set:EP1733720A1
+patent from set:US20090110674A1
+patent from set:WO2016182929A1
+patent from set:EP2163252A1
+patent from set:WO2007117556A2
+patent from set:WO2009063333A2
+patent from set:EP1181375A2
+patent from set:US20100239621A1
+patent from set:US20100210722A1
+patent from set:US9321872B2
+patent from set:US20110159152A1
+patent from set:US5776349A
+patent from set:US20100152286A1
+patent from set:EP2552413A2
+patent from set:US9011832B2
+patent from set:US20050037995A1
+patent from set:EP1336602A1
+patent from set:US9427010B2
+patent from set:US20050059635A1
+patent from set:EP1384482A1
+patent from set:US20160000701A1
+patent from set:WO2014129974A1
+patent from set:US20030185939A1
+patent from set:WO2013119955A1
+patent from set:US8110672B2
+patent from set:US20130309218A1
+patent from set:EP2939657A1
+patent from set:US20110020519A1
+patent from set:WO2013137826A1
+patent from set:US20120165413A1
+patent from set:WO2015137500A1
+patent from set:US8709766B2
+patent from set:US20110244512A1
+patent from set:WO2002030412A1
+patent from set:US20150342914A1
+patent from set:US20070065903A1
+patent from set:US20130131183A1
+patent from set:WO2016012618A1
+patent from set:US20040116514A1
+patent from set:US20140037762A1
+patent from set:WO2004087892A1
+patent from set:US20140255524A1
+patent from set:WO2009038030A1
+patent from set:US8367395B2
+patent from set:US20040166199A1
+patent from set:US6540654B2
+patent from set:US20130309338A1
+patent from set:US20050059659A1
+patent from set:US9452143B2
+patent from set:US6000551A
+patent from set:WO2013136025A1
+patent from set:US20090181901A1
+patent from set:US20130273123A1
+patent from set:US20140370154A1
+patent from set:US20110274746A1
+patent from set:US20130102463A1
+patent from set:US20030206972A1
+patent from set:US20120214244A1
+patent from set:JP2000004848A
+patent from set:WO2006102342A2
+patent from set:US9226911B2
+patent from set:EP2078092A2
+patent from set:EP1572990A2
+patent from set:US8445035B2
+patent from set:WO2012125953A2
+patent from set:EP1572990A4
+patent from set:US20100221306A1
+patent from set:US9381223B2
+patent from set:EP2345409A1
+patent from set:US7776915B2
+patent from set:US8927285B2
+patent from set:EP2004801A2
+patent from set:EP2226071A1
+patent from set:WO2008075204A2
+patent from set:US20160192689A1
+patent from set:US20040175785A1
+patent from set:EP2348868A1
+patent from set:US20160000745A1
+patent from set:US20040101942A1
+patent from set:EP2745835B1
+patent from set:US6579714B1
+patent from set:EP2915838A1
+patent from set:US8927043B2
+patent from set:WO2007094430A1
+patent from set:WO2013160340A1
+patent from set:EP2226071B1
+patent from set:US20080233209A1
+patent from set:US20090324658A1
+patent from set:EP2623335A2
+patent from set:EP2745835A1
+patent from set:WO2013071029A1
+patent from set:EP2424512A1
+patent from set:US20050065097A1
+patent from set:US20100273727A1
+patent from set:EP1932514A1
+patent from set:US9447068B2
+patent from set:EP1660596A1
+patent from set:US7098005B2
+patent from set:US20040224383A1
+patent from set:EP2571991A1
+patent from set:US20130017283A1
+patent from set:WO2009135311A1
+patent from set:US20080138851A1
+patent from set:WO2014011857A1
+patent from set:US20120171719A1
+patent from set:WO2004056975A2
+patent from set:US20130011455A1
+patent from set:US20100197782A1
+patent from set:WO2012103119A1
+patent from set:EP1364943A1
+patent from set:JP2008239609A
+patent from set:WO2012115954A2
+patent from set:US20050075316A1
+patent from set:US20160263047A1
+patent from set:US20150367366A1
+patent from set:EP1328639A2
+patent from set:US20130337116A1
+patent from set:US9199952B2
+patent from set:EP1364943B1
+patent from set:EP2692331A1
+patent from set:US8278358B2
+patent from set:WO2015057751A1
+patent from set:WO2016049236A1
+patent from set:US20160296581A1
+patent from set:US20100305341A1
+patent from set:US8158683B2
+patent from set:EP1377547B1
+patent from set:US8454970B2
+patent from set:US20110123680A1
+patent from set:US20100272763A1
+patent from set:EP3034612A1
+patent from set:JP2009191008A
+patent from set:EP3030648A2
+patent from set:EP2812313A1
+patent from set:EP2767274A1
+patent from set:US8008061B2
+patent from set:EP1553101B1
+patent from set:US20140039052A1
+patent from set:EP2752436B1
+patent from set:US20150327446A1
+patent from set:WO2006077433A1
+patent from set:US20130309719A1
+patent from set:WO2015136123A1
+patent from set:US20110274716A1
+patent from set:US20140356420A1
+patent from set:EP2918278A1
+patent from set:US20060188955A1
+patent from set:WO2009048249A2
+patent from set:EP1409454A4
+patent from set:WO2009048249A3
+patent from set:US7317008B2
+patent from set:US20100255458A1
+patent from set:EP1409454A2
+patent from set:US20050009788A1
+patent from set:US20080025929A1
+patent from set:WO2011152689A3
+patent from set:JP2014198706A
+patent from set:WO2011152689A9
+patent from set:EP2658610B1
+patent from set:US8741337B2
+patent from set:US20120052137A1
+patent from set:EP2174658A1
+patent from set:WO2015073628A1
+patent from set:EP1884238B1
+patent from set:EP2453762A1
+patent from set:US20150164782A1
+patent from set:US20040268439A1
+patent from set:WO2006034570A1
+patent from set:US8663690B2
+patent from set:JPH05331010A
+patent from set:EP2658610A2
+patent from set:WO2009089117A1
+patent from set:EP1632556A1
+patent from set:JPH07224278A
+patent from set:US20160310460A1
+patent from set:EP2459220A1
+patent from set:EP1884238A4
+patent from set:US20110275592A1
+patent from set:US5951875A
+patent from set:EP1553101A1
+patent from set:EP1884238A1
+patent from set:EP2752436A1
+patent from set:US20100062040A1
+patent from set:JP2008001623A
+patent from set:JP2010168284A
+patent from set:US20130052719A1
+patent from set:EP2554185A1
+patent from set:JP2010209023A
+patent from set:US20140315279A1
+patent from set:US20120189706A1
+patent from set:US20100303913A1
+patent from set:EP3028691A1
+patent from set:US20060216251A1
+patent from set:WO2005010156A2
+patent from set:EP1871883A1
+patent from set:US20050090469A1
+patent from set:WO2011047530A1
+patent from set:US20130137138A1
+patent from set:US7320997B2
+patent from set:EP2441828A1
+patent from set:US20080187526A1
+patent from set:EP3057604A1
+patent from set:US20120141387A1
+patent from set:WO2011047530A8
+patent from set:US20110293525A1
+patent from set:US20120128800A1
+patent from set:EP2663198A1
+patent from set:US20160068615A1
+patent from set:US20100093847A1
+patent from set:WO2002013835A1
+patent from set:US8617886B2
+patent from set:WO2016166755A1
+patent from set:US8765198B2
+patent from set:US8765719B2
+patent from set:US20140194547A1
+patent from set:US20160206588A1
+patent from set:US20160256511A1
+patent from set:US6620604B1
+patent from set:EP1428884A1
+patent from set:US7504236B2
+patent from set:US20150044327A1
+patent from set:EP2935571A1
+patent from set:WO2009126890A2
+patent from set:US20150111263A1
+patent from set:WO1998028081A1
+patent from set:EP2997955A1
+patent from set:WO2015180993A1
+patent from set:WO2004071996A2
+patent from set:WO2016073843A2
+patent from set:WO2009089115A1
+patent from set:US7252942B2
+patent from set:WO2010022364A1
+patent from set:US6103940A
+patent from set:WO2014131120A1
+patent from set:WO2005001024A2
+patent from set:US20160145668A1
+patent from set:WO2008130372A2
+patent from set:WO2011103464A1
+patent from set:WO2014151329A1
+patent from set:US20160302452A1
+patent from set:US20140170700A1
+patent from set:US20110217244A1
+patent from set:US20130295623A1
+patent from set:US20130172426A1
+patent from set:US20080287393A1
+patent from set:EP3079786A1
+patent from set:EP2536293A1
+patent from set:US20150342854A1
+patent from set:WO2016007841A1
+patent from set:WO2011073205A1
+patent from set:WO2006092449A2
+patent from set:US20040209365A1
+patent from set:US9211238B2
+patent from set:US20150133712A1
+patent from set:US7838552B2
+patent from set:WO2010048114A1
+patent from set:EP2194140A2
+patent from set:US8412469B1
+patent from set:US20070015237A1
+patent from set:EP2882494A1
+patent from set:US20130337068A1
+patent from set:US20060036088A1
+patent from set:US20050143475A1
+patent from set:WO2006002630A1
+patent from set:WO2012155202A1
+patent from set:WO2014112573A1
+patent from set:EP2123263A1
+patent from set:WO2013133903A1
+patent from set:WO2005079143A2
+patent from set:US20080153148A1
+patent from set:US9388372B2
+patent from set:JP2009108022A
+patent from set:WO1998028083A1
+patent from set:WO2007049786A1
+patent from set:EP2676670A1
+patent from set:US20050147579A1
+patent from set:US7628984B2
+patent from set:EP2296675A1
+patent from set:US20130189722A1
+patent from set:EP2982364A1
+patent from set:US20080286254A1
+patent from set:US20040115758A1
+patent from set:EP3046555A1
+patent from set:US9410036B2
+patent from set:US9453232B2
+patent from set:WO2016055196A1
+patent from set:WO2013052433A2
+patent from set:US20050049248A1
+patent from set:EP2812372A1
+patent from set:WO2011006261A1
+patent from set:US20070298483A1
+patent from set:WO2012089184A2
+patent from set:WO2007112587A1
+patent from set:WO2012040938A1
+patent from set:US20070059790A1
+patent from set:US20160051604A1
+patent from set:EP2172196A1
+patent from set:US9006493B2
+patent from set:WO2010077922A1
+patent from set:EP2808015A1
+patent from set:EP2573188A2
+patent from set:US20040059110A1
+patent from set:US20160113915A1
+patent from set:US20150216779A1
+patent from set:WO2007138933A1
+patent from set:WO2011060084A1
+patent from set:US20130253070A1
+patent from set:WO2011116738A2
+patent from set:EP3027058A1
+patent from set:US20150157577A1
+patent from set:US9149056B2
+patent from set:US7232666B2
+patent from set:US20160287528A1
+patent from set:WO2014144765A1
+patent from set:US20090004304A1
+patent from set:US20080254188A1
+patent from set:US20120315345A1
+patent from set:US20160022556A1
+patent from set:US20080274068A1
+patent from set:US8017162B2
+patent from set:WO2013012760A1
+patent from set:WO1997046622A1
+patent from set:US7892580B2
+patent from set:EP2829263A1
+patent from set:US20160185899A1
+patent from set:EP2574337A1
+patent from set:US20130162999A1
+patent from set:US20040175407A1
+patent from set:US20040077068A1
+patent from set:US20150250203A1
+patent from set:WO2009062518A1
+patent from set:WO2002030419A1
+patent from set:JP2007314451A
+patent from set:US20080089851A1
+patent from set:US8902423B2
+patent from set:US4539230A
+patent from set:US20160030455A1
+patent from set:US20130196937A1
+patent from set:EP2728012A1
+patent from set:JP2007516697A
+patent from set:US20110111038A1
+patent ID not in web: 0: WO2014035351A1
+patent ID not in web: 1: EP2575505A1
+patent ID not in web: 2: WO2009089496A2
+patent ID not in web: 3: EP2842950A4
+patent ID not in web: 4: WO2012104576A2
+patent ID not in web: 5: EP2111860A1
+patent ID not in web: 6: WO2009052629A1
+patent ID not in web: 7: EP2842950A1
+patent ID not in web: 8: WO2004056972A2
+patent ID not in web: 9: EP1470817A1
+patent ID not in web: 10: US20050124033A1
+patent ID not in web: 11: US20140308248A1
+patent ID not in web: 12: US20110268759A1
+patent ID not in web: 13: WO2014025938A1
+patent ID not in web: 14: US20160331676A1
+patent ID not in web: 15: WO2001017374A1
+patent ID not in web: 16: WO2006130174A2
+patent ID not in web: 17: EP2871973A1
+patent ID not in web: 18: US9233081B2
+patent ID not in web: 19: EP2619304A2
+patent ID not in web: 20: WO2010081259A1
+patent ID not in web: 21: EP2741779A1
+patent ID not in web: 22: WO2011035179A1
+patent ID not in web: 23: EP2983498A1
+patent ID not in web: 24: JP2009072132A
+patent ID not in web: 25: EP1727530A2
+patent ID not in web: 26: JP2004035528A
+patent ID not in web: 27: WO2005087942A1
+patent ID not in web: 28: EP1919447A2
+patent ID not in web: 29: JP2011168573A
+patent ID not in web: 30: US20160310555A1
+patent ID not in web: 31: US9220741B2
+patent ID not in web: 32: WO2006126325A1
+patent ID not in web: 33: WO2011150229A2
+patent ID not in web: 34: WO2015004255A1
+patent ID not in web: 35: JP2010006783A
+patent ID not in web: 36: EP1664794A2
+patent ID not in web: 37: EP2664627B1
+patent ID not in web: 38: EP2098222A1
+patent ID not in web: 39: US8834855B2
+patent ID not in web: 40: US20080161296A1
+patent ID not in web: 41: EP2803276A1
+patent ID not in web: 42: WO2016004363A2
+patent ID not in web: 43: EP2627764A1
+patent ID not in web: 44: WO2016135400A1
+patent ID not in web: 45: EP2568961A2
+patent ID not in web: 46: EP1625204A2
+patent ID not in web: 47: EP1693377B1
+patent ID not in web: 48: EP1693377A1
+patent ID not in web: 49: WO2006078284A2
+patent ID not in web: 50: WO2013068134A1
+patent ID not in web: 51: WO2016175670A1
+patent ID not in web: 52: WO2007060811A1
+patent ID not in web: 53: WO2009066799A1
+patent ID not in web: 54: EP2670392A2
+patent ID not in web: 55: US20160375150A1
+patent ID not in web: 56: EP2664627A1
+patent ID not in web: 57: US20160324933A1
+patent ID not in web: 58: WO2008053517A1
+patent ID not in web: 59: WO2013024048A1
+patent ID not in web: 60: EP1463513A1
+patent ID not in web: 61: EP2197410A2
+patent ID not in web: 62: WO2009130895A1
+patent ID not in web: 63: JP2010275265A
+patent ID not in web: 64: WO2015073598A1
+patent ID not in web: 65: EP2825638A1
+patent ID not in web: 66: US20060121558A1
+patent ID not in web: 67: WO2012047120A1
+patent ID not in web: 68: WO2015131152A1
+patent ID not in web: 69: US20070148727A1
+patent ID not in web: 70: WO2014096992A1
+patent ID not in web: 71: EP1982711A1
+patent ID not in web: 72: EP1463513B1
+patent ID not in web: 73: JP2010233517A
+patent ID not in web: 74: US9480672B2
+patent ID not in web: 75: WO2011018501A2
+patent ID not in web: 76: EP2789245A1
+patent ID not in web: 77: EP2294193A2
+patent ID not in web: 78: WO2016209732A1
+patent ID not in web: 79: EP2218447A1
+patent ID not in web: 80: WO2002000908A2
+patent ID not in web: 81: WO2010104908A1
+patent ID not in web: 82: WO2014161815A1
+patent ID not in web: 83: EP2553107A2
+patent ID not in web: 84: JP2008280281A
+patent ID not in web: 85: EP1776427A1
+patent ID not in web: 86: US20110059192A1
+patent ID not in web: 87: US9096875B2
+patent ID not in web: 88: EP2441828B1
+patent ID not in web: 89: US20050009930A1
+patent ID not in web: 90: US20040146966A1
+patent ID not in web: 91: WO2014065640A3
+patent ID not in web: 92: EP2803276B1
+patent ID not in web: 93: WO2014065640A2
+patent ID not in web: 94: EP1374831A1
+patent ID not in web: 95: US20050009758A1
+patent ID not in web: 96: WO2003051375A1
+patent ID not in web: 97: US20110021843A1
+patent ID not in web: 98: WO2007116980A1
+patent ID not in web: 99: EP1866428A2
+patent ID not in web: 100: EP2812005A1
+patent ID not in web: 101: EP2273977A2
+patent ID not in web: 102: US20090324800A1
+patent ID not in web: 103: WO2016096986A1
+patent ID not in web: 104: EP1138757A1
+patent ID not in web: 105: WO2005026269A1
+patent ID not in web: 106: WO2007062415A1
+patent ID not in web: 107: WO2013144595A1
+patent ID not in web: 108: WO2014089174A2
+patent ID not in web: 109: WO2004056974A2
+patent ID not in web: 110: WO2016170784A1
+patent ID not in web: 111: WO2016172787A1
+patent ID not in web: 112: US20050014219A1
+patent ID not in web: 113: WO2014028585A1
+patent ID not in web: 114: WO2014096990A1
+patent ID not in web: 115: WO2014074592A1
+patent ID not in web: 116: EP2047842A1
+patent ID not in web: 117: WO2004104180A2
+patent ID not in web: 118: WO2015041977A1
+patent ID not in web: 119: JP2009155331A
+patent ID not in web: 120: EP2825629A1
+patent ID not in web: 121: WO2011012715A1
+patent ID not in web: 122: EP2988783A1
+patent ID not in web: 123: EP2580966A1
+patent ID not in web: 124: WO2016172282A1
+patent ID not in web: 125: EP2890740A1
+patent ID not in web: 126: EP2832344A1
+patent ID not in web: 127: EP2841109A1
+patent ID not in web: 128: WO2010124391A1
+patent ID not in web: 129: EP1581632A2
+patent ID not in web: 130: WO2011123407A2
+patent ID not in web: 131: WO2008042338A2
+patent ID not in web: 132: WO2008063158A2
+patent ID not in web: 133: EP2340805A2
+patent ID not in web: 134: WO2008095182A2
+patent ID not in web: 135: US20090324637A1
+patent ID not in web: 136: WO2002018617A2
+patent ID not in web: 137: US9161921B2
+patent ID not in web: 138: WO2009051470A1
+patent ID not in web: 139: EP2710153A1
+patent ID not in web: 140: EP2958890A1
+patent ID not in web: 141: US9339845B2
+patent ID not in web: 142: US20050065096A1
+patent ID not in web: 143: EP2129231A2
+patent ID not in web: 144: US20080241119A1
+patent ID not in web: 145: WO2015174910A1
+patent ID not in web: 146: EP1845927A1
+patent ID not in web: 147: US20130017284A1
+patent ID not in web: 148: EP2371967B1
+patent ID not in web: 149: WO2010124392A1
+patent ID not in web: 150: US20070026484A1
+patent ID not in web: 151: EP2902101A1
+patent ID not in web: 152: EP1377547A2
+patent ID not in web: 153: EP1646713A2
+patent ID not in web: 154: EP2371967A1
+patent ID not in web: 155: WO2012089615A1
+patent ID not in web: 156: EP2997956A1
+patent ID not in web: 157: EP2818154A1
+patent ID not in web: 158: EP1554372A2
+patent ID not in web: 159: EP2806756A2
+patent ID not in web: 160: EP2676553A1
+patent ID not in web: 161: EP2477620A1
+patent ID not in web: 162: US20110039299A1
+patent ID not in web: 163: US20040253663A1
+patent ID not in web: 164: EP2606881A1
+patent ID not in web: 165: EP2658962A1
+patent ID not in web: 166: WO2005044975A2
+patent ID not in web: 167: EP2305373A1
+patent ID not in web: 168: EP1890691A2
+patent ID not in web: 169: JP2010235574A
+patent ID not in web: 170: EP2532251A1
+patent ID not in web: 171: EP2172223A1
+patent ID not in web: 172: WO2011146833A1
+patent ID not in web: 173: EP2928315A2
+patent ID not in web: 174: JP2009033970A
+patent ID not in web: 175: US8871217B2
+patent ID not in web: 176: EP2301659A1
+patent ID not in web: 177: JPH10158156A
+patent ID not in web: 178: US9282759B2
+patent ID not in web: 179: US20080311175A1
+patent ID not in web: 180: US9096508B2
+patent ID not in web: 181: WO2009037947A2
+patent ID not in web: 182: EP1620454A2
+patent ID not in web: 183: EP2074214A2
+patent ID not in web: 184: WO2012049306A1
+patent ID not in web: 185: EP2935570A1
+patent ID not in web: 186: WO2002068385A2
+patent ID not in web: 187: WO2012138885A1
+patent ID not in web: 188: US20100222422A1
+patent ID not in web: 189: JP2010120939A
+patent ID not in web: 190: WO2002068385A9
+patent ID not in web: 191: EP2597156A1
+patent ID not in web: 192: WO2011143271A2
+patent ID not in web: 193: WO2007050769A2
+patent ID not in web: 194: US9284294B2
+patent ID not in web: 195: US20100137646A1
+patent ID not in web: 196: WO2013113027A2
+patent ID not in web: 197: WO2009126738A2
+patent ID not in web: 198: EP2215168B1
+patent ID not in web: 199: WO2015187689A1
+patent ID not in web: 200: WO2007120423A9
+patent ID not in web: 201: JP2013540110A
+patent ID not in web: 202: WO2007120423A2
+patent ID not in web: 203: EP3077006A1
+patent ID not in web: 204: US9234204B2
+patent ID not in web: 205: EP2215168A1
+patent ID not in web: 206: EP1074254A2
+patent ID not in web: 207: JP2001335480A
+patent ID not in web: 208: WO2009027850A2
+patent ID not in web: 209: JPH06276956A
+patent ID not in web: 210: WO2008021574A2
+patent ID not in web: 211: EP1733720B1
+patent ID not in web: 212: EP1573013A2
+patent ID not in web: 213: EP1573013A4
+patent ID not in web: 214: EP2214656A1
+patent ID not in web: 215: EP3068415A1
+patent ID not in web: 216: WO2009075383A1
+patent ID not in web: 217: US20130102040A1
+patent ID not in web: 218: US8952217B2
+patent ID not in web: 219: JP2008291004A
+patent ID not in web: 220: JPH083468A
+patent ID not in web: 221: WO2012097018A1
+patent ID not in web: 222: US20050113372A1
+patent ID not in web: 223: JP2009120494A
+patent ID not in web: 224: US9446055B2
+patent ID not in web: 225: WO2003087234A1
+patent ID not in web: 226: WO2014003740A1
+patent ID not in web: 227: WO2012024291A1
+patent ID not in web: 228: EP2418270B1
+patent ID not in web: 229: EP2894191A1
+patent ID not in web: 230: EP2496525A1
+patent ID not in web: 231: EP2418270A1
+patent ID not in web: 232: US20070154575A1
+patent ID not in web: 233: US20160302462A1
+patent ID not in web: 234: JP2009201480A
+patent ID not in web: 235: WO2010058235A1
+patent ID not in web: 236: WO2008023283A2
+patent ID not in web: 237: WO2014138426A2
+patent ID not in web: 238: US9072692B2
+patent ID not in web: 239: US20030003528A1
+patent ID not in web: 240: WO2013171100A1
+patent ID not in web: 241: WO2002094982A2
+patent ID not in web: 242: US8445028B2
+patent ID not in web: 243: WO2004037998A2
+patent ID not in web: 244: US20060020127A1
+patent ID not in web: 245: WO2010051918A2
+patent ID not in web: 246: WO2016174599A1
+patent ID not in web: 247: US20080206275A1
+patent ID not in web: 248: WO2012082731A2
+patent ID not in web: 249: EP2498602A1
+patent ID not in web: 250: WO2016098874A1
+patent ID not in web: 251: US20120045428A1
+patent ID not in web: 252: JP2009173597A
+patent ID not in web: 253: US20160338983A1
+patent ID not in web: 254: WO2011152692A3
+patent ID not in web: 255: JP2007297370A
+patent ID not in web: 256: US20120121743A1
+patent ID not in web: 257: EP2263641A2
+patent ID not in web: 258: EP2957166A1
+patent ID not in web: 259: EP2465539A1
+patent ID not in web: 260: EP1820538A1
+patent ID not in web: 261: WO2015101410A1
+patent ID not in web: 262: EP2007221A1
+patent ID not in web: 263: EP2968206A1
+patent ID not in web: 264: JP2009180565A
+patent ID not in web: 265: EP1361281A1
+patent ID not in web: 266: EP2227216A1
+patent ID not in web: 267: EP2977462A1
+patent ID not in web: 268: US20070009932A1
+patent ID not in web: 269: WO2012040698A2
+patent ID not in web: 270: EP2990035A1
+patent ID not in web: 271: WO2011065412A1
+patent ID not in web: 272: EP2741778A1
+patent ID not in web: 273: WO2008010788A2
+patent ID not in web: 274: JP2008231198A
+patent ID not in web: 275: EP2981557A1
+patent ID not in web: 276: WO2008010788A9
+patent ID not in web: 277: US9056049B2
+patent ID not in web: 278: US9476082B2
+patent ID not in web: 279: WO2013119959A1
+patent ID not in web: 280: US9066973B2
+patent ID not in web: 281: EP2552413B1
+patent ID not in web: 282: US9297031B2
+patent ID not in web: 283: WO2009149374A2
+patent ID not in web: 284: WO2015085173A1
+patent ID not in web: 285: US20040126848A1
+patent ID not in web: 286: EP1806982A1
+patent ID not in web: 287: US20120094339A1
+patent ID not in web: 288: EP2464248A2
+patent ID not in web: 289: EP1806982A4
+patent ID not in web: 290: WO2013024047A1
+patent ID not in web: 291: EP2214625A1
+patent ID not in web: 292: WO2005072086A2
+patent ID not in web: 293: WO2015017625A1
+patent ID not in web: 294: EP2210583A1
+patent ID not in web: 295: EP2380552A1
+patent ID not in web: 296: EP1497382A1
+patent ID not in web: 297: WO2016073739A1
+patent ID not in web: 298: WO2015144831A1
+patent ID not in web: 299: EP1631660A2
+patent ID not in web: 300: WO2009032987A1
+patent ID not in web: 301: EP2671596A1
+patent ID not in web: 302: WO2014173759A1
+patent ID not in web: 303: WO2015082688A1
+patent ID not in web: 304: EP2465540B1
+patent ID not in web: 305: JP2010270021A
+patent ID not in web: 306: WO2012091812A1
+patent ID not in web: 307: WO2015021352A2
+patent ID not in web: 308: WO2009023803A2
+patent ID not in web: 309: US20160130542A1
+patent ID not in web: 310: EP2465540A1
+patent ID not in web: 311: EP2515107A1
+patent ID not in web: 312: US20120329978A1
+patent ID not in web: 313: WO2013161378A1
+patent ID not in web: 314: WO2014078459A1
+patent ID not in web: 315: EP2731599A1
+patent ID not in web: 316: EP2919772A1
+patent ID not in web: 317: EP2056835A2
+patent ID not in web: 318: WO2014151326A1
+patent ID not in web: 319: EP2644020A1
+patent ID not in web: 320: EP1733720A1
+patent ID not in web: 321: WO2016182929A1
+patent ID not in web: 322: EP2163252A1
+patent ID not in web: 323: WO2007117556A2
+patent ID not in web: 324: WO2009063333A2
+patent ID not in web: 325: EP1181375A2
+patent ID not in web: 326: US9321872B2
+patent ID not in web: 327: EP2552413A2
+patent ID not in web: 328: US9011832B2
+patent ID not in web: 329: US20050037995A1
+patent ID not in web: 330: EP1336602A1
+patent ID not in web: 331: US9427010B2
+patent ID not in web: 332: EP1384482A1
+patent ID not in web: 333: WO2014129974A1
+patent ID not in web: 334: US20030185939A1
+patent ID not in web: 335: WO2013119955A1
+patent ID not in web: 336: EP2939657A1
+patent ID not in web: 337: WO2013137826A1
+patent ID not in web: 338: US20120165413A1
+patent ID not in web: 339: WO2015137500A1
+patent ID not in web: 340: WO2002030412A1
+patent ID not in web: 341: WO2016012618A1
+patent ID not in web: 342: WO2004087892A1
+patent ID not in web: 343: WO2009038030A1
+patent ID not in web: 344: US20040166199A1
+patent ID not in web: 345: US9452143B2
+patent ID not in web: 346: WO2013136025A1
+patent ID not in web: 347: US20120214244A1
+patent ID not in web: 348: JP2000004848A
+patent ID not in web: 349: WO2006102342A2
+patent ID not in web: 350: US9226911B2
+patent ID not in web: 351: EP2078092A2
+patent ID not in web: 352: EP1572990A2
+patent ID not in web: 353: WO2012125953A2
+patent ID not in web: 354: EP1572990A4
+patent ID not in web: 355: US9381223B2
+patent ID not in web: 356: EP2345409A1
+patent ID not in web: 357: EP2004801A2
+patent ID not in web: 358: EP2226071A1
+patent ID not in web: 359: WO2008075204A2
+patent ID not in web: 360: EP2348868A1
+patent ID not in web: 361: EP2745835B1
+patent ID not in web: 362: EP2915838A1
+patent ID not in web: 363: US8927043B2
+patent ID not in web: 364: WO2007094430A1
+patent ID not in web: 365: WO2013160340A1
+patent ID not in web: 366: EP2226071B1
+patent ID not in web: 367: EP2623335A2
+patent ID not in web: 368: EP2745835A1
+patent ID not in web: 369: WO2013071029A1
+patent ID not in web: 370: EP2424512A1
+patent ID not in web: 371: EP1932514A1
+patent ID not in web: 372: US9447068B2
+patent ID not in web: 373: EP1660596A1
+patent ID not in web: 374: US20040224383A1
+patent ID not in web: 375: EP2571991A1
+patent ID not in web: 376: US20130017283A1
+patent ID not in web: 377: WO2009135311A1
+patent ID not in web: 378: US20080138851A1
+patent ID not in web: 379: WO2014011857A1
+patent ID not in web: 380: US20120171719A1
+patent ID not in web: 381: WO2004056975A2
+patent ID not in web: 382: WO2012103119A1
+patent ID not in web: 383: EP1364943A1
+patent ID not in web: 384: JP2008239609A
+patent ID not in web: 385: WO2012115954A2
+patent ID not in web: 386: US20050075316A1
+patent ID not in web: 387: EP1328639A2
+patent ID not in web: 388: US9199952B2
+patent ID not in web: 389: EP1364943B1
+patent ID not in web: 390: EP2692331A1
+patent ID not in web: 391: US8278358B2
+patent ID not in web: 392: WO2015057751A1
+patent ID not in web: 393: WO2016049236A1
+patent ID not in web: 394: US20160296581A1
+patent ID not in web: 395: US20100305341A1
+patent ID not in web: 396: EP1377547B1
+patent ID not in web: 397: EP3034612A1
+patent ID not in web: 398: JP2009191008A
+patent ID not in web: 399: EP3030648A2
+patent ID not in web: 400: EP2812313A1
+patent ID not in web: 401: EP2767274A1
+patent ID not in web: 402: EP1553101B1
+patent ID not in web: 403: EP2752436B1
+patent ID not in web: 404: WO2006077433A1
+patent ID not in web: 405: WO2015136123A1
+patent ID not in web: 406: US20110274716A1
+patent ID not in web: 407: EP2918278A1
+patent ID not in web: 408: US20060188955A1
+patent ID not in web: 409: WO2009048249A2
+patent ID not in web: 410: EP1409454A4
+patent ID not in web: 411: WO2009048249A3
+patent ID not in web: 412: EP1409454A2
+patent ID not in web: 413: WO2011152689A3
+patent ID not in web: 414: JP2014198706A
+patent ID not in web: 415: WO2011152689A9
+patent ID not in web: 416: EP2658610B1
+patent ID not in web: 417: EP2174658A1
+patent ID not in web: 418: WO2015073628A1
+patent ID not in web: 419: EP1884238B1
+patent ID not in web: 420: EP2453762A1
+patent ID not in web: 421: US20040268439A1
+patent ID not in web: 422: WO2006034570A1
+patent ID not in web: 423: JPH05331010A
+patent ID not in web: 424: EP2658610A2
+patent ID not in web: 425: WO2009089117A1
+patent ID not in web: 426: EP1632556A1
+patent ID not in web: 427: JPH07224278A
+patent ID not in web: 428: US20160310460A1
+patent ID not in web: 429: EP2459220A1
+patent ID not in web: 430: EP1884238A4
+patent ID not in web: 431: EP1553101A1
+patent ID not in web: 432: EP1884238A1
+patent ID not in web: 433: EP2752436A1
+patent ID not in web: 434: JP2008001623A
+patent ID not in web: 435: JP2010168284A
+patent ID not in web: 436: EP2554185A1
+patent ID not in web: 437: JP2010209023A
+patent ID not in web: 438: US20100303913A1
+patent ID not in web: 439: EP3028691A1
+patent ID not in web: 440: US20060216251A1
+patent ID not in web: 441: WO2005010156A2
+patent ID not in web: 442: EP1871883A1
+patent ID not in web: 443: US20050090469A1
+patent ID not in web: 444: WO2011047530A1
+patent ID not in web: 445: EP2441828A1
+patent ID not in web: 446: US20080187526A1
+patent ID not in web: 447: EP3057604A1
+patent ID not in web: 448: WO2011047530A8
+patent ID not in web: 449: US20120128800A1
+patent ID not in web: 450: EP2663198A1
+patent ID not in web: 451: WO2002013835A1
+patent ID not in web: 452: WO2016166755A1
+patent ID not in web: 453: US8765719B2
+patent ID not in web: 454: EP1428884A1
+patent ID not in web: 455: EP2935571A1
+patent ID not in web: 456: WO2009126890A2
+patent ID not in web: 457: EP2997955A1
+patent ID not in web: 458: WO2015180993A1
+patent ID not in web: 459: WO2004071996A2
+patent ID not in web: 460: WO2016073843A2
+patent ID not in web: 461: WO2009089115A1
+patent ID not in web: 462: WO2010022364A1
+patent ID not in web: 463: WO2014131120A1
+patent ID not in web: 464: WO2005001024A2
+patent ID not in web: 465: WO2008130372A2
+patent ID not in web: 466: WO2011103464A1
+patent ID not in web: 467: WO2014151329A1
+patent ID not in web: 468: US20160302452A1
+patent ID not in web: 469: EP3079786A1
+patent ID not in web: 470: EP2536293A1
+patent ID not in web: 471: WO2016007841A1
+patent ID not in web: 472: WO2011073205A1
+patent ID not in web: 473: WO2006092449A2
+patent ID not in web: 474: US20040209365A1
+patent ID not in web: 475: US9211238B2
+patent ID not in web: 476: WO2010048114A1
+patent ID not in web: 477: EP2194140A2
+patent ID not in web: 478: US20070015237A1
+patent ID not in web: 479: EP2882494A1
+patent ID not in web: 480: US20060036088A1
+patent ID not in web: 481: WO2006002630A1
+patent ID not in web: 482: WO2012155202A1
+patent ID not in web: 483: WO2014112573A1
+patent ID not in web: 484: EP2123263A1
+patent ID not in web: 485: WO2013133903A1
+patent ID not in web: 486: WO2005079143A2
+patent ID not in web: 487: JP2009108022A
+patent ID not in web: 488: WO2007049786A1
+patent ID not in web: 489: EP2676670A1
+patent ID not in web: 490: EP2296675A1
+patent ID not in web: 491: EP2982364A1
+patent ID not in web: 492: EP3046555A1
+patent ID not in web: 493: US9453232B2
+patent ID not in web: 494: WO2016055196A1
+patent ID not in web: 495: WO2013052433A2
+patent ID not in web: 496: EP2812372A1
+patent ID not in web: 497: WO2011006261A1
+patent ID not in web: 498: US20070298483A1
+patent ID not in web: 499: WO2012089184A2
+patent ID not in web: 500: WO2007112587A1
+patent ID not in web: 501: WO2012040938A1
+patent ID not in web: 502: US20070059790A1
+patent ID not in web: 503: EP2172196A1
+patent ID not in web: 504: US9006493B2
+patent ID not in web: 505: WO2010077922A1
+patent ID not in web: 506: EP2808015A1
+patent ID not in web: 507: EP2573188A2
+patent ID not in web: 508: US20040059110A1
+patent ID not in web: 509: US20160113915A1
+patent ID not in web: 510: WO2007138933A1
+patent ID not in web: 511: WO2011060084A1
+patent ID not in web: 512: WO2011116738A2
+patent ID not in web: 513: EP3027058A1
+patent ID not in web: 514: US9149056B2
+patent ID not in web: 515: US20160287528A1
+patent ID not in web: 516: WO2014144765A1
+patent ID not in web: 517: WO2013012760A1
+patent ID not in web: 518: WO1997046622A1
+patent ID not in web: 519: EP2829263A1
+patent ID not in web: 520: US20160185899A1
+patent ID not in web: 521: EP2574337A1
+patent ID not in web: 522: US20130162999A1
+patent ID not in web: 523: WO2009062518A1
+patent ID not in web: 524: WO2002030419A1
+patent ID not in web: 525: JP2007314451A
+patent ID not in web: 526: EP2728012A1
+patent ID not in web: 527: JP2007516697A
+patent ID not in web: 528: US20110111038A1
+patent web not in set: 0: 
+patent web not in set: 1: US8628969
+patent web not in set: 2: US8691555
+patent web not in set: 3: US2012058542
+patent web not in set: 4: US8034983
+
