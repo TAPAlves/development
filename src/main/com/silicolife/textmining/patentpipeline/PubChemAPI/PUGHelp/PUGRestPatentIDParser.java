@@ -13,7 +13,7 @@ public class PUGRestPatentIDParser extends DefaultHandler{
 
 	private String tempString;
 	private Map<String, Set<String>> patentIDs;
-	private String compoundIdentifier=new String();
+	private String compoundIdentifier;
 	private Set<String> patentsForAUniqueID;
 
 	public PUGRestPatentIDParser (Map<String, Set<String>> patentIDs){
@@ -22,15 +22,9 @@ public class PUGRestPatentIDParser extends DefaultHandler{
 	}
 
 	public void startElement(String s, String s1, String elementName, Attributes attributes) throws SAXException{
-		if (elementName.equalsIgnoreCase("CID")){
-			if (patentsForAUniqueID!=null && !patentsForAUniqueID.isEmpty()){
-				patentIDs.put(compoundIdentifier, patentsForAUniqueID);
-				patentsForAUniqueID=new HashSet<>();
-			}
-			else{
-				patentsForAUniqueID=new HashSet<>();
-			}
-		}			
+		if (elementName.equalsIgnoreCase("Information")){
+			patentsForAUniqueID=new HashSet<>();
+ 		}			
 	}
 
 
@@ -39,11 +33,16 @@ public class PUGRestPatentIDParser extends DefaultHandler{
 		if (element.equalsIgnoreCase("PatentID")){
 			if (tempString.matches("[A-Z]{1,3}\\d+[A-Z]{0,1}\\d{0,1}") && tempString.length()>=5){
 				patentsForAUniqueID.add(tempString);
-
 			}
 		}
 		if (element.equalsIgnoreCase("CID")){
 			compoundIdentifier=tempString;
+		}
+
+		if (element.equalsIgnoreCase("Information")){
+			if (patentsForAUniqueID!=null && !patentsForAUniqueID.isEmpty()){
+				patentIDs.put(compoundIdentifier, patentsForAUniqueID);
+			}
 		}
 	}
 
