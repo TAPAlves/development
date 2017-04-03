@@ -1,6 +1,7 @@
 package main.com.silicolife.textmining.patentpipeline.PubChemAPI;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -25,10 +26,16 @@ public class IRPubChemPatentIDRetrieval extends AIRPatentIDRecoverSource{
 		PUGRestInputEnum inputType = ((IIRPubChemPatentIDRetrievalConfiguration)getConfiguration()).getInputType();
 		Set<String> patentIDs = new HashSet<>();
 		if (inputType.name().equalsIgnoreCase("compoundName")){
-			patentIDs = PUGRestUtils.getPatentIDsUsingCompoundName(configuration.getQuery());
+			Map<String, Set<String>> patentIDsForAllIdentifiers = PUGRestUtils.getPatentIDsUsingCompoundName(configuration.getQuery());
+			for (String key:patentIDsForAllIdentifiers.keySet()){
+				patentIDs.addAll(patentIDsForAllIdentifiers.get(key));
+			}
 		}
 		else if (inputType.name().equalsIgnoreCase("compoundIdentifier")){
-			patentIDs = PUGRestUtils.getPatentIDsUsingCID(configuration.getQuery());
+			Map<String, Set<String>> patentIDsForAllIdentifiers = PUGRestUtils.getPatentIDsUsingCID(configuration.getQuery());
+			for (String key:patentIDsForAllIdentifiers.keySet()){
+				patentIDs.addAll(patentIDsForAllIdentifiers.get(key));
+			}
 		}
 		return patentIDs;
 	}
@@ -70,7 +77,7 @@ public class IRPubChemPatentIDRetrieval extends AIRPatentIDRecoverSource{
 						for (String intger:intList){
 							Integer.parseInt(intger);
 						}
-						
+
 					}catch (NumberFormatException e) {
 						throw new WrongIRPatentIDRecoverConfigurationException("The compound identifier must be an non-zero integer!");
 					}

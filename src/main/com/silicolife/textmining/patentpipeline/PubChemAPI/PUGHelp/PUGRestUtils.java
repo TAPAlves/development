@@ -1,7 +1,6 @@
 package main.com.silicolife.textmining.patentpipeline.PubChemAPI.PUGHelp;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -25,18 +24,18 @@ public class PUGRestUtils {
 	private static HTTPClient client = new HTTPClient();
 
 
-	public static Set<String> getPatentIDsUsingCID(String identifier){
+	public static Map<String, Set<String>> getPatentIDsUsingCID(String identifier){
 
 		String urlPatentsForAID= generalURL + SEPARATOR + database + SEPARATOR 
 				+ PUGRestInputEnum.compoundIdentifier.toString() + SEPARATOR + identifier
 				+ SEPARATOR + operation + SEPARATOR + outputFormat;
 
-		Set<String> patentIDs = httpClientGetRequest(urlPatentsForAID);
+		Map<String, Set<String>> patentIDs = httpClientGetRequest(urlPatentsForAID);
 		return patentIDs;
 
 	}
 
-	public static Set<String> getPatentIDsUsingCompoundName (String compound){
+	public static Map<String, Set<String>> getPatentIDsUsingCompoundName (String compound){
 
 		String[] cFractions = compound.split(" ");
 		if (cFractions.length>1){
@@ -45,7 +44,7 @@ public class PUGRestUtils {
 		String urlPatentsForAID= generalURL + SEPARATOR + database + SEPARATOR 
 				+ PUGRestInputEnum.compoundName.toString() + SEPARATOR + compound
 				+ SEPARATOR + operation + SEPARATOR + outputFormat;
-		Set<String> patentIDs = httpClientGetRequest(urlPatentsForAID);
+		Map<String, Set<String>> patentIDs = httpClientGetRequest(urlPatentsForAID);
 		return patentIDs;
 
 
@@ -61,10 +60,10 @@ public class PUGRestUtils {
 	}
 
 
-	private static Set<String> httpClientGetRequest(String url){
+	private static Map<String,Set<String>> httpClientGetRequest(String url){
 		Map<String, String> headers = new HashMap<String, String>();
 
-		Set<String> patentIDs = new HashSet<>();
+		Map<String,Set<String>> patentIDs = new HashMap<>();
 
 		if (!nameTypeCompoundSign){
 			try {

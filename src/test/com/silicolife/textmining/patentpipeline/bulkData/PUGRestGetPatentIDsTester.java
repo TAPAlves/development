@@ -1,14 +1,12 @@
 package test.com.silicolife.textmining.patentpipeline.bulkData;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
-
-import javax.management.InstanceNotFoundException;
 
 import org.junit.Test;
 
@@ -30,36 +28,36 @@ public class PUGRestGetPatentIDsTester {
 	//	@Test
 	public void test1(){
 		String identifier="5281239";
-		Set<String> set = PUGRestUtils.getPatentIDsUsingCID(identifier);
+		Map<String, Set<String>> set = PUGRestUtils.getPatentIDsUsingCID(identifier);
 		System.out.println(set);
 		System.out.println(set.size());
-		for (String a:set){
-			System.out.println(a);
-		}
+		//		for (String a:set){
+		//			System.out.println(a);
+		//		}
 	}
 
 
 	//	@Test
 	public void test2() throws UnsupportedEncodingException{
 		String identifier="hydrochloric acid";
-		Set<String> set = PUGRestUtils.getPatentIDsUsingCompoundName(identifier);
+		Map<String, Set<String>> set = PUGRestUtils.getPatentIDsUsingCompoundName(identifier);
 		System.out.println(set);
 		System.out.println(set.size());
-		for (String a:set){
-			System.out.println(a);
-		}
+		//		for (String a:set){
+		//			System.out.println(a);
+		//		}
 	}
 
 
 	//	@Test
 	public void test3() throws UnsupportedEncodingException{
 		String identifier="sodium hydroxide";
-		Set<String> set = PUGRestUtils.getPatentIDsUsingCompoundName(identifier);
+		Map<String, Set<String>> set = PUGRestUtils.getPatentIDsUsingCompoundName(identifier);
 		System.out.println(set);
 		System.out.println(set.size());
-		for (String a:set){
-			System.out.println(a);
-		}
+		//		for (String a:set){
+		//			System.out.println(a);
+		//		}
 	}
 
 
@@ -122,6 +120,10 @@ public class PUGRestGetPatentIDsTester {
 		System.out.println(patentWebService.size());
 		int numNotweb = 0;
 		int numNotSet = 0;
+		for (String patnetSet:patentIds){
+			System.out.println("patent from set:" + patnetSet);
+		}
+
 		for (String patent: patentIds){
 			if (!patentWebService.contains(patent)){
 				if (!existsOnSet(patent, patentWebService)){
@@ -136,9 +138,10 @@ public class PUGRestGetPatentIDsTester {
 					System.out.println("patent web not in set: " + numNotSet + ": "+ patent);
 					numNotSet++;
 				}
-
 			}
 		}
+
+
 	}
 
 
@@ -180,6 +183,21 @@ public class PUGRestGetPatentIDsTester {
 		br.close();
 		return patentIDs;
 	}
+
+	//	@Test
+	public void test8() throws WrongIRPatentIDRecoverConfigurationException, ANoteException{
+		String identifier="SCHEMBL14996002";
+		PUGRestInputEnum inputType = PUGRestInputEnum.compoundName;
+		IIRPatentPipelineSearchConfiguration query = new IRPatentPipelineSearchConfigurationImpl(identifier);
+		IIRPubChemPatentIDRetrievalConfiguration configuration = new IRPubChemPatentIDRetrievalConfigurationImpl(inputType,query);
+		IRPubChemPatentIDRetrieval pugRestSearch = new IRPubChemPatentIDRetrieval(configuration);
+		Set<String> patentIds = pugRestSearch.retrievalPatentIds(query);
+		for(String patentID :patentIds)
+			System.out.println(patentID);
+
+		System.out.println(patentIds.size());
+	}
+
 }
 
 

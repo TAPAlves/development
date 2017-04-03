@@ -18,17 +18,17 @@ import org.xml.sax.SAXException;
 import com.silicolife.textmining.utils.http.ResponseHandler;
 import com.silicolife.textmining.utils.http.exceptions.ResponseHandlingException;
 
-public class PUGRestPatentIDSHandler implements ResponseHandler<Set<String>>{
+public class PUGRestPatentIDSHandler implements ResponseHandler<Map<String,Set<String>>>{
 
-	private Set<String> patentIDs;
+	private Map<String,Set<String>> patentIDs;
 
-	public PUGRestPatentIDSHandler(Set<String> patentIDs) {
+	public PUGRestPatentIDSHandler(Map<String,Set<String>> patentIDs) {
 		this.patentIDs=patentIDs;
 	}
 
 
 	@Override
-	public Set<String> buildResponse(InputStream response, String responseMessage,
+	public Map<String,Set<String>> buildResponse(InputStream response, String responseMessage,
 			Map<String, List<String>> headerFields, int status) throws ResponseHandlingException {
 
 		try {

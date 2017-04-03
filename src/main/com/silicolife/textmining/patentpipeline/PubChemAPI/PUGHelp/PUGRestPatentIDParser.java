@@ -1,5 +1,7 @@
 package main.com.silicolife.textmining.patentpipeline.PubChemAPI.PUGHelp;
 
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.xml.sax.Attributes;
@@ -10,18 +12,25 @@ public class PUGRestPatentIDParser extends DefaultHandler{
 
 
 	private String tempString;
-	private Set<String> patentIDs;
+	private Map<String, Set<String>> patentIDs;
+	private String compoundIdentifier=new String();
+	private Set<String> patentsForAUniqueID;
 
-	public PUGRestPatentIDParser (Set<String> patentIDs){
+	public PUGRestPatentIDParser (Map<String, Set<String>> patentIDs){
 		this.patentIDs=patentIDs;
 
 	}
 
 	public void startElement(String s, String s1, String elementName, Attributes attributes) throws SAXException{
-		if (elementName.equalsIgnoreCase("PatentID")){
-			tempString=new String();
-		}
-
+		if (elementName.equalsIgnoreCase("CID")){
+			if (patentsForAUniqueID!=null && !patentsForAUniqueID.isEmpty()){
+				patentIDs.put(compoundIdentifier, patentsForAUniqueID);
+				patentsForAUniqueID=new HashSet<>();
+			}
+			else{
+				patentsForAUniqueID=new HashSet<>();
+			}
+		}			
 	}
 
 
@@ -29,8 +38,12 @@ public class PUGRestPatentIDParser extends DefaultHandler{
 
 		if (element.equalsIgnoreCase("PatentID")){
 			if (tempString.matches("[A-Z]{1,3}\\d+[A-Z]{0,1}\\d{0,1}") && tempString.length()>=5){
-				patentIDs.add(tempString);
+				patentsForAUniqueID.add(tempString);
+
 			}
+		}
+		if (element.equalsIgnoreCase("CID")){
+			compoundIdentifier=tempString;
 		}
 	}
 
@@ -40,9 +53,8 @@ public class PUGRestPatentIDParser extends DefaultHandler{
 	}
 
 
-	public Set<String> getPatentIDs(){
+	public Map<String,Set<String>> getPatentIDs(){
 		return this.patentIDs;
 
 	}
-
 }
