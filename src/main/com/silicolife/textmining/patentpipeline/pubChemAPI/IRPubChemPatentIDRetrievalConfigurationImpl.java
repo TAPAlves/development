@@ -1,8 +1,8 @@
-package main.com.silicolife.textmining.patentpipeline.PubChemAPI;
+package main.com.silicolife.textmining.patentpipeline.pubChemAPI;
 
 import com.silicolife.textmining.processes.ir.patentpipeline.configuration.IIRPatentPipelineSearchConfiguration;
 
-import main.com.silicolife.textmining.patentpipeline.PubChemAPI.PUGHelp.PUGRestInputEnum;
+import main.com.silicolife.textmining.patentpipeline.pubChemAPI.pugHelp.PUGRestInputEnum;
 
 public class IRPubChemPatentIDRetrievalConfigurationImpl implements IIRPubChemPatentIDRetrievalConfiguration{
 

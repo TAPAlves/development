@@ -1,4 +1,4 @@
-package main.com.silicolife.textmining.patentpipeline.PubChemAPI;
+package main.com.silicolife.textmining.patentpipeline.pubChemAPI;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -11,8 +11,8 @@ import com.silicolife.textmining.processes.ir.patentpipeline.core.searchmodule.A
 import com.silicolife.textmining.processes.ir.patentpipeline.core.searchmodule.IIRPatentIDRetrievalModuleConfiguration;
 import com.silicolife.textmining.processes.ir.patentpipeline.core.searchmodule.WrongIRPatentIDRecoverConfigurationException;
 
-import main.com.silicolife.textmining.patentpipeline.PubChemAPI.PUGHelp.PUGRestInputEnum;
-import main.com.silicolife.textmining.patentpipeline.PubChemAPI.PUGHelp.PUGRestUtils;
+import main.com.silicolife.textmining.patentpipeline.pubChemAPI.pugHelp.PUGRestInputEnum;
+import main.com.silicolife.textmining.patentpipeline.pubChemAPI.pugHelp.PUGRestUtils;
 
 public class IRPubChemPatentIDRetrieval extends AIRPatentIDRecoverSource{
 

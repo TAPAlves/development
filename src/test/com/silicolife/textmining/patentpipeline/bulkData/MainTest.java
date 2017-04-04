@@ -16,9 +16,9 @@ import com.silicolife.textmining.core.datastructures.documents.PublicationImpl;
 import com.silicolife.textmining.core.datastructures.documents.PublicationSourcesDefaultEnum;
 import com.silicolife.textmining.core.interfaces.core.document.IPublication;
 
-import main.com.silicolife.textmining.patentpipeline.bulkData.BDSS.BDSSUtils;
+import main.com.silicolife.textmining.patentpipeline.bulkData.bdss.BDSSUtils;
 
-public class mainTest {
+public class MainTest {
 
 	@Test
 	public void test() throws IOException, SAXException, ParserConfigurationException{

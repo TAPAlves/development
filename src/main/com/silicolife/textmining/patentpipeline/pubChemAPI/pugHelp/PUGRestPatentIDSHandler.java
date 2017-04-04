@@ -1,4 +1,4 @@
-package main.com.silicolife.textmining.patentpipeline.PubChemAPI.PUGHelp;
+package main.com.silicolife.textmining.patentpipeline.pubChemAPI.pugHelp;
 
 import java.io.IOException;
 import java.io.InputStream;

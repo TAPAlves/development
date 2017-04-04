@@ -1,4 +1,4 @@
-package main.com.silicolife.textmining.patentpipeline.bulkData.BDSS;
+package main.com.silicolife.textmining.patentpipeline.bulkData.bdss;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;

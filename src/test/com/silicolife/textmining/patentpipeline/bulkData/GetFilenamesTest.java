@@ -13,9 +13,9 @@ import org.xml.sax.SAXException;
 
 import com.silicolife.textmining.core.interfaces.core.document.IPublication;
 
-import main.com.silicolife.textmining.patentpipeline.bulkData.BDSS.BDSSUtils;
+import main.com.silicolife.textmining.patentpipeline.bulkData.bdss.BDSSUtils;
 
-public class getFilenamesTest {
+public class GetFilenamesTest {
 
 
 
