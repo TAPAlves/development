@@ -1,7 +1,6 @@
 package test.com.silicolife.textmining.patentpipeline.bulkData;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,7 +15,6 @@ import org.junit.Test;
 
 import com.silicolife.textmining.core.datastructures.documents.PublicationImpl;
 import com.silicolife.textmining.core.datastructures.documents.PublicationSourcesDefaultEnum;
-import com.silicolife.textmining.core.datastructures.documents.query.QueryPublicationRelevanceImpl;
 import com.silicolife.textmining.core.interfaces.core.configuration.IProxy;
 import com.silicolife.textmining.core.interfaces.core.dataaccess.exception.ANoteException;
 import com.silicolife.textmining.core.interfaces.core.document.IPublication;
@@ -268,9 +266,10 @@ public class PUGRestGetPatentIDsTester {
 			patentMap.remove(toRemoveID);
 		}
 		PrintWriter print = new PrintWriter("teste"+identifier+".txt");
-		print.println(patentIds.size());
+		print.println("patentIDs: "+patentIds.size());
 		Set<String> patentWebService = openCSV("resources/fucoxanthin_pubchem_webservice_patents.csv");
-		print.println(patentWebService.size());
+		print.println("web service: "+patentWebService.size());
+		print.println("to Remove: " + toRemoveIDs.size());
 
 		int numNotweb = 0;
 		int numNotSet = 0;
