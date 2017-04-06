@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -237,9 +239,9 @@ public class PUGRestGetPatentIDsTester {
 		Map<String, IPublication> patentMap =new HashMap<>();
 		IIRPatentMetaInformationRetrievalReport reportMetaInformation = patentPipeline.executePatentRetrievalMetaInformationStep(patentIds);
 		patentMap=reportMetaInformation.getMapPatentIDPublication();
-		Set<String> toRemoveIDs=new HashSet<>();
+		Set<String> toRemoveIDs=new HashSet<>(); 
 
-		Set<String> allPossibleSolutions = getAllSetPossibilities(patentIds);
+		Map<String, List<String>> allPossibleSolutions = getAllSetPossibilities(patentIds);
 		Set<String> choosedPatents=new HashSet<>();
 
 		for(String patentID:patentMap.keySet()){
@@ -257,15 +259,15 @@ public class PUGRestGetPatentIDsTester {
 				pubExternalIDs.addAll(possext);
 			}
 
+
 			for (String externalID:pubExternalIDs){
 				if (!pubPatentIDSALL.contains(externalID) && 
-						existsOnSet(externalID, allPossibleSolutions) && 
-						!choosedPatents.contains(externalID)){
-					toRemoveIDs.add(patentID);
-					choosedPatents.add(externalID);
+						existsOnCollection(externalID, allPossibleSolutions.values()) && 
+						!choosedPatents.contains(getKeyForAValue(allPossibleSolutions,externalID))){
+					toRemoveIDs.add(getKeyForAValue(allPossibleSolutions,externalID));
 				}
-
 			}
+			choosedPatents.add(pubpatentID);
 
 		}
 		for (String toRemoveID: toRemoveIDs){
@@ -311,13 +313,42 @@ public class PUGRestGetPatentIDsTester {
 
 	}
 
-	private Set<String> getAllSetPossibilities(Set<String> patentIDs){
-		Set<String> allPatentOptions=new HashSet<>();
+	private String getKeyForAValue(Map<String, List<String>> allPossibleSolutions, String patentID){
+		String keyString = new String();
+		for (String key:allPossibleSolutions.keySet()){
+			List<String> valueList = allPossibleSolutions.get(key);
+			if (valueList.contains(patentID)){
+				keyString=key;
+			}
+		}
+		return keyString;
+	}
+
+
+
+	private boolean existsOnCollection(String patent, Collection<List<String>> patentLists) {
+		List<String> possibleIDs = OPSUtils.createPatentIDPossibilities(patent);
+		Set<String> patentSet= new HashSet<>();
+		for (List<String> col: patentLists){
+			patentSet.addAll(col);
+		}
+		for (String patentPossible:possibleIDs){
+			if (patentSet.contains(patentPossible)){
+				return true;
+			}
+
+		}
+		return false;
+	}
+
+
+	private Map<String,List<String>> getAllSetPossibilities(Set<String> patentIDs){
+		Map<String,List<String>> allOptions=new HashMap<>();
 		for (String patent:patentIDs){
 			List<String> patentPossible = OPSUtils.createPatentIDPossibilities(patent);
-			allPatentOptions.addAll(patentPossible);
+			allOptions.put(patent, patentPossible);
 		}
-		return allPatentOptions;
+		return allOptions;
 	}
 
 }
