@@ -162,7 +162,7 @@ public class PUGRestGetPatentIDsTester {
 
 
 	private boolean existsOnSet(String patent, Set<String> patentSet){
-		Set<String> possibleIDs = OPSUtils.createPatentIDPossibilities(patent);
+		List<String> possibleIDs = OPSUtils.createPatentIDPossibilities(patent);
 		for (String patentPossible:possibleIDs){
 			if (patentSet.contains(patentPossible)){
 				return true;
@@ -175,7 +175,7 @@ public class PUGRestGetPatentIDsTester {
 
 	private boolean setExistsonSet(String patentWeb, Set<String> patentsRest){
 		for (String patent:patentsRest){
-			Set<String> patentPossible = OPSUtils.createPatentIDPossibilities(patent);
+			List<String> patentPossible = OPSUtils.createPatentIDPossibilities(patent);
 			if (patentPossible.contains(patentWeb)){
 				return true;
 			}
@@ -240,27 +240,33 @@ public class PUGRestGetPatentIDsTester {
 		Set<String> toRemoveIDs=new HashSet<>();
 
 		Set<String> allPossibleSolutions = getAllSetPossibilities(patentIds);
-		
-		
+		Set<String> choosedPatents=new HashSet<>();
+
 		for(String patentID:patentMap.keySet()){
 
 			// Get ID from publication
 			IPublication pub = patentMap.get(patentID);
 			String pubpatentID = PublicationImpl.getPublicationExternalIDForSource(pub,PublicationSourcesDefaultEnum.patent.name());
-			Set<String> pubPatentIDSALL = OPSUtils.createPatentIDPossibilities(pubpatentID);
-			
+			List<String> pubPatentIDSALL = OPSUtils.createPatentIDPossibilities(pubpatentID);
+
 			List<IPublicationExternalSourceLink> externalLinksList = pub.getPublicationExternalIDSource();
 			Set<String> pubExternalIDs=new HashSet<>();
 			for (IPublicationExternalSourceLink externaLink:externalLinksList){
-				pubExternalIDs.add(externaLink.getSourceInternalId());
+				String externalID = externaLink.getSourceInternalId();
+				List<String> possext = OPSUtils.createPatentIDPossibilities(externalID);
+				pubExternalIDs.addAll(possext);
 			}
 
 			for (String externalID:pubExternalIDs){
-				if (!(externalID.equalsIgnoreCase(pubpatentID) || pubPatentIDSALL.contains(externalID)) && existsOnSet(externalID, allPossibleSolutions)){
-					//					patentMap.remove(externalID);
+				if (!pubPatentIDSALL.contains(externalID) && 
+						existsOnSet(externalID, allPossibleSolutions) && 
+						!choosedPatents.contains(externalID)){
 					toRemoveIDs.add(patentID);
+					choosedPatents.add(externalID);
 				}
+
 			}
+
 		}
 		for (String toRemoveID: toRemoveIDs){
 			patentMap.remove(toRemoveID);
@@ -308,7 +314,7 @@ public class PUGRestGetPatentIDsTester {
 	private Set<String> getAllSetPossibilities(Set<String> patentIDs){
 		Set<String> allPatentOptions=new HashSet<>();
 		for (String patent:patentIDs){
-			Set<String> patentPossible = OPSUtils.createPatentIDPossibilities(patent);
+			List<String> patentPossible = OPSUtils.createPatentIDPossibilities(patent);
 			allPatentOptions.addAll(patentPossible);
 		}
 		return allPatentOptions;
