@@ -21,8 +21,8 @@ import com.silicolife.textmining.core.interfaces.core.configuration.IProxy;
 import com.silicolife.textmining.core.interfaces.core.dataaccess.exception.ANoteException;
 import com.silicolife.textmining.core.interfaces.core.document.IPublication;
 import com.silicolife.textmining.core.interfaces.core.document.IPublicationExternalSourceLink;
-import com.silicolife.textmining.processes.ir.epopatent.OPSUtils;
 import com.silicolife.textmining.processes.ir.patentpipeline.PatentPipelineException;
+import com.silicolife.textmining.processes.ir.patentpipeline.PatentPipelineUtils;
 import com.silicolife.textmining.processes.ir.patentpipeline.components.metainfomodules.ops.IROPSPatentMetaInformationRetrievalConfigurationImpl;
 import com.silicolife.textmining.processes.ir.patentpipeline.components.metainfomodules.ops.OPSPatentMetaInformationRetrieval;
 import com.silicolife.textmining.processes.ir.patentpipeline.configuration.IIRPatentPipelineSearchConfiguration;
@@ -164,7 +164,7 @@ public class PUGRestGetPatentIDsTester {
 
 
 	private boolean existsOnSet(String patent, Set<String> patentSet){
-		List<String> possibleIDs = OPSUtils.createPatentIDPossibilities(patent);
+		List<String> possibleIDs = PatentPipelineUtils.createPatentIDPossibilities(patent);
 		for (String patentPossible:possibleIDs){
 			if (patentSet.contains(patentPossible)){
 				return true;
@@ -177,7 +177,7 @@ public class PUGRestGetPatentIDsTester {
 
 	private boolean setExistsonSet(String patentWeb, Set<String> patentsRest){
 		for (String patent:patentsRest){
-			List<String> patentPossible = OPSUtils.createPatentIDPossibilities(patent);
+			List<String> patentPossible = PatentPipelineUtils.createPatentIDPossibilities(patent);
 			if (patentPossible.contains(patentWeb)){
 				return true;
 			}
@@ -241,7 +241,7 @@ public class PUGRestGetPatentIDsTester {
 		patentMap=reportMetaInformation.getMapPatentIDPublication();
 		Set<String> toRemoveIDs=new HashSet<>(); 
 
-		Map<String, List<String>> allPossibleSolutions = getAllSetPossibilities(patentIds);
+		Map<String, List<String>> allPossibleSolutions = PatentPipelineUtils.getAllPatentIDPossibilitiesForAGivenSet(patentIds);
 		Set<String> choosedPatents=new HashSet<>();
 
 
@@ -251,20 +251,19 @@ public class PUGRestGetPatentIDsTester {
 			// Get ID from publication
 			IPublication pub = patentMap.get(patentID);
 			String pubpatentID = PublicationImpl.getPublicationExternalIDForSource(pub,PublicationSourcesDefaultEnum.patent.name());
-			List<String> pubPatentIDSALL = OPSUtils.createPatentIDPossibilities(pubpatentID);
+			List<String> pubPatentIDSALL = PatentPipelineUtils.createPatentIDPossibilities(pubpatentID);
 
 			List<IPublicationExternalSourceLink> externalLinksList = pub.getPublicationExternalIDSource();
 			Set<String> pubExternalIDs=new HashSet<>();
 			for (IPublicationExternalSourceLink externaLink:externalLinksList){
 				String externalID = externaLink.getSourceInternalId();
-				List<String> possext = OPSUtils.createPatentIDPossibilities(externalID);
+				List<String> possext = PatentPipelineUtils.createPatentIDPossibilities(externalID);
 				pubExternalIDs.addAll(possext);
 			}
 
 			for (String externalID:pubExternalIDs){
 				if (!pubPatentIDSALL.contains(externalID) && 
 						existsOnCollection(externalID, allPossibleSolutions.values()) && 
-						!choosedPatents.contains(getKeyForAValue(allPossibleSolutions,externalID)) && 
 						!verifyChoosedPatentsKindCode(getKeyForAValue(allPossibleSolutions,externalID), choosedPatents)){
 					toRemoveIDs.add(getKeyForAValue(allPossibleSolutions,externalID));
 				}
@@ -318,9 +317,9 @@ public class PUGRestGetPatentIDsTester {
 			print.println("\n"+i+": "+patentMap.get(patent));
 			i++;
 		}
-		Map<String, List<String>> webSolutions = getAllSetPossibilities(patentWebService);
-		Map<String, List<String>> woRemoveIDs = getAllSetPossibilities(toRemoveIDs);
-		Map<String, List<String>> patents = getAllSetPossibilities(patentMap.keySet());
+		Map<String, List<String>> webSolutions = PatentPipelineUtils.getAllPatentIDPossibilitiesForAGivenSet(patentWebService);
+		Map<String, List<String>> woRemoveIDs = PatentPipelineUtils.getAllPatentIDPossibilitiesForAGivenSet(toRemoveIDs);
+		Map<String, List<String>> patents = PatentPipelineUtils.getAllPatentIDPossibilitiesForAGivenSet(patentMap.keySet());
 		List<String> allPats=new ArrayList<>();
 		List<String> allToRemPAts=new ArrayList<>();
 		List<String> allWebPats=new ArrayList<>();
@@ -412,10 +411,10 @@ public class PUGRestGetPatentIDsTester {
 
 
 	private boolean verifyChoosedPatentsKindCode (String externalID, Set<String> choosedPatents) {
-		List<String> possibleIDs = OPSUtils.createPatentIDPossibilities(externalID);
+		List<String> possibleIDs = PatentPipelineUtils.createPatentIDPossibilities(externalID);
 		Set<String> patentSet= new HashSet<>();
 		for (String patent:choosedPatents){
-			patentSet.addAll(OPSUtils.createPatentIDPossibilities(patent));
+			patentSet.addAll(PatentPipelineUtils.createPatentIDPossibilities(patent));
 		}
 		for (String patentPossible:possibleIDs){
 			if (patentSet.contains(patentPossible)){
@@ -442,7 +441,7 @@ public class PUGRestGetPatentIDsTester {
 
 
 	private boolean existsOnCollection(String patent, Collection<List<String>> patentLists) {
-		List<String> possibleIDs = OPSUtils.createPatentIDPossibilities(patent);
+		List<String> possibleIDs = PatentPipelineUtils.createPatentIDPossibilities(patent);
 		Set<String> patentSet= new HashSet<>();
 		for (List<String> col: patentLists){
 			patentSet.addAll(col);
@@ -457,14 +456,7 @@ public class PUGRestGetPatentIDsTester {
 	}
 
 
-	private Map<String,List<String>> getAllSetPossibilities(Set<String> patentIDs){
-		Map<String,List<String>> allOptions=new HashMap<>();
-		for (String patent:patentIDs){
-			List<String> patentPossible = OPSUtils.createPatentIDPossibilities(patent);
-			allOptions.put(patent, patentPossible);
-		}
-		return allOptions;
-	}
+
 
 }
 
