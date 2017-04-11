@@ -244,6 +244,8 @@ public class PUGRestGetPatentIDsTester {
 		Map<String, List<String>> allPossibleSolutions = getAllSetPossibilities(patentIds);
 		Set<String> choosedPatents=new HashSet<>();
 
+
+
 		for(String patentID:patentMap.keySet()){
 
 			// Get ID from publication
@@ -259,11 +261,11 @@ public class PUGRestGetPatentIDsTester {
 				pubExternalIDs.addAll(possext);
 			}
 
-
 			for (String externalID:pubExternalIDs){
 				if (!pubPatentIDSALL.contains(externalID) && 
 						existsOnCollection(externalID, allPossibleSolutions.values()) && 
-						!choosedPatents.contains(getKeyForAValue(allPossibleSolutions,externalID))){
+						!choosedPatents.contains(getKeyForAValue(allPossibleSolutions,externalID)) && 
+						!verifyChoosedPatentsKindCode(getKeyForAValue(allPossibleSolutions,externalID), choosedPatents)){
 					toRemoveIDs.add(getKeyForAValue(allPossibleSolutions,externalID));
 				}
 			}
@@ -301,17 +303,130 @@ public class PUGRestGetPatentIDsTester {
 				}
 			}
 		}
+		int numWeb = 0;
+		for (String patent:patentWebService){
+			print.println("patent web: " + numWeb + ": "+ patent);
+			numWeb++;
+		}
+		
+		
+		
 
 		int i = 0;
 		for (String patent: patentMap.keySet()){
 			System.out.println("\n"+i+": "+patentMap.get(patent));
 			print.println("\n"+i+": "+patentMap.get(patent));
 			i++;
+		}
+		Map<String, List<String>> webSolutions = getAllSetPossibilities(patentWebService);
+		Map<String, List<String>> woRemoveIDs = getAllSetPossibilities(toRemoveIDs);
+		Map<String, List<String>> patents = getAllSetPossibilities(patentMap.keySet());
+		List<String> allPats=new ArrayList<>();
+		List<String> allToRemPAts=new ArrayList<>();
+		List<String> allWebPats=new ArrayList<>();
+		for (String patent:patents.keySet()){
+			allPats.addAll(patents.get(patent));
+		}
+		for (String patent:woRemoveIDs.keySet()){
+			allToRemPAts.addAll(woRemoveIDs.get(patent));
+		}
+		for (String patent:webSolutions.keySet()){
+			allWebPats.addAll(webSolutions.get(patent));
+		}
+
+		Set<String> toREmo=new HashSet<>();
+		Set<String> toREmo1=new HashSet<>();
+		for (String patent:patents.keySet()){
+			for (String id:patents.get(patent)){
+				if(allWebPats.contains(id)){
+					toREmo.add(patent);
+					for (String id1:webSolutions.keySet()){
+						for (String id2:webSolutions.get(id1)){
+							if (id2.equalsIgnoreCase(id)){
+								//								webSolutions.remove(id1);
+								toREmo1.add(id1);
+							}
+
+						}
+					}
+
+				}
+			}
+		}
+
+		for (String toRemoveID: toREmo){
+			patents.remove(toRemoveID);
+		}
+		for (String id1:toREmo1){
+			webSolutions.remove(id1);
+		}
+		toREmo.clear();
+		toREmo1.clear();
+
+
+		for (String patent:woRemoveIDs.keySet()){
+			for (String id:woRemoveIDs.get(patent)){
+				if(allWebPats.contains(id)){
+					toREmo.add(patent);
+					for (String id1:webSolutions.keySet()){
+						for (String id2:webSolutions.get(id1)){
+							if (id2.equalsIgnoreCase(id)){
+								toREmo1.add(id1);
+							}
+
+						}
+					}
+				}
+			}
+		}
+
+		for (String toRemoveID: toREmo){
+			woRemoveIDs.remove(toRemoveID);
+		}
+
+
+		for (String id1:toREmo1){
+			webSolutions.remove(id1);
+		}
+
+
+		i=1;
+		if (webSolutions.size()>0){
+			for (String patent:webSolutions.keySet()){
+				print.println(i + ": " + "resultant web solution: " + webSolutions.get(patent));
+				i++;
+			}
 
 		}
+		i=1;
+		if (patents.size()>0){
+			for (String patent:patents.keySet()){
+				print.println(i + ": " +"resultant patent: " + patents.get(patent));
+				i++;
+			}
+		}
+
 		print.close();
 
 	}
+
+
+	private boolean verifyChoosedPatentsKindCode (String externalID, Set<String> choosedPatents) {
+		List<String> possibleIDs = OPSUtils.createPatentIDPossibilities(externalID);
+		Set<String> patentSet= new HashSet<>();
+		for (String patent:choosedPatents){
+			patentSet.addAll(OPSUtils.createPatentIDPossibilities(patent));
+		}
+		for (String patentPossible:possibleIDs){
+			if (patentSet.contains(patentPossible)){
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+
 
 	private String getKeyForAValue(Map<String, List<String>> allPossibleSolutions, String patentID){
 		String keyString = new String();
