@@ -1,6 +1,7 @@
 package test.com.silicolife.textmining.patentpipeline.bulkData;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -159,7 +160,6 @@ public class PUGRestGetPatentIDsTester {
 			}
 		}
 
-
 	}
 
 
@@ -217,7 +217,7 @@ public class PUGRestGetPatentIDsTester {
 	}
 
 
-	@Test
+	//	@Test
 	public void test9() throws WrongIRPatentIDRecoverConfigurationException, ANoteException, WrongIRPatentMetaInformationRetrievalConfigurationException, PatentPipelineException, IOException{
 		String identifier="fucoxanthin";
 		PUGRestInputEnum inputType = PUGRestInputEnum.compoundName;
@@ -307,9 +307,9 @@ public class PUGRestGetPatentIDsTester {
 			print.println("patent web: " + numWeb + ": "+ patent);
 			numWeb++;
 		}
-		
-		
-		
+
+
+
 
 		int i = 0;
 		for (String patent: patentMap.keySet()){
@@ -456,6 +456,46 @@ public class PUGRestGetPatentIDsTester {
 	}
 
 
+
+	@Test
+	public void test10() throws WrongIRPatentIDRecoverConfigurationException, WrongIRPatentMetaInformationRetrievalConfigurationException, ANoteException, PatentPipelineException, FileNotFoundException{
+		String identifier="fucoxanthin";
+		PUGRestInputEnum inputType = PUGRestInputEnum.compoundName;
+		IIRPatentPipelineSearchConfiguration query = new IRPatentPipelineSearchConfigurationImpl(identifier);
+		IIRPubChemPatentIDRetrievalConfiguration configuration = new IRPubChemPatentIDRetrievalConfigurationImpl(inputType,query);
+		IRPubChemPatentIDRetrieval pugRestSearch = new IRPubChemPatentIDRetrieval(configuration);
+		Set<String> patentIds = pugRestSearch.retrievalPatentIds(query);
+
+		PatentPipeline patentPipeline = new PatentPipeline();
+
+		IProxy proxy = null;
+		String accessTokenOPS = "LLCAsGwQHRQAi9sKU3L83tMcKszoVnhi:q9sxdjCvGbLDsWrc";
+		IIRPatentMetaInformationRetrievalConfiguration configurationOPS=new IROPSPatentMetaInformationRetrievalConfigurationImpl(proxy, accessTokenOPS);
+		IIRPatentMetainformationRetrievalSource opsMetaInformationretrieval = new OPSPatentMetaInformationRetrieval(configurationOPS);
+
+		patentPipeline.addPatentsMetaInformationRetrieval(opsMetaInformationretrieval);
+
+
+		Map<String, IPublication> patentMap =new HashMap<>();
+		IIRPatentMetaInformationRetrievalReport reportMetaInformation = patentPipeline.executePatentRetrievalMetaInformationStep(patentIds);
+		patentMap=reportMetaInformation.getMapPatentIDPublication();
+		Map<String, List<String>> allPossibleSolutions = PatentPipelineUtils.getAllPatentIDPossibilitiesForAGivenSet(patentIds);
+
+		patentMap=PatentPipelineUtils.processPatentMapWithMetadata(patentMap, allPossibleSolutions);
+		
+		PrintWriter print = new PrintWriter("teste_PRocesses_"+identifier+".txt");
+		System.out.println("patentIDs: " + patentIds.size());
+		print.println("patentIDs: " + patentIds.size());
+		System.out.println("mapSize: " + patentMap.size());
+		print.println("mapSize: " + patentMap.size());
+		int i = 0;
+		for (String patent:patentMap.keySet()){
+			print.println(i + ": " + patentMap.get(patent));
+			i++;
+		}
+		print.close();
+
+	}
 
 
 }
