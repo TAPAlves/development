@@ -498,8 +498,8 @@ public class PUGRestGetPatentIDsTester {
 	}
 
 
-	@Test
-	public void test11() throws IOException{
+//	@Test
+	public void test11(){
 		String SMILEs="CC(=CC=CC=C(C)C=CC=C(C)C(=O)CC12C(CC(CC1(O2)C)O)(C)C)C=CC=C(C)C=C=C3C(CC(CC3(C)O)OC(=O)C)(C)C";
 		Map<String, Set<String>> set = PUGRestUtils.getPatentIDsUsingSMILEs(SMILEs);
 		System.out.println(set);
@@ -509,6 +509,21 @@ public class PUGRestGetPatentIDsTester {
 			System.out.println(set.get(a));
 		}
 
+	}
+		
+	@Test
+	public void test12(){
+		String inchiKey="SJWWTRQNNRNTPU-ABBNZJFMSA-N";
+		Map<String, Set<String>> set = PUGRestUtils.getPatentIDsUsingInchiKey(inchiKey);
+		System.out.println(set);
+		System.out.println(set.size());
+		for (String a:set.keySet()){
+			System.out.println(a);
+			System.out.println(set.get(a));
+			System.out.println(set.get(a).size());
+		}
+		
+		
 	}
 
 

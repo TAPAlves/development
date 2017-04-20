@@ -3,7 +3,6 @@ package main.com.silicolife.textmining.patentpipeline.pubChemAPI.pugHelp;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -50,18 +49,56 @@ public class PUGRestUtils {
 
 	}
 
-	@SuppressWarnings("unchecked")
-	public static Map<String, Set<String>> getPatentIDsUsingSMILEs(String identifier) throws UnsupportedEncodingException{
-		identifier=URLEncoder.encode(identifier,"UTF-8");
 
+	public static Map<String, Set<String>> getPatentIDsUsingSMILEs(String identifier){
 		Map<String, Set<String>> patentIDs = new HashMap<>();
-		String urlPatentsForAID= generalURL + SEPARATOR + database + SEPARATOR
-				+ fastidentityString + SEPARATOR + PUGRestInputEnum.smiles.toString()
-				+ SEPARATOR + identifier
-				+ SEPARATOR + "cids" + SEPARATOR + PUGRestOutputEnum.json.toString();
-
 		try {
-			URL url = new URL(urlPatentsForAID);
+			identifier=URLEncoder.encode(identifier,"UTF-8");
+
+			String urlPatentsForAID= generalURL + SEPARATOR + database + SEPARATOR
+					+ fastidentityString + SEPARATOR + PUGRestInputEnum.smiles.toString()
+					+ SEPARATOR + identifier
+					+ SEPARATOR + "cids" + SEPARATOR + PUGRestOutputEnum.json.toString();
+
+			ListIterator<Long> iterator = getJsonIteratorUsingURL(urlPatentsForAID);
+			while (iterator.hasNext()){
+				patentIDs.putAll(getPatentIDsUsingCID((iterator.next().toString())));
+			}
+		} catch (Exception e) {
+		}
+
+		return patentIDs;
+
+	}
+
+
+	public static Map<String, Set<String>> getPatentIDsUsingInchiKey(String identifier) {
+		Map<String, Set<String>> patentIDs = new HashMap<>();
+
+		//			identifier=URLEncoder.encode(identifier,"UTF-8");
+
+		String urlPatentsForAID= generalURL + SEPARATOR + database + SEPARATOR
+				+ PUGRestInputEnum.inchikey.toString()
+				+ SEPARATOR + identifier + SEPARATOR + "cids" + SEPARATOR + PUGRestOutputEnum.json.toString();
+		//https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/inchikey/SJWWTRQNNRNTPU-ABBNZJFMSA-N/cids/xml
+		try{
+			ListIterator<Long> iterator = getJsonIteratorUsingURL(urlPatentsForAID);
+			while (iterator.hasNext()){
+				patentIDs.putAll(getPatentIDsUsingCID((iterator.next().toString())));
+			}
+		} catch (Exception e) {
+		}
+
+		return patentIDs;
+
+	}
+
+
+	@SuppressWarnings("unchecked")
+	private static ListIterator<Long> getJsonIteratorUsingURL(String urlPatentsForAID){
+		URL url;
+		try {
+			url = new URL(urlPatentsForAID);
 			URLConnection connection = url.openConnection();
 			InputStream in = connection.getInputStream();
 
@@ -70,15 +107,12 @@ public class PUGRestUtils {
 			jsonObj = (JSONObject) jsonObj.get("IdentifierList");
 			JSONArray cids = (JSONArray) jsonObj.get("CID");
 			ListIterator<Long> iterator = cids.listIterator();
-			while (iterator.hasNext()){
-				patentIDs.putAll(getPatentIDsUsingCID((iterator.next().toString())));
-			}
+			return iterator;
 		} catch (IOException | ParseException e) {;
 		}
-
-		return patentIDs;
-
+		return null;
 	}
+
 
 
 	public static Map<String, Set<String>> getPatentIDsUsingCompoundName (String compound){
