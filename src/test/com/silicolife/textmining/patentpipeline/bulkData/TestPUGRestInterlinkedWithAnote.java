@@ -55,7 +55,7 @@ public class TestPUGRestInterlinkedWithAnote {
 
 		IIRPatentPipelineSearchConfiguration patentPipelineSearchConfiguration = new IRPatentPipelineSearchConfigurationImpl(query);
 
-		PUGRestInputEnum inputType = PUGRestInputEnum.compoundName;
+ 		PUGRestInputEnum inputType = PUGRestInputEnum.compoundName;
 		IIRPubChemPatentIDRetrievalConfiguration configuration = new IRPubChemPatentIDRetrievalConfigurationImpl(inputType,patentPipelineSearchConfiguration);
 		IRPubChemPatentIDRetrieval pugRestSearch = new IRPubChemPatentIDRetrieval(configuration);
 		//		Set<String> patentIds = pugRestSearch.retrievalPatentIds(patentPipelineSearchConfiguration);

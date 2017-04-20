@@ -13,6 +13,20 @@ public enum PUGRestInputEnum {
 		public String toString() {
 			return "cid";
 		}
-	}
+	},
+	
+	smiles{
+		@Override
+		public String toString() {
+			return "smiles";
+		}
+	},
 
+	inchikey{
+		@Override
+		public String toString() {
+			return "inchikey";
+		}
+	}
+	
 }

@@ -1,8 +1,21 @@
 package main.com.silicolife.textmining.patentpipeline.pubChemAPI.pugHelp;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import com.silicolife.textmining.utils.http.HTTPClient;
 import com.silicolife.textmining.utils.http.exceptions.ClientErrorException;
@@ -18,8 +31,10 @@ public class PUGRestUtils {
 	private static String generalURL="https://pubchem.ncbi.nlm.nih.gov/rest/pug";
 	private static String database= "compound";
 	private static String operation="xrefs/patentID";
-	private static String outputFormat="xml"; //xml,json,csv,sdf,txt,png
+	private static String outputFormat=PUGRestOutputEnum.xml.toString(); //xml,json,csv,sdf,txt,png
 	private static boolean nameTypeCompoundSign=false;
+	private static String fastidentityString="fastidentity";
+
 
 	private static HTTPClient client = new HTTPClient();
 
@@ -34,6 +49,37 @@ public class PUGRestUtils {
 		return patentIDs;
 
 	}
+
+	@SuppressWarnings("unchecked")
+	public static Map<String, Set<String>> getPatentIDsUsingSMILEs(String identifier) throws UnsupportedEncodingException{
+		identifier=URLEncoder.encode(identifier,"UTF-8");
+
+		Map<String, Set<String>> patentIDs = new HashMap<>();
+		String urlPatentsForAID= generalURL + SEPARATOR + database + SEPARATOR
+				+ fastidentityString + SEPARATOR + PUGRestInputEnum.smiles.toString()
+				+ SEPARATOR + identifier
+				+ SEPARATOR + "cids" + SEPARATOR + PUGRestOutputEnum.json.toString();
+
+		try {
+			URL url = new URL(urlPatentsForAID);
+			URLConnection connection = url.openConnection();
+			InputStream in = connection.getInputStream();
+
+			JSONParser parser= new JSONParser();
+			JSONObject jsonObj = (JSONObject) parser.parse(new InputStreamReader(in));
+			jsonObj = (JSONObject) jsonObj.get("IdentifierList");
+			JSONArray cids = (JSONArray) jsonObj.get("CID");
+			ListIterator<Long> iterator = cids.listIterator();
+			while (iterator.hasNext()){
+				patentIDs.putAll(getPatentIDsUsingCID((iterator.next().toString())));
+			}
+		} catch (IOException | ParseException e) {;
+		}
+
+		return patentIDs;
+
+	}
+
 
 	public static Map<String, Set<String>> getPatentIDsUsingCompoundName (String compound){
 

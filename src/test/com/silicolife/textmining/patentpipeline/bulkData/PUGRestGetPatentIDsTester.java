@@ -457,7 +457,7 @@ public class PUGRestGetPatentIDsTester {
 
 
 
-	@Test
+	//	@Test
 	public void test10() throws WrongIRPatentIDRecoverConfigurationException, WrongIRPatentMetaInformationRetrievalConfigurationException, ANoteException, PatentPipelineException, FileNotFoundException{
 		String identifier="fucoxanthin";
 		PUGRestInputEnum inputType = PUGRestInputEnum.compoundName;
@@ -482,7 +482,7 @@ public class PUGRestGetPatentIDsTester {
 		Map<String, List<String>> allPossibleSolutions = PatentPipelineUtils.getAllPatentIDPossibilitiesForAGivenSet(patentIds);
 
 		patentMap=PatentPipelineUtils.processPatentMapWithMetadata(patentMap, allPossibleSolutions);
-		
+
 		PrintWriter print = new PrintWriter("teste_PRocesses_"+identifier+".txt");
 		System.out.println("patentIDs: " + patentIds.size());
 		print.println("patentIDs: " + patentIds.size());
@@ -494,6 +494,20 @@ public class PUGRestGetPatentIDsTester {
 			i++;
 		}
 		print.close();
+
+	}
+
+
+	@Test
+	public void test11() throws IOException{
+		String SMILEs="CC(=CC=CC=C(C)C=CC=C(C)C(=O)CC12C(CC(CC1(O2)C)O)(C)C)C=CC=C(C)C=C=C3C(CC(CC3(C)O)OC(=O)C)(C)C";
+		Map<String, Set<String>> set = PUGRestUtils.getPatentIDsUsingSMILEs(SMILEs);
+		System.out.println(set);
+		System.out.println(set.size());
+		for (String a:set.keySet()){
+			System.out.println(a);
+			System.out.println(set.get(a));
+		}
 
 	}
 
