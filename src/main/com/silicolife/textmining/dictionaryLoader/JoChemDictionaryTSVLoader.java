@@ -28,10 +28,8 @@ public class JoChemDictionaryTSVLoader{
 
 	private Map<String, IResourceElement> alreadyAddedElemnt;
 
-
 	public JoChemDictionaryTSVLoader() {
 		this.alreadyAddedElemnt = new HashMap<>();
-
 	}
 
 	public List<IResourceElement> loadTermFromGenericCVSFile(File file,CSVFileConfigurations csvfileconfigurations) throws ANoteException,
@@ -227,6 +225,4 @@ public class JoChemDictionaryTSVLoader{
 			value = value.replace(csvfileconfigurations.getTextDelimiter().getValue(),"");
 		return value;
 	}
-
-
 }
