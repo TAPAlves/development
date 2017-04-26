@@ -4,13 +4,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
-import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,15 +19,12 @@ import com.silicolife.textmining.core.datastructures.annotation.ner.EntityAnnota
 import com.silicolife.textmining.core.datastructures.documents.PublicationImpl;
 import com.silicolife.textmining.core.datastructures.exceptions.process.InvalidConfigurationException;
 import com.silicolife.textmining.core.datastructures.general.ClassPropertiesManagement;
-import com.silicolife.textmining.core.datastructures.init.InitConfiguration;
 import com.silicolife.textmining.core.datastructures.process.ProcessOriginImpl;
-import com.silicolife.textmining.core.datastructures.process.ProcessRunStatusConfigurationEnum;
 import com.silicolife.textmining.core.datastructures.process.ner.ElementToNer;
 import com.silicolife.textmining.core.datastructures.process.ner.HandRules;
 import com.silicolife.textmining.core.datastructures.process.ner.NERCaseSensativeEnum;
 import com.silicolife.textmining.core.datastructures.process.ner.ResourcesToNerAnote;
 import com.silicolife.textmining.core.datastructures.resources.ResourceImpl;
-import com.silicolife.textmining.core.datastructures.resources.lexiacalwords.LexicalWordsImpl;
 import com.silicolife.textmining.core.datastructures.textprocessing.EntitiesDesnormalization;
 import com.silicolife.textmining.core.datastructures.textprocessing.TermSeparator;
 import com.silicolife.textmining.core.datastructures.utils.GenerateRandomId;
@@ -42,7 +37,6 @@ import com.silicolife.textmining.core.interfaces.core.document.ICorpusPublicatio
 import com.silicolife.textmining.core.interfaces.core.document.IDocumentSet;
 import com.silicolife.textmining.core.interfaces.core.document.IPublication;
 import com.silicolife.textmining.core.interfaces.core.document.IPublicationExternalSourceLink;
-import com.silicolife.textmining.core.interfaces.core.document.corpus.ICorpus;
 import com.silicolife.textmining.core.interfaces.core.document.labels.IPublicationLabel;
 import com.silicolife.textmining.core.interfaces.core.document.structure.IPublicationField;
 import com.silicolife.textmining.core.interfaces.core.general.classe.IAnoteClass;
@@ -50,7 +44,6 @@ import com.silicolife.textmining.core.interfaces.core.report.processes.INERProce
 import com.silicolife.textmining.core.interfaces.process.IProcessOrigin;
 import com.silicolife.textmining.core.interfaces.process.IE.IIEProcess;
 import com.silicolife.textmining.core.interfaces.process.IE.ner.INERConfiguration;
-import com.silicolife.textmining.core.interfaces.resource.IResource;
 import com.silicolife.textmining.core.interfaces.resource.IResourceElement;
 import com.silicolife.textmining.core.interfaces.resource.lexicalwords.ILexicalWords;
 import com.silicolife.textmining.processes.ie.ner.datatstructures.INERPosProccessAddEntities;
@@ -62,17 +55,14 @@ import com.silicolife.textmining.processes.ie.ner.linnaeus.adapt.uk.ac.man.docum
 import com.silicolife.textmining.processes.ie.ner.linnaeus.adapt.uk.ac.man.entitytagger.Mention;
 import com.silicolife.textmining.processes.ie.ner.linnaeus.adapt.uk.ac.man.entitytagger.doc.TaggedDocument;
 import com.silicolife.textmining.processes.ie.ner.linnaeus.adapt.uk.ac.man.entitytagger.matching.Matcher;
-import com.silicolife.textmining.processes.ie.ner.linnaeus.adapt.uk.ac.man.entitytagger.matching.Matcher.Disambiguation;
 import com.silicolife.textmining.processes.ie.ner.linnaeus.adapt.uk.ac.man.entitytagger.matching.matchers.ConcurrentMatcher;
 import com.silicolife.textmining.processes.ie.ner.linnaeus.adapt.uk.ac.man.entitytagger.matching.matchers.MatchPostProcessor;
 import com.silicolife.textmining.processes.ie.ner.linnaeus.adapt.uk.ac.man.entitytagger.matching.matchers.UnionMatcher;
 import com.silicolife.textmining.processes.ie.ner.linnaeus.adapt.uk.ac.man.entitytagger.matching.matchers.VariantDictionaryMatcher;
 import com.silicolife.textmining.processes.ie.ner.linnaeus.configuration.INERLinnaeusConfiguration;
 import com.silicolife.textmining.processes.ie.ner.linnaeus.configuration.LinnauesExecutionData;
-import com.silicolife.textmining.processes.ie.ner.linnaeus.configuration.NERLinnaeusConfigurationImpl;
-import com.silicolife.textmining.processes.ie.ner.linnaeus.configuration.NERLinnaeusPreProcessingEnum;
 
-public class LinnaeusTaggerMemoryRun extends LinnaeusTagger{
+public class LinnaeusTaggerMemoryRun extends ANERLexicalResourcesToMemoryRun{
 
 	public static final String linneausTagger = "Linnaeus Tagger";
 	public static final String abreviation = "Abbreviation";
@@ -577,80 +567,81 @@ public class LinnaeusTaggerMemoryRun extends LinnaeusTagger{
 
 
 
-	public INERConfiguration getProcessConfiguration(IIEProcess ieprocess,ProcessRunStatusConfigurationEnum processStatus) throws ANoteException{
-		ICorpus corpus = ieprocess.getCorpus();
-		Map<String, Pattern> patterns = null;
-		boolean useabreviation = false;
-		Disambiguation disambiguationEnum = Disambiguation.OFF;
-		NERCaseSensativeEnum caseSensitiveEnum = NERCaseSensativeEnum.NONE;
-		boolean normalized = false;
-		int numThreads = 4;
-		ILexicalWords stopwords = null;
-		NERLinnaeusPreProcessingEnum preprocessing = NERLinnaeusPreProcessingEnum.No;
-		boolean usingOtherResourceInfoToImproveRuleAnnotations = false;
-		int sizeOfSmallWordsToBeNotAnnotated = 0;
 
-		Properties propertiesToConvert = ieprocess.getProperties();
-		Map<Long, Set<Long>> mapResourceIDToClassesID = new HashMap<>();
-		for( Object key : propertiesToConvert.keySet()){
-			String keyString = String.valueOf(key);
-			Long resourceID = null;
-			try{
-				resourceID = Long.valueOf(keyString);
-			}catch(Exception e){}
-			if(resourceID != null){
-				Object classes = propertiesToConvert.get(key);
-				String classesString = String.valueOf(classes);
-				String[] classesIdString = classesString.split(",");
-				Set<Long> klassIDs = new HashSet<>();
-				for(String klassID : classesIdString){
-					klassIDs.add(Long.valueOf(klassID));
-				}
-				mapResourceIDToClassesID.put(resourceID, klassIDs);
-			}else{
-				Object value = propertiesToConvert.get(key);
-				if(keyString.equals(LinnaeusTagger.abreviation))
-					useabreviation = Boolean.valueOf(String.valueOf(value));
+	//	public INERConfiguration getProcessConfiguration(IIEProcess ieprocess,ProcessRunStatusConfigurationEnum processStatus) throws ANoteException{
+	//		ICorpus corpus = ieprocess.getCorpus();
+	//		Map<String, Pattern> patterns = null;
+	//		boolean useabreviation = false;
+	//		Disambiguation disambiguationEnum = Disambiguation.OFF;
+	//		NERCaseSensativeEnum caseSensitiveEnum = NERCaseSensativeEnum.NONE;
+	//		boolean normalized = false;
+	//		int numThreads = 4;
+	//		ILexicalWords stopwords = null;
+	//		NERLinnaeusPreProcessingEnum preprocessing = NERLinnaeusPreProcessingEnum.No;
+	//		boolean usingOtherResourceInfoToImproveRuleAnnotations = false;
+	//		int sizeOfSmallWordsToBeNotAnnotated = 0;
+	//
+	//		Properties propertiesToConvert = ieprocess.getProperties();
+	//		Map<Long, Set<Long>> mapResourceIDToClassesID = new HashMap<>();
+	//		for( Object key : propertiesToConvert.keySet()){
+	//			String keyString = String.valueOf(key);
+	//			Long resourceID = null;
+	//			try{
+	//				resourceID = Long.valueOf(keyString);
+	//			}catch(Exception e){}
+	//			if(resourceID != null){
+	//				Object classes = propertiesToConvert.get(key);
+	//				String classesString = String.valueOf(classes);
+	//				String[] classesIdString = classesString.split(",");
+	//				Set<Long> klassIDs = new HashSet<>();
+	//				for(String klassID : classesIdString){
+	//					klassIDs.add(Long.valueOf(klassID));
+	//				}
+	//				mapResourceIDToClassesID.put(resourceID, klassIDs);
+	//			}else{
+	//				Object value = propertiesToConvert.get(key);
+	//				if(keyString.equals(LinnaeusTagger.abreviation))
+	//					useabreviation = Boolean.valueOf(String.valueOf(value));
+	//
+	//				if(keyString.equals(LinnaeusTagger.disambiguation))
+	//					disambiguationEnum = Disambiguation.valueOf(String.valueOf(value));
+	//
+	//				if(keyString.equals(GlobalNames.casesensitive))
+	//					caseSensitiveEnum = NERCaseSensativeEnum.valueOf(String.valueOf(value));
+	//
+	//				if(keyString.equals(GlobalNames.normalization))
+	//					normalized = Boolean.valueOf(String.valueOf(value));
+	//
+	//				if(keyString.equals(GlobalNames.useOtherResourceInformationInRules))
+	//					usingOtherResourceInfoToImproveRuleAnnotations = true;
+	//				if(keyString.equals(GlobalNames.numberThreads))
+	//					numThreads = Integer.valueOf(String.valueOf(value));
+	//				//				if(keyString.equals(GlobalNames.stopWordsResourceID))
+	//				//				{
+	//				//					stopwords = new LexicalWordsImpl(InitConfiguration.getDataAccess().getResourceByID(Long.valueOf(String.valueOf(value))));
+	//				//					preprocessing = NERLinnaeusPreProcessingEnum.StopWords;
+	//				//				}
+	//				if(keyString.equals(GlobalNames.sizeOfNonAnnotatedSmallWords))
+	//					sizeOfSmallWordsToBeNotAnnotated = Integer.valueOf(String.valueOf(value));
+	//			}
+	//		}
+	//
+	//		ResourcesToNerAnote resourceToNER = getResourcesToNERForConfiguration(caseSensitiveEnum, usingOtherResourceInfoToImproveRuleAnnotations, sizeOfSmallWordsToBeNotAnnotated, mapResourceIDToClassesID);
+	//		return new NERLinnaeusConfigurationImpl(corpus,processStatus, patterns, resourceToNER, useabreviation, disambiguationEnum, caseSensitiveEnum, normalized, numThreads, stopwords, preprocessing, usingOtherResourceInfoToImproveRuleAnnotations,sizeOfSmallWordsToBeNotAnnotated);
+	//	}
 
-				if(keyString.equals(LinnaeusTagger.disambiguation))
-					disambiguationEnum = Disambiguation.valueOf(String.valueOf(value));
-
-				if(keyString.equals(GlobalNames.casesensitive))
-					caseSensitiveEnum = NERCaseSensativeEnum.valueOf(String.valueOf(value));
-
-				if(keyString.equals(GlobalNames.normalization))
-					normalized = Boolean.valueOf(String.valueOf(value));
-
-				if(keyString.equals(GlobalNames.useOtherResourceInformationInRules))
-					usingOtherResourceInfoToImproveRuleAnnotations = true;
-				if(keyString.equals(GlobalNames.numberThreads))
-					numThreads = Integer.valueOf(String.valueOf(value));
-				if(keyString.equals(GlobalNames.stopWordsResourceID))
-				{
-					stopwords = new LexicalWordsImpl(InitConfiguration.getDataAccess().getResourceByID(Long.valueOf(String.valueOf(value))));
-					preprocessing = NERLinnaeusPreProcessingEnum.StopWords;
-				}
-				if(keyString.equals(GlobalNames.sizeOfNonAnnotatedSmallWords))
-					sizeOfSmallWordsToBeNotAnnotated = Integer.valueOf(String.valueOf(value));
-			}
-		}
-
-		ResourcesToNerAnote resourceToNER = getResourcesToNERForConfiguration(caseSensitiveEnum, usingOtherResourceInfoToImproveRuleAnnotations, sizeOfSmallWordsToBeNotAnnotated, mapResourceIDToClassesID);
-		return new NERLinnaeusConfigurationImpl(corpus,processStatus, patterns, resourceToNER, useabreviation, disambiguationEnum, caseSensitiveEnum, normalized, numThreads, stopwords, preprocessing, usingOtherResourceInfoToImproveRuleAnnotations,sizeOfSmallWordsToBeNotAnnotated);
-	}
-
-	private ResourcesToNerAnote getResourcesToNERForConfiguration(NERCaseSensativeEnum caseSensitiveEnum,
-			boolean usingOtherResourceInfoToImproveRuleAnnotations, int sizeOfSmallWordsToBeNotAnnotated, Map<Long, Set<Long>> mapResourceIDToClassesID) throws ANoteException {
-		ResourcesToNerAnote resourceToNER = new ResourcesToNerAnote(caseSensitiveEnum, usingOtherResourceInfoToImproveRuleAnnotations, sizeOfSmallWordsToBeNotAnnotated);
-		for(Long resource : mapResourceIDToClassesID.keySet()){
-
-			IResource<IResourceElement> resElem = InitConfiguration.getDataAccess().getResourceByID(resource);
-			Set<Long> selectedClass = mapResourceIDToClassesID.get(resource);
-			Set<Long> classContent = selectedClass;
-			resourceToNER.add(resElem, classContent, selectedClass);
-		}
-		return resourceToNER;
-	}
+	//	private ResourcesToNerAnote getResourcesToNERForConfiguration(NERCaseSensativeEnum caseSensitiveEnum,
+	//			boolean usingOtherResourceInfoToImproveRuleAnnotations, int sizeOfSmallWordsToBeNotAnnotated, Map<Long, Set<Long>> mapResourceIDToClassesID) throws ANoteException {
+	//		ResourcesToNerAnote resourceToNER = new ResourcesToNerAnote(caseSensitiveEnum, usingOtherResourceInfoToImproveRuleAnnotations, sizeOfSmallWordsToBeNotAnnotated);
+	//		for(Long resource : mapResourceIDToClassesID.keySet()){
+	//
+	//			IResource<IResourceElement> resElem = InitConfiguration.getDataAccess().getResourceByID(resource);
+	//			Set<Long> selectedClass = mapResourceIDToClassesID.get(resource);
+	//			Set<Long> classContent = selectedClass;
+	//			resourceToNER.add(resElem, classContent, selectedClass);
+	//		}
+	//		return resourceToNER;
+	//	}
 
 
 
