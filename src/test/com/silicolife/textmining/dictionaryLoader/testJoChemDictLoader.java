@@ -24,7 +24,7 @@ public class testJoChemDictLoader {
 
 	@Test
 	public void test() throws InvalidDatabaseAccess, ANoteException, IOException {
-		File file = new File("C:\\Users\\Tiago\\workspace\\developmentUMinho\\resources\\JoChem.tsv");
+		File file = new File("resources/JoChem.tsv");
 		//		IResource<IResourceElement> resource = CreateDictionaryTest.createDictionary("BioDB Dictionary");
 		JoChemDictionaryTSVLoader importer = new JoChemDictionaryTSVLoader();
 		List<IResourceElement> list = importer.loadTermFromGenericCVSFile(file, getCSVConfigurations());
@@ -35,19 +35,24 @@ public class testJoChemDictLoader {
 	}
 
 	private CSVFileConfigurations getCSVConfigurations() {
-		Map<String, ColumnParameters> columnNameColumnParameters = new HashMap<String, ColumnParameters>();
-		ColumnParameters termColum = new ColumnParameters(0, null, DefaultDelimiterValue.HYPHEN);
-		columnNameColumnParameters.put("Term", termColum );
-		ColumnParameters klass = new ColumnParameters(1, null, DefaultDelimiterValue.HYPHEN);
-		columnNameColumnParameters.put("Class", klass );
 		Delimiter vbar = Delimiter.VERTICAL_BAR;
-		ColumnParameters synonyms = new ColumnParameters(2,vbar, DefaultDelimiterValue.HYPHEN);
-		columnNameColumnParameters.put("Synonym", synonyms );
-		ColumnParameters externalids = new ColumnParameters(3, vbar, DefaultDelimiterValue.HYPHEN, Delimiter.COLON );
+		Map<String, ColumnParameters> columnNameColumnParameters = new HashMap<String, ColumnParameters>();
+		ColumnParameters termColum = new ColumnParameters(0, vbar, DefaultDelimiterValue.NONE);
+		columnNameColumnParameters.put("Term", termColum );
+
+		//		Delimiter vbar = Delimiter.VERTICAL_BAR;
+		ColumnParameters synonyms = new ColumnParameters(1,vbar, DefaultDelimiterValue.NONE, vbar);
+		columnNameColumnParameters.put("Synonyms", synonyms );
+//		underscore=new Delimiter();
+		Delimiter.USER.setUserDelimiter("_");
+		ColumnParameters externalids = new ColumnParameters(2, vbar, DefaultDelimiterValue.NONE,Delimiter.USER);
 		columnNameColumnParameters.put("ExternalID", externalids );
+		ColumnParameters klass = new ColumnParameters(3, vbar, DefaultDelimiterValue.NONE);
+		columnNameColumnParameters.put("Class", klass );
+
 		Delimiter generalDelimiter = Delimiter.TAB;
-		TextDelimiter textDelimiters = TextDelimiter.QUOTATION_MARK;
-		DefaultDelimiterValue defaultValue = DefaultDelimiterValue.HYPHEN;
+		TextDelimiter textDelimiters = TextDelimiter.NONE;
+		DefaultDelimiterValue defaultValue = DefaultDelimiterValue.NONE;
 		ColumnDelemiterDefaultValue columsDelemiterDefaultValue = new ColumnDelemiterDefaultValue(columnNameColumnParameters);
 		boolean hasHeaders = true;
 		CSVFileConfigurations csvFileConfig = new CSVFileConfigurations(generalDelimiter,textDelimiters,defaultValue,columsDelemiterDefaultValue,hasHeaders);
