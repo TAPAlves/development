@@ -34,7 +34,7 @@ public class testJoChemDictLoader {
 		}
 	}
 
-	private CSVFileConfigurations getCSVConfigurations() {
+	private static CSVFileConfigurations getCSVConfigurations() {
 		Delimiter vbar = Delimiter.VERTICAL_BAR;
 		Map<String, ColumnParameters> columnNameColumnParameters = new HashMap<String, ColumnParameters>();
 		ColumnParameters termColum = new ColumnParameters(0, vbar, DefaultDelimiterValue.NONE);
@@ -59,6 +59,15 @@ public class testJoChemDictLoader {
 		return csvFileConfig;
 	}
 
+	public static List<IResourceElement> getJoChemDictionary() throws ANoteException, IOException{
+		File file = new File("resources/JoChem.tsv");
+		//		IResource<IResourceElement> resource = CreateDictionaryTest.createDictionary("BioDB Dictionary");
+		JoChemDictionaryTSVLoader importer = new JoChemDictionaryTSVLoader();
+		List<IResourceElement> list = importer.loadTermFromGenericCVSFile(file, getCSVConfigurations());
+		return list;
+		
+	}
+	
 
 
 

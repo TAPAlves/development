@@ -1,0 +1,99 @@
+package test.com.silicolife.textmining.LinneausTaggerToMemoryRun;
+
+import static org.junit.Assert.assertTrue;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Pattern;
+
+import org.junit.Test;
+
+import com.silicolife.textmining.core.datastructures.exceptions.process.InvalidConfigurationException;
+import com.silicolife.textmining.core.datastructures.init.InitConfiguration;
+import com.silicolife.textmining.core.datastructures.init.exception.InvalidDatabaseAccess;
+import com.silicolife.textmining.core.datastructures.process.ProcessRunStatusConfigurationEnum;
+import com.silicolife.textmining.core.datastructures.process.ner.NERCaseSensativeEnum;
+import com.silicolife.textmining.core.datastructures.process.ner.ResourcesToNerAnote;
+import com.silicolife.textmining.core.datastructures.resources.ResourceImpl;
+import com.silicolife.textmining.core.datastructures.resources.dictionary.loaders.DictionaryImpl;
+import com.silicolife.textmining.core.interfaces.core.dataaccess.exception.ANoteException;
+import com.silicolife.textmining.core.interfaces.core.document.corpus.ICorpus;
+import com.silicolife.textmining.core.interfaces.core.report.processes.INERProcessReport;
+import com.silicolife.textmining.core.interfaces.process.IR.exception.InternetConnectionProblemException;
+import com.silicolife.textmining.core.interfaces.resource.IResource;
+import com.silicolife.textmining.core.interfaces.resource.IResourceElement;
+import com.silicolife.textmining.core.interfaces.resource.dictionary.IDictionary;
+import com.silicolife.textmining.core.interfaces.resource.lexicalwords.ILexicalWords;
+import com.silicolife.textmining.machinelearning.processes.corpora.loaders.CreateCorpusFromPublicationManagerTest;
+import com.silicolife.textmining.processes.DatabaseConnectionInit;
+import com.silicolife.textmining.processes.ie.ner.linnaeus.LinnaeusTagger;
+import com.silicolife.textmining.processes.ie.ner.linnaeus.adapt.uk.ac.man.entitytagger.matching.Matcher.Disambiguation;
+import com.silicolife.textmining.processes.ie.ner.linnaeus.configuration.INERLinnaeusConfiguration;
+import com.silicolife.textmining.processes.ie.ner.linnaeus.configuration.NERLinnaeusConfigurationImpl;
+import com.silicolife.textmining.processes.ie.ner.linnaeus.configuration.NERLinnaeusPreProcessingEnum;
+
+import main.com.silicolife.textmining.LinnaeusExtension.LinnaeusTaggerMemoryRun;
+import test.com.silicolife.textmining.dictionaryLoader.testJoChemDictLoader;
+
+public class LinneausTaggerToMemoryRunTest {
+
+	@Test
+	public void test() throws InvalidDatabaseAccess, ANoteException, InternetConnectionProblemException, IOException, InvalidConfigurationException {
+		DatabaseConnectionInit.init("localhost","3306","anote2db","root","admin");
+		ICorpus corpus = InitConfiguration.getDataAccess().getCorpusByID(8861883496831132819L);
+		//		ICorpus corpus = CreateCorpusFromPublicationManagerTest.createCorpus().getCorpus();
+		List<IResourceElement> dictionary = createDictionary();
+		INERProcessReport report = executeLinnaeus(corpus, dictionary);
+		assertTrue(report.isFinishing());
+	}
+
+	public static INERProcessReport executeLinnaeus(ICorpus corpus,
+			List<IResourceElement> dictionary) throws ANoteException, InvalidConfigurationException {
+		boolean useabreviation = true;
+		boolean normalized = true;
+		NERCaseSensativeEnum caseSensitive = NERCaseSensativeEnum.INALLWORDS;
+		ILexicalWords stopwords = null;
+		NERLinnaeusPreProcessingEnum preprocessing = NERLinnaeusPreProcessingEnum.No;
+		Disambiguation disambiguation = Disambiguation.OFF;
+		ResourcesToNerAnote resourceToNER = new ResourcesToNerAnote();
+		resourceToNER.addUsingAnoteClasses(dictionary, dictionary.getResourceClassContent(), dictionary.getResourceClassContent());
+		Map<String, Pattern> patterns = new HashMap<String, Pattern>();
+		int numThreads = 4;
+		boolean usingOtherResourceInfoToImproveRuleAnnotations = false;
+		int sizeOfSmallWordsToBeNotAnnotated = 0;
+		INERLinnaeusConfiguration configurations = new NERLinnaeusConfigurationImpl(corpus,ProcessRunStatusConfigurationEnum.createnew, patterns , resourceToNER, useabreviation , disambiguation , caseSensitive , normalized , numThreads , stopwords , preprocessing , usingOtherResourceInfoToImproveRuleAnnotations, sizeOfSmallWordsToBeNotAnnotated );
+		LinnaeusTaggerMemoryRun linnaues = new LinnaeusTaggerMemoryRun( );
+		System.out.println("Execute Linnaeus");
+		INERProcessReport report = linnaues.executeCorpusNER(configurations);
+		return report;
+	}
+
+	public static List<IResourceElement> createDictionary() throws ANoteException, IOException{
+		System.out.println("Create Dictionary");
+
+		List<IResourceElement> resource = testJoChemDictLoader.getJoChemDictionary();
+		IResource reso=new ResourceImpl();
+		reso.addResourceElements(resource);
+		//		IDictionary dictionary = new DictionaryImpl();
+		//		dictionary.addResourceElements(resource);
+		//		BioMetaEcoCycFlatFileLoader loader = new BioMetaEcoCycFlatFileLoader();
+		//		String byocycFolder = "src/test/resources/BioCyc/small";
+		//		File file = new File(byocycFolder);
+		//		if(loader.checkFile(file))
+		//		{
+		//			Properties properties = new Properties();
+		//			String loaderUID = "";
+		//			boolean loadExtendalIDds = true;
+		//			IDictionaryLoaderConfiguration configuration = new DictionaryLoaderConfigurationImpl(loaderUID , dictionary, file, properties , loadExtendalIDds );
+		//			loader.loadTerms(configuration );
+		//		}
+		//		return dictionary;
+		return resource;
+	}
+
+
+
+}
+
