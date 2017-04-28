@@ -16,25 +16,21 @@ import com.silicolife.textmining.core.datastructures.init.exception.InvalidDatab
 import com.silicolife.textmining.core.datastructures.process.ProcessRunStatusConfigurationEnum;
 import com.silicolife.textmining.core.datastructures.process.ner.NERCaseSensativeEnum;
 import com.silicolife.textmining.core.datastructures.process.ner.ResourcesToNerAnote;
-import com.silicolife.textmining.core.datastructures.resources.ResourceImpl;
-import com.silicolife.textmining.core.datastructures.resources.dictionary.loaders.DictionaryImpl;
 import com.silicolife.textmining.core.interfaces.core.dataaccess.exception.ANoteException;
 import com.silicolife.textmining.core.interfaces.core.document.corpus.ICorpus;
 import com.silicolife.textmining.core.interfaces.core.report.processes.INERProcessReport;
 import com.silicolife.textmining.core.interfaces.process.IR.exception.InternetConnectionProblemException;
 import com.silicolife.textmining.core.interfaces.resource.IResource;
 import com.silicolife.textmining.core.interfaces.resource.IResourceElement;
-import com.silicolife.textmining.core.interfaces.resource.dictionary.IDictionary;
 import com.silicolife.textmining.core.interfaces.resource.lexicalwords.ILexicalWords;
-import com.silicolife.textmining.machinelearning.processes.corpora.loaders.CreateCorpusFromPublicationManagerTest;
 import com.silicolife.textmining.processes.DatabaseConnectionInit;
-import com.silicolife.textmining.processes.ie.ner.linnaeus.LinnaeusTagger;
 import com.silicolife.textmining.processes.ie.ner.linnaeus.adapt.uk.ac.man.entitytagger.matching.Matcher.Disambiguation;
 import com.silicolife.textmining.processes.ie.ner.linnaeus.configuration.INERLinnaeusConfiguration;
 import com.silicolife.textmining.processes.ie.ner.linnaeus.configuration.NERLinnaeusConfigurationImpl;
 import com.silicolife.textmining.processes.ie.ner.linnaeus.configuration.NERLinnaeusPreProcessingEnum;
 
 import main.com.silicolife.textmining.LinnaeusExtension.LinnaeusTaggerMemoryRun;
+import main.com.silicolife.textmining.LinnaeusExtension.ResourceInMemoryImpl;
 import test.com.silicolife.textmining.dictionaryLoader.testJoChemDictLoader;
 
 public class LinneausTaggerToMemoryRunTest {
@@ -44,13 +40,13 @@ public class LinneausTaggerToMemoryRunTest {
 		DatabaseConnectionInit.init("localhost","3306","anote2db","root","admin");
 		ICorpus corpus = InitConfiguration.getDataAccess().getCorpusByID(8861883496831132819L);
 		//		ICorpus corpus = CreateCorpusFromPublicationManagerTest.createCorpus().getCorpus();
-		List<IResourceElement> dictionary = createDictionary();
+		IResource<IResourceElement> dictionary = createDictionary();
 		INERProcessReport report = executeLinnaeus(corpus, dictionary);
 		assertTrue(report.isFinishing());
 	}
 
 	public static INERProcessReport executeLinnaeus(ICorpus corpus,
-			List<IResourceElement> dictionary) throws ANoteException, InvalidConfigurationException {
+			IResource<IResourceElement> dictionary) throws ANoteException, InvalidConfigurationException {
 		boolean useabreviation = true;
 		boolean normalized = true;
 		NERCaseSensativeEnum caseSensitive = NERCaseSensativeEnum.INALLWORDS;
@@ -70,11 +66,11 @@ public class LinneausTaggerToMemoryRunTest {
 		return report;
 	}
 
-	public static List<IResourceElement> createDictionary() throws ANoteException, IOException{
+	public static IResource<IResourceElement> createDictionary() throws ANoteException, IOException{
 		System.out.println("Create Dictionary");
 
 		List<IResourceElement> resource = testJoChemDictLoader.getJoChemDictionary();
-		IResource reso=new ResourceImpl();
+		IResource<IResourceElement> reso=new ResourceInMemoryImpl();
 		reso.addResourceElements(resource);
 		//		IDictionary dictionary = new DictionaryImpl();
 		//		dictionary.addResourceElements(resource);
@@ -90,7 +86,7 @@ public class LinneausTaggerToMemoryRunTest {
 		//			loader.loadTerms(configuration );
 		//		}
 		//		return dictionary;
-		return resource;
+		return reso;
 	}
 
 
