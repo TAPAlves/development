@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Set;
 
-import com.silicolife.textmining.core.datastructures.language.LanguageProperties;
 import com.silicolife.textmining.core.datastructures.resources.ResourceElementSetImpl;
 import com.silicolife.textmining.core.datastructures.utils.GenerateRandomId;
 import com.silicolife.textmining.core.datastructures.utils.conf.GlobalOptions;
@@ -17,6 +16,7 @@ import com.silicolife.textmining.core.interfaces.core.general.classe.IAnoteClass
 import com.silicolife.textmining.core.interfaces.resource.IResource;
 import com.silicolife.textmining.core.interfaces.resource.IResourceElement;
 import com.silicolife.textmining.core.interfaces.resource.IResourceElementSet;
+import com.silicolife.textmining.core.interfaces.resource.ResourcesTypeEnum;
 import com.silicolife.textmining.core.interfaces.resource.content.IResourceContent;
 
 public class ResourceInMemoryImpl extends Observable implements IResource<IResourceElement>{
@@ -63,7 +63,7 @@ public class ResourceInMemoryImpl extends Observable implements IResource<IResou
 
 	public ResourceInMemoryImpl() {
 		//		super();
-		setId(GenerateRandomId.generateID());
+		this(GenerateRandomId.generateID(),"DictionaryName","Put your notes",ResourcesTypeEnum.dictionary.toString(),true);
 		resources=new ArrayList<>();
 	}
 
@@ -251,8 +251,8 @@ public class ResourceInMemoryImpl extends Observable implements IResource<IResou
 				List<Long> classesArray = new ArrayList<>(classes);
 				for (int i = 0; i < limitIndex; i++) {
 					classesStrPartial += classesArray.get(actualIndex+i)+",";
-//					System.out.println(i);
-//					System.out.println(classes.size());
+					//					System.out.println(i);
+					//					System.out.println(classes.size());
 				}
 
 				actualIndex+=limitIndex;
@@ -343,11 +343,11 @@ public class ResourceInMemoryImpl extends Observable implements IResource<IResou
 		info = getType() + " : " + getName() + " (ID :"+ getId() + " ) ";
 		if(!getInfo().equals(""))
 		{
-			info = info + LanguageProperties.getLanguageStream("pt.uminho.anote2.general.notes")+": "+getInfo();
+			info = info + "Notes" +": "+getInfo();
 		}
 		if(!isActive())
 		{
-			info = info + " ("+LanguageProperties.getLanguageStream("pt.uminho.anote2.general.inactive")+") ";
+			info = info + " ("+"Inactive"+") ";
 		}
 		return info;
 	}

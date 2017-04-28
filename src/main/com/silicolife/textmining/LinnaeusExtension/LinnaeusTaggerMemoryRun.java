@@ -119,7 +119,7 @@ public class LinnaeusTaggerMemoryRun extends ANERLexicalResourcesToMemoryRun{
 
 	protected LinnauesExecutionData loadExecutionData(INERLinnaeusConfiguration linnauesConfiguration) throws ANoteException
 	{
-		nerlogger.info("Start to get resources elements on DB");
+		nerlogger.info("Getting resource elements to NER");
 		ElementToNer elementsToNER = getElementsToNER(linnauesConfiguration);
 		HandRules rules = new HandRules(elementsToNER);
 		List<IEntityAnnotation> elements = elementsToNER.getTermsByAlphabeticOrder(linnauesConfiguration.getCaseSensitiveEnum());
