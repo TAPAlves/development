@@ -52,6 +52,7 @@ public class ResourceInMemoryImpl extends Observable implements IResource<IResou
 		else this.info=info;
 		this.active = true;
 		this.type=type;
+		resources=new ArrayList<>();
 	}
 
 	public ResourceInMemoryImpl(String name,String info,String type,boolean active)
@@ -61,7 +62,9 @@ public class ResourceInMemoryImpl extends Observable implements IResource<IResou
 
 
 	public ResourceInMemoryImpl() {
-		super();
+		//		super();
+		setId(GenerateRandomId.generateID());
+		resources=new ArrayList<>();
 	}
 
 
@@ -240,9 +243,36 @@ public class ResourceInMemoryImpl extends Observable implements IResource<IResou
 
 	public static String convertClassesToResourceProperties(Set<Long> classes) {
 		String classesStr = new String();
-		for(Long classID:classes)
-		{
-			classesStr = classesStr.concat(classID+",");
+		int limitIndex = 20000;
+		int actualIndex=0;
+		while(actualIndex<classes.size()){
+			String classesStrPartial = new String();
+			if ((classes.size()-actualIndex)>=limitIndex){
+				List<Long> classesArray = new ArrayList<>(classes);
+				for (int i = 0; i < limitIndex; i++) {
+					classesStrPartial += classesArray.get(actualIndex+i)+",";
+//					System.out.println(i);
+//					System.out.println(classes.size());
+				}
+
+				actualIndex+=limitIndex;
+				classesStr+=classesStrPartial;
+				classesStrPartial=new String();
+				//				for(Long classID:classes)
+				//				{
+				//					classesStr += classID+",";
+				//					System.out.println(limitIndex);
+				//					System.out.println(classes.size());
+				//					limitIndex++;
+			}
+			else{
+				List<Long> classesArray = new ArrayList<>(classes);
+				for (int i = actualIndex; i <classes.size() ; i++) {
+					classesStrPartial += classesArray.get(i)+",";
+				}
+				classesStr+=classesStrPartial;
+				actualIndex=classes.size();
+			}	
 		}
 		if(classesStr.length() > 0)
 			classesStr = classesStr.substring(0,classesStr.length()-1);

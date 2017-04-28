@@ -54,6 +54,7 @@ public abstract class ANERLexicalResourcesToMemoryRun implements INERProcess {
 		//		nerlogger.info("Register NERProcess in Corpus");
 		//		InitConfiguration.getDataAccess().registerCorpusProcess(processToRun.getCorpus(), processToRun);
 		INERProcessReport report = new NERProcessReportImpl(configuration.getIEProcess().getName() + " report", processToRun);
+//		sINERProcessReport report = new NERProcessReportImpl(configuration.getIEProcess().getName() + " report", null);
 		ICorpusPublicationPaginator publicationsPaginator = getPublicationsPaginator(configuration.getCorpus(),10000);
 		long startime = GregorianCalendar.getInstance().getTimeInMillis();
 		INERPosProccessAddEntities nerPosProccessAddEntities = new NERPosProcessAddEntitiesImpl();

@@ -37,7 +37,7 @@ public class LinneausTaggerToMemoryRunTest {
 
 	@Test
 	public void test() throws InvalidDatabaseAccess, ANoteException, InternetConnectionProblemException, IOException, InvalidConfigurationException {
-		DatabaseConnectionInit.init("localhost","3306","anote2db","root","admin");
+		DatabaseConnectionInit.init("localhost","3306","createdatest","root","admin");
 		ICorpus corpus = InitConfiguration.getDataAccess().getCorpusByID(8861883496831132819L);
 		//		ICorpus corpus = CreateCorpusFromPublicationManagerTest.createCorpus().getCorpus();
 		IResource<IResourceElement> dictionary = createDictionary();

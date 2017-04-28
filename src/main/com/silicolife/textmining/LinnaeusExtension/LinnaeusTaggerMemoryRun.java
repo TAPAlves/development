@@ -24,7 +24,6 @@ import com.silicolife.textmining.core.datastructures.process.ner.ElementToNer;
 import com.silicolife.textmining.core.datastructures.process.ner.HandRules;
 import com.silicolife.textmining.core.datastructures.process.ner.NERCaseSensativeEnum;
 import com.silicolife.textmining.core.datastructures.process.ner.ResourcesToNerAnote;
-import com.silicolife.textmining.core.datastructures.resources.ResourceImpl;
 import com.silicolife.textmining.core.datastructures.textprocessing.EntitiesDesnormalization;
 import com.silicolife.textmining.core.datastructures.textprocessing.TermSeparator;
 import com.silicolife.textmining.core.datastructures.utils.GenerateRandomId;
@@ -559,7 +558,7 @@ public class LinnaeusTaggerMemoryRun extends ANERLexicalResourcesToMemoryRun{
 			Set<Long> selected = resources.getList().get(i).getSelectedClassesID();
 			long id = resources.getList().get(i).getResource().getId();
 			{
-				prop.put(String.valueOf(id),ResourceImpl.convertClassesToResourceProperties(selected));
+				prop.put(String.valueOf(id),ResourceInMemoryImpl.convertClassesToResourceProperties(selected));
 			}
 		}
 		return prop;
