@@ -1,26 +1,16 @@
 package main.com.silicolife.textmining.LinnaeusExtension;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Observable;
 import java.util.Set;
 
-import com.silicolife.textmining.core.datastructures.dataaccess.database.dataaccess.implementation.exceptions.ResourcesExceptions;
-import com.silicolife.textmining.core.datastructures.dataaccess.database.dataaccess.implementation.exceptions.general.ExceptionsCodes;
-import com.silicolife.textmining.core.datastructures.dataaccess.database.dataaccess.implementation.model.core.entities.Classes;
-import com.silicolife.textmining.core.datastructures.dataaccess.database.dataaccess.implementation.model.core.entities.Resources;
-import com.silicolife.textmining.core.datastructures.init.InitConfiguration;
 import com.silicolife.textmining.core.datastructures.language.LanguageProperties;
 import com.silicolife.textmining.core.datastructures.resources.ResourceElementSetImpl;
-import com.silicolife.textmining.core.datastructures.resources.content.ResourceClassContentImpl;
-import com.silicolife.textmining.core.datastructures.resources.content.ResourceClassesContentImpl;
-import com.silicolife.textmining.core.datastructures.resources.content.ResourceContentImpl;
 import com.silicolife.textmining.core.datastructures.utils.GenerateRandomId;
 import com.silicolife.textmining.core.datastructures.utils.conf.GlobalOptions;
 import com.silicolife.textmining.core.interfaces.core.dataaccess.exception.ANoteException;
-import com.silicolife.textmining.core.interfaces.core.dataaccess.exception.DaemonException;
 import com.silicolife.textmining.core.interfaces.core.dataaccess.layer.resources.IResourceManagerReport;
 import com.silicolife.textmining.core.interfaces.core.general.IExternalID;
 import com.silicolife.textmining.core.interfaces.core.general.classe.IAnoteClass;
@@ -127,7 +117,7 @@ public class ResourceInMemoryImpl extends Observable implements IResource<IResou
 	}
 
 
-	public IResourceElementSet<IResourceElement> getResourceElementsByClass(IAnoteClass klass) throws ANoteException {
+	public IResourceElementSet<IResourceElement> getResourceElementsByClass(IAnoteClass klass) {
 		IResourceElementSet<IResourceElement> elementSet = new ResourceElementSetImpl<IResourceElement>();
 		if (resources!=null && !resources.isEmpty()){
 			for (IResourceElement resourceElement : resources) {
@@ -163,7 +153,6 @@ public class ResourceInMemoryImpl extends Observable implements IResource<IResou
 
 	public IResourceElement getResourceElementByID(long termID)
 	{
-
 		if (resources!=null && !resources.isEmpty()){
 			for (IResourceElement resourceElement : resources) {
 				if (resourceElement.getId()==termID){
@@ -187,7 +176,7 @@ public class ResourceInMemoryImpl extends Observable implements IResource<IResou
 	 * @param elem - Resource Element
 	 * @return 
 	 */
-	public IResourceManagerReport addResourceElements(List<IResourceElement> elements) throws ANoteException
+	public IResourceManagerReport addResourceElements(List<IResourceElement> elements)
 	{
 		this.resources.addAll(elements);
 		return null;
@@ -200,7 +189,8 @@ public class ResourceInMemoryImpl extends Observable implements IResource<IResou
 	 * @return
 	 */
 	public IResourceManagerReport updateResourceElement(IResourceElement elem){
-//		return InitConfiguration.getDataAccess().updateResourceElement(elem);
+		//		return InitConfiguration.getDataAccess().updateResourceElement(elem);
+		updateElement(elem);
 		return null;
 	}
 
@@ -220,15 +210,21 @@ public class ResourceInMemoryImpl extends Observable implements IResource<IResou
 	public void inactivateResourceElement(IResourceElement elem) throws ANoteException {
 	}
 
-	public void removeResourceElementSynonyms(IResourceElement elem) throws ANoteException{
+	public void removeResourceElementSynonyms(IResourceElement elem){
 		long elemID = elem.getId();
 		IResourceElement memoryElement = getResourceElementByID(elemID);
 		memoryElement.setSynonyms(new ArrayList<>());
+		updateElement(memoryElement);
 	}
 
 	public void removeResourceElementSynonym(IResourceElement elem,String synonym) throws ANoteException
 	{
-//		InitConfiguration.getDataAccess().removeResourceElementSynonym(elem, synonym);
+		//		InitConfiguration.getDataAccess().removeResourceElementSynonym(elem, synonym);
+		List<String> syn = elem.getSynonyms();
+		if (syn.contains(synonym)){
+			syn.remove(synonym);
+		}
+		updateElement(elem);
 	}
 
 	protected void memoryAndProgress(int step, int total) {
@@ -263,12 +259,20 @@ public class ResourceInMemoryImpl extends Observable implements IResource<IResou
 	}
 
 	public void inactiveElementsByClassID(long classID) throws ANoteException {
-		InitConfiguration.getDataAccess().removeResourceClass(this, classID);		
+		//		InitConfiguration.getDataAccess().removeResourceClass(this, classID);		
 	}
 
-	public void updateElement(IResourceElement element) throws ANoteException
+	public void updateElement(IResourceElement element)
 	{
-		InitConfiguration.getDataAccess().updateResourceElement(element);
+		Set<IResourceElement> toRemove=new HashSet<>();
+		//		InitConfiguration.getDataAccess().updateResourceElement(element);
+		for (IResourceElement resource:resources){
+			if (resource.getId()==element.getId()){
+				toRemove.add(resource);
+			}
+		}
+		resources.removeAll(toRemove);
+		resources.add(element);
 	}
 
 	public int compareTo(IResource<IResourceElement> resource)
@@ -285,11 +289,22 @@ public class ResourceInMemoryImpl extends Observable implements IResource<IResou
 	}
 
 	public boolean checkiftermalreadyexist(String term) throws ANoteException {
-		return InitConfiguration.getDataAccess().checkResourceElementExistsInResource(this, term);
+		//		return InitConfiguration.getDataAccess().checkResourceElementExistsInResource(this, term);
+		for (IResourceElement resource:resources){
+			if (resource.getTerm().equalsIgnoreCase(term)){
+				return true;
+			}
+		}
+		return false;
 	}
 
-	public IResourceManagerReport addExternalID(IResourceElement elem, List<IExternalID> externalIDs) throws ANoteException {
-		return InitConfiguration.getDataAccess().addResourceElementExternalIds(this,elem, externalIDs);
+
+	public void addExternalID(IResourceElement elem, List<IExternalID> externalIDs) throws ANoteException {
+		//		return InitConfiguration.getDataAccess().addResourceElementExternalIds(this,elem, externalIDs);
+		elem.setExternalIDsInMemory(externalIDs);
+		updateElement(elem);
+
+
 	}
 
 	public String toString()
@@ -307,8 +322,10 @@ public class ResourceInMemoryImpl extends Observable implements IResource<IResou
 		return info;
 	}
 
-	public boolean isFill() throws ANoteException {
-		return InitConfiguration.getDataAccess().getResourceContent(this).getTermNumber()!=0;
+	public boolean isFill() {
+		return false;
+
+		//		return InitConfiguration.getDataAccess().getResourceContent(this).getTermNumber()!=0;
 	}
 }
 
