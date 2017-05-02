@@ -362,6 +362,59 @@ public class LinnaeusTaggerMemoryRun extends ANERLexicalResourcesToMemoryRun{
 		}
 	}
 
+	//	private boolean addAnnotatedDocumentEntities (INERPosProccessAddEntities nerPosProccessAddEntities, IIEProcess process,IPublication document,List<IEntityAnnotation> newEntityAnnotations){
+	//		annotationService.addCorpusProcessDocumentEntityAnootations(schema.getCorpus().getId(), schema.getId(), document.getId(), entityAnnotations);
+
+	//		Corpus corpus = process.getCorpus();
+	//		if (corpus == null)
+	//			throw new AnnotationException(ExceptionsCodes.codeNoCorpus, ExceptionsCodes.msgNoCorpus);
+	//		Processes processes = process.getprocessManagerDao.getProcessesDao().findById(processId);
+	//		if (processes == null)
+	//			throw new AnnotationException(ExceptionsCodes.codeNoProcess, ExceptionsCodes.msgNoProcess);
+	//		IPublication publications = corpusManagerDao.getPublicationsDao().findById(documentID);
+	//		if (publications == null)
+	//			throw new AnnotationException(ExceptionsCodes.codeNoPublication, ExceptionsCodes.msgNoPublication);
+	//		for(IEntityAnnotation entityAnnotation: newEntityAnnotations)
+	//		{
+	//			if(entityAnnotation.getClassAnnotation()==null)
+	//			{
+	//				throw new AnnotationException(ExceptionsCodes.codeNoNullClass, ExceptionsCodes.msgNoNullClass);
+	//			}
+	//
+	//			Annotations annot = AnnotationsWrapper.convertToDeamonStructure(entityAnnotation,corpus,processes,publications);
+	//			Classes klass = resourceManagerDao.getClassesDao().findUniqueByAttribute("claName", entityAnnotation.getClassAnnotation().getName());
+	//			if(klass==null)
+	//			{
+	//				resourceManagerDao.getClassesDao().save(annot.getClasses());
+	//			}
+	//			else
+	//			{
+	//				annot.setClasses(klass);
+	//			}
+	//			annotationManagerdao.getAnnotationsDao().save(annot);
+	//			Set<AnnotationProperties> annotationPropertiess = annot.getAnnotationPropertieses();
+	//			for (AnnotationProperties annotationProperty : annotationPropertiess) {
+	//				annotationManagerdao.getAnnotationPropertiesDao().save(annotationProperty);
+	//			}
+	//		}
+	//		
+	//		/*
+	//		 * Document in corpus is processed
+	//		 */
+	//		addDocumentInCorpusAsProcessed(corpusId, processId, documentID, processes);
+	//		
+	//		/*
+	//		 * log
+	//		 */
+	//		AuthUsers user = userLogged.getCurrentUserLogged();
+	//		AuthUserLogs log = new AuthUserLogs(user, new Date(), "create", "annotations", null, "Add Annotations");
+	//		usersManagerDao.getAuthUserLogsDao().save(log);
+	//		
+	//		return true;
+	//	}
+
+
+
 
 
 	protected List<IEntityAnnotation> correctEntitiesAfterNormalization(INERLinnaeusConfiguration linnauesConfiguration,
