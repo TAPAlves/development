@@ -17,6 +17,7 @@ import com.silicolife.textmining.core.datastructures.process.ProcessRunStatusCon
 import com.silicolife.textmining.core.datastructures.process.ner.NERCaseSensativeEnum;
 import com.silicolife.textmining.core.datastructures.process.ner.ResourcesToNerAnote;
 import com.silicolife.textmining.core.interfaces.core.dataaccess.exception.ANoteException;
+import com.silicolife.textmining.core.interfaces.core.document.IAnnotatedDocument;
 import com.silicolife.textmining.core.interfaces.core.document.corpus.ICorpus;
 import com.silicolife.textmining.core.interfaces.core.report.processes.INERProcessReport;
 import com.silicolife.textmining.core.interfaces.process.IR.exception.InternetConnectionProblemException;
@@ -63,6 +64,11 @@ public class LinneausTaggerToMemoryRunTest {
 		LinnaeusTaggerMemoryRun linnaues = new LinnaeusTaggerMemoryRun( );
 		System.out.println("Execute Linnaeus");
 		INERProcessReport report = linnaues.executeCorpusNER(configurations);
+		List<IAnnotatedDocument> anDocs = linnaues.getAllIAnnotatedDocuments();
+		for (IAnnotatedDocument doc:anDocs){
+			System.out.println(doc.getId() + ": " + doc.getAuthors());
+			
+		}
 		return report;
 	}
 
