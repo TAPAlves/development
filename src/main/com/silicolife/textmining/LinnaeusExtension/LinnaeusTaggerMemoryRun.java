@@ -107,7 +107,7 @@ public class LinnaeusTaggerMemoryRun extends ANERLexicalResourcesToMemoryRun{
 				long measuretime3 = GregorianCalendar.getInstance().getTimeInMillis();
 				long toprint2 = measuretime3 - measuretime2;
 				nerlogger.error("M3-M2 :" + toprint2);
-				counter = executeLinneausForDocumentSet(linnauesConfiguration, configuration.getIEProcess(), nerPosProccessAddEntities, startime,linnauesExecutionData, matcher, report, documents, size, counter);
+				counter = executeLinneausForDocumentSet(linnauesConfiguration, configuration.getIEProcess(), nerPosProccessAddEntities, startime,linnauesExecutionData, matcher, report, documents, size, counter,documentSet);
 				measuretime4 = GregorianCalendar.getInstance().getTimeInMillis();
 				long toprint3 = measuretime4 - measuretime3;
 				nerlogger.error("M4-M3 :" + toprint3);
@@ -128,7 +128,7 @@ public class LinnaeusTaggerMemoryRun extends ANERLexicalResourcesToMemoryRun{
 		Map<String, Set<Long>> maplowerCaseToPossibleResourceIDs = elementsToNER.getMaplowerCaseToPossibleResourceIDs();
 		Map<Long, String> mapPossibleResourceIDsToTermString = elementsToNER.getMapPossibleResourceIDsToTermString();
 		Set<String> stopwords = loadStopWords(linnauesConfiguration);
-		nerlogger.info("Finished to get resources elements on DB");
+		nerlogger.info("Finished to get resources to NER");
 		return new LinnauesExecutionData(elementsToNER, rules, elements, resourceMapClass, resourceIDMapResource, maplowerCaseToPossibleResourceIDs, mapPossibleResourceIDsToTermString, stopwords);
 	}
 
@@ -176,7 +176,7 @@ public class LinnaeusTaggerMemoryRun extends ANERLexicalResourcesToMemoryRun{
 
 	private Integer executeLinneausForDocumentSet(INERLinnaeusConfiguration linnauesConfiguration, IIEProcess processToRun,INERPosProccessAddEntities nerPosProccessAddEntities,
 			long startime,LinnauesExecutionData linnaeusExecutionData, Matcher matcher, INERProcessReport report,
-			DocumentIterator documents, Integer publicationsSize, Integer counter) throws ANoteException {
+			DocumentIterator documents, Integer publicationsSize, Integer counter, IDocumentSet documentSet) throws ANoteException {
 
 		ConcurrentMatcher tm = new ConcurrentMatcher(matcher,documents);
 		IteratorBasedMaster<TaggedDocument> master = new IteratorBasedMaster<TaggedDocument>(tm,linnauesConfiguration.getNumberOfThreads());
@@ -197,7 +197,7 @@ public class LinnaeusTaggerMemoryRun extends ANERLexicalResourcesToMemoryRun{
 						positions);
 				applyHandRulesToAnnotationPositions(linnaeusExecutionData, td, positionsRules);
 				saveAnnotatedDocumentWithAnnotationPositions(linnauesConfiguration, processToRun, report, nerPosProccessAddEntities, td, id,
-						positions,positionsRules);
+						positions,positionsRules, documentSet);
 			}
 			counter++;
 			memoryAndProgress(counter,publicationsSize,startime);		
@@ -326,21 +326,22 @@ public class LinnaeusTaggerMemoryRun extends ANERLexicalResourcesToMemoryRun{
 
 	private void saveAnnotatedDocumentWithAnnotationPositions(INERLinnaeusConfiguration linnauesConfiguration,
 			IIEProcess processToRun, INERProcessReport report,INERPosProccessAddEntities nerPosProccessAddEntities,TaggedDocument td, Long id,
-			AnnotationPositions positions, AnnotationPositions positionsRules) throws ANoteException {
+			AnnotationPositions positions, AnnotationPositions positionsRules, IDocumentSet documentSet) throws ANoteException {
 		if(!stop)
 		{
 			report.incrementEntitiesAnnotated(positions.getAnnotations().size());
 			List<IEntityAnnotation> entityAnnotations = positions.getEntitiesFromAnnoattionPositions();
-			List<IPublicationExternalSourceLink> publicationExternalIDSource = new ArrayList<IPublicationExternalSourceLink>();
-			List<IPublicationField> publicationFields = new ArrayList<>();
-			List<IPublicationLabel> publicationLabels = new ArrayList<>();
-			IPublication document =  new PublicationImpl(id,
-					"", "", "", "", "",
-					"", "", "", "", "", "",
-					"", false, "", "",
-					publicationExternalIDSource ,
-					publicationFields ,
-					publicationLabels );
+//			List<IPublicationExternalSourceLink> publicationExternalIDSource = new ArrayList<IPublicationExternalSourceLink>();
+//			List<IPublicationField> publicationFields = new ArrayList<>();
+//			List<IPublicationLabel> publicationLabels = new ArrayList<>();
+			IPublication document = documentSet.getDocument(id);
+//			IPublication document =  new PublicationImpl(id,
+//					"", "", "", "", "",
+//					"", "", "", "", "", "",
+//					"", false, "", "",
+//					publicationExternalIDSource ,
+//					publicationFields ,
+//					publicationLabels );
 
 			entityAnnotations = correctEntitiesAfterNormalization(linnauesConfiguration, td, entityAnnotations);
 			AnnotationPositions annotationsPositionsResult = new AnnotationPositions();
