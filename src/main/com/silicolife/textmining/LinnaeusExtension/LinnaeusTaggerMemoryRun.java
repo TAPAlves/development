@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
 import com.silicolife.textmining.core.datastructures.annotation.AnnotationPosition;
 import com.silicolife.textmining.core.datastructures.annotation.AnnotationPositions;
 import com.silicolife.textmining.core.datastructures.annotation.ner.EntityAnnotationImpl;
-import com.silicolife.textmining.core.datastructures.documents.PublicationImpl;
 import com.silicolife.textmining.core.datastructures.exceptions.process.InvalidConfigurationException;
 import com.silicolife.textmining.core.datastructures.general.ClassPropertiesManagement;
 import com.silicolife.textmining.core.datastructures.process.ProcessOriginImpl;
@@ -35,9 +34,6 @@ import com.silicolife.textmining.core.interfaces.core.dataaccess.exception.ANote
 import com.silicolife.textmining.core.interfaces.core.document.ICorpusPublicationPaginator;
 import com.silicolife.textmining.core.interfaces.core.document.IDocumentSet;
 import com.silicolife.textmining.core.interfaces.core.document.IPublication;
-import com.silicolife.textmining.core.interfaces.core.document.IPublicationExternalSourceLink;
-import com.silicolife.textmining.core.interfaces.core.document.labels.IPublicationLabel;
-import com.silicolife.textmining.core.interfaces.core.document.structure.IPublicationField;
 import com.silicolife.textmining.core.interfaces.core.general.classe.IAnoteClass;
 import com.silicolife.textmining.core.interfaces.core.report.processes.INERProcessReport;
 import com.silicolife.textmining.core.interfaces.process.IProcessOrigin;
@@ -360,6 +356,10 @@ public class LinnaeusTaggerMemoryRun extends ANERLexicalResourcesToMemoryRun{
 			entityAnnotations = annotationsPositionsResult.getEntitiesFromAnnoattionPositions();
 			// Add Document Entity Annotations
 			nerPosProccessAddEntities.addAnnotatedDocumentEntities(processToRun, document, entityAnnotations);
+			
+			System.out.println(entityAnnotations);
+			
+			
 		}
 	}
 
