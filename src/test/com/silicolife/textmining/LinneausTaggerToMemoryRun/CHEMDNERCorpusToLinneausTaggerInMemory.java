@@ -13,7 +13,6 @@ import java.util.Set;
 import org.junit.Test;
 
 import com.silicolife.textmining.core.datastructures.corpora.CorpusCreateConfigurationImpl;
-import com.silicolife.textmining.core.datastructures.init.InitConfiguration;
 import com.silicolife.textmining.core.datastructures.process.IEProcessImpl;
 import com.silicolife.textmining.core.datastructures.process.ProcessOriginImpl;
 import com.silicolife.textmining.core.datastructures.process.ProcessTypeImpl;
@@ -37,8 +36,8 @@ import main.com.silicolife.textmining.Loaders.CorpusImplInMemory;
 
 public class CHEMDNERCorpusToLinneausTaggerInMemory {
 	@Test
-	public void createCorpusFromBioCreativeFiles() throws IOException, ANoteException {
-//		DatabaseConnectionInit.init("localhost","3306","createdatest","root","admin");
+	public ICorpusCreateReport createCorpusFromBioCreativeFiles() throws IOException, ANoteException {
+		//		DatabaseConnectionInit.init("localhost","3306","createdatest","root","admin");
 		String corpusName = "Biocreative V - chemdner patent training";
 		String folder= "src/test/resources/chemdner/train";
 		String documentFile = "chemdner_patents_train_text.txt";
@@ -46,6 +45,7 @@ public class CHEMDNERCorpusToLinneausTaggerInMemory {
 		CHEMDNERLoaderInMemory loader = new CHEMDNERLoaderInMemory();
 		ICorpusCreateReport reportCreateCorpus = createBioCreativeCorpus(corpusName, folder, documentFile, annotationsFile, loader);
 		loadAnnotationsToCorpus(corpusName, loader, reportCreateCorpus);
+		return reportCreateCorpus;
 	}
 
 
@@ -63,15 +63,73 @@ public class CHEMDNERCorpusToLinneausTaggerInMemory {
 			IPublication pub = docit.next();
 			if(loader.getDocumentEntityAnnotations().containsKey(pub.getId())){
 				IAnnotatedDocument annotDoc = loader.getDocumentEntityAnnotations().get(pub.getId());
-				InitConfiguration.getDataAccess().addProcessDocumentEntitiesAnnotations(nerProcess, pub, annotDoc.getEntitiesAnnotations());
-				
-				
-				
+
+
+
+
+				//				InitConfiguration.getDataAccess().addProcessDocumentEntitiesAnnotations(nerProcess, pub, annotDoc.getEntitiesAnnotations());
+
+
+
+
+
+
+				//				Corpus corpus = corpusManagerDao.getCorpusDao().findById(corpusId);
+				//				if (corpus == null)
+				//					throw new AnnotationException(ExceptionsCodes.codeNoCorpus, ExceptionsCodes.msgNoCorpus);
+				//				Processes processes = processManagerDao.getProcessesDao().findById(processId);
+				//				if (processes == null)
+				//					throw new AnnotationException(ExceptionsCodes.codeNoProcess, ExceptionsCodes.msgNoProcess);
+				//				Publications publications = corpusManagerDao.getPublicationsDao().findById(documentID);
+				//				if (publications == null)
+				//					throw new AnnotationException(ExceptionsCodes.codeNoPublication, ExceptionsCodes.msgNoPublication);
+				//				for(IEntityAnnotation entityAnnotation: entityAnnotations)
+				//				{
+				//					if(entityAnnotation.getClassAnnotation()==null)
+				//					{
+				//						throw new AnnotationException(ExceptionsCodes.codeNoNullClass, ExceptionsCodes.msgNoNullClass);
+				//					}
+				//
+				//					Annotations annot = AnnotationsWrapper.convertToDeamonStructure(entityAnnotation,corpus,processes,publications);
+				//					Classes klass = resourceManagerDao.getClassesDao().findUniqueByAttribute("claName", entityAnnotation.getClassAnnotation().getName());
+				//					if(klass==null)
+				//					{
+				//						resourceManagerDao.getClassesDao().save(annot.getClasses());
+				//					}
+				//					else
+				//					{
+				//						annot.setClasses(klass);
+				//					}
+				//					annotationManagerdao.getAnnotationsDao().save(annot);
+				//					Set<AnnotationProperties> annotationPropertiess = annot.getAnnotationPropertieses();
+				//					for (AnnotationProperties annotationProperty : annotationPropertiess) {
+				//						annotationManagerdao.getAnnotationPropertiesDao().save(annotationProperty);
+				//					}
+				//				}
+				//				
+				//				/*
+				//				 * Document in corpus is processed
+				//				 */
+				//				addDocumentInCorpusAsProcessed(corpusId, processId, documentID, processes);
+				//				
+				//				/*
+				//				 * log
+				//				 */
+				//				AuthUsers user = userLogged.getCurrentUserLogged();
+				//				AuthUserLogs log = new AuthUserLogs(user, new Date(), "create", "annotations", null, "Add Annotations");
+				//				usersManagerDao.getAuthUserLogsDao().save(log);
+				//				
+				//				return true;
+
+
+
+
+
 			}
 		}
 	}
 
-	
+
 	private ICorpusCreateReport createBioCreativeCorpus(String corpusName, String folder, String documentFile,
 			String annotationsFile, CHEMDNERLoaderInMemory loader) throws IOException{
 		Properties properties = new Properties();

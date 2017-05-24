@@ -67,7 +67,7 @@ public class LinneausTaggerToMemoryRunTest {
 		List<IAnnotatedDocument> anDocs = linnaues.getAllIAnnotatedDocuments();
 		for (IAnnotatedDocument doc:anDocs){
 			System.out.println(doc.getId() + ": " + doc.getAuthors());
-			
+
 		}
 		return report;
 	}
