@@ -1,8 +1,11 @@
 package main.com.silicolife.textmining.machineLearningMains;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -18,20 +21,28 @@ import com.silicolife.textmining.machinelearning.biotml.core.annotator.BioTMLMal
 import com.silicolife.textmining.machinelearning.biotml.core.corpora.BioTMLCorpusImpl;
 import com.silicolife.textmining.machinelearning.biotml.core.corpora.BioTMLDocumentImpl;
 import com.silicolife.textmining.machinelearning.biotml.core.corpora.BioTMLEntityImpl;
+import com.silicolife.textmining.machinelearning.biotml.core.evaluation.BioTMLEvaluator;
+import com.silicolife.textmining.machinelearning.biotml.core.evaluation.datastrucures.BioTMLEvaluationImpl;
 import com.silicolife.textmining.machinelearning.biotml.core.evaluation.datastrucures.BioTMLModelEvaluationConfiguratorImpl;
 import com.silicolife.textmining.machinelearning.biotml.core.exception.BioTMLException;
 import com.silicolife.textmining.machinelearning.biotml.core.features.BioTMLFeatureGeneratorConfiguratorImpl;
 import com.silicolife.textmining.machinelearning.biotml.core.features.modules.NLP4JFeatures;
 import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLAnnotator;
+import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLConfusionMatrix;
 import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLCorpus;
+import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLCorpusReader;
+import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLCorpusWriter;
 import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLDocument;
 import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLEntity;
+import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLEvaluation;
 import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLModel;
 import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLModelConfigurator;
 import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLModelEvaluationConfigurator;
 import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLModelReader;
 import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLModelWriter;
 import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLMultiEvaluation;
+import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLSentence;
+import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLToken;
 import com.silicolife.textmining.machinelearning.biotml.core.mllibraries.BioTMLAlgorithm;
 import com.silicolife.textmining.machinelearning.biotml.core.models.BioTMLModelConfigurator;
 import com.silicolife.textmining.machinelearning.biotml.core.models.mallet.MalletClassifierModel;
@@ -39,6 +50,7 @@ import com.silicolife.textmining.machinelearning.biotml.core.models.mallet.Malle
 import com.silicolife.textmining.machinelearning.biotml.core.nlp.nlp4j.BioTMLNLP4J;
 import com.silicolife.textmining.machinelearning.biotml.reader.BioTMLCorpusReaderImpl;
 import com.silicolife.textmining.machinelearning.biotml.reader.BioTMLModelReaderImpl;
+import com.silicolife.textmining.machinelearning.biotml.writer.BioTMLCorpusWriterImpl;
 import com.silicolife.textmining.machinelearning.biotml.writer.BioTMLModelWriterImpl;
 
 import test.com.silicolife.textmining.LinneausTaggerToMemoryRun.CHEMDNERCorpusToLinneausTaggerInMemory;
@@ -452,8 +464,123 @@ public class LoadBiocIntoAnoteTest {
 		IBioTMLAnnotator annotator = new BioTMLMalletAnnotatorImpl(corpus);
 		IBioTMLCorpus annotatedCorpus = annotator.generateAnnotatedBioTMCorpus(svm,8);
 		List<IBioTMLEntity> annotationsTest = annotatedCorpus.getEntities();
+		createAnotatedModelFile(annotatedCorpus, "testeModelos/Corpus/CorpusAnotado.gz");
+
+
+		evaluateAnnotation(annotationsTest,annotationsTest);
+
+
 		System.out.println(annotationsTest.get(0).toString());
 		System.out.println(annotationsTest);
 
 	}
+
+
+	private void createAnotatedModelFile(IBioTMLCorpus annotatedCorpus, String modelPath) throws BioTMLException{
+		IBioTMLCorpusWriter writer = new BioTMLCorpusWriterImpl(annotatedCorpus);
+		if (!new File(new File(modelPath).getParent()).exists()){
+			new File(new File(modelPath).getParent()).mkdir();
+		}
+		writer.writeGZBioTMLCorpusFile(modelPath);
+	}
+
+
+	private void createA1FileFromAnotatedCorpus(String corpusPath) throws IOException{ //ACTUALLY WITH A JNLPBAWRITER CODE - ADPATE WITH NEJICODE
+
+		String modeltoread = "testeModelos/Corpus/CorpusAnotado.gz";
+		String A1towrite = "testeModelos/A1/result.A1";
+		File A1File = new File(A1towrite);
+		IBioTMLCorpusReader reader = new BioTMLCorpusReaderImpl();
+
+
+		BufferedWriter writer = new BufferedWriter(new FileWriter(A1File, false));
+		IBioTMLCorpus corpus = null;
+		try {
+			corpus = reader.readBioTMLCorpusFromFile(modeltoread);
+		} catch (BioTMLException e) {
+			e.printStackTrace();
+		}
+		System.out.println(corpus.getEntities());
+		List<IBioTMLDocument> docs = corpus.getDocuments();
+		Iterator<IBioTMLDocument> itDocs = docs.iterator();
+		String toWrite = new String();
+
+		while(itDocs.hasNext()){
+			IBioTMLDocument document = itDocs.next();
+			toWrite = "###MEDLINE:" + document.getID();
+			writer.write(toWrite);
+			writer.newLine();
+			writer.newLine();
+			for(IBioTMLSentence sentence : document.getSentences()){
+				for(IBioTMLToken token : sentence.getTokens()){
+					toWrite = token.getToken();
+					try {
+						IBioTMLEntity entity = corpus.getEntityFromDocAndOffsets(document.getID(), token.getStartOffset(), token.getEndOffset());
+						if(entity.getStartOffset() == token.getStartOffset()){
+							toWrite = toWrite + "\tB-"+entity.getAnnotationType();
+						}else{
+							toWrite = toWrite + "\tI-"+entity.getAnnotationType();
+						}
+					} catch (BioTMLException e) {
+						toWrite = toWrite + "\tO";
+					}
+					writer.write(toWrite);
+					writer.newLine();
+				}
+				writer.newLine();
+			}
+		}
+		writer.close();
+	}
+
+
+
+
+
+	private void evaluateAnnotation(List<IBioTMLEntity> goldAnnotations, List<IBioTMLEntity> toCompareAnnotations){
+		BioTMLEvaluator<IBioTMLEntity> annotationsEvaluator = new BioTMLEvaluator<>();
+		IBioTMLConfusionMatrix<IBioTMLEntity> confusionMatrix = annotationsEvaluator.generateConfusionMatrix(goldAnnotations, toCompareAnnotations);
+		IBioTMLEvaluation eval = new BioTMLEvaluationImpl(confusionMatrix);
+		List<String> labels = eval.getConfusionMatrix().getLabels();
+		for (String label:labels){
+			System.out.println("Precision: " + eval.getPrecisionOfLabel(label));
+			System.out.println("Recall: " + eval.getRecallOfLabel(label));
+			System.out.println("F1: " + eval.getFscoreOfLabel(label));
+
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
+
