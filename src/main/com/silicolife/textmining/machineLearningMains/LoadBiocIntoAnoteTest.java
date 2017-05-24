@@ -469,14 +469,18 @@ public class LoadBiocIntoAnoteTest {
 		IBioTMLAnnotator annotator = new BioTMLMalletAnnotatorImpl(corpus);
 		IBioTMLCorpus annotatedCorpus = annotator.generateAnnotatedBioTMCorpus(svm,8);
 		List<IBioTMLEntity> annotationsTest = annotatedCorpus.getEntities();
-		createAnotatedModelFile(annotatedCorpus, "testeModelos/Corpus/CorpusAnotado.gz");
+		//		createAnotatedModelFile(annotatedCorpus, "testeModelos/Corpus/CorpusAnotado.gz");
 
 
-		evaluateAnnotation(annotationsTest,annotationsTest);
+		List<IBioTMLEntity> goldAnnotations = getGoldAnnotations("src/test/resources/chemdner/train/evaluate200.tsv");
 
 
-		System.out.println(annotationsTest.get(0).toString());
-		System.out.println(annotationsTest);
+
+		evaluateAnnotation(goldAnnotations,annotationsTest);
+
+
+		//		System.out.println(annotationsTest.get(0).toString());
+		//		System.out.println(annotationsTest);
 
 	}
 
@@ -551,6 +555,7 @@ public class LoadBiocIntoAnoteTest {
 		IBioTMLEvaluation eval = new BioTMLEvaluationImpl(confusionMatrix);
 		List<String> labels = eval.getConfusionMatrix().getLabels();
 		for (String label:labels){
+			System.out.println(label);
 			System.out.println("Precision: " + eval.getPrecisionOfLabel(label));
 			System.out.println("Recall: " + eval.getRecallOfLabel(label));
 			System.out.println("F1: " + eval.getFscoreOfLabel(label));
@@ -562,7 +567,7 @@ public class LoadBiocIntoAnoteTest {
 
 
 	private List<IBioTMLEntity> getGoldAnnotations (String goldTSVAnnotationsFile) throws BioTMLException{
-		File annotationFile = new File (goldTSVAnnotationsFile);
+		File annotationFile = new File(goldTSVAnnotationsFile);
 		Map<String, Long> mapDocNameToDocID = new HashMap<>();	
 		try {
 			List<IBioTMLEntity> annotations = new ArrayList<IBioTMLEntity>();
@@ -573,7 +578,7 @@ public class LoadBiocIntoAnoteTest {
 				if(!mapDocNameToDocID.containsKey(annotationLine[0])){
 					mapDocNameToDocID.put(annotationLine[0], getLastDocID(mapDocNameToDocID)+1);
 				}
-				annotations.add(new BioTMLEntityImpl(mapDocNameToDocID.get(annotationLine[0]), annotationLine[1], Long.valueOf(annotationLine[2]), Long.valueOf(annotationLine[3])));
+				annotations.add(new BioTMLEntityImpl(mapDocNameToDocID.get(annotationLine[0]), annotationLine[5], Long.valueOf(annotationLine[2]), Long.valueOf(annotationLine[3])));
 			}
 			reader.close();
 			return annotations;
@@ -583,10 +588,23 @@ public class LoadBiocIntoAnoteTest {
 	}
 
 	private long getLastDocID(Map<String, Long> mapDocNameToDocID){
-		Integer[] docIDs = mapDocNameToDocID.values().toArray(new Integer[0]);
-		if(docIDs.length>0){
-			Arrays.sort(docIDs);
-			return docIDs[docIDs.length - 1];
+		List<Integer> docIDs=new ArrayList<>();
+		if (mapDocNameToDocID.keySet().size()>0){
+//			for (String id:mapDocNameToDocID.keySet()){
+//				if (docIDs.length!=0){
+//					docIDs[docIDs.length-1]=new Integer (mapDocNameToDocID.get(id).intValue());
+//				}else{
+//					docIDs[0]=new Integer (mapDocNameToDocID.get(id).intValue());
+//				}
+//			}
+			Iterator<Long> iterator = mapDocNameToDocID.values().iterator();
+			while (iterator.hasNext()){
+				docIDs.add(iterator.next().intValue());
+			}
+//			Integer[] newDocIds= new Integer [mapDocNameToDocID.size()];
+			Integer[] newDocIDs = docIDs.toArray(new Integer[0]);
+			Arrays.sort(newDocIDs);
+			return newDocIDs[newDocIDs.length - 1];
 		}else{
 			return -1;
 		}
