@@ -1,12 +1,17 @@
 package main.com.silicolife.textmining.machineLearningMains;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -449,7 +454,7 @@ public class LoadBiocIntoAnoteTest {
 
 	@Test
 
-	public  void test2() throws BioTMLException{
+	public void test2() throws BioTMLException{
 		String corpusDir="src/test/resources/chemdner/trainFile";
 		String modelDir="testeModelos/modeloML/modeloCriado.gz";
 
@@ -483,6 +488,9 @@ public class LoadBiocIntoAnoteTest {
 		}
 		writer.writeGZBioTMLCorpusFile(modelPath);
 	}
+
+
+
 
 
 	private void createA1FileFromAnotatedCorpus(String corpusPath) throws IOException{ //ACTUALLY WITH A JNLPBAWRITER CODE - ADPATE WITH NEJICODE
@@ -552,6 +560,38 @@ public class LoadBiocIntoAnoteTest {
 
 
 
+
+	private List<IBioTMLEntity> getGoldAnnotations (String goldTSVAnnotationsFile) throws BioTMLException{
+		File annotationFile = new File (goldTSVAnnotationsFile);
+		Map<String, Long> mapDocNameToDocID = new HashMap<>();	
+		try {
+			List<IBioTMLEntity> annotations = new ArrayList<IBioTMLEntity>();
+			BufferedReader reader = new BufferedReader(new FileReader(annotationFile));
+			String line;
+			while((line = reader.readLine())!=null){
+				String[] annotationLine = line.split("\t");
+				if(!mapDocNameToDocID.containsKey(annotationLine[0])){
+					mapDocNameToDocID.put(annotationLine[0], getLastDocID(mapDocNameToDocID)+1);
+				}
+				annotations.add(new BioTMLEntityImpl(mapDocNameToDocID.get(annotationLine[0]), annotationLine[1], Long.valueOf(annotationLine[2]), Long.valueOf(annotationLine[3])));
+			}
+			reader.close();
+			return annotations;
+		} catch (IOException exc) {
+			throw new BioTMLException(exc);
+		} 
+	}
+
+	private long getLastDocID(Map<String, Long> mapDocNameToDocID){
+		Integer[] docIDs = mapDocNameToDocID.values().toArray(new Integer[0]);
+		if(docIDs.length>0){
+			Arrays.sort(docIDs);
+			return docIDs[docIDs.length - 1];
+		}else{
+			return -1;
+		}
+
+	}
 
 
 
