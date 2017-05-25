@@ -613,30 +613,27 @@ public class LoadBiocIntoAnoteTest {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	private List<IBioTMLEntity> getGoldAnnotationsFromEvalFile (String goldTSVAnnotationsEvalFile) throws BioTMLException{
+		File annotationFile = new File(goldTSVAnnotationsEvalFile);
+		Map<String, Long> mapDocNameToDocID = new HashMap<>();	
+		try {
+			List<IBioTMLEntity> annotations = new ArrayList<IBioTMLEntity>();
+			BufferedReader reader = new BufferedReader(new FileReader(annotationFile));
+			String line;
+			while((line = reader.readLine())!=null){
+				String[] annotationLine = line.split("\t");
+				if(!mapDocNameToDocID.containsKey(annotationLine[0])){
+					mapDocNameToDocID.put(annotationLine[0], getLastDocID(mapDocNameToDocID)+1);
+				}
+				String[] classificators = annotationLine[1].split(":");
+				annotations.add(new BioTMLEntityImpl(mapDocNameToDocID.get(annotationLine[0]), classificators[0], Long.valueOf(classificators[1]), Long.valueOf(classificators[2])));
+			}
+			reader.close();
+			return annotations;
+		} catch (IOException exc) {
+			throw new BioTMLException(exc);
+		} 
+	}
 
 }
 
