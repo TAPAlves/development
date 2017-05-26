@@ -89,8 +89,6 @@ public class ComparationsBetweenOURandNEJI {
 		proc.waitFor();   
 
 	}
-	//	 ./workspace/nejiCode/nejiTrain.sh -a ./workspace/development/src/test/resources/chemdner/trainFile/annotations.tsv -c ./workspace/development/src/test/resources/chemdner/trainFile/text.txt -f ./workspace/development/tests/nejiModel/trainFiles/configurationsTest.config -if BC2 -m FAMILY -o ./workspace/development/tests/nejiModel -t 8
-
 
 //	@Test
 	public void evaluateUsingAGZModel() throws BioTMLException{
@@ -109,19 +107,12 @@ public class ComparationsBetweenOURandNEJI {
 		IBioTMLAnnotator annotator = new BioTMLMalletAnnotatorImpl(corpus);
 		IBioTMLCorpus annotatedCorpus = annotator.generateAnnotatedBioTMCorpus(svm,8);
 		List<IBioTMLEntity> annotationsTest = annotatedCorpus.getEntities();
-		//		createAnotatedModelFile(annotatedCorpus, "testeModelos/Corpus/CorpusAnotado.gz");
 
 
 		List<IBioTMLEntity> goldAnnotations = classTest.getGoldAnnotations("src/test/resources/chemdner/train/evaluate200.tsv");
 
-
-
+		
 		classTest.evaluateAnnotation(goldAnnotations,annotationsTest);
-
-
-		//		System.out.println(annotationsTest.get(0).toString());
-		//		System.out.println(annotationsTest);
-
 	}
 
 	@Test

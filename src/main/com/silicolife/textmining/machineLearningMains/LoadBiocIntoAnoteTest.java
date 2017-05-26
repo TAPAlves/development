@@ -2,10 +2,14 @@ package main.com.silicolife.textmining.machineLearningMains;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -59,6 +63,20 @@ import com.silicolife.textmining.machinelearning.biotml.reader.BioTMLModelReader
 import com.silicolife.textmining.machinelearning.biotml.writer.BioTMLCorpusWriterImpl;
 import com.silicolife.textmining.machinelearning.biotml.writer.BioTMLModelWriterImpl;
 
+import pt.ua.tm.neji.core.parser.Parser;
+import pt.ua.tm.neji.core.parser.ParserLanguage;
+import pt.ua.tm.neji.core.parser.ParserLevel;
+import pt.ua.tm.neji.core.pipeline.Pipeline;
+import pt.ua.tm.neji.exception.NejiException;
+import pt.ua.tm.neji.parser.GDepParser;
+import pt.ua.tm.neji.sentencesplitter.LingpipeSentenceSplitter;
+import pt.ua.tm.neji.train.config.ModelConfig;
+import pt.ua.tm.neji.train.model.CRFModel;
+import pt.ua.tm.neji.train.nlp.TrainNLP;
+import pt.ua.tm.neji.train.pipeline.TrainPipelinePhase1;
+import pt.ua.tm.neji.train.pipeline.TrainPipelinePhase2;
+import pt.ua.tm.neji.train.reader.BC2Reader;
+import pt.ua.tm.neji.train.trainer.DefaultTrainer;
 import test.com.silicolife.textmining.LinneausTaggerToMemoryRun.CHEMDNERCorpusToLinneausTaggerInMemory;
 
 public class LoadBiocIntoAnoteTest {
@@ -451,7 +469,7 @@ public class LoadBiocIntoAnoteTest {
 	}
 
 
-//	@Test
+	//	@Test
 
 	public void test2() throws BioTMLException{
 		String corpusDir="src/test/resources/chemdner/trainFile";
@@ -493,12 +511,12 @@ public class LoadBiocIntoAnoteTest {
 	}
 
 
-@Test
-public void test3() throws IOException, BioTMLException{
-//	convertAnnotationsFileFromBiocreativetoBC2("/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/annotations.tsv", null);
-	getAnnotationsFromBC2File("/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/annotations_bc2");
-}
-	
+	//	@Test
+	public void test3() throws IOException, BioTMLException{
+		//	convertAnnotationsFileFromBiocreativetoBC2("/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/annotations.tsv", null);
+		getAnnotationsFromBC2File("/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/annotations_bc2");
+	}
+
 
 
 	private void createA1FileFromAnotatedCorpus(String corpusPath) throws IOException{ //ACTUALLY WITH A JNLPBAWRITER CODE - ADPATE WITH NEJICODE
@@ -633,9 +651,9 @@ public void test3() throws IOException, BioTMLException{
 			throw new BioTMLException(exc);
 		} 
 	}
-	
-	
-	
+
+
+
 	public List<IBioTMLEntity> getAnnotationsFromBC2File (String annotationsFile) throws BioTMLException{
 		File annotationFile = new File(annotationsFile);
 		Map<String, Long> mapDocNameToDocID = new HashMap<>();	
@@ -657,7 +675,7 @@ public void test3() throws IOException, BioTMLException{
 			throw new BioTMLException(exc);
 		} 
 	}
-	
+
 
 
 	public void convertAnnotationsFileFromBiocreativetoBC2(String biocreativeFilePath,String bc2FilePath) throws IOException{
@@ -681,6 +699,60 @@ public void test3() throws IOException, BioTMLException{
 	}
 
 
+	//	@Test
+	public void trainNejiModel() throws NejiException, IOException{
+		// Set files
+		String sentencesFile = "/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/text.txt";
+		String annotationsFile = "/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/annotations_bc2";
+		String modelConfigurationFile = "/home/tiagoalves/workspace/development/tests/nejiModel/trainFiles/configurationsTest.config";
+		String modelFile = "/home/tiagoalves/workspace/development/tests/nejiModel/FAMILY.gz";
+
+		// Create parser
+		Parser parser = new GDepParser(ParserLanguage.ENGLISH, ParserLevel.CHUNKING, new LingpipeSentenceSplitter(), false).launch();
+
+		// Set sentences and annotations streams
+		InputStream sentencesStream = new FileInputStream(sentencesFile);
+		InputStream annotationsStream = new FileInputStream(annotationsFile);
+
+		// Run pipeline to get corpus from sentences and annotations
+		Pipeline pipelinePhase1 = new TrainPipelinePhase1()
+				.add(new BC2Reader(parser, null, annotationsStream))
+				.add(new TrainNLP(parser));
+		pipelinePhase1.run(sentencesStream);
+
+		// Close sentences and annotations streams
+		sentencesStream.close();
+		annotationsStream.close();
+
+		// Get corpus
+		pt.ua.tm.neji.core.corpus.Corpus corpus = pipelinePhase1.getCorpus();
+
+		// Get model configuration
+		InputStream inputStream = new ByteArrayInputStream(" ".getBytes("UTF-8"));
+		ModelConfig modelConfig = new ModelConfig(modelConfigurationFile);
+
+		// Run pipeline to train model on corpus
+		Pipeline pipelinePhase2 = new TrainPipelinePhase2()
+				.add(new DefaultTrainer(modelConfig));
+		pipelinePhase2.setCorpus(corpus);
+		pipelinePhase2.run(inputStream);
+
+		// Close input stream
+		inputStream.close();
+
+		// Get trained model and write to file
+		CRFModel model = (CRFModel) pipelinePhase2.getModuleData("TRAINED_MODEL").get(0);
+		model.write(new FileOutputStream(modelFile));
+
+
+	}
+
+
+	@Test
+	public void annotateUsingNejiModel(){
+		
+
+	}
 
 
 }
