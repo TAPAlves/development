@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,6 +21,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
 import com.silicolife.textmining.core.datastructures.utils.FileHandling;
@@ -63,12 +65,22 @@ import com.silicolife.textmining.machinelearning.biotml.reader.BioTMLModelReader
 import com.silicolife.textmining.machinelearning.biotml.writer.BioTMLCorpusWriterImpl;
 import com.silicolife.textmining.machinelearning.biotml.writer.BioTMLModelWriterImpl;
 
+import pt.ua.tm.neji.core.module.Reader;
+import pt.ua.tm.neji.core.module.Writer;
 import pt.ua.tm.neji.core.parser.Parser;
 import pt.ua.tm.neji.core.parser.ParserLanguage;
 import pt.ua.tm.neji.core.parser.ParserLevel;
 import pt.ua.tm.neji.core.pipeline.Pipeline;
+import pt.ua.tm.neji.dictionary.Dictionary;
+import pt.ua.tm.neji.dictionary.DictionaryHybrid;
+import pt.ua.tm.neji.dictionary.VariantMatcherLoader;
 import pt.ua.tm.neji.exception.NejiException;
+import pt.ua.tm.neji.ml.MLHybrid;
+import pt.ua.tm.neji.ml.MLModel;
+import pt.ua.tm.neji.nlp.NLP;
 import pt.ua.tm.neji.parser.GDepParser;
+import pt.ua.tm.neji.pipeline.DefaultPipeline;
+import pt.ua.tm.neji.reader.RawReader;
 import pt.ua.tm.neji.sentencesplitter.LingpipeSentenceSplitter;
 import pt.ua.tm.neji.train.config.ModelConfig;
 import pt.ua.tm.neji.train.model.CRFModel;
@@ -77,6 +89,7 @@ import pt.ua.tm.neji.train.pipeline.TrainPipelinePhase1;
 import pt.ua.tm.neji.train.pipeline.TrainPipelinePhase2;
 import pt.ua.tm.neji.train.reader.BC2Reader;
 import pt.ua.tm.neji.train.trainer.DefaultTrainer;
+import pt.ua.tm.neji.writer.A1Writer;
 import test.com.silicolife.textmining.LinneausTaggerToMemoryRun.CHEMDNERCorpusToLinneausTaggerInMemory;
 
 public class LoadBiocIntoAnoteTest {
@@ -749,7 +762,66 @@ public class LoadBiocIntoAnoteTest {
 
 
 	@Test
-	public void annotateUsingNejiModel(){
+	public void annotateUsingNejiModel() throws NejiException, IOException{
+		// Set files
+		String documentFile = "example/annotate/in/22528326.txt";
+		String outputFile = "example/annotate/out/22528326.a1";
+		     
+		// Set resources
+		String dictionary1File = "example/dictionaries/Body_Part_Organ_or_Organ_Component_T023_ANAT.tsv";
+		String dictionary2File = "example/dictionaries/Disease_or_Syndrome_T047_DISO.tsv";
+		String modelFile = "example/models/prge/prge.properties";
+
+		// Create reader
+		Reader reader = new RawReader();
+		      
+		// Create parser
+		Parser parser = new GDepParser(ParserLanguage.ENGLISH, ParserLevel.CHUNKING, 
+		new LingpipeSentenceSplitter(), false).launch();
+		       
+		// Create NLP        
+		NLP nlp = new NLP(parser);
+		        
+		// Create dictionary matchers
+		List<String> dictionary1Lines = FileUtils.readLines(new File(dictionary1File));
+		Dictionary dictionary1 = VariantMatcherLoader.loadDictionaryFromLines(dictionary1Lines);
+		List<String> dictionary2Lines = FileUtils.readLines(new File(dictionary2File));
+		Dictionary dictionary2 = VariantMatcherLoader.loadDictionaryFromLines(dictionary2Lines);
+		        
+		DictionaryHybrid dictionaryMatcher1 = new DictionaryHybrid(dictionary1);
+		DictionaryHybrid dictionaryMatcher2 = new DictionaryHybrid(dictionary2);
+		        
+		// Create machine-learning model matcher
+		MLModel model = new MLModel("prge", new File(modelFile));
+		model.initialize();
+		MLHybrid mlModelMatcher = new MLHybrid(model.getCrf(), "prge");
+		        
+		 // Create Writer
+		 Writer writer = new A1Writer();
+		        
+		 // Set document stream
+		 InputStream documentStream = new FileInputStream(documentFile);
+
+		 // Run pipeline to get annotations
+		 Pipeline pipeline = new DefaultPipeline()
+		        .add(reader)
+		        .add(nlp)
+		        .add(dictionaryMatcher1)
+		        .add(dictionaryMatcher2)
+		        .add(mlModelMatcher)
+		        .add(writer);
+
+		OutputStream outputStream = pipeline.run(documentStream).get(0);
+
+		// Write annotations to output file
+		FileUtils.writeStringToFile(new File(outputFile), outputStream.toString());
+		        
+		// Close streams
+		documentStream.close();
+		outputStream.close();
+		        
+		// Close parser
+		parser.close();
 		
 
 	}
