@@ -494,8 +494,9 @@ public class LoadBiocIntoAnoteTest {
 
 
 @Test
-public void test3() throws IOException{
-	convertAnnotationsFileFromBiocreativetoBC2("/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/annotations.tsv", null);
+public void test3() throws IOException, BioTMLException{
+//	convertAnnotationsFileFromBiocreativetoBC2("/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/annotations.tsv", null);
+	getAnnotationsFromBC2File("/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/annotations_bc2");
 }
 	
 
@@ -552,7 +553,7 @@ public void test3() throws IOException{
 
 
 
-	private void evaluateAnnotation(List<IBioTMLEntity> goldAnnotations, List<IBioTMLEntity> toCompareAnnotations){
+	public void evaluateAnnotation(List<IBioTMLEntity> goldAnnotations, List<IBioTMLEntity> toCompareAnnotations){
 		BioTMLEvaluator<IBioTMLEntity> annotationsEvaluator = new BioTMLEvaluator<>();
 		IBioTMLConfusionMatrix<IBioTMLEntity> confusionMatrix = annotationsEvaluator.generateConfusionMatrix(goldAnnotations, toCompareAnnotations);
 		IBioTMLEvaluation eval = new BioTMLEvaluationImpl(confusionMatrix);
@@ -566,7 +567,7 @@ public void test3() throws IOException{
 		}
 	}
 
-	private List<IBioTMLEntity> getGoldAnnotations (String goldTSVAnnotationsFile) throws BioTMLException{
+	public List<IBioTMLEntity> getGoldAnnotations (String goldTSVAnnotationsFile) throws BioTMLException{
 		File annotationFile = new File(goldTSVAnnotationsFile);
 		Map<String, Long> mapDocNameToDocID = new HashMap<>();	
 		try {
@@ -632,6 +633,31 @@ public void test3() throws IOException{
 			throw new BioTMLException(exc);
 		} 
 	}
+	
+	
+	
+	public List<IBioTMLEntity> getAnnotationsFromBC2File (String annotationsFile) throws BioTMLException{
+		File annotationFile = new File(annotationsFile);
+		Map<String, Long> mapDocNameToDocID = new HashMap<>();	
+		try {
+			List<IBioTMLEntity> annotations = new ArrayList<IBioTMLEntity>();
+			BufferedReader reader = new BufferedReader(new FileReader(annotationFile));
+			String line;
+			while((line = reader.readLine())!=null){
+				String[] annotationLine = line.split("\\|");
+				if(!mapDocNameToDocID.containsKey(annotationLine[0])){
+					mapDocNameToDocID.put(annotationLine[0], getLastDocID(mapDocNameToDocID)+1);
+				}
+				String[] classificators = annotationLine[1].split(" ");
+				annotations.add(new BioTMLEntityImpl(mapDocNameToDocID.get(annotationLine[0]), annotationLine[2], Long.valueOf(classificators[0]), Long.valueOf(classificators[1])));
+			}
+			reader.close();
+			return annotations;
+		} catch (IOException exc) {
+			throw new BioTMLException(exc);
+		} 
+	}
+	
 
 
 	public void convertAnnotationsFileFromBiocreativetoBC2(String biocreativeFilePath,String bc2FilePath) throws IOException{
