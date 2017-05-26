@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -66,8 +67,6 @@ public class LoadBiocIntoAnoteTest {
 	public void test1() throws BioTMLException{
 		createAModel();
 	}
-
-
 
 
 	public static ICorpusCreateReport loadCorpusFromBiocreative() throws IOException, ANoteException{
@@ -293,7 +292,7 @@ public class LoadBiocIntoAnoteTest {
 		return annotations;
 	}
 
-	private static BioTMLFeatureGeneratorConfiguratorImpl loadfeatures(){
+	public static BioTMLFeatureGeneratorConfiguratorImpl loadfeatures(){
 		Set<String> features = new TreeSet<String>();
 		features.add("WORD");
 		features.add("NUMCAPS");
@@ -342,7 +341,7 @@ public class LoadBiocIntoAnoteTest {
 		return new BioTMLFeatureGeneratorConfiguratorImpl(features);
 	}
 
-	private static IBioTMLModelConfigurator defaultConfiguration(String modelClassType, String modelIEType){
+	public static IBioTMLModelConfigurator defaultConfiguration(String modelClassType, String modelIEType){
 		BioTMLModelConfigurator configuration = new BioTMLModelConfigurator(modelClassType, modelIEType);
 		configuration.setAlgorithmType(BioTMLAlgorithm.malletsvm);
 		configuration.setNumThreads(5);
@@ -452,7 +451,7 @@ public class LoadBiocIntoAnoteTest {
 	}
 
 
-	@Test
+//	@Test
 
 	public void test2() throws BioTMLException{
 		String corpusDir="src/test/resources/chemdner/trainFile";
@@ -494,7 +493,11 @@ public class LoadBiocIntoAnoteTest {
 	}
 
 
-
+@Test
+public void test3() throws IOException{
+	convertAnnotationsFileFromBiocreativetoBC2("/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/annotations.tsv", null);
+}
+	
 
 
 	private void createA1FileFromAnotatedCorpus(String corpusPath) throws IOException{ //ACTUALLY WITH A JNLPBAWRITER CODE - ADPATE WITH NEJICODE
@@ -563,9 +566,6 @@ public class LoadBiocIntoAnoteTest {
 		}
 	}
 
-
-
-
 	private List<IBioTMLEntity> getGoldAnnotations (String goldTSVAnnotationsFile) throws BioTMLException{
 		File annotationFile = new File(goldTSVAnnotationsFile);
 		Map<String, Long> mapDocNameToDocID = new HashMap<>();	
@@ -590,18 +590,18 @@ public class LoadBiocIntoAnoteTest {
 	private long getLastDocID(Map<String, Long> mapDocNameToDocID){
 		List<Integer> docIDs=new ArrayList<>();
 		if (mapDocNameToDocID.keySet().size()>0){
-//			for (String id:mapDocNameToDocID.keySet()){
-//				if (docIDs.length!=0){
-//					docIDs[docIDs.length-1]=new Integer (mapDocNameToDocID.get(id).intValue());
-//				}else{
-//					docIDs[0]=new Integer (mapDocNameToDocID.get(id).intValue());
-//				}
-//			}
+			//			for (String id:mapDocNameToDocID.keySet()){
+			//				if (docIDs.length!=0){
+			//					docIDs[docIDs.length-1]=new Integer (mapDocNameToDocID.get(id).intValue());
+			//				}else{
+			//					docIDs[0]=new Integer (mapDocNameToDocID.get(id).intValue());
+			//				}
+			//			}
 			Iterator<Long> iterator = mapDocNameToDocID.values().iterator();
 			while (iterator.hasNext()){
 				docIDs.add(iterator.next().intValue());
 			}
-//			Integer[] newDocIds= new Integer [mapDocNameToDocID.size()];
+			//			Integer[] newDocIds= new Integer [mapDocNameToDocID.size()];
 			Integer[] newDocIDs = docIDs.toArray(new Integer[0]);
 			Arrays.sort(newDocIDs);
 			return newDocIDs[newDocIDs.length - 1];
@@ -610,8 +610,6 @@ public class LoadBiocIntoAnoteTest {
 		}
 
 	}
-
-
 
 	private List<IBioTMLEntity> getGoldAnnotationsFromEvalFile (String goldTSVAnnotationsEvalFile) throws BioTMLException{
 		File annotationFile = new File(goldTSVAnnotationsEvalFile);
@@ -634,6 +632,30 @@ public class LoadBiocIntoAnoteTest {
 			throw new BioTMLException(exc);
 		} 
 	}
+
+
+	public void convertAnnotationsFileFromBiocreativetoBC2(String biocreativeFilePath,String bc2FilePath) throws IOException{
+		BufferedReader reader = new BufferedReader(new FileReader(biocreativeFilePath));
+		String line;
+		PrintWriter writer;
+		if (bc2FilePath==null || bc2FilePath.isEmpty()){
+			String[] biocreativeFileName = biocreativeFilePath.split("/");
+			writer = new PrintWriter(biocreativeFilePath.replace(biocreativeFileName[biocreativeFileName.length-1], biocreativeFileName[biocreativeFileName.length-1].split("\\.")[0]+"_bc2"), "UTF-8");
+		}
+		else{
+			writer = new PrintWriter(bc2FilePath, "UTF-8");
+		}
+		while((line = reader.readLine())!=null){
+			String[] annotationLine = line.split("\t");
+			writer.println(annotationLine[0]+"|"+annotationLine[2] + " " + annotationLine[3] + "|" + annotationLine[5]);
+		}
+		reader.close();
+		writer.close();
+
+	}
+
+
+
 
 }
 
