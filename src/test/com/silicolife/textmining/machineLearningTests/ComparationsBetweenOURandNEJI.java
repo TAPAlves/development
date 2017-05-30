@@ -119,7 +119,7 @@ public class ComparationsBetweenOURandNEJI {
 	public void evaluateUsingNejiOutput() throws BioTMLException{
 		LoadBiocIntoAnoteTest classTest=new LoadBiocIntoAnoteTest();
 		List<IBioTMLEntity> goldAnnotations = classTest.getGoldAnnotations("src/test/resources/chemdner/trainFile/train_1000.tsv");
-		List<IBioTMLEntity> annotations = classTest.getAnnotationsFromBC2File("/home/tiagoalves/workspace/nejiCode/tests/nejiOutput/groupBC2FileOf1000patentsBC2.bc2");
+		List<IBioTMLEntity> annotations = classTest.getAnnotationsFromGroupedBC2File("/home/tiagoalves/workspace/nejiCode/tests/nejiOutput/groupBC2FileOf1000patentsBC2.bc2");
 		classTest.evaluateAnnotation(goldAnnotations,annotations);
 	}
 

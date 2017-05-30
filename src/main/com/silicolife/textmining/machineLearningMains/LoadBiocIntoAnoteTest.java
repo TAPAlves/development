@@ -666,7 +666,7 @@ public class LoadBiocIntoAnoteTest {
 
 
 
-	public List<IBioTMLEntity> getAnnotationsFromBC2File (String annotationsFile) throws BioTMLException{
+	public List<IBioTMLEntity> getAnnotationsFromGroupedBC2File (String annotationsFile) throws BioTMLException{
 		File annotationFile = new File(annotationsFile);
 		Map<String, Long> mapDocNameToDocID = new HashMap<>();	
 		try {
@@ -687,6 +687,43 @@ public class LoadBiocIntoAnoteTest {
 			throw new BioTMLException(exc);
 		} 
 	}
+
+
+	public List<IBioTMLEntity> getAnnotationsFromBC2AnnotationsFolder(String annotationsFolder, String groupType) throws BioTMLException{
+		List<IBioTMLEntity> entities= new ArrayList<>();
+		File annotationsFolderFile = new File(annotationsFolder);
+		File[] files = annotationsFolderFile.listFiles();
+		for (int i = 0; i < files.length; i++) {
+			entities.addAll(getAnnotationsFromBC2File(files[i].getPath(), groupType));
+
+
+		}
+		return entities;
+	}
+
+	public List<IBioTMLEntity> getAnnotationsFromBC2File (String annotationsFile, String groupType) throws BioTMLException{
+		File annotationFile = new File(annotationsFile);
+		Map<String, Long> mapDocNameToDocID = new HashMap<>();	
+		try {
+			List<IBioTMLEntity> annotations = new ArrayList<IBioTMLEntity>();
+			BufferedReader reader = new BufferedReader(new FileReader(annotationFile));
+			String line;
+			while((line = reader.readLine())!=null){
+				String[] annotationLine = line.split("\\|");
+				if(!mapDocNameToDocID.containsKey(annotationLine[0])){
+					mapDocNameToDocID.put(annotationLine[0], getLastDocID(mapDocNameToDocID)+1);
+				}
+				String[] classificators = annotationLine[1].split(" ");
+				annotations.add(new BioTMLEntityImpl(mapDocNameToDocID.get(annotationLine[0]), groupType, Long.valueOf(classificators[0]), Long.valueOf(classificators[1])));
+			}
+			reader.close();
+			return annotations;
+		} catch (IOException exc) {
+			throw new BioTMLException(exc);
+		} 
+	}
+
+
 
 
 
@@ -927,12 +964,12 @@ public class LoadBiocIntoAnoteTest {
 	@Test
 	public void test4() throws IOException{
 		//		convertFromBC2toABC2GroupFileToEvaluation("/home/tiagoalves/workspace/nejiCode/tests/nejiOutput/1000patentsBC2.bc2","/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/train_1000.tsv");
-		convertBiocreativeFilesIntoEachGroupFiles("/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/train_1000.tsv");
+		convertBiocreativeFilesIntoEachGroupFiles("/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/train_1000.tsv",null);
 	}
 
 
 
-	public List<String> convertBiocreativeFilesIntoEachGroupFiles(String biocreativeFilePath) throws IOException{
+	public List<String> convertBiocreativeFilesIntoEachGroupFiles(String biocreativeFilePath, String destinationPath) throws IOException{
 		File biocreativeFile= new File(biocreativeFilePath);
 		if (!biocreativeFile.exists() || !biocreativeFile.canRead()) {
 			System.out.println("The file doesn't exist or can't be read.");
@@ -958,7 +995,7 @@ public class LoadBiocIntoAnoteTest {
 		List<String> createdFiles=new ArrayList<>();
 		//create the files after verifying which groups are available
 		for (String group: groupsCreated){
-			String groupFilePath = createBiocreativeFileForASpecificGroup(biocreativeFile, group);
+			String groupFilePath = createBiocreativeFileForASpecificGroup(biocreativeFile, group, destinationPath);
 			createdFiles.add(groupFilePath);
 		}
 
@@ -966,12 +1003,19 @@ public class LoadBiocIntoAnoteTest {
 	}
 
 
-	private String createBiocreativeFileForASpecificGroup(File biocreativeFile,String group) throws IOException{
+	private String createBiocreativeFileForASpecificGroup(File biocreativeFile,String group, String destinationPath) throws IOException{
 		FileInputStream is = new FileInputStream(biocreativeFile);
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
 		String[] sections = biocreativeFile.getPath().split("/");
-		File destinationFile =new File(biocreativeFile.getPath().replace(sections[sections.length-1], "groupFiles/"));
+		File destinationFile = null;
+		if (destinationPath==null || destinationPath.isEmpty()){
+			destinationFile =new File(biocreativeFile.getPath().replace(sections[sections.length-1], "groupFiles/"));
+		}
+		else{
+			destinationFile=new File (destinationPath);
+
+		}
 		if (!destinationFile.exists()){
 			destinationFile.mkdirs();
 		}
@@ -1031,6 +1075,13 @@ public class LoadBiocIntoAnoteTest {
 		pwt.close();
 		br.close();
 		is.close();
+	}
+
+
+	public void createDirectories (String filename){
+		if (!new File(new File(filename).getParent()).exists()){
+			new File(new File(filename).getParent()).mkdir();
+		}
 	}
 
 }
