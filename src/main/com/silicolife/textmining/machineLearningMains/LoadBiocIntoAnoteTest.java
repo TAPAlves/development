@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -71,9 +72,6 @@ import pt.ua.tm.neji.core.parser.Parser;
 import pt.ua.tm.neji.core.parser.ParserLanguage;
 import pt.ua.tm.neji.core.parser.ParserLevel;
 import pt.ua.tm.neji.core.pipeline.Pipeline;
-import pt.ua.tm.neji.dictionary.Dictionary;
-import pt.ua.tm.neji.dictionary.DictionaryHybrid;
-import pt.ua.tm.neji.dictionary.VariantMatcherLoader;
 import pt.ua.tm.neji.exception.NejiException;
 import pt.ua.tm.neji.ml.MLHybrid;
 import pt.ua.tm.neji.ml.MLModel;
@@ -89,7 +87,7 @@ import pt.ua.tm.neji.train.pipeline.TrainPipelinePhase1;
 import pt.ua.tm.neji.train.pipeline.TrainPipelinePhase2;
 import pt.ua.tm.neji.train.reader.BC2Reader;
 import pt.ua.tm.neji.train.trainer.DefaultTrainer;
-import pt.ua.tm.neji.writer.A1Writer;
+import pt.ua.tm.neji.writer.BC2Writer;
 import test.com.silicolife.textmining.LinneausTaggerToMemoryRun.CHEMDNERCorpusToLinneausTaggerInMemory;
 
 public class LoadBiocIntoAnoteTest {
@@ -366,9 +364,9 @@ public class LoadBiocIntoAnoteTest {
 		features.add("4PREFIX");
 		features.add("CHARNGRAM");
 		features.addAll(new NLP4JFeatures().getRecomendedNERFeatureIds());
-		//		features.add("OPENNLPPOS");
-		//		features.add("OPENNLPCHUNK");
-		//		features.add("OPENNLPCHUNKPARSING");
+		//				features.add("OPENNLPPOS");
+		//				features.add("OPENNLPCHUNK");
+		//				features.add("OPENNLPCHUNKPARSING");
 		return new BioTMLFeatureGeneratorConfiguratorImpl(features);
 	}
 
@@ -376,6 +374,7 @@ public class LoadBiocIntoAnoteTest {
 		BioTMLModelConfigurator configuration = new BioTMLModelConfigurator(modelClassType, modelIEType);
 		configuration.setAlgorithmType(BioTMLAlgorithm.malletsvm);
 		configuration.setNumThreads(5);
+		//		configuration.setSVMParameters("-h","0");
 		return configuration;
 	}
 
@@ -526,8 +525,8 @@ public class LoadBiocIntoAnoteTest {
 
 	//	@Test
 	public void test3() throws IOException, BioTMLException{
-		//	convertAnnotationsFileFromBiocreativetoBC2("/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/annotations.tsv", null);
-		getAnnotationsFromBC2File("/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/annotations_bc2");
+		convertAnnotationsFileFromBiocreativetoBC2("/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/train_1000.tsv", null);
+		//		getAnnotationsFromBC2File("/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/annotations_bc2");
 	}
 
 
@@ -715,8 +714,8 @@ public class LoadBiocIntoAnoteTest {
 	//	@Test
 	public void trainNejiModel() throws NejiException, IOException{
 		// Set files
-		String sentencesFile = "/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/text.txt";
-		String annotationsFile = "/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/annotations_bc2";
+		String sentencesFile = "/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/1000patentsBC2.txt";
+		String annotationsFile = "/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/training_annotations";
 		String modelConfigurationFile = "/home/tiagoalves/workspace/development/tests/nejiModel/trainFiles/configurationsTest.config";
 		String modelFile = "/home/tiagoalves/workspace/development/tests/nejiModel/FAMILY.gz";
 
@@ -737,11 +736,12 @@ public class LoadBiocIntoAnoteTest {
 		sentencesStream.close();
 		annotationsStream.close();
 
+
 		// Get corpus
 		pt.ua.tm.neji.core.corpus.Corpus corpus = pipelinePhase1.getCorpus();
 
 		// Get model configuration
-		InputStream inputStream = new ByteArrayInputStream(" ".getBytes("UTF-8"));
+		InputStream inputStream = new ByteArrayInputStream(modelConfigurationFile.getBytes("UTF-8"));
 		ModelConfig modelConfig = new ModelConfig(modelConfigurationFile);
 
 		// Run pipeline to train model on corpus
@@ -753,6 +753,7 @@ public class LoadBiocIntoAnoteTest {
 		// Close input stream
 		inputStream.close();
 
+
 		// Get trained model and write to file
 		CRFModel model = (CRFModel) pipelinePhase2.getModuleData("TRAINED_MODEL").get(0);
 		model.write(new FileOutputStream(modelFile));
@@ -761,72 +762,180 @@ public class LoadBiocIntoAnoteTest {
 	}
 
 
-	@Test
+	//	@Test
 	public void annotateUsingNejiModel() throws NejiException, IOException{
 		// Set files
-		String documentFile = "example/annotate/in/22528326.txt";
-		String outputFile = "example/annotate/out/22528326.a1";
-		     
+		String documentFile = "src/test/resources/chemdner/trainFile/1000patentsBC2.txt";
+		String outputFile = "tests/nejiOutput/text.bc2";
+
 		// Set resources
-		String dictionary1File = "example/dictionaries/Body_Part_Organ_or_Organ_Component_T023_ANAT.tsv";
-		String dictionary2File = "example/dictionaries/Disease_or_Syndrome_T047_DISO.tsv";
-		String modelFile = "example/models/prge/prge.properties";
+		//		String dictionary1File = "example/dictionaries/Body_Part_Organ_or_Organ_Component_T023_ANAT.tsv";
+		//		String dictionary2File = "example/dictionaries/Disease_or_Syndrome_T047_DISO.tsv";
+		String modelFile = "tests/nejiModel/model/model.properties";
 
 		// Create reader
 		Reader reader = new RawReader();
-		      
+
 		// Create parser
 		Parser parser = new GDepParser(ParserLanguage.ENGLISH, ParserLevel.CHUNKING, 
-		new LingpipeSentenceSplitter(), false).launch();
-		       
+				new LingpipeSentenceSplitter(), false).launch();
+
 		// Create NLP        
 		NLP nlp = new NLP(parser);
-		        
-		// Create dictionary matchers
-		List<String> dictionary1Lines = FileUtils.readLines(new File(dictionary1File));
-		Dictionary dictionary1 = VariantMatcherLoader.loadDictionaryFromLines(dictionary1Lines);
-		List<String> dictionary2Lines = FileUtils.readLines(new File(dictionary2File));
-		Dictionary dictionary2 = VariantMatcherLoader.loadDictionaryFromLines(dictionary2Lines);
-		        
-		DictionaryHybrid dictionaryMatcher1 = new DictionaryHybrid(dictionary1);
-		DictionaryHybrid dictionaryMatcher2 = new DictionaryHybrid(dictionary2);
-		        
-		// Create machine-learning model matcher
-		MLModel model = new MLModel("prge", new File(modelFile));
-		model.initialize();
-		MLHybrid mlModelMatcher = new MLHybrid(model.getCrf(), "prge");
-		        
-		 // Create Writer
-		 Writer writer = new A1Writer();
-		        
-		 // Set document stream
-		 InputStream documentStream = new FileInputStream(documentFile);
 
-		 // Run pipeline to get annotations
-		 Pipeline pipeline = new DefaultPipeline()
-		        .add(reader)
-		        .add(nlp)
-		        .add(dictionaryMatcher1)
-		        .add(dictionaryMatcher2)
-		        .add(mlModelMatcher)
-		        .add(writer);
+		// Create dictionary matchers
+		//		List<String> dictionary1Lines = FileUtils.readLines(new File(dictionary1File));
+		//		Dictionary dictionary1 = VariantMatcherLoader.loadDictionaryFromLines(dictionary1Lines);
+		//		List<String> dictionary2Lines = FileUtils.readLines(new File(dictionary2File));
+		//		Dictionary dictionary2 = VariantMatcherLoader.loadDictionaryFromLines(dictionary2Lines);
+
+		//		DictionaryHybrid dictionaryMatcher1 = new DictionaryHybrid(dictionary1);
+		//		DictionaryHybrid dictionaryMatcher2 = new DictionaryHybrid(dictionary2);
+
+		// Create machine-learning model matcher
+		MLModel model = new MLModel("FAMILY", new File(modelFile));
+		model.initialize();
+		MLHybrid mlModelMatcher = new MLHybrid(model.getCrf(), "FAMILY");
+
+		// Create Writer
+		Writer writer = new BC2Writer();
+
+		// Set document stream
+		InputStream documentStream = new FileInputStream(documentFile);
+
+		// Run pipeline to get annotations
+		Pipeline pipeline = new DefaultPipeline()
+				.add(reader)
+				.add(nlp)
+				//		        .add(dictionaryMatcher1)
+				//		        .add(dictionaryMatcher2)
+				.add(mlModelMatcher)
+				.add(writer);
 
 		OutputStream outputStream = pipeline.run(documentStream).get(0);
 
 		// Write annotations to output file
 		FileUtils.writeStringToFile(new File(outputFile), outputStream.toString());
-		        
+
 		// Close streams
 		documentStream.close();
 		outputStream.close();
-		        
+
 		// Close parser
 		parser.close();
-		
+
 
 	}
 
 
+	public void convertBioCreativeTExtFilesIntoBC2(String filePath,String destinationPath) throws IOException{
+
+		// Verify if file exists
+		File file = new File(filePath);
+		if (!file.exists() || !file.canRead()) {
+			System.out.println("File doesn't exist or can't be read.");
+			System.exit(0);
+		}
+
+		// Read file
+		FileInputStream is = new FileInputStream(filePath);
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+
+		// Convert file to BC2
+		if (destinationPath==null){
+
+			String[] sections = filePath.split("/");
+			destinationPath=filePath.replace(sections[sections.length-1], "resultantText.txt");
+		}
+		PrintWriter pwt = new PrintWriter(destinationPath);
+		String line;
+
+		while ((line = br.readLine()) != null) {
+
+			String[] parts = line.split("\t");
+
+			String id = parts[0];
+			String title = parts[1];
+			String abtract = parts[2];            
+
+			pwt.println(id + " " + title + " " + abtract);
+		}
+
+		pwt.close();
+		br.close();
+		is.close();
+	}
+
+
+
+
+	public void convertFromBC2toABC2GroupFileToEvaluation(String bc2Filepath, String biocreativeFilePath) throws IOException{
+		// Verify if file exists
+		File bc2File = new File(bc2Filepath);
+		File biocreativeFile= new File(biocreativeFilePath);
+		if (!bc2File.exists() || !bc2File.canRead() || !biocreativeFile.exists() || !biocreativeFile.canRead()) {
+			System.out.println("One of the two (or two) files doesn't exist or can't be read.");
+			System.exit(0);
+		}
+
+		// Read file
+		FileInputStream is = new FileInputStream(bc2Filepath);
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+
+
+
+		String[] sections = bc2Filepath.split("/");
+		String destinationPath = bc2Filepath.replace(sections[sections.length-1], "groupBC2FileOf" + sections[sections.length-1]);
+
+		PrintWriter pwt = new PrintWriter(destinationPath);
+		String line;
+
+		while ((line = br.readLine()) != null) {
+
+			String[] annotationsLine = line.split("\\|");
+			String group = getGroupForAID(biocreativeFilePath, annotationsLine[2]);
+
+			if (group!=null){
+				pwt.println(line.replace(annotationsLine[annotationsLine.length-1],group));
+			}
+		}
+
+		pwt.close();
+		br.close();
+		is.close();
+	}
+
+
+
+	private String getGroupForAID(String biocreativeFile, String patentID) throws IOException{
+		FileInputStream is = new FileInputStream(biocreativeFile);
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+		String line;
+		while ((line = br.readLine()) != null) {
+			String[] annotationsLine = line.split("\t");
+			if (annotationsLine[4].contains(patentID) || patentID.contains(annotationsLine[4])){
+				return annotationsLine[5];
+			}
+
+		}
+		is.close();
+		br.close();
+		return null;
+
+	}
+
+	@Test
+	public void test4() throws IOException{
+		convertFromBC2toABC2GroupFileToEvaluation("/home/tiagoalves/workspace/nejiCode/tests/nejiOutput/1000patentsBC2.bc2","/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/train_1000.tsv");
+	}
+
+	
+
+	public void convertBiocreativeFilesIntoEachGroupFiles(){
+		
+	}
+	
+	
 }
 
 

@@ -27,12 +27,12 @@ import main.com.silicolife.textmining.machineLearningMains.LoadBiocIntoAnoteTest
 public class ComparationsBetweenOURandNEJI {
 
 	private String corpusDir="src/test/resources/chemdner/trainFile";
-	private String modelClassType= "FAMILY";
+	private String modelClassType= "ABBREVIATION";
 	private String modelDir="tests/ourModel/"+ modelClassType+".gz";
-	private String sentencesFile = corpusDir +"/text.txt";
-	private String annotationsFile = corpusDir +"/annotations.tsv";
+	private String sentencesFile = corpusDir +"/text_1000.txt";
+	private String annotationsFile = corpusDir +"/train_1000.tsv";
 
-	//	@Test
+	@Test
 	public void createOurModel() throws BioTMLException{
 		LoadBiocIntoAnoteTest classTest=new LoadBiocIntoAnoteTest();
 
@@ -44,7 +44,7 @@ public class ComparationsBetweenOURandNEJI {
 		IBioTMLCorpus corpus = reader.readBioTMLCorpusFromBioCFiles(sentencesFile, annotationsFile, "nlp4j");
 
 		@SuppressWarnings("static-access")
-		IBioTMLModel svm = new MalletClassifierModel(classTest.loadfeatures(), classTest.defaultConfiguration("FAMILY", BioTMLConstants.ner.toString()));
+		IBioTMLModel svm = new MalletClassifierModel(classTest.loadfeatures(), classTest.defaultConfiguration(modelClassType, BioTMLConstants.ner.toString()));
 
 		svm.train(corpus);
 		createDirectories (modelDir);
@@ -62,7 +62,7 @@ public class ComparationsBetweenOURandNEJI {
 
 
 
-	//	@Test
+//		@Test
 	public void createNejiModel() throws IOException, InterruptedException{
 		String[] args = new String[] {"bash", "-c", "./workspace/nejiCode/nejiTrain.sh "
 				+ "-a ./workspace/development/"+annotationsFile
@@ -90,17 +90,17 @@ public class ComparationsBetweenOURandNEJI {
 
 	}
 
-//	@Test
+	//	@Test
 	public void evaluateUsingAGZModel() throws BioTMLException{
 		LoadBiocIntoAnoteTest classTest=new LoadBiocIntoAnoteTest();
 		String corpusDir="src/test/resources/chemdner/trainFile";
-		String modelDir="tests/nejiModel/FAMILY.gz";
+		String modelDir="tests/ourModel/FAMILY.gz";
 
 		System.out.println("Loading the BioTMLCorpus...");
 
 		BioTMLCorpusReaderImpl reader = new BioTMLCorpusReaderImpl();
 		IBioTMLCorpus corpus = reader.readBioTMLCorpusFromBioCFiles(corpusDir +"/text.txt", "nlp4j");
-
+		//		IBioTMLCorpus corpus = reader.readBioTMLCorpusFromBioCFiles("/home/tiagoalves/workspace/development/src/test/resources/chemdner/dev/chemdner_patents_development_text.txt", "nlp4j");
 
 		IBioTMLModelReader modelReader = new BioTMLModelReaderImpl();
 		IBioTMLModel svm = modelReader.loadModelFromGZFile(modelDir);
@@ -111,19 +111,26 @@ public class ComparationsBetweenOURandNEJI {
 
 		List<IBioTMLEntity> goldAnnotations = classTest.getGoldAnnotations("src/test/resources/chemdner/train/evaluate200.tsv");
 
-		
+
 		classTest.evaluateAnnotation(goldAnnotations,annotationsTest);
 	}
 
-	@Test
+//		@Test
 	public void evaluateUsingNejiOutput() throws BioTMLException{
 		LoadBiocIntoAnoteTest classTest=new LoadBiocIntoAnoteTest();
-		List<IBioTMLEntity> goldAnnotations = classTest.getGoldAnnotations("src/test/resources/chemdner/train/evaluate200.tsv");
-		List<IBioTMLEntity> annotations = classTest.getAnnotationsFromBC2File("/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/annotations_bc2");
+		List<IBioTMLEntity> goldAnnotations = classTest.getGoldAnnotations("src/test/resources/chemdner/trainFile/train_1000.tsv");
+		List<IBioTMLEntity> annotations = classTest.getAnnotationsFromBC2File("/home/tiagoalves/workspace/nejiCode/tests/nejiOutput/groupBC2FileOf1000patentsBC2.bc2");
 		classTest.evaluateAnnotation(goldAnnotations,annotations);
 	}
+
+//@Test
+public void testConversionToBC2() throws IOException{
+	LoadBiocIntoAnoteTest classTest=new LoadBiocIntoAnoteTest();
+	classTest.convertBioCreativeTExtFilesIntoBC2(sentencesFile, corpusDir + "/1000patentsBC2.txt");
+}
 	
 	
+
 }
 
 
