@@ -884,6 +884,7 @@ public class LoadBiocIntoAnoteTest {
 			String[] sections = filePath.split("/");
 			destinationPath=filePath.replace(sections[sections.length-1], "resultantText.txt");
 		}
+		createDirectories(destinationPath);
 		PrintWriter pwt = new PrintWriter(destinationPath);
 		String line;
 
@@ -1040,6 +1041,22 @@ public class LoadBiocIntoAnoteTest {
 	}
 
 
+	public void convertFromBioCreativeIntoBC2UsingAFolder(String biocreativeFilesDir, String destinationDir) throws IOException{
+		File dest = new File(destinationDir);
+		if (!dest.exists()){
+			dest.mkdirs();
+		}
+		File[] files = new File (biocreativeFilesDir).listFiles();
+		for (File file:files){
+			if (!file.isDirectory()){
+				convertFromBrioCreativeIntoBC2Files(file.getPath(), destinationDir+"/"+(file.getName().replace(".tsv", "")));			
+			}
+		}
+
+
+	}
+
+
 	public void convertFromBrioCreativeIntoBC2Files (String biocreativeFilePath, String destinationPath) throws IOException{
 		//        
 		//        String filePath = "/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/train_1000.tsv";
@@ -1080,7 +1097,7 @@ public class LoadBiocIntoAnoteTest {
 
 	public void createDirectories (String filename){
 		if (!new File(new File(filename).getParent()).exists()){
-			new File(new File(filename).getParent()).mkdir();
+			new File(new File(filename).getParent()).mkdirs();
 		}
 	}
 

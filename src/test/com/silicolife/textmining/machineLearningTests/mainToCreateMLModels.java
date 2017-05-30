@@ -3,6 +3,8 @@ package test.com.silicolife.textmining.machineLearningTests;
 import java.io.IOException;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.silicolife.textmining.machinelearning.biotml.core.BioTMLConstants;
 import com.silicolife.textmining.machinelearning.biotml.core.annotator.BioTMLMalletAnnotatorImpl;
 import com.silicolife.textmining.machinelearning.biotml.core.exception.BioTMLException;
@@ -23,7 +25,7 @@ public class mainToCreateMLModels {
 
 	private String corpusDir="src/test/resources/chemdner/trainFile";
 	private String modelClassType= "MULTIPLE";
-	private String modelDir="tests/ourModel/"+ modelClassType+".gz";
+	private String modelDir="tests/ourModel/models/"+ modelClassType+".gz";
 	private String sentencesFile = corpusDir +"/text_1000.txt";
 	private String corpusSentencesFile="";
 	private String annotationsFile = corpusDir +"/train_1000.tsv";
@@ -34,7 +36,7 @@ public class mainToCreateMLModels {
 
 
 
-	public void createOOURModel (String modelClassType, String modelDir) throws BioTMLException{
+	public void createOURModel (String modelClassType, String modelDir) throws BioTMLException{
 		LoadBiocIntoAnoteTest classTest=new LoadBiocIntoAnoteTest();
 
 		System.out.println("Loading the BioTMLCorpus...");
@@ -83,11 +85,13 @@ public class mainToCreateMLModels {
 		return annotationsTest;
 
 	}
-
+@Test
 	public void createConditionsToRunNeji() throws IOException{
 		LoadBiocIntoAnoteTest classTest=new LoadBiocIntoAnoteTest();
 		classTest.convertBioCreativeTExtFilesIntoBC2(sentencesFile, nejiSentencesFile);
+		
 		classTest.convertBiocreativeFilesIntoEachGroupFiles(annotationsFile,nejiAnnotationsDir);	
+		classTest.convertFromBioCreativeIntoBC2UsingAFolder(nejiAnnotationsDir, nejiAnnotationsDir+"/bc2Files");
 	}
 
 	public void evaluateNejiAnnotations(String groupType, String nejiAnnotationsDir) throws BioTMLException{
@@ -117,19 +121,4 @@ public class mainToCreateMLModels {
 
 	}
 
-
-
-
-
-
-
-
-
-
 }
-
-
-
-
-
-
