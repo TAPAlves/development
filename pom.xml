@@ -4,13 +4,13 @@
 	<groupId>development</groupId>
 	<artifactId>development</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<repositories>
+		<!-- <repositories>
 		<repository>
 			<id>bioinformatics-all</id>
 			<name>Bioinformatics Nexus (All)</name>
 			<url>http://bioinformatics.ua.pt/maven/content/groups/public</url>
 		</repository>
-	</repositories>
+	</repositories> -->
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
@@ -42,10 +42,10 @@
 			<artifactId>json-simple</artifactId>
 			<version>1.1.1</version>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>pt.ua.tm</groupId>
 			<artifactId>neji</artifactId>
 			<version>2.0</version>
-		</dependency>
+		</dependency> -->
 	</dependencies>
 </project>
