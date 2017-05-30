@@ -27,7 +27,7 @@ import main.com.silicolife.textmining.machineLearningMains.LoadBiocIntoAnoteTest
 public class ComparationsBetweenOURandNEJI {
 
 	private String corpusDir="src/test/resources/chemdner/trainFile";
-	private String modelClassType= "ABBREVIATION";
+	private String modelClassType= "MULTIPLE";
 	private String modelDir="tests/ourModel/"+ modelClassType+".gz";
 	private String sentencesFile = corpusDir +"/text_1000.txt";
 	private String annotationsFile = corpusDir +"/train_1000.tsv";

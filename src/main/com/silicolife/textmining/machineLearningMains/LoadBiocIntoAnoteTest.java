@@ -5,7 +5,6 @@ import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -927,13 +926,13 @@ public class LoadBiocIntoAnoteTest {
 
 	@Test
 	public void test4() throws IOException{
-//		convertFromBC2toABC2GroupFileToEvaluation("/home/tiagoalves/workspace/nejiCode/tests/nejiOutput/1000patentsBC2.bc2","/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/train_1000.tsv");
-	convertBiocreativeFilesIntoEachGroupFiles("/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/train_1000.tsv");
+		//		convertFromBC2toABC2GroupFileToEvaluation("/home/tiagoalves/workspace/nejiCode/tests/nejiOutput/1000patentsBC2.bc2","/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/train_1000.tsv");
+		convertBiocreativeFilesIntoEachGroupFiles("/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/train_1000.tsv");
 	}
 
 
 
-	public void convertBiocreativeFilesIntoEachGroupFiles(String biocreativeFilePath) throws IOException{
+	public List<String> convertBiocreativeFilesIntoEachGroupFiles(String biocreativeFilePath) throws IOException{
 		File biocreativeFile= new File(biocreativeFilePath);
 		if (!biocreativeFile.exists() || !biocreativeFile.canRead()) {
 			System.out.println("The file doesn't exist or can't be read.");
@@ -955,15 +954,19 @@ public class LoadBiocIntoAnoteTest {
 		}
 		br.close();
 		is.close();
-		
+
+		List<String> createdFiles=new ArrayList<>();
 		//create the files after verifying which groups are available
 		for (String group: groupsCreated){
-			createBiocreativeFileForASpecificGroup(biocreativeFile, group);
+			String groupFilePath = createBiocreativeFileForASpecificGroup(biocreativeFile, group);
+			createdFiles.add(groupFilePath);
 		}
-		
+
+		return createdFiles;
 	}
 
-	private void createBiocreativeFileForASpecificGroup(File biocreativeFile,String group) throws IOException{
+
+	private String createBiocreativeFileForASpecificGroup(File biocreativeFile,String group) throws IOException{
 		FileInputStream is = new FileInputStream(biocreativeFile);
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
@@ -972,8 +975,8 @@ public class LoadBiocIntoAnoteTest {
 		if (!destinationFile.exists()){
 			destinationFile.mkdirs();
 		}
-		
-		PrintWriter pwt = new PrintWriter(destinationFile.getPath()+ "/" + group + sections[sections.length-1]);
+		String destinationFilePath = destinationFile.getPath()+ "/" + group + sections[sections.length-1];
+		PrintWriter pwt = new PrintWriter(destinationFilePath);
 		String line;
 		while ((line = br.readLine()) != null) {
 
@@ -988,11 +991,46 @@ public class LoadBiocIntoAnoteTest {
 		br.close();
 		is.close();
 
+		return destinationFilePath;
+
 	}
 
 
+	public void convertFromBrioCreativeIntoBC2Files (String biocreativeFilePath, String destinationPath) throws IOException{
+		//        
+		//        String filePath = "/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/train_1000.tsv";
+		//        String destinationPath = "/home/tiagoalves/workspace/nejiCode/testeFamilyModel/files/training_annotations_1000";
+
+		// Verify if file exists
+		File file = new File(biocreativeFilePath);
+		if (!file.exists() || !file.canRead()) {
+			System.out.println("File doesn't exist or can't be read.");
+			System.exit(0);
+		}
+
+		// Read file
+		FileInputStream is = new FileInputStream(biocreativeFilePath);
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+
+		// Convert file to BC2
+		PrintWriter pwt = new PrintWriter(destinationPath);
+		String line;
+
+		while ((line = br.readLine()) != null) {
+
+			String[] parts = line.split("\t");
+
+			String id = parts[0];
+			String start = parts[2];
+			String end = parts[3];            
+			String text = parts[4];
+
+			pwt.println(id + "|" + start + " " + end + "|" + text);
+		}
+
+		pwt.close();
+		br.close();
+		is.close();
+	}
 
 }
-
-
-
