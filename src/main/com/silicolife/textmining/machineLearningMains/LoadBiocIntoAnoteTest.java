@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -926,16 +927,71 @@ public class LoadBiocIntoAnoteTest {
 
 	@Test
 	public void test4() throws IOException{
-		convertFromBC2toABC2GroupFileToEvaluation("/home/tiagoalves/workspace/nejiCode/tests/nejiOutput/1000patentsBC2.bc2","/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/train_1000.tsv");
+//		convertFromBC2toABC2GroupFileToEvaluation("/home/tiagoalves/workspace/nejiCode/tests/nejiOutput/1000patentsBC2.bc2","/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/train_1000.tsv");
+	convertBiocreativeFilesIntoEachGroupFiles("/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/train_1000.tsv");
 	}
 
-	
 
-	public void convertBiocreativeFilesIntoEachGroupFiles(){
+
+	public void convertBiocreativeFilesIntoEachGroupFiles(String biocreativeFilePath) throws IOException{
+		File biocreativeFile= new File(biocreativeFilePath);
+		if (!biocreativeFile.exists() || !biocreativeFile.canRead()) {
+			System.out.println("The file doesn't exist or can't be read.");
+			System.exit(0);
+		}
+
+		FileInputStream is = new FileInputStream(biocreativeFile);
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+
+		List<String> groupsCreated=new ArrayList<>();
+		String line;
+		while ((line = br.readLine()) != null) {
+
+			String[] annotationsLine = line.split("\t");
+			String groupString = annotationsLine[5];
+			if (!groupsCreated.contains(groupString)){
+				groupsCreated.add(groupString);
+			}
+		}
+		br.close();
+		is.close();
+		
+		//create the files after verifying which groups are available
+		for (String group: groupsCreated){
+			createBiocreativeFileForASpecificGroup(biocreativeFile, group);
+		}
 		
 	}
-	
-	
+
+	private void createBiocreativeFileForASpecificGroup(File biocreativeFile,String group) throws IOException{
+		FileInputStream is = new FileInputStream(biocreativeFile);
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+
+		String[] sections = biocreativeFile.getPath().split("/");
+		File destinationFile =new File(biocreativeFile.getPath().replace(sections[sections.length-1], "groupFiles/"));
+		if (!destinationFile.exists()){
+			destinationFile.mkdirs();
+		}
+		
+		PrintWriter pwt = new PrintWriter(destinationFile.getPath()+ "/" + group + sections[sections.length-1]);
+		String line;
+		while ((line = br.readLine()) != null) {
+
+			String[] annotationsLine = line.split("\t");
+			String groupString = annotationsLine[5];
+			if (group.equalsIgnoreCase(groupString)){
+				pwt.println(line);
+			}
+		}
+
+		pwt.close();
+		br.close();
+		is.close();
+
+	}
+
+
+
 }
 
 
