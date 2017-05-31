@@ -88,10 +88,11 @@ public class mainToCreateMLModels {
 @Test
 	public void createConditionsToRunNeji() throws IOException{
 		LoadBiocIntoAnoteTest classTest=new LoadBiocIntoAnoteTest();
-		classTest.convertBioCreativeTExtFilesIntoBC2(sentencesFile, nejiSentencesFile);
+//		classTest.convertBioCreativeTExtFilesIntoBC2(sentencesFile, nejiSentencesFile);
 		
-		classTest.convertBiocreativeFilesIntoEachGroupFiles(annotationsFile,nejiAnnotationsDir);	
-		classTest.convertFromBioCreativeIntoBC2UsingAFolder(nejiAnnotationsDir, nejiAnnotationsDir+"/bc2Files");
+//		classTest.convertBiocreativeFilesIntoEachGroupFiles(annotationsFile,nejiAnnotationsDir);	
+//		classTest.convertFromBioCreativeIntoBC2UsingAFolder(nejiAnnotationsDir, nejiAnnotationsDir+"/bc2Files");
+		classTest.convertFromBioCreativeTEXTFILESIntoBC2UsingAFolder("/home/tiagoalves/workspace/development/generalMain/sentencesGrouped", "/home/tiagoalves/workspace/development/generalMain/sentencesGrouped/bc2Sentences");
 	}
 
 	public void evaluateNejiAnnotations(String groupType, String nejiAnnotationsDir) throws BioTMLException{

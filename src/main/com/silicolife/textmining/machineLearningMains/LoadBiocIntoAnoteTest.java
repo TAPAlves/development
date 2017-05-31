@@ -16,6 +16,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -965,7 +966,11 @@ public class LoadBiocIntoAnoteTest {
 	@Test
 	public void test4() throws IOException{
 		//		convertFromBC2toABC2GroupFileToEvaluation("/home/tiagoalves/workspace/nejiCode/tests/nejiOutput/1000patentsBC2.bc2","/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/train_1000.tsv");
-		convertBiocreativeFilesIntoEachGroupFiles("/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/train_1000.tsv",null);
+//		convertBiocreativeFilesIntoEachGroupFiles("/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/train_1000.tsv",null);
+		filterBioCreativeTextFilestoASpecificGroupUsingAnnotationsFile("/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/text_1000.txt", 
+				"/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/groupFiles/TRIVIALtrain_1000.tsv", 
+				"TRIVIAL", "/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/");
+//		convertJoChemDictionaryIntoNejiFormat("/home/tiagoalves/workspace/development/resources/JoChem2.tsv", "/home/tiagoalves/workspace/development/resources/JoChemToNeji.tsv");
 	}
 
 
@@ -1056,6 +1061,24 @@ public class LoadBiocIntoAnoteTest {
 
 	}
 
+	
+	
+	
+	
+	
+	public void convertFromBioCreativeTEXTFILESIntoBC2UsingAFolder(String biocreativeFilesDir, String destinationDir) throws IOException{
+		File dest = new File(destinationDir);
+		if (!dest.exists()){
+			dest.mkdirs();
+		}
+		File[] files = new File (biocreativeFilesDir).listFiles();
+		for (File file:files){
+			if (!file.isDirectory()){
+				convertBioCreativeTExtFilesIntoBC2(file.getPath(), destinationDir+"/"+(file.getName().replace(".txt", "")));			
+			}
+		}
+	}
+		
 
 	public void convertFromBrioCreativeIntoBC2Files (String biocreativeFilePath, String destinationPath) throws IOException{
 		//        
@@ -1099,6 +1122,72 @@ public class LoadBiocIntoAnoteTest {
 		if (!new File(new File(filename).getParent()).exists()){
 			new File(new File(filename).getParent()).mkdirs();
 		}
+	}
+
+	public void convertJoChemDictionaryIntoNejiFormat(String joChemPath, String joChemDestinPath) throws IOException{
+		File file = new File(joChemPath);
+		if (!file.exists() || !file.canRead()) {
+			System.out.println("File doesn't exist or can't be read.");
+			System.exit(0);
+		}
+		
+		FileInputStream is = new FileInputStream(joChemPath);
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+	
+		PrintWriter pwt = new PrintWriter(joChemDestinPath);
+
+		String line;
+		while ((line = br.readLine()) != null) {
+			String[] parts = line.split("\t");
+			String ids = parts[2];
+			String[] idParts = ids.split("\\|")[0].split("_");//cas entry
+			pwt.println(idParts[0]+":"+idParts[1]+":"+"type:"+"CHEMICAL\t"+parts[0]+"|"+parts[1]);
+		}
+		br.close();
+		is.close();
+
+	}
+
+	public void filterBioCreativeTextFilestoASpecificGroupUsingAnnotationsFile(String bcFilePath, String annotationsFilePath, String group, String destinDir) throws IOException{
+		File file = new File(bcFilePath);
+		if (!file.exists() || !file.canRead()) {
+			System.out.println("File doesn't exist or can't be read.");
+			System.exit(0);
+		}
+		Set<String> ids=new HashSet<>();
+
+		FileInputStream is = new FileInputStream(annotationsFilePath);
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+		String line;
+
+		while ((line = br.readLine()) != null) {
+			String[] parts = line.split("\t");
+			ids.add(parts[0]);
+		}
+		br.close();
+		is.close();
+
+
+		is = new FileInputStream(bcFilePath);
+		br = new BufferedReader(new InputStreamReader(is));
+
+		PrintWriter pwt = new PrintWriter(destinDir + "/"+group + file.getName());
+
+		line="";
+
+		while ((line = br.readLine()) != null) {
+
+			String[] parts = line.split("\t");
+
+			String id = parts[0];
+			if (ids.contains(id)){
+				pwt.println(line);
+			}
+		}
+
+		pwt.close();
+		br.close();
+		is.close();
 	}
 
 }
