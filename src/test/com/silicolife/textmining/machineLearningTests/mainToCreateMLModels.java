@@ -23,20 +23,30 @@ import main.com.silicolife.textmining.machineLearningMains.LoadBiocIntoAnoteTest
 
 public class mainToCreateMLModels {
 
-	private String corpusDir="src/test/resources/chemdner/trainFile";
-	private String modelClassType= "MULTIPLE";
-	private String modelDir="tests/ourModel/models/"+ modelClassType+".gz";
-	private String sentencesFile = corpusDir +"/text_1000.txt";
-	private String corpusSentencesFile="";
-	private String annotationsFile = corpusDir +"/train_1000.tsv";
+//	private String corpusDir="src/test/resources/chemdner/trainFile";
+	private String modelClassType= "FAMILY";
+//	private String modelDir="tests/ourModel/models/"+ modelClassType+".gz";
+//	private String sentencesFile = corpusDir +"/text_1000.txt";
+	private String corpusSentencesFile="/home/tiagoalves/workspace/development/generalMain/development/developmentSentences/"+modelClassType+"textFiles_1500.txt";
+//	private String annotationsFile = corpusDir +"/train_1000.tsv";
 	private String nejiDir="generalMain/NejiCode";
+//	private String nejiSentencesFile=nejiDir + "/sentences/BC2_text_1000.txt";
+//	private String nejiAnnotationsDir=nejiDir+"/annotations";
+	private String goldAnnotationsFile="/home/tiagoalves/workspace/development/generalMain/development/developmentAnnotations/"+modelClassType+"annotations_1500.tsv";
+
+
+	
+//Test with the development set
+	private String corpusDir= "/home/tiagoalves/workspace/development/generalMain/train";//"src/test/resources/chemdner/trainFile";
+//	private String modelClassType= "MULTIPLE";
+	private String modelDir="generalMain/OurModel/"+ modelClassType+".gz";
+	private String sentencesFile = corpusDir +"/trainSentences/"+modelClassType+"text_1000.txt";//text_1000.txt
+	private String annotationsFile = corpusDir +"/trainAnnotations/"+modelClassType+"annotations_1500.tsv";//"/train_1000.tsv";
 	private String nejiSentencesFile=nejiDir + "/sentences/BC2_text_1000.txt";
-	private String nejiAnnotationsDir=nejiDir+"/annotations";
-	private String goldAnnotationsFile="src/test/resources/chemdner/train/evaluate200.tsv";
+	private String nejiAnnotationsDir="generalMain/"+"train/trainAnnotations";
 
-
-
-	public void createOURModel (String modelClassType, String modelDir) throws BioTMLException{
+//	@Test
+	public void createOURModel() throws BioTMLException{
 		LoadBiocIntoAnoteTest classTest=new LoadBiocIntoAnoteTest();
 
 		System.out.println("Loading the BioTMLCorpus...");
@@ -60,7 +70,7 @@ public class mainToCreateMLModels {
 		//		String modelDir="testeModelos/modeloML/modeloCriado.gz";
 
 		System.out.println("Loading the BioTMLCorpus...");
-
+//		corpusFilePath=sentencesFile;
 		BioTMLCorpusReaderImpl reader = new BioTMLCorpusReaderImpl();
 		IBioTMLCorpus corpus = reader.readBioTMLCorpusFromBioCFiles(corpusFilePath, "nlp4j");
 
@@ -85,14 +95,14 @@ public class mainToCreateMLModels {
 		return annotationsTest;
 
 	}
-@Test
+//@Test
 	public void createConditionsToRunNeji() throws IOException{
 		LoadBiocIntoAnoteTest classTest=new LoadBiocIntoAnoteTest();
 //		classTest.convertBioCreativeTExtFilesIntoBC2(sentencesFile, nejiSentencesFile);
 		
-//		classTest.convertBiocreativeFilesIntoEachGroupFiles(annotationsFile,nejiAnnotationsDir);	
-//		classTest.convertFromBioCreativeIntoBC2UsingAFolder(nejiAnnotationsDir, nejiAnnotationsDir+"/bc2Files");
-		classTest.convertFromBioCreativeTEXTFILESIntoBC2UsingAFolder("/home/tiagoalves/workspace/development/generalMain/sentencesGrouped", "/home/tiagoalves/workspace/development/generalMain/sentencesGrouped/bc2Sentences");
+		classTest.convertBiocreativeFilesIntoEachGroupFiles(annotationsFile,nejiAnnotationsDir);	
+		classTest.convertFromBioCreativeIntoBC2UsingAFolder(nejiAnnotationsDir, nejiAnnotationsDir+"/bc2Files");
+//		classTest.convertFromBioCreativeTEXTFILESIntoBC2UsingAFolder("/home/tiagoalves/workspace/development/generalMain/sentencesGrouped", "/home/tiagoalves/workspace/development/generalMain/sentencesGrouped/bc2Sentences");
 	}
 
 	public void evaluateNejiAnnotations(String groupType, String nejiAnnotationsDir) throws BioTMLException{
@@ -121,5 +131,13 @@ public class mainToCreateMLModels {
 		classTest.evaluateAnnotation(goldAnnotations,annotations);
 
 	}
+	
+	
+	@Test
+	public void evaluateourmodel() throws BioTMLException{
+//		evaluateOurModel(modelClassType);
+		evaluateNejiAnnotations("FAMILY", "/home/tiagoalves/workspace/development/generalMain/output/neji/ABBREVIATIONtextFiles_1500.bc2");
+	}
+	
 
 }

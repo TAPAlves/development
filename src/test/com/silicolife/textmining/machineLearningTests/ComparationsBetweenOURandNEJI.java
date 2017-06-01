@@ -26,11 +26,11 @@ import main.com.silicolife.textmining.machineLearningMains.LoadBiocIntoAnoteTest
 
 public class ComparationsBetweenOURandNEJI {
 
-	private String corpusDir="src/test/resources/chemdner/trainFile";
+	private String corpusDir= "src/test/resources/chemdner/devFiles";//"src/test/resources/chemdner/trainFile";
 	private String modelClassType= "MULTIPLE";
 	private String modelDir="tests/ourModel/"+ modelClassType+".gz";
-	private String sentencesFile = corpusDir +"/text_1000.txt";
-	private String annotationsFile = corpusDir +"/train_1000.tsv";
+	private String sentencesFile = corpusDir +"/textFiles_1500.txt";//text_1000.txt
+	private String annotationsFile = corpusDir +"annotations_1500.tsv";//"/train_1000.tsv";
 
 	@Test
 	public void createOurModel() throws BioTMLException{

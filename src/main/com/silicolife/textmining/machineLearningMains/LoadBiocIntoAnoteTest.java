@@ -693,11 +693,16 @@ public class LoadBiocIntoAnoteTest {
 	public List<IBioTMLEntity> getAnnotationsFromBC2AnnotationsFolder(String annotationsFolder, String groupType) throws BioTMLException{
 		List<IBioTMLEntity> entities= new ArrayList<>();
 		File annotationsFolderFile = new File(annotationsFolder);
-		File[] files = annotationsFolderFile.listFiles();
-		for (int i = 0; i < files.length; i++) {
-			entities.addAll(getAnnotationsFromBC2File(files[i].getPath(), groupType));
+		if (annotationsFolderFile.isDirectory()){
+			File[] files = annotationsFolderFile.listFiles();
+			for (int i = 0; i < files.length; i++) {
+				entities.addAll(getAnnotationsFromBC2File(files[i].getPath(), groupType));
 
 
+			}
+		}
+		else{
+			entities.addAll(getAnnotationsFromBC2File(annotationsFolderFile.getPath(), groupType));
 		}
 		return entities;
 	}
@@ -966,11 +971,12 @@ public class LoadBiocIntoAnoteTest {
 	@Test
 	public void test4() throws IOException{
 		//		convertFromBC2toABC2GroupFileToEvaluation("/home/tiagoalves/workspace/nejiCode/tests/nejiOutput/1000patentsBC2.bc2","/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/train_1000.tsv");
-//		convertBiocreativeFilesIntoEachGroupFiles("/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/train_1000.tsv",null);
-		filterBioCreativeTextFilestoASpecificGroupUsingAnnotationsFile("/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/text_1000.txt", 
-				"/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/groupFiles/TRIVIALtrain_1000.tsv", 
-				"TRIVIAL", "/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/");
-//		convertJoChemDictionaryIntoNejiFormat("/home/tiagoalves/workspace/development/resources/JoChem2.tsv", "/home/tiagoalves/workspace/development/resources/JoChemToNeji.tsv");
+		//		convertBiocreativeFilesIntoEachGroupFiles("/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/train_1000.tsv",null);
+		//		filterBioCreativeTextFilestoASpecificGroupUsingAnnotationsFile("/home/tiagoalves/workspace/development/src/test/resources/chemdner/devFiles/textFiles_1500.txt", 
+		//				"/home/tiagoalves/workspace/development/generalMain/development/developmentAnnotations/TRIVIALannotations_1500.tsv", 
+		//				"TRIVIAL", "/home/tiagoalves/workspace/development/generalMain/development/developmentSentences");
+		//		convertJoChemDictionaryIntoNejiFormat("/home/tiagoalves/workspace/development/resources/JoChem2.tsv", "/home/tiagoalves/workspace/development/resources/JoChemToNeji.tsv");
+		convertFromBioCreativeTEXTFILESIntoBC2UsingAFolder("/home/tiagoalves/workspace/development/generalMain/development/developmentSentences", "/home/tiagoalves/workspace/development/generalMain/development/developmentSentences/bc2Sentences");
 	}
 
 
@@ -1061,11 +1067,11 @@ public class LoadBiocIntoAnoteTest {
 
 	}
 
-	
-	
-	
-	
-	
+
+
+
+
+
 	public void convertFromBioCreativeTEXTFILESIntoBC2UsingAFolder(String biocreativeFilesDir, String destinationDir) throws IOException{
 		File dest = new File(destinationDir);
 		if (!dest.exists()){
@@ -1078,7 +1084,7 @@ public class LoadBiocIntoAnoteTest {
 			}
 		}
 	}
-		
+
 
 	public void convertFromBrioCreativeIntoBC2Files (String biocreativeFilePath, String destinationPath) throws IOException{
 		//        
@@ -1130,10 +1136,10 @@ public class LoadBiocIntoAnoteTest {
 			System.out.println("File doesn't exist or can't be read.");
 			System.exit(0);
 		}
-		
+
 		FileInputStream is = new FileInputStream(joChemPath);
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
-	
+
 		PrintWriter pwt = new PrintWriter(joChemDestinPath);
 
 		String line;
