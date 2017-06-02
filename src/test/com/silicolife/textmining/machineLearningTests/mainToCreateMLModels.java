@@ -1,5 +1,6 @@
 package test.com.silicolife.textmining.machineLearningTests;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -19,7 +20,7 @@ import com.silicolife.textmining.machinelearning.biotml.reader.BioTMLCorpusReade
 import com.silicolife.textmining.machinelearning.biotml.reader.BioTMLModelReaderImpl;
 import com.silicolife.textmining.machinelearning.biotml.writer.BioTMLModelWriterImpl;
 
-import main.com.silicolife.textmining.machineLearningMains.LoadBiocIntoAnoteTest;
+import main.com.silicolife.textmining.machineLearningMains.MLBioTMLModelVSNejiUtils;
 
 public class mainToCreateMLModels {
 
@@ -47,18 +48,16 @@ public class mainToCreateMLModels {
 
 //	@Test
 	public void createOURModel() throws BioTMLException{
-		LoadBiocIntoAnoteTest classTest=new LoadBiocIntoAnoteTest();
-
 		System.out.println("Loading the BioTMLCorpus...");
 
 		BioTMLCorpusReaderImpl reader = new BioTMLCorpusReaderImpl();
 		IBioTMLCorpus corpus = reader.readBioTMLCorpusFromBioCFiles(sentencesFile, annotationsFile, "nlp4j");
 
 		@SuppressWarnings("static-access")
-		IBioTMLModel svm = new MalletClassifierModel(classTest.loadfeatures(), classTest.defaultSVMConfiguration(modelClassType, BioTMLConstants.ner.toString()));
+		IBioTMLModel svm = new MalletClassifierModel(MLBioTMLModelVSNejiUtils.loadfeatures(), MLBioTMLModelVSNejiUtils.defaultSVMConfiguration(modelClassType, BioTMLConstants.ner.toString()));
 
 		svm.train(corpus);
-		classTest.createDirectories (modelDir);
+		new File(modelDir).mkdirs();
 		IBioTMLModelWriter writer = new BioTMLModelWriterImpl(modelDir);
 		writer.writeGZModelFile(svm); 
 		System.out.println("Model Creation finished!");		
@@ -97,20 +96,20 @@ public class mainToCreateMLModels {
 	}
 //@Test
 	public void createConditionsToRunNeji() throws IOException{
-		LoadBiocIntoAnoteTest classTest=new LoadBiocIntoAnoteTest();
+		MLBioTMLModelVSNejiUtils classTest=new MLBioTMLModelVSNejiUtils();
 //		classTest.convertBioCreativeTExtFilesIntoBC2(sentencesFile, nejiSentencesFile);
 		
-		classTest.convertBiocreativeFilesIntoEachGroupFiles(annotationsFile,nejiAnnotationsDir);	
-		classTest.convertFromBioCreativeIntoBC2UsingAFolder(nejiAnnotationsDir, nejiAnnotationsDir+"/bc2Files");
+		classTest.splitBioCAnnotationsFilesByGroups(annotationsFile,nejiAnnotationsDir);	
+		classTest.convertBioCAnnotationsToBC2FormatUsingAFolder(nejiAnnotationsDir, nejiAnnotationsDir+"/bc2Files");
 //		classTest.convertFromBioCreativeTEXTFILESIntoBC2UsingAFolder("/home/tiagoalves/workspace/development/generalMain/sentencesGrouped", "/home/tiagoalves/workspace/development/generalMain/sentencesGrouped/bc2Sentences");
 	}
 
 	public void evaluateNejiAnnotations(String groupType, String nejiAnnotationsDir) throws BioTMLException{
-		LoadBiocIntoAnoteTest classTest=new LoadBiocIntoAnoteTest();
+		MLBioTMLModelVSNejiUtils classTest=new MLBioTMLModelVSNejiUtils();
 
-		List<IBioTMLEntity> annotations = classTest.getAnnotationsFromBC2AnnotationsFolder(nejiAnnotationsDir, groupType);
+		List<IBioTMLEntity> annotations = classTest.loadAnnotationsFromBC2AnnotationsFolder(nejiAnnotationsDir, groupType);
 
-		List<IBioTMLEntity> goldAnnotations = classTest.getGoldAnnotations(goldAnnotationsFile);
+		List<IBioTMLEntity> goldAnnotations = classTest.loadGoldAnnotationsFromTSVFile(goldAnnotationsFile);
 
 		System.out.println("Results for:" + groupType.toUpperCase() +"\n");
 
@@ -120,11 +119,11 @@ public class mainToCreateMLModels {
 
 
 	public void evaluateOurModel(String groupType) throws BioTMLException{
-		LoadBiocIntoAnoteTest classTest=new LoadBiocIntoAnoteTest();
+		MLBioTMLModelVSNejiUtils classTest=new MLBioTMLModelVSNejiUtils();
 
 		List<IBioTMLEntity> annotations = testWithOurModel(modelDir, corpusSentencesFile);
 
-		List<IBioTMLEntity> goldAnnotations = classTest.getGoldAnnotations(goldAnnotationsFile);
+		List<IBioTMLEntity> goldAnnotations = classTest.loadGoldAnnotationsFromTSVFile(goldAnnotationsFile);
 
 		System.out.println("Results for:" + groupType.toUpperCase() +"\n");
 

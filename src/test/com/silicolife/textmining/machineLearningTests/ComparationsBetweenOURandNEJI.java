@@ -1,11 +1,17 @@
 package test.com.silicolife.textmining.machineLearningTests;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
 import com.silicolife.textmining.machinelearning.biotml.core.BioTMLConstants;
@@ -22,7 +28,29 @@ import com.silicolife.textmining.machinelearning.biotml.reader.BioTMLCorpusReade
 import com.silicolife.textmining.machinelearning.biotml.reader.BioTMLModelReaderImpl;
 import com.silicolife.textmining.machinelearning.biotml.writer.BioTMLModelWriterImpl;
 
-import main.com.silicolife.textmining.machineLearningMains.LoadBiocIntoAnoteTest;
+import main.com.silicolife.textmining.machineLearningMains.MLBioTMLModelVSNejiUtils;
+import pt.ua.tm.neji.core.module.Reader;
+import pt.ua.tm.neji.core.module.Writer;
+import pt.ua.tm.neji.core.parser.Parser;
+import pt.ua.tm.neji.core.parser.ParserLanguage;
+import pt.ua.tm.neji.core.parser.ParserLevel;
+import pt.ua.tm.neji.core.pipeline.Pipeline;
+import pt.ua.tm.neji.exception.NejiException;
+import pt.ua.tm.neji.ml.MLHybrid;
+import pt.ua.tm.neji.ml.MLModel;
+import pt.ua.tm.neji.nlp.NLP;
+import pt.ua.tm.neji.parser.GDepParser;
+import pt.ua.tm.neji.pipeline.DefaultPipeline;
+import pt.ua.tm.neji.reader.RawReader;
+import pt.ua.tm.neji.sentencesplitter.LingpipeSentenceSplitter;
+import pt.ua.tm.neji.train.config.ModelConfig;
+import pt.ua.tm.neji.train.model.CRFModel;
+import pt.ua.tm.neji.train.nlp.TrainNLP;
+import pt.ua.tm.neji.train.pipeline.TrainPipelinePhase1;
+import pt.ua.tm.neji.train.pipeline.TrainPipelinePhase2;
+import pt.ua.tm.neji.train.reader.BC2Reader;
+import pt.ua.tm.neji.train.trainer.DefaultTrainer;
+import pt.ua.tm.neji.writer.BC2Writer;
 
 public class ComparationsBetweenOURandNEJI {
 
@@ -34,7 +62,7 @@ public class ComparationsBetweenOURandNEJI {
 
 	@Test
 	public void createOurModel() throws BioTMLException{
-		LoadBiocIntoAnoteTest classTest=new LoadBiocIntoAnoteTest();
+		MLBioTMLModelVSNejiUtils classTest=new MLBioTMLModelVSNejiUtils();
 
 
 
@@ -92,7 +120,7 @@ public class ComparationsBetweenOURandNEJI {
 
 	//	@Test
 	public void evaluateUsingAGZModel() throws BioTMLException{
-		LoadBiocIntoAnoteTest classTest=new LoadBiocIntoAnoteTest();
+		MLBioTMLModelVSNejiUtils classTest=new MLBioTMLModelVSNejiUtils();
 		String corpusDir="src/test/resources/chemdner/trainFile";
 		String modelDir="tests/ourModel/FAMILY.gz";
 
@@ -109,7 +137,7 @@ public class ComparationsBetweenOURandNEJI {
 		List<IBioTMLEntity> annotationsTest = annotatedCorpus.getEntities();
 
 
-		List<IBioTMLEntity> goldAnnotations = classTest.getGoldAnnotations("src/test/resources/chemdner/train/evaluate200.tsv");
+		List<IBioTMLEntity> goldAnnotations = classTest.loadGoldAnnotationsFromTSVFile("src/test/resources/chemdner/train/evaluate200.tsv");
 
 
 		classTest.evaluateAnnotation(goldAnnotations,annotationsTest);
@@ -117,19 +145,134 @@ public class ComparationsBetweenOURandNEJI {
 
 //		@Test
 	public void evaluateUsingNejiOutput() throws BioTMLException{
-		LoadBiocIntoAnoteTest classTest=new LoadBiocIntoAnoteTest();
-		List<IBioTMLEntity> goldAnnotations = classTest.getGoldAnnotations("src/test/resources/chemdner/trainFile/train_1000.tsv");
-		List<IBioTMLEntity> annotations = classTest.getAnnotationsFromGroupedBC2File("/home/tiagoalves/workspace/nejiCode/tests/nejiOutput/groupBC2FileOf1000patentsBC2.bc2");
+		MLBioTMLModelVSNejiUtils classTest=new MLBioTMLModelVSNejiUtils();
+		List<IBioTMLEntity> goldAnnotations = classTest.loadGoldAnnotationsFromTSVFile("src/test/resources/chemdner/trainFile/train_1000.tsv");
+		List<IBioTMLEntity> annotations = classTest.loadAnnotationsFromGroupedBC2File("/home/tiagoalves/workspace/nejiCode/tests/nejiOutput/groupBC2FileOf1000patentsBC2.bc2");
 		classTest.evaluateAnnotation(goldAnnotations,annotations);
 	}
 
 //@Test
 public void testConversionToBC2() throws IOException{
-	LoadBiocIntoAnoteTest classTest=new LoadBiocIntoAnoteTest();
-	classTest.convertBioCreativeTExtFilesIntoBC2(sentencesFile, corpusDir + "/1000patentsBC2.txt");
+	MLBioTMLModelVSNejiUtils classTest=new MLBioTMLModelVSNejiUtils();
+	classTest.convertBioCTextFilesIntoBC2TextFormat(sentencesFile, corpusDir + "/1000patentsBC2.txt");
 }
 	
-	
+//@Test
+public void trainNejiModel() throws NejiException, IOException{
+	// Set files
+	String sentencesFile = "/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/1000patentsBC2.txt";
+	String annotationsFile = "/home/tiagoalves/workspace/development/src/test/resources/chemdner/trainFile/training_annotations";
+	String modelConfigurationFile = "/home/tiagoalves/workspace/development/tests/nejiModel/trainFiles/configurationsTest.config";
+	String modelFile = "/home/tiagoalves/workspace/development/tests/nejiModel/FAMILY.gz";
+
+	// Create parser
+	Parser parser = new GDepParser(ParserLanguage.ENGLISH, ParserLevel.CHUNKING, new LingpipeSentenceSplitter(), false).launch();
+
+	// Set sentences and annotations streams
+	InputStream sentencesStream = new FileInputStream(sentencesFile);
+	InputStream annotationsStream = new FileInputStream(annotationsFile);
+
+	// Run pipeline to get corpus from sentences and annotations
+	Pipeline pipelinePhase1 = new TrainPipelinePhase1()
+			.add(new BC2Reader(parser, null, annotationsStream))
+			.add(new TrainNLP(parser));
+	pipelinePhase1.run(sentencesStream);
+
+	// Close sentences and annotations streams
+	sentencesStream.close();
+	annotationsStream.close();
+
+
+	// Get corpus
+	pt.ua.tm.neji.core.corpus.Corpus corpus = pipelinePhase1.getCorpus();
+
+	// Get model configuration
+	InputStream inputStream = new ByteArrayInputStream(modelConfigurationFile.getBytes("UTF-8"));
+	ModelConfig modelConfig = new ModelConfig(modelConfigurationFile);
+
+	// Run pipeline to train model on corpus
+	Pipeline pipelinePhase2 = new TrainPipelinePhase2()
+			.add(new DefaultTrainer(modelConfig));
+	pipelinePhase2.setCorpus(corpus);
+	pipelinePhase2.run(inputStream);
+
+	// Close input stream
+	inputStream.close();
+
+
+	// Get trained model and write to file
+	CRFModel model = (CRFModel) pipelinePhase2.getModuleData("TRAINED_MODEL").get(0);
+	model.write(new FileOutputStream(modelFile));
+
+
+}
+
+
+//	@Test
+public void annotateUsingNejiModel() throws NejiException, IOException{
+	// Set files
+	String documentFile = "src/test/resources/chemdner/trainFile/1000patentsBC2.txt";
+	String outputFile = "tests/nejiOutput/text.bc2";
+
+	// Set resources
+	//		String dictionary1File = "example/dictionaries/Body_Part_Organ_or_Organ_Component_T023_ANAT.tsv";
+	//		String dictionary2File = "example/dictionaries/Disease_or_Syndrome_T047_DISO.tsv";
+	String modelFile = "tests/nejiModel/model/model.properties";
+
+	// Create reader
+	Reader reader = new RawReader();
+
+	// Create parser
+	Parser parser = new GDepParser(ParserLanguage.ENGLISH, ParserLevel.CHUNKING, 
+			new LingpipeSentenceSplitter(), false).launch();
+
+	// Create NLP        
+	NLP nlp = new NLP(parser);
+
+	// Create dictionary matchers
+	//		List<String> dictionary1Lines = FileUtils.readLines(new File(dictionary1File));
+	//		Dictionary dictionary1 = VariantMatcherLoader.loadDictionaryFromLines(dictionary1Lines);
+	//		List<String> dictionary2Lines = FileUtils.readLines(new File(dictionary2File));
+	//		Dictionary dictionary2 = VariantMatcherLoader.loadDictionaryFromLines(dictionary2Lines);
+
+	//		DictionaryHybrid dictionaryMatcher1 = new DictionaryHybrid(dictionary1);
+	//		DictionaryHybrid dictionaryMatcher2 = new DictionaryHybrid(dictionary2);
+
+	// Create machine-learning model matcher
+	MLModel model = new MLModel("FAMILY", new File(modelFile));
+	model.initialize();
+	MLHybrid mlModelMatcher = new MLHybrid(model.getCrf(), "FAMILY");
+
+	// Create Writer
+	Writer writer = new BC2Writer();
+
+	// Set document stream
+	InputStream documentStream = new FileInputStream(documentFile);
+
+	// Run pipeline to get annotations
+	Pipeline pipeline = new DefaultPipeline()
+			.add(reader)
+			.add(nlp)
+			//		        .add(dictionaryMatcher1)
+			//		        .add(dictionaryMatcher2)
+			.add(mlModelMatcher)
+			.add(writer);
+
+	OutputStream outputStream = pipeline.run(documentStream).get(0);
+
+	// Write annotations to output file
+	FileUtils.writeStringToFile(new File(outputFile), outputStream.toString());
+
+	// Close streams
+	documentStream.close();
+	outputStream.close();
+
+	// Close parser
+	parser.close();
+
+
+}
+
 
 }
 

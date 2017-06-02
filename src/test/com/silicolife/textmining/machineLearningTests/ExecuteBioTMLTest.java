@@ -25,7 +25,7 @@ import com.silicolife.textmining.machinelearning.biotml.reader.BioTMLCorpusReade
 import com.silicolife.textmining.machinelearning.biotml.reader.BioTMLModelReaderImpl;
 import com.silicolife.textmining.machinelearning.biotml.writer.BioTMLModelWriterImpl;
 
-import main.com.silicolife.textmining.machineLearningMains.LoadBiocIntoAnoteTest;
+import main.com.silicolife.textmining.machineLearningMains.MLBioTMLModelVSNejiUtils;
 
 public class ExecuteBioTMLTest {
 	
@@ -37,7 +37,7 @@ public class ExecuteBioTMLTest {
 	}
 	
 	private IBioTMLModel createCRFModel(IBioTMLCorpus corpus, String dirToSave, String modelClassType) throws BioTMLException{
-		IBioTMLModel crf = new MalletTransducerModel(LoadBiocIntoAnoteTest.loadfeatures(), LoadBiocIntoAnoteTest.defaultCRFConfiguration(modelClassType, BioTMLConstants.ner.toString()));
+		IBioTMLModel crf = new MalletTransducerModel(MLBioTMLModelVSNejiUtils.loadfeatures(), MLBioTMLModelVSNejiUtils.defaultCRFConfiguration(modelClassType, BioTMLConstants.ner.toString()));
 		crf.train(corpus);
 		if (!new File(new File(dirToSave).getParent()).exists()){
 			new File(new File(dirToSave).getParent()).mkdirs();
@@ -50,7 +50,7 @@ public class ExecuteBioTMLTest {
 	
 	private IBioTMLModel createSVMModel(IBioTMLCorpus corpus, String dirToSave, String modelClassType) throws BioTMLException{
 		@SuppressWarnings("static-access")
-		IBioTMLModel svm = new MalletClassifierModel(LoadBiocIntoAnoteTest.loadfeatures(), LoadBiocIntoAnoteTest.defaultSVMConfiguration(modelClassType, BioTMLConstants.ner.toString()));
+		IBioTMLModel svm = new MalletClassifierModel(MLBioTMLModelVSNejiUtils.loadfeatures(), MLBioTMLModelVSNejiUtils.defaultSVMConfiguration(modelClassType, BioTMLConstants.ner.toString()));
 		svm.train(corpus);
 		if (!new File(new File(dirToSave).getParent()).exists()){
 			new File(new File(dirToSave).getParent()).mkdirs();
