@@ -67,6 +67,7 @@ public class MLBioTMLModelVSNejiUtils {
 
 	// --------------------------EVALUATION --------------------------//
 
+
 	public static void evaluateAnnotation(List<IBioTMLEntity> goldAnnotations, List<IBioTMLEntity> toCompareAnnotations){
 		BioTMLEvaluator<IBioTMLEntity> annotationsEvaluator = new BioTMLEvaluator<>();
 		IBioTMLConfusionMatrix<IBioTMLEntity> confusionMatrix = annotationsEvaluator.generateConfusionMatrix(goldAnnotations, toCompareAnnotations);
@@ -80,8 +81,14 @@ public class MLBioTMLModelVSNejiUtils {
 
 		}
 	}
+	
+	public void evaluateNejiAnnotations(String groupType, String nejiAnnotationsDir, String goldAnnotationsFile) throws BioTMLException{
+		List<IBioTMLEntity> annotations = loadAnnotationsFromBC2AnnotationsFolder(nejiAnnotationsDir, groupType);
+		List<IBioTMLEntity> goldAnnotations = loadGoldAnnotationsFromTSVFile(goldAnnotationsFile);
+		System.out.println("Results for:" + groupType.toUpperCase() +"\n");
+		evaluateAnnotation(goldAnnotations,annotations);
 
-
+	}
 	
 	// --------------------------FEATURES GENERATOR --------------------------//
 
@@ -514,7 +521,6 @@ public class MLBioTMLModelVSNejiUtils {
 			if (annotationsLine[4].contains(patentID) || patentID.contains(annotationsLine[4])){
 				return annotationsLine[5];
 			}
-
 		}
 		is.close();
 		br.close();
