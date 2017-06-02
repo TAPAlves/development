@@ -118,7 +118,7 @@ public class LoadBiocIntoAnoteTest {
 
 		String modelClassType = "chemical";
 		String modelIEType = "NER";
-		IBioTMLModelConfigurator configuration = defaultConfiguration(modelClassType, modelIEType);
+		IBioTMLModelConfigurator configuration = defaultSVMConfiguration(modelClassType, modelIEType);
 		//			configuration.setAlgorithmType(BioTMLAlgorithms.malletsvm.toString());
 		//			svm_parameter svmparam = configuration.getSVMParameters();
 		//			svmparam.kernel_type = 3;
@@ -132,7 +132,7 @@ public class LoadBiocIntoAnoteTest {
 		System.out.println("Starting the model...");
 
 		//			IBioTMLModel model =new MalletClassifierModel(corpus, loadFeatures(), configuration, defaultEvaluationConfiguration());
-		IBioTMLModel model = new MalletTransducerModel(loadfeatures(),defaultConfiguration(modelClassType, modelIEType));
+		IBioTMLModel model = new MalletTransducerModel(loadfeatures(),defaultSVMConfiguration(modelClassType, modelIEType));
 		//			System.out.println("Executing the model evaluation...");
 		//			IBioTMLModelEvaluationResults evaluation = model.evaluate(corpus, defaultEvaluationConfiguration());
 		//			System.out.println(evaluation.printResults());
@@ -371,11 +371,10 @@ public class LoadBiocIntoAnoteTest {
 		return new BioTMLFeatureGeneratorConfiguratorImpl(features);
 	}
 
-	public static IBioTMLModelConfigurator defaultConfiguration(String modelClassType, String modelIEType){
+	public static IBioTMLModelConfigurator defaultSVMConfiguration(String modelClassType, String modelIEType){
 		BioTMLModelConfigurator configuration = new BioTMLModelConfigurator(modelClassType, modelIEType);
 		configuration.setAlgorithmType(BioTMLAlgorithm.malletsvm);
 		configuration.setNumThreads(5);
-		//		configuration.setSVMParameters("-h","0");
 		return configuration;
 	}
 
@@ -388,7 +387,7 @@ public class LoadBiocIntoAnoteTest {
 
 	private void testTrainAndSavingModel() throws BioTMLException, IOException{
 		IBioTMLCorpus corpus = new BioTMLCorpusImpl(loadDocuments(), loadAnnotations(),"");
-		IBioTMLModel svm = new MalletClassifierModel(loadfeatures(), defaultConfiguration("protein", BioTMLConstants.ner.toString()));
+		IBioTMLModel svm = new MalletClassifierModel(loadfeatures(), defaultSVMConfiguration("protein", BioTMLConstants.ner.toString()));
 		IBioTMLMultiEvaluation res = svm.evaluate(corpus, defaultEvaluationConfiguration());
 		System.out.println(res);
 		svm.train(corpus);
@@ -421,7 +420,7 @@ public class LoadBiocIntoAnoteTest {
 
 
 		//		IBioTMLCorpus corpus = new BioTMLCorpusImpl(loadDocuments(), loadAnnotations(),"");
-		IBioTMLModel svm = new MalletClassifierModel(loadfeatures(), defaultConfiguration("FAMILY", BioTMLConstants.ner.toString()));
+		IBioTMLModel svm = new MalletClassifierModel(loadfeatures(), defaultSVMConfiguration("FAMILY", BioTMLConstants.ner.toString()));
 		//		IBioTMLMultiEvaluation res = svm.evaluate(corpus, defaultEvaluationConfiguration());
 		//		System.out.println(res);
 		svm.train(corpus);
@@ -1194,6 +1193,14 @@ public class LoadBiocIntoAnoteTest {
 		pwt.close();
 		br.close();
 		is.close();
+	}
+
+
+	public static IBioTMLModelConfigurator defaultCRFConfiguration(String modelClassType, String modelIEType) {
+			BioTMLModelConfigurator configuration = new BioTMLModelConfigurator(modelClassType, modelIEType);
+			configuration.setAlgorithmType(BioTMLAlgorithm.malletcrf);
+			configuration.setNumThreads(5);
+			return configuration;
 	}
 
 }

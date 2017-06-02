@@ -55,7 +55,7 @@ public class mainToCreateMLModels {
 		IBioTMLCorpus corpus = reader.readBioTMLCorpusFromBioCFiles(sentencesFile, annotationsFile, "nlp4j");
 
 		@SuppressWarnings("static-access")
-		IBioTMLModel svm = new MalletClassifierModel(classTest.loadfeatures(), classTest.defaultConfiguration(modelClassType, BioTMLConstants.ner.toString()));
+		IBioTMLModel svm = new MalletClassifierModel(classTest.loadfeatures(), classTest.defaultSVMConfiguration(modelClassType, BioTMLConstants.ner.toString()));
 
 		svm.train(corpus);
 		classTest.createDirectories (modelDir);
