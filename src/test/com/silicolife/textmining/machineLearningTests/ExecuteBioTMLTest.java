@@ -29,9 +29,12 @@ import main.com.silicolife.textmining.machineLearningMains.MLBioTMLModelVSNejiUt
 
 public class ExecuteBioTMLTest {
 	
-
 	private IBioTMLCorpus loadCorpus(String documentfile, String annotationfile) throws BioTMLException {
 		BioTMLCorpusReaderImpl reader = new BioTMLCorpusReaderImpl();
+		if (annotationfile==null || annotationfile.isEmpty()){
+			IBioTMLCorpus corpus = reader.readBioTMLCorpusFromBioCFiles(documentfile, "nlp4j");
+			return corpus;
+		}
 		IBioTMLCorpus corpus = reader.readBioTMLCorpusFromBioCFiles(documentfile, annotationfile, "nlp4j");
 		return corpus;
 	}
@@ -104,8 +107,8 @@ public class ExecuteBioTMLTest {
 		System.out.println("Loading the training BioTMLCorpus...");
 		IBioTMLCorpus trainingCorpus = loadCorpus(trainingDocumentsFile, trainingAnnotationsFile);
 //		IBioTMLModel model = createCRFModel(trainingCorpus, modelDir, modelClassType);
-		IBioTMLModel model = createSVMModel(trainingCorpus, modelDir, modelClassType);
-//		IBioTMLModel model = readModel(modelDir);
+//		IBioTMLModel model = createSVMModel(trainingCorpus, modelDir, modelClassType);
+		IBioTMLModel model = readModel(modelDir);
 		evaluateOurModel(trainingCorpus, model);
 		
 		System.out.println("Loading the development BioTMLCorpus...");

@@ -34,7 +34,7 @@ import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLE
 import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLModelConfigurator;
 import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLModelEvaluationConfigurator;
 import com.silicolife.textmining.machinelearning.biotml.core.mllibraries.BioTMLAlgorithm;
-import com.silicolife.textmining.machinelearning.biotml.core.models.BioTMLModelConfigurator;
+import com.silicolife.textmining.machinelearning.biotml.core.models.BioTMLModelConfiguratorImpl;
 import com.silicolife.textmining.machinelearning.biotml.core.nlp.nlp4j.BioTMLNLP4J;
 
 public class MLBioTMLModelVSNejiUtils {
@@ -42,7 +42,7 @@ public class MLBioTMLModelVSNejiUtils {
 	// --------------------------CONFIGURATIONS SECTION --------------------------//
 
 	public static IBioTMLModelConfigurator defaultSVMConfiguration(String modelClassType, String modelIEType){
-		BioTMLModelConfigurator configuration = new BioTMLModelConfigurator(modelClassType, modelIEType);
+		BioTMLModelConfiguratorImpl configuration = new BioTMLModelConfiguratorImpl(modelClassType, modelIEType);
 		configuration.setAlgorithmType(BioTMLAlgorithm.malletsvm);
 		configuration.setNumThreads(5);
 		return configuration;
@@ -50,7 +50,7 @@ public class MLBioTMLModelVSNejiUtils {
 
 
 	public static IBioTMLModelConfigurator defaultCRFConfiguration(String modelClassType, String modelIEType) {
-		BioTMLModelConfigurator configuration = new BioTMLModelConfigurator(modelClassType, modelIEType);
+		BioTMLModelConfiguratorImpl configuration = new BioTMLModelConfiguratorImpl(modelClassType, modelIEType);
 		configuration.setAlgorithmType(BioTMLAlgorithm.malletcrf);
 		configuration.setNumThreads(5);
 		return configuration;
