@@ -47,6 +47,7 @@ public class ExecuteBioTMLTest {
 		}
 		IBioTMLModelWriter writer = new BioTMLModelWriterImpl(dirToSave);
 		writer.writeGZModelFile(crf); 
+		readModel(dirToSave);
 		System.out.println("Model Creation finished!");
 		return crf;
 	}
@@ -60,6 +61,7 @@ public class ExecuteBioTMLTest {
 		}
 		IBioTMLModelWriter writer = new BioTMLModelWriterImpl(dirToSave);
 		writer.writeGZModelFile(svm); 
+		readModel(dirToSave);
 		System.out.println("Model Creation finished!");
 		return svm;
 	}
@@ -106,9 +108,9 @@ public class ExecuteBioTMLTest {
 		
 		System.out.println("Loading the training BioTMLCorpus...");
 		IBioTMLCorpus trainingCorpus = loadCorpus(trainingDocumentsFile, trainingAnnotationsFile);
-//		IBioTMLModel model = createCRFModel(trainingCorpus, modelDir, modelClassType);
+		IBioTMLModel model = createCRFModel(trainingCorpus, modelDir, modelClassType);
 //		IBioTMLModel model = createSVMModel(trainingCorpus, modelDir, modelClassType);
-		IBioTMLModel model = readModel(modelDir);
+//		IBioTMLModel model = readModel(modelDir);
 		evaluateOurModel(trainingCorpus, model);
 		
 		System.out.println("Loading the development BioTMLCorpus...");
