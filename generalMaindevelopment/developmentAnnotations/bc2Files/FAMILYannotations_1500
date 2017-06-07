@@ -1,0 +1,550 @@
+CA2100514C|103 117|spiromethylene
+CA2100514C|253 260|halogen
+CA2100514C|27 34|steroid
+CA2100514C|321 335|spiromethylene
+CA2100514C|438 446|steroids
+CA2100514C|0 26|17-spiromethylene steroids
+CA2102780C|26 74|bis mono- and/or bicyclic aryl and/or heteroaryl
+CA2102780C|407 455|bis mono- and/or bicyclic aryl and/or heteroaryl
+CA2102780C|0 41|Bis mono-and bicyclic aryl and heteroaryl
+CA2104399C|448 458|nucleoside
+CA2106642C|25 36|carbazolone
+CA2106642C|0 11|Carbazolone
+CA2106819C|25 44|oligoribonucleotide
+CA2106819C|0 19|Oligoribonucleotide
+CA2120743C|14 43|acyclic phosphonomethoxyalkyl
+CA2120743C|160 166|purine
+CA2120743C|171 181|pyrimidine
+CA2120743C|10 39|acyclic phosphonomethoxyalkyl
+CA2142445C|135 140|amide
+CA2143752C|300 309|aliphatic
+CA2143752C|331 338|carbons
+CA2143752C|385 392|halogen
+CA2151377C|119 130|hydrocarbon
+CA2151377C|138 147|arylalkyl
+CA2151377C|149 153|aryl
+CA2151377C|195 205|R11R12NCO-
+CA2151377C|257 268|hydrocarbon
+CA2151377C|296 307|hydrocarbon
+CA2151377C|362 369|halogen
+CA2151377C|371 376|alkyl
+CA2151377C|378 384|alkoxy
+CA2151377C|386 395|alkylthio
+CA2151377C|406 420|alkylsulphonyl
+CA2151377C|446 456|cycloalkyl
+CA2151377C|458 473|cycloalkylalkyl
+CA2151377C|521 526|alkyl
+CA2151377C|571 582|carbocyclic
+CA2151377C|629 640|hydrocarbon
+CA2151377C|691 702|hydrocarbon
+CA2151377C|783 791|alkylene
+CA2151377C|942 949|alcohol
+CA2151377C|0 17|Aminomethylindans
+CA2151377C|20 31|benzofurans
+CA2151377C|37 52|benzothiophenes
+CA2154601C|175 192|proanthocyanidins
+CA2154601C|424 433|coumarins
+CA2154601C|44 53|coumarins
+CA2154601C|464 481|proanthocyanidins
+CA2154601C|24 33|coumarins
+CA2161857C|0 13|Oxazolidinone
+CA2163175C|1055 1070|C1-C8 haloalkyl
+CA2163175C|1072 1089|C1-C8 alkoxyalkyl
+CA2163175C|1091 1111|C1-C8 alkylthioalkyl
+CA2163175C|1113 1131|C1-C8 hydroxyalkyl
+CA2163175C|1133 1151|C1-C8 acyloxyalkyl
+CA2163175C|1153 1172|C1-C8 aroyloxyalkyl
+CA2163175C|1174 1190|C1-C8 aminoalkyl
+CA2163175C|1192 1213|C1-C8 alkylaminoalkyl
+CA2163175C|1215 1238|C1-C8 dialkylaminoalkyl
+CA2163175C|122 129|halogen
+CA2163175C|1240 1264|C1-C8 trialkylsilylalkyl
+CA2163175C|1301 1306|alkyl
+CA2163175C|131 142|C1-C4 alkyl
+CA2163175C|1351 1368|C1-C6 alkylphenyl
+CA2163175C|1370 1386|C7-C12 arylalkyl
+CA2163175C|1388 1407|C7-C12 alkarylalkyl
+CA2163175C|1412 1429|heterocyclylalkyl
+CA2163175C|1443 1455|heterocyclic
+CA2163175C|146 158|C1-C4 alkoxy
+CA2163175C|1605 1609|halo
+CA2163175C|176 183|halogen
+CA2163175C|185 196|C1-C4 alkyl
+CA2163175C|198 210|C1-C4 alkoxy
+CA2163175C|212 228|C3-C4 alkenyloxy
+CA2163175C|230 246|C3-C4 alkynyloxy
+CA2163175C|297 312|C1-C4 alkylthio
+CA2163175C|329 338|alkylthio
+CA2163175C|376 387|C1-C4 alkyl
+CA2163175C|397 410|C3-C6 alkenyl
+CA2163175C|412 425|C3-C6 alkynyl
+CA2163175C|427 442|C1-C8 haloalkyl
+CA2163175C|444 461|C1-C8 alkoxyalkyl
+CA2163175C|463 483|C1-C8 alkylthioalkyl
+CA2163175C|485 503|C1-C8 hydroxyalkyl
+CA2163175C|505 523|C1-C8 acyloxyalkyl
+CA2163175C|525 544|C1-C8 aroyloxyalkyl
+CA2163175C|546 564|C1-C8 carboxyalkyl
+CA2163175C|566 589|C1-C8 alkylcarboxyalkyl
+CA2163175C|591 614|C6-C12 arylcarboxyalkyl
+CA2163175C|616 632|C1-C8 aminoalkyl
+CA2163175C|634 655|C1-C8 alkylaminoalkyl
+CA2163175C|657 680|C1-C8 dialkylaminoalkyl
+CA2163175C|682 706|C1-C8 trialkylsilylalkyl
+CA2163175C|743 748|alkyl
+CA2163175C|793 809|C3-C8 cycloalkyl
+CA2163175C|811 828|C1-C6 alkylphenyl
+CA2163175C|830 846|C7-C12 arylalkyl
+CA2163175C|848 867|C7-C12 alkarylalkyl
+CA2163175C|872 889|heterocyclylalkyl
+CA2163175C|903 915|heterocyclic
+CA2163175C|11 19|aromatic
+CA2163175C|32 38|oximes
+CA2163175C|40 46|ethers
+CA2163175C|51 61|thioethers
+CA2168921C|31 63|1,6-naphthyridonecarboxylic acid
+CA2168921C|0 32|1,6-naphthyridonecarboxylic acid
+CA2169831C|129 137|aromatic
+CA2171614C|268 279|sialic acid
+CA2171614C|344 355|sialic acid
+CA2171614C|38 49|sialic acid
+CA2173116C|124 136|heterocyclic
+CA2173116C|193 198|sugar
+CA2173116C|70 88|purine nucleosides
+CA2173116C|14 25|nucleosides
+CA2173116C|30 41|nucleotides
+CA2173876C|0 23|Alkoxy alkyl carbamates
+CA2173876C|29 52|imidazo(1,2-a)pyridines
+CA2176392C|96 111|phosphate ester
+CA2176392C|7 21|2-amino purine
+CA2176796C|12 39|benzyloxycarbonylguanidines
+CA2179955C|193 195|Ar
+CA2179955C|197 207|cycloalkyl
+CA2179955C|230 247|cyclo- alkylalkyl
+CA2179955C|275 277|Ar
+CA2183620C|200 204|PLGA
+CA2183620C|69 73|PLGA
+CA2185397C|0 19|Arylalkyl diazinone
+CA2185397C|0 20|Arylalkyl-diazinones
+CA2188267C|164 172|R4a-CH2-
+CA2188267C|208 229|(C1-C4)-alkylmercapto
+CA2188267C|243 251|-NR11R12
+CA2188267C|267 272|-OR13
+CA2188267C|7 26|tetrahydropteridine
+CA2189221C|12 28|sulfonimidamides
+CA2189221C|135 151|Sulfonimidamides
+CA2189221C|12 28|sulfonimidamides
+CA2195663C|0 19|Dihydrobenzofuranes
+CA2201477C|4 14|pyrimidone
+CA2211982C|0 28|Indanylidineacetylguanidines
+CA2211982C|12 40|indanylidineacetylguanidines
+CA2217191C|675 682|alcohol
+CA2217191C|51 63|phospholipid
+CA2218553C|31 45|amylmetacresol
+CA2220777C|6 18|heterocycles
+CA2222964C|172 178|halide
+CA2222964C|288 294|halide
+CA2222964C|313 320|halides
+CA2224369C|0 21|Aromatic acid diamide
+CA2224369C|130 132|Ar
+CA2224369C|268 279|C1-C4 alkyl
+CA2224369C|281 293|C1-C4 alkoxy
+CA2224369C|337 345|halogens
+CA2224369C|0 22|Aromatic acid diamides
+CA2224426C|71 81|fatty acid
+CA2224426C|90 96|amides
+CA2225822C|264 278|nitroimidazole
+CA2228060C|0 9|Isoxazole
+CA2228060C|14 25|crotonamide
+CA2230960C|1040 1056|C3-C6 cycloalkyl
+CA2230960C|1072 1078|alkoxy
+CA2230960C|1088 1104|C1-C4 thioalkoxy
+CA2230960C|1143 1147|aryl
+CA2230960C|1192 1202|arylalkoxy
+CA2230960C|1247 1257|alkylamino
+CA2230960C|1276 1281|alkyl
+CA2230960C|1586 1594|aromatic
+CA2230960C|1634 1639|-NR8-
+CA2230960C|1710 1716|alkoxy
+CA2230960C|1726 1742|C1-C4 thioalkoxy
+CA2230960C|1781 1788|aryloxy
+CA2230960C|1804 1814|alkylamino
+CA2230960C|209 220|C1-C8 alkyl
+CA2230960C|260 276|C3-C6 cycloalkyl
+CA2230960C|315 338|C2-C8 unsaturated alkyl
+CA2230960C|349 355|ketone
+CA2230960C|37 47|piperazine
+CA2230960C|394 398|aryl
+CA2230960C|437 449|C1-C4 alkoxy
+CA2230960C|488 499|arylhydroxy
+CA2230960C|599 604|thiol
+CA2230960C|710 727|C1-C4 thio-alkoxy
+CA2230960C|895 902|halogen
+CA2230960C|970 975|alkyl
+CA2230960C|985 1001|C1-C4 thio-alkyl
+CA2230960C|0 10|Piperazine
+CA2232880C|128 142|perfluoroalkyl
+CA2232880C|194 213|(hydrocarbon)-alkyl
+CA2232880C|17 24|alkanes
+CA2240721C|114 119|sugar
+CA2240721C|34 62|N-substituted methacrylamide
+CA2240721C|66 76|acrylamide
+CA2240721C|12 22|acrylamide
+CA2242618C|241 244|PVP
+CA2242618C|34 37|pvp
+CA2244512C|267 276|flavonoid
+CA2244512C|385 394|flavonoid
+CA2244512C|68 77|flavonoid
+CA2263798C|125 135|amino acid
+CA2263798C|65 75|amino acid
+CA2270177C|79 88|androgens
+CA2270893C|105 113|retinoid
+CA2270893C|128 136|retinoid
+CA2270893C|95 103|retinoid
+CA2270893C|0 39|N-aryl substituted tetrahydroquinolines
+CA2270893C|52 60|retinoid
+CA2275686C|0 16|Isoquinolinamine
+CA2275686C|21 36|phthalazinamine
+CA2276694C|173 180|alcohol
+CA2276694C|182 187|ether
+CA2276694C|211 216|thiol
+CA2276694C|218 233|carboxylic acid
+CA2276694C|390 395|RCOO-
+CA2276694C|397 403|RCONH-
+CA2276694C|405 410|RCOS-
+CA2276694C|412 418|RCH2O-
+CA2276694C|420 427|RCH2NH-
+CA2276694C|429 437|-COOCH2R
+CA2276694C|439 448|-CONHCH2R
+CA2276694C|453 459|-SCH2R
+CA2276694C|4 14|fatty acid
+CA2282254C|0 15|Hydroxyazepanes
+CA2282254C|128 134|Benzyl
+CA2282254C|139 151|3,6-dibenzyl
+CA2282254C|167 182|hydroxyazepanes
+CA2282254C|362 381|tetrahydroxyazepane
+CA2282254C|0 15|Hydroxyazepanes
+CA2288726C|109 116|halogen
+CA2291796C|126 135|vanilloid
+CA2291796C|190 199|vanilloid
+CA2291796C|251 260|vanilloid
+CA2293714C|0 23|Benzpyrido cycloheptane
+CA2294086C|202 213|amino acids
+CA2295678C|0 8|Pyridine
+CA2302445C|141 151|piperazino
+CA2302445C|155 165|piperidino
+CA2302445C|189 194|alkyl
+CA2302445C|221 234|cycloalkyloxy
+CA2302445C|269 282|trialkylsilyl
+CA2302445C|28 34|taxane
+CA2302445C|4 10|taxane
+CA2304704C|478 488|disulfides
+CA2308315C|101 106|alkyl
+CA2308315C|168 172|aryl
+CA2308315C|197 202|alkyl
+CA2308315C|278 283|alkyl
+CA2308315C|301 308|carbons
+CA2308315C|369 374|alkyl
+CA2308315C|436 440|aryl
+CA2308315C|465 470|alkyl
+CA2308315C|0 28|N,n'-bis(sulfonyl)hydrazines
+CA2309256C|23 47|6-O-alkyl erythromycin A
+CA2309256C|22 44|6-o-alkyl erythromycin
+CA2310659C|428 439|amino acids
+CA2318184C|173 175|Ar
+CA2318184C|35 55|cyclopentenopyridine
+CA2318184C|12 70|5-(2,2-difluoro-1,3-benzodioxol-5-yl) cyclopentenopyridine
+CA2320288C|1160 1184|oligodeoxyribonucleotide
+CA2320288C|284 308|oligodeoxyribonucleotide
+CA2320288C|475 499|oligodeoxyribonucleotide
+CA2320288C|49 73|oligodeoxyribonucleotide
+CA2320288C|536 560|oligodeoxyribonucleotide
+CA2320288C|692 716|oligodeoxyribonucleotide
+CA2320288C|0 25|Oligodeoxyribonucleotides
+CA2330128C|189 199|polyphenol
+CA2330128C|301 310|vitamin E
+CA2330128C|312 321|vitamin A
+CA2336799C|195 213|polyorganosiloxane
+CA2336799C|84 92|silicone
+CA2339290C|178 188|amino acid
+CA2339290C|272 287|hyaluronic acid
+CA2339290C|49 60|amino acids
+CA2341949C|47 57|pyridinium
+CA2347981C|298 319|sulphinyl heterocycle
+CA2347981C|654 675|sulphinyl heterocycle
+CA2347981C|96 118|sulphinyl heterocycles
+CA2353544C|237 253|oligosaccharides
+CA2353544C|26 42|oligosaccharides
+CA2357986C|64 70|2'-O-R
+CA2357986C|72 82|2'-O-R-O-R
+CA2357986C|84 90|3'-O-R
+CA2357986C|96 106|3'-O-R-O-R
+CA2359708C|0 8|Ketolide
+CA2366186C|166 171|alkyl
+CA2366186C|335 341|alkoxy
+CA2366186C|349 354|alkyl
+CA2366186C|358 364|alkoxy
+CA2366186C|39 47|retinoid
+CA2366186C|408 413|alkyl
+CA2366186C|445 462|C5-12-hydrocarbon
+CA2366186C|580 596|carboxylic acids
+CA2366186C|624 632|retinoid
+CA2366186C|730 736|esters
+CA2366186C|0 8|Retinoid
+CA2370201C|299 312|pentapeptides
+CA2370201C|329 342|pentapeptides
+CA2373183C|9 23|iminocyclitols
+CA2373183C|0 13|Iminocyclitol
+CA2373634C|0 16|Isophosphoramide
+CA2373634C|0 16|Isophosphoramide
+CA2375671C|101 108|halogen
+CA2375671C|116 121|alkyl
+CA2375671C|131 137|alkoxy
+CA2375671C|212 219|halogen
+CA2375671C|244 249|alkyl
+CA2375671C|259 265|alkoxy
+CA2375671C|326 331|alkyl
+CA2375671C|345 350|alkyl
+CA2375671C|358 364|alkoxy
+CA2375671C|395 400|alkyl
+CA2375671C|414 419|alkyl
+CA2375671C|437 442|alkyl
+CA2375671C|464 483|-(CH2)n-piperazinyl
+CA2375671C|537 542|alkyl
+CA2375671C|570 575|alkyl
+CA2375671C|577 596|-(CH2)n-morpholinyl
+CA2375671C|598 605|-(CH2)n
+CA2375671C|620 640|-(CH2)n+1-imidazolyl
+CA2375671C|648 662|alkyl-sulfanyl
+CA2375671C|670 684|alkyl-sulfonyl
+CA2375671C|699 718|"-NH-(CH2)n+1N(R4"")2"
+CA2375671C|720 736|"-(CH2)n+1N(R4"")2"
+CA2375671C|738 761|-O-(CH2)n+1-morpholinyl
+CA2375671C|763 786|-O-(CH2)n+1-piperidinyl
+CA2375671C|76 83|halogen
+CA2375671C|790 808|"-O-(CH2)n+1N(R4"")2"
+CA2375671C|843 848|alkyl
+CA2375671C|870 882|"-C(O)N(R4"")-"
+CA2375671C|886 898|"-N(R4"")C(O)-"
+CA2375671C|0 19|4-phenyl-pyrimidine
+CA2379557C|254 296|arylsulphonamide-substituted benzimidazole
+CA2379557C|25 67|arylsulphonamide-substituted benzimidazole
+CA2379557C|0 42|Arylsulphonamide-substituted benzimidazole
+CA2382337C|397 404|phenols
+CA2391297C|33 71|6-O-alkyl-2-nor-2-substituted ketolide
+CA2391297C|0 38|6-o-alkyl-2-nor-2-substituted ketolide
+CA2396151C|362 376|aminoglycoside
+CA2396151C|394 406|tetracycline
+CA2396151C|602 616|alkyl sulfates
+CA2396151C|618 634|alkyl sulfonates
+CA2396151C|636 654|alkylaryl sulfates
+CA2396151C|656 676|dialkylaryl sulfates
+CA2396151C|678 698|alkylaryl sulfonates
+CA2396151C|700 722|dialkylaryl sulfonates
+CA2396151C|724 743|cycloalkyl sulfates
+CA2396151C|745 766|cycloalkyl sulfonates
+CA2396151C|768 792|alkylcycloalkyl sulfates
+CA2419877C|100 119|polyethylene glycol
+CA2419877C|159 166|alkanol
+CA2421548C|0 7|Amidine
+CA2426625C|118 130|benzoquinone
+CA2426625C|351 363|benzoquinone
+CA2426625C|518 535|thiazolidinedione
+CA2438270C|985 1000|oligosaccharide
+CA2444244C|24 36|acylanilides
+CA2448607C|295 298|PEG
+CA2448607C|300 319|polyethylene glycol
+CA2472449C|136 171|aminoalkyl methacrylate copolymer E
+CA2472449C|579 614|aminoalkyl methacrylate copolymer E
+CA2472449C|780 815|aminoalkyl methacrylate copolymer E
+CA2508180C|0 21|Dimetalhydroxy malate
+CA2508180C|0 22|Dimetalhydroxy malates
+CA2529055C|0 11|Carotenoids
+CA2529055C|163 176|phospholipids
+CA2533117A1|382 393|tetracyclic
+CA2533117A1|577 586|monoamine
+CA2538729A1|114 124|morpholino
+CA2538729A1|339 347|androgen
+CA2538729A1|463 471|androgen
+CA2538729A1|33 41|androgen
+CA2577676A1|120 130|fatty acid
+CA2577676A1|92 102|fatty acid
+CA2582262A1|20 34|fatty alcohols
+CA2582262A1|20 34|fatty alcohols
+CA2587247A1|55 74|phosphatidyl serine
+CA2587247A1|23 42|phosphatidyl serine
+CA2590334A1|187 199|heterocyclic
+CA2590334A1|17 37|[3.2.0] heterocyclic
+CA2597798A1|129 139|C1-6 alkyl
+CA2597798A1|174 179|alkyl
+CA2602643C|316 323|sterols
+CA2602643C|333 340|stanols
+CA2602643C|365 377|procyanidins
+CA2602643C|379 390|policosanol
+CA2604392A1|101 128|quaternary ammonium halides
+CA2604392A1|24 51|quaternary ammonium halides
+CA2604392A1|0 27|Quaternary ammonium halides
+CA2612595A1|108 128|geranygeranylacetone
+CA2612595A1|166 178|paeoniflorin
+CA2615127A1|436 443|halogen
+CA2615127A1|629 639|CrC4 alkyl
+CA2615127A1|649 660|C1-C4 alkyl
+CA2615127A1|811 818|halogen
+CA2615127A1|820 830|CrC4 alkyl
+CA2615127A1|832 843|CrC4 alkoxy
+CA2616222C|296 304|zeolites
+CA2616222C|306 315|alkoxides
+CA2616222C|329 344|tertiary amines
+CA2616222C|101 110|dithienyl
+CA2623733A1|222 232|amino acid
+CA2647292A1|330 338|hydrates
+CA2647292A1|386 421|thiazolyldihydrocyclopentapyrazoles
+CA2647292A1|0 35|Thiazolyldihydrocyclopentapyrazoles
+CA2652501C|104 108|aryl
+CA2652501C|112 124|heterocyclic
+CA2652501C|185 199|C2-C4 alkylene
+CA2652501C|303 311|alkylene
+CA2652501C|364 385|alicyclic hydrocarbon
+CA2652501C|433 448|alicyclic amine
+CA2652501C|6 18|heterocyclic
+CA2657592A1|300 315|polyisobutylene
+CA2657592A1|379 394|polyisobutylene
+CA2659222C|243 283|.alpha., .beta. unsaturated aryl sulfone
+CA2659222C|32 73|.alpha., .beta. unsaturated aryl sulfones
+CA2667039A1|327 340|benzimidazole
+CA2667039A1|70 83|benzimidazole
+CA2667039A1|37 50|benzimidazole
+CA2672190C|39 84|4-(Heterocyclyl)alkyl-N- (arylsulfonyl)indole
+CA2672190C|0 45|4-(heterocyclyl)alkyl-n-(arylsulfonyl) indole
+CA2687751A1|314 326|disaccharide
+CA2687751A1|56 69|disaccharides
+CA2687751A1|0 13|Disaccharides
+CA2695844A1|157 163|folate
+CA2695844A1|275 281|folate
+CA2700263A1|53 59|cephem
+CA2700263A1|32 38|cephem
+CA2761068A1|660 670|clathrates
+CA2764885A1|0 28|Dihydropyrrolonaphtyridinone
+CA2777304A1|45 62|benzosulphonamide
+CA2777304A1|12 30|benzosulphonamides
+CA2777406A1|105 122|thiazolidinedione
+CA2777406A1|167 184|thiazolidinedione
+CA2777406A1|387 404|thiazolidinedione
+CA2777406A1|0 17|Thiazolidinedione
+CA2796068A1|65 89|poly-N-acetylglucosamine
+CA2796068A1|31 55|poly-n-acetylglucosamine
+CA2834341A1|198 225|polyunsaturated fatty acids
+CA2835015A1|13 24|amino acids
+CA2837759A1|207 221|thienopyridine
+CA2837759A1|231 245|thienopyridine
+CA2837759A1|70 78|ß-lactam
+CN100579977C|40 48|triazole
+CN100581558C|416 423|alcohol
+CN100581558C|434 441|alcohol
+CN100582235C|12 19|alcohol
+CN100584851C|48 57|phosphate
+CN100584851C|0 10|Phosphates
+CN100584851C|14 32|secondary alcohols
+CN100998603A|20 36|Se containing VC
+CN100999470B|14 27|phenolic acid
+CN101002774A|338 351|hydrochloride
+CN101003513A|26 37|quinazoline
+CN101003513A|306 317|quinazoline
+CN101003513A|12 23|quinazoline
+CN101007811A|22 35|cephalosporin
+CN101016265A|243 253|nucleoside
+CN101018793A|33 59|phosphorylated polyphenols
+CN101018793A|517 525|phenolic
+CN101018793A|0 26|Phosphorylated polyphenols
+CN101019848B|59 66|citrate
+CN101019851B|146 156|fatty acid
+CN101019851B|38 48|fatty acid
+CN101019851B|96 106|fatty acid
+CN101019851B|13 23|fatty acid
+CN101020062A|166 176|polyglycol
+CN101020062A|279 289|polyglycol
+CN101020062A|388 411|polyglycol-ursolic acid
+CN101020062A|413 436|Polyglycol-ursolic acid
+CN101020062A|44 54|polyglycol
+CN101020062A|512 522|polyglycol
+CN101020062A|654 664|polyglycol
+CN101020062A|12 22|polyglycol
+CN101020700A|289 298|porphyrin
+CN101020700A|406 415|porphyrin
+CN101023925A|477 483|purine
+CN101023925A|606 621|polylactic acid
+CN101023925A|641 656|polylactic acid
+CN101024604B|31 46|dihydrochalcone
+CN101024604B|452 467|dihydrochalcone
+CN101024604B|6 21|dihydrochalcone
+CN101032499A|24 35|triterpenes
+CN101037391A|164 173|polyamine
+CN101037391A|188 197|polyamine
+CN101037391A|287 296|polyamine
+CN101037391A|337 346|polyamine
+CN101037391A|34 43|polyamine
+CN101037391A|382 391|polyamine
+CN101037391A|566 575|polyamine
+CN101037391A|8 18|polyamines
+CN101039902B|0 12|Aminoalcohol
+CN101039914A|25 62|trifluoromethyl substituted benzamide
+CN101039914A|0 37|Trifluoromethyl substituted benzamide
+CN101040860A|193 204|terraazoles
+CN101040860A|679 690|terraazoles
+CN101040869A|196 206|amino acid
+CN101040869A|245 264|selenious anhydride
+CN101040869A|358 368|amino acid
+CN101040869A|502 512|amino acid
+CN101040869A|94 104|amino acid
+CN101040869A|49 59|amino acid
+CN101041074A|117 122|alkyl
+CN101041074A|555 560|alkyl
+CN101041074A|647 666|phosphate polyester
+CN101041074A|670 682|p (LAEG-EOP)
+CN101041074A|684 696|p (DAPG-EOP)
+CN101041074A|705 714|polyester
+CN101041074A|743 758|polylactic acid
+CN101041074A|760 770|polyphenyl
+CN101041074A|772 788|2-aliphatic acid
+CN101041074A|790 812|sebacic acid polyester
+CN101041074A|814 852|poly (erucic acid dimmer-sebacic acid)
+CN101041074A|856 888|poly (fumaric acid-sebacic acid)
+CN101045060A|141 155|glucocorticoid
+CN101045060A|56 70|glucocorticoid
+CN101045155A|584 598|17-alpha-alkyl
+CN101045155A|611 623|testosterone
+CN101045155A|941 949|androgen
+CN101045155A|963 977|17-alpha-alkyl
+CN101050179A|26 70|2, 3, 4, 5-tetrasubstituted phenyl propylene
+CN101050179A|40 55|benzyl ethylene
+CN101062049A|148 158|glycosides
+CN101062049A|612 622|glycosides
+CN101062049A|65 75|glycosides
+CN101062118A|141 152|polyphenols
+CN101062118A|226 237|phosphatide
+CN101062936A|44 56|triterpenoid
+CN101062936A|24 36|triterpenoid
+CN101062937A|47 64|glycyrrhizic acid
+CN101062937A|0 23|18alpha- liquorice acid
+CN101073667A|111 121|amino acid
+CN101074227B|153 174|5-membered heteroaryl
+CN101074227B|44 55|quinazoline
+CN101074227B|0 29|Phosphine acyloxy quinazoline
+CN101074259A|2 9|saponin
+CN101074259A|0 7|Saponin
+CN101076520B|187 198|imidazoline
+CN101076520B|330 341|imidazoline
+CN101076520B|33 66|1,2,4-tri-substituted imidazoline
+CN101076520B|0 11|Imidazoline
+CN101081211A|62 71|quinolone
+CN101084889B|381 386|sugar
+CN101084906A|467 474|alkoxyl
+CN101084906A|523 530|halogen
+CN101084906A|561 569|aldehyde
+CN101084906A|648 663|arylsulfonyloxy
+CN101084906A|56 64|alkaloid
+CN101092433A|0 102|Cis [( trans 1R, 2R 1,2 cyclohexane diamine) .(beta ¿C phenyl isosuccinic acid radical) platinum (ó )]
+CN101095675A|113 123|amino acid
+CN101098867B|12 21|sulfoxide
+CN101104864B|134 147|epothilones B
+CN101104864B|220 233|epothilones B

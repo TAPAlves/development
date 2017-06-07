@@ -1,0 +1,485 @@
+CA2077637C|492 501|oxycodone
+CA2077637C|90 99|oxycodone
+CA2077637C|64 73|oxycodone
+CA2077637C|77 88|hydrocodone
+CA2100514C|231 239|hydrogen
+CA2100514C|241 247|methyl
+CA2100514C|300 306|carbon
+CA2100514C|350 356|carbon
+CA2100514C|369 375|carbon
+CA2104399C|143 199|2-hydroxymethyl-5-(5-fluorocytosin-1-yl)-1.3-oxathiolane
+CA2104399C|37 93|2-hydroxymethyl-5-(5-fluorocytosin-1-yl)-1,3-oxathiolane
+CA2106642C|131 139|hydroxyl
+CA2106642C|143 168|2-methyl-1H-imidazol-1-yl
+CA2106642C|236 244|hydrogen
+CA2106642C|250 256|methyl
+CA2106642C|260 265|ethyl
+CA2106642C|338 344|methyl
+CA2106642C|348 353|ethyl
+CA2106642C|510 594|9-methyl-3-[(2-methyl-1H-imidazol-1-yl)methyl]--1,2,3,9-tetrahydro-4H-carbazol-4-one
+CA2106642C|766 774|hydrogen
+CA2143752C|243 248|amino
+CA2143752C|399 403|acyl
+CA2151377C|157 166|sulphonyl
+CA2151377C|176 185|carbonate
+CA2151377C|242 250|hydrogen
+CA2151377C|282 290|hydrogen
+CA2151377C|352 360|hydrogen
+CA2151377C|397 404|hydroxy
+CA2151377C|422 427|cyano
+CA2151377C|429 444|trifluoromethyl
+CA2151377C|477 482|nitro
+CA2151377C|503 511|hydrogen
+CA2151377C|617 625|hydrogen
+CA2151377C|676 684|hydrogen
+CA2163175C|1008 1025|tetrahydropyranyl
+CA2163175C|1029 1046|tetrahydrofuranyl
+CA2163175C|112 120|hydrogen
+CA2163175C|1466 1477|morpholinyl
+CA2163175C|1479 1490|piperidinyl
+CA2163175C|1492 1504|pyrrolidinyl
+CA2163175C|1506 1517|piperazinyl
+CA2163175C|1519 1527|oxiranyl
+CA2163175C|1529 1537|oxetanyl
+CA2163175C|1539 1546|furanyl
+CA2163175C|1548 1565|tetrahydropyranyl
+CA2163175C|1569 1586|tetrahydrofuranyl
+CA2163175C|1595 1603|hydrogen
+CA2163175C|1611 1617|methyl
+CA2163175C|166 174|hydrogen
+CA2163175C|278 295|trifuluoromethoxy
+CA2163175C|340 345|nitro
+CA2163175C|350 355|cyano
+CA2163175C|364 372|hydrogen
+CA2163175C|86 92|oxygen
+CA2163175C|926 937|morpholinyl
+CA2163175C|939 950|piperidinyl
+CA2163175C|952 964|pyrrolidinyl
+CA2163175C|96 103|sulphur
+CA2163175C|966 977|piperazinyl
+CA2163175C|979 987|oxiranyl
+CA2163175C|989 997|oxetanyl
+CA2163175C|999 1006|furanyl
+CA2173116C|155 161|purine
+CA2176392C|119 123|acyl
+CA2176796C|154 160|sodium
+CA2183620C|107 126|quaternary ammonium
+CA2183620C|254 273|quaternary ammonium
+CA2185015C|6 11|silyl
+CA2188267C|132 140|hydrogen
+CA2188267C|142 148|phenyl
+CA2188267C|198 206|hydrogen
+CA2188267C|374 386|nitric oxide
+CA2188267C|471 483|nitric oxide
+CA2189221C|257 273|benzoylguanidine
+CA2211982C|225 231|sodium
+CA2218553C|36 62|2,4-dichlorobenzyl alcohol
+CA2218553C|67 81|amylmetacresol
+CA2218553C|0 26|2,4-dichlorobenzyl alcohol
+CA2222964C|180 197|hydrogen peroxide
+CA2222964C|328 336|chloride
+CA2222964C|338 345|bromide
+CA2222964C|353 359|iodide
+CA2222964C|393 399|oxygen
+CA2222964C|438 455|hydrogen peroxide
+CA2222964C|73 79|oxygen
+CA2222964C|859 865|oxygen
+CA2222964C|0 6|Oxygen
+CA2224369C|138 144|phenyl
+CA2224369C|171 178|pyridyl
+CA2224369C|190 197|pyridyl
+CA2224369C|295 301|phenyl
+CA2224369C|303 308|cyano
+CA2224369C|310 315|nitro
+CA2224369C|317 322|amino
+CA2224369C|324 332|hydroxyl
+CA2224369C|351 359|naphthyl
+CA2224369C|369 379|quinolinyl
+CA2224426C|187 211|cis-9,10-octadecenoamide
+CA2224426C|26 50|cis-9,10-octadecenoamide
+CA2225822C|0 14|Nitroimidazole
+CA2230960C|1311 1320|carbamate
+CA2230960C|1417 1430|1,2-phenylene
+CA2230960C|1434 1449|2,3-naphthylene
+CA2230960C|1465 1471|oxygen
+CA2230960C|1475 1481|sulfur
+CA2230960C|1522 1527|imino
+CA2230960C|1619 1625|oxygen
+CA2230960C|162 170|hydrogen
+CA2230960C|1687 1694|hydroxy
+CA2230960C|1879 1891|1-5 nitrogen
+CA2230960C|1906 1914|nitrogen
+CA2230960C|538 543|amino
+CA2230960C|553 564|C1-C4 ester
+CA2230960C|574 589|C1-C4 thioester
+CA2230960C|643 651|carboxyl
+CA2230960C|663 668|epoxy
+CA2230960C|878 886|hydrogen
+CA2230960C|911 918|hydroxy
+CA2230960C|943 954|C1-C4 ester
+CA2255521C|266 277|acetic acid
+CA2257121C|115 133|racemic oxybutynin
+CA2257121C|214 228|(S)-oxybutynin
+CA2257121C|230 252|(S)-desethyloxybutynin
+CA2257121C|511 525|(S)-oxybutynin
+CA2257121C|529 551|(S)-desethyloxybutynin
+CA2257121C|80 94|(s)-oxybutynin
+CA2276694C|189 195|phenyl
+CA2276694C|197 202|amino
+CA2276694C|204 209|amido
+CA2276694C|238 259|carboxylic acid ester
+CA2276694C|508 526|cis-8-heptadecenyl
+CA2276694C|528 548|trans-8-heptadecenyl
+CA2276694C|550 568|cis-10-nonadecenyl
+CA2276694C|573 593|trans-10-nonadecenyl
+CA2288726C|127 135|hydrogen
+CA2291391C|337 352|magnesium oxide
+CA2294086C|239 253|amino nitrogen
+CA2294086C|634 664|L-asparagine monohydrochloride
+CA2294086C|669 680|L-glutamine
+CA2294086C|693 708|L-aspartic acid
+CA2294086C|713 728|L-glutamic acid
+CA2299423C|361 379|methacrylate ester
+CA2302445C|196 203|pyridyl
+CA2302445C|205 212|thienyl
+CA2302445C|214 219|furyl
+CA2303509C|79 91|alpha.-amino
+CA2308315C|125 131|carbon
+CA2308315C|221 227|carbon
+CA2308315C|393 399|carbon
+CA2308315C|489 495|carbon
+CA2309256C|110 124|oxime hydroxyl
+CA2309256C|128 150|9-oxime erythromycin A
+CA2309256C|158 165|benzoyl
+CA2309256C|199 210|2'-hydroxyl
+CA2309256C|236 247|4'-hydroxyl
+CA2309256C|297 307|6-hydroxyl
+CA2309256C|322 329|benzoyl
+CA2309256C|374 381|9-oxime
+CA2315835C|26 91|1-methyl-5-p-toluoylpyrrole-2-acetamidoacetic acid guaiacyl ester
+CA2315835C|24 91|1-methyl-5-p-toluoylpyrrole-2-acetamidoacetic   acid guaiacyl ester
+CA2318184C|181 187|phenyl
+CA2318184C|274 282|hydroxyl
+CA2320288C|180 196|O6-benzylguanine
+CA2320288C|386 402|O6-benzylguanine
+CA2320288C|429 445|O6-benzylguanine
+CA2320288C|582 599|methylphosphonate
+CA2320288C|605 621|phosphorothioate
+CA2320288C|37 53|o6-benzylguanine
+CA2323839C|44 74|guanosine 3', 5'-monophosphate
+CA2330128C|327 341|beta.-carotene
+CA2331471C|621 627|carbon
+CA2331471C|632 640|nitrogen
+CA2336799C|277 283|oxygen
+CA2347950C|242 278|cyclic guanosine 3',5'-monophosphate
+CA2347950C|0 20|Pyrazolopyrimidinone
+CA2347981C|1143 1163|omeprazole magnesium
+CA2347981C|1172 1181|magnesium
+CA2347981C|133 142|imidazole
+CA2347981C|477 486|sulphinyl
+CA2347981C|63 72|sulphinyl
+CA2366186C|182 190|hydrogen
+CA2366186C|258 267|methylene
+CA2366186C|294 305|cyclopropyl
+CA2366186C|318 325|hydroxy
+CA2366186C|493 499|phenyl
+CA2366186C|515 532|quaternary carbon
+CA2375671C|178 184|carbon
+CA2375671C|221 236|trifluoromethyl
+CA2375671C|308 316|hydrogen
+CA2375671C|366 371|amino
+CA2375671C|373 379|phenyl
+CA2375671C|381 388|hydroxy
+CA2375671C|402 407|cyano
+CA2375671C|421 430|carbamoyl
+CA2375671C|444 451|pyridyl
+CA2375671C|453 462|pyrimidyl
+CA2375671C|556 563|hydroxy
+CA2375671C|607 618|piperidinyl
+CA2375671C|64 72|hydrogen
+CA2375671C|686 697|benzylamino
+CA2375671C|825 833|hydrogen
+CA2375671C|91 99|hydrogen
+CA2382337C|414 432|isopropyl-o-cresol
+CA2394717C|3 7|iron
+CA2394717C|68 72|iron
+CA2394717C|0 4|Iron
+CA2396151C|456 467|4-quinolone
+CA2397594C|27 129|(-)-cis-2-(2-chlorophenyl)-5,7-dihydroxy-8[4R-(3S--hydroxy-1-methyl)piperidinyl]-4H-1-benzopyran-4-one
+CA2397594C|19 120|(-)-cis-2-(2-chlorophenyl)-5,7-dihydroxy-8[4r-(3s-hydroxy-1-methyl)piperidinyl]-4h-1-benzopyran-4-one
+CA2419877C|240 246|oxygen
+CA2419877C|41 57|4-hydroxyanisole
+CA2419877C|29 46|4-hydroxy anisole
+CA2454592C|220 228|chlorine
+CA2454592C|252 260|chlorine
+CA2456970C|122 140|desmethyltamoxifen
+CA2456970C|466 486|desmethyl toremifene
+CA2456970C|502 520|desmethyltamoxifen
+CA2456970C|87 107|desmethyl toremifene
+CA2508180C|199 206|calcium
+CA2508180C|208 217|magnesium
+CA2508180C|219 223|zinc
+CA2508180C|225 231|copper
+CA2508180C|233 242|manganese
+CA2508180C|248 252|iron
+CA2508180C|331 336|oxide
+CA2508180C|340 349|hydroxide
+CA2533117A1|178 257|(E)-8-(3,4-dimethoxystyryl)-1,3-diethyl-7-methyl-3,7-dihydro-1H-purin-2,6-dione
+CA2538729A1|161 171|phosphorus
+CA2552694A1|192 209|Alpha Lipoic Acid
+CA2552694A1|493 499|oxygen
+CA2576022A1|141 161|L-form aldonolactone
+CA2576022A1|201 216|L-arabonic acid
+CA2576022A1|237 253|L-arabonolactone
+CA2576022A1|296 321|L-arabono-.gamma.-lactone
+CA2576022A1|31 38|calcium
+CA2576022A1|360 375|L-arabonic acid
+CA2576022A1|420 427|lactone
+CA2576022A1|83 102|L-form aldonic acid
+CA2576022A1|29 36|calcium
+CA2577676A1|166 180|diacylglycerol
+CA2577676A1|26 40|diacylglycerol
+CA2577676A1|78 92|diacylglycerol
+CA2582262A1|43 50|octanol
+CA2582262A1|52 59|decanol
+CA2582262A1|61 70|dodecanol
+CA2582949A1|44 55|copper ions
+CA2582949A1|493 504|copper ions
+CA2582949A1|838 844|copper
+CA2597798A1|153 161|hydrogen
+CA2597798A1|203 209|fluoro
+CA2597798A1|225 231|fluoro
+CA2615127A1|488 496|fluorine
+CA2615127A1|498 506|chlorine
+CA2615127A1|508 515|bromine
+CA2615127A1|520 526|iodine
+CA2615127A1|616 624|hydrogen
+CA2615127A1|692 698|phenyl
+CA2615127A1|708 714|phenyl
+CA2615127A1|845 850|amino
+CA2615127A1|852 857|nitro
+CA2615127A1|862 867|cyano
+CA2616222C|79 94|methylscopinium
+CA2652501C|539 547|nitrogen
+CA2652501C|668 676|nitrogen
+CA2657592A1|322 329|silicon
+CA2657592A1|402 409|silicon
+CA2662732A1|132 138|methyl
+CA2662732A1|184 190|phenyl
+CA2662732A1|194 201|thienyl
+CA2670440A1|136 147|beta-iactam
+CA2675980A1|177 284|4{4-[3-(4-chloro-3- trifluoromethylphenyf)-ureido]-3-fluorophenoxy}-pyridine -2-carboxylic acid methylamide
+CA2678127A1|339 356|triphenylethylene
+CA2678127A1|479 496|triphenylethylene
+CA2678127A1|98 115|triphenylethylene
+CA2680502A1|0 7|Benzoyl
+CA2695844A1|353 369|tetrahydrofolate
+CA2695844A1|371 381|thymidine,
+CA2695844A1|382 407|10-formyltetrahydrofolate
+CA2695844A1|411 433|methyltetrahydrofolate
+CA2695844A1|585 601|tetrahydrofolate
+CA2703458A1|28 45|phenylpyrrolidine
+CA2703458A1|0 17|Phenylpyrrolidine
+CA2777406A1|450 469|adenosine phosphate
+CA2834341A1|308 314|Oxygen
+CA2856102A1|37 76|phytocannabinoid tetrahydrocannabivarin
+CA2856102A1|0 22|Tetrahydrocannabivarin
+CA2857096A1|69 92|nalmefene hydrochloride
+CA2857096A1|93 178|[17-(cyclopropylmethyl)-4,5-alpha-epoxy-6-methylenemorphinan-3,14-diol hydrochloride]
+CA2857096A1|24 47|nalmefene hydrochloride
+CN100579530C|78 94|chlorine dioxide
+CN100579530C|100 116|chlorine dioxide
+CN100581544C|202 215|diltiazem HC1
+CN100581544C|245 260|d,L-hyoscyamine
+CN100581544C|266 306|6,7-dimethoxy-1-veratrylisoquinoline HC1
+CN100584851C|139 157|secondary hydroxyl
+CN100584851C|92 109|secondary hydroxy
+CN100594898C|196 216|phosphatidy lcholine
+CN100594898C|37 57|phosphatidy lcholine
+CN100998603A|145 159|selenium oxide
+CN100998603A|49 57|selenium
+CN101002774A|233 329|6-fluoro- 1-methyl, 4-oxy-7-(1-piperazinyl)-4H-[1, 3] thiazine [3, 2-a] quinoline-3- carboxylate
+CN101002774A|360 376|methanesulfonate
+CN101002897A|167 182|glycerin borate
+CN101007018A|163 183|aneurine mononitrate
+CN101007018A|197 224|riboflavin sodium phosphate
+CN101007018A|296 315|sodium pantothenate
+CN101007018A|331 347|vitamin C sodium
+CN101007018A|451 484|dium ethylenediamine tetraacetate
+CN101007030A|164 193|apigenin-7-O-neohesperidoside
+CN101007030A|195 232|apigenin-7-O-2'-isodulcitolrutinoside
+CN101007030A|234 269|apigenin-7-O-beta-D-glucopyranoside
+CN101007811A|176 181|amine
+CN101007811A|207 222|tert-butylamine
+CN101007811A|224 238|diethanolamine
+CN101007811A|240 255|triethanolamine
+CN101007811A|257 269|diethylamine
+CN101007811A|316 321|amine
+CN101007811A|348 353|amine
+CN101007811A|37 42|amine
+CN101007811A|378 383|amine
+CN101007811A|411 416|amine
+CN101007811A|443 448|amine
+CN101007811A|474 479|amine
+CN101007811A|504 509|amine
+CN101007811A|51 58|hydrate
+CN101007811A|534 539|amine
+CN101007811A|566 571|amine
+CN101007811A|597 602|amine
+CN101007811A|629 634|amine
+CN101007811A|661 666|amine
+CN101007811A|693 698|amine
+CN101007811A|723 728|amine
+CN101007811A|752 757|amine
+CN101007811A|784 789|amine
+CN101007811A|8 13|amine
+CN101007829A|212 255|1, 6- diphosphoric acid- D- fructose esters
+CN101007829A|310 337|sodium fructose diphosphate
+CN101007829A|44 87|1, 6- diphosphoric acid- D- fructose esters
+CN101007829A|0 39|1,6-diphospho-D-fructose ester arginine
+CN101011084A|135 145|L-arginine
+CN101011374A|90 97|carboxy
+CN101011374A|70 78|carboxyl
+CN101015559A|267 286|momestasone furoate
+CN101015559A|344 350|acetyl
+CN101015559A|374 389|sodium alginate
+CN101016265A|137 193|1-í (2-hydroxy ethoxy)-methylí -6-(benzene thio) thymine
+CN101016265A|264 288|4-benzene thiopyridinone
+CN101016265A|75 85|pyridinone
+CN101018793A|591 599|hydroxyl
+CN101019848B|225 239|ferric citrate
+CN101019863A|192 235|2-phenyl-1, 2-benzoisoselenazole-3(2H)-tone
+CN101019863A|40 83|2-phenyl-1, 2-benzoisoselenazole-3(2H)-tone
+CN101019863A|15 58|2-phenyl-1, 2-benzoisoselenazole-3(2H)-tone
+CN101020062A|182 194|cyclohydroxy
+CN101020700A|153 172|ruthenium porphyrin
+CN101020700A|213 222|ruthenium
+CN101020700A|249 256|pyridyl
+CN101020700A|32 51|ruthenium porphyrin
+CN101020700A|372 389|ruthenium pyridyl
+CN101020700A|426 445|ruthenium porphyrin
+CN101020700A|0 19|Ruthenium porphyrin
+CN101023942A|7 24|dihydro myricotin
+CN101024604B|196 206|chloroform
+CN101024604B|264 274|chloroform
+CN101024604B|499 545|4'- hydroxyl-2', 4- dimethoxy- dihydrochalcone
+CN101028510B|160 177|calcium gluconate
+CN101028510B|179 197|sodium bicarbonate
+CN101028510B|406 413|ethanol
+CN101036654B|239 255|sodium carbonate
+CN101036654B|260 278|sodium bicarbonate
+CN101036654B|615 634|cefoperazone sodium
+CN101036678A|390 423|3~5-dioxygen-caffeoyl quinic acid
+CN101036678A|428 461|4~5-dioxygen-caffeoyl quinic acid
+CN101040869A|383 391|selenium
+CN101040869A|415 423|selenium
+CN101040869A|527 535|selenium
+CN101040869A|557 565|selenium
+CN101040869A|65 73|selenium
+CN101040869A|20 28|selenium
+CN101041074A|729 738|phosphate
+CN101045060A|33 52|tetramethylpyrazine
+CN101045704A|135 170|ondansetron hydrochloride dihydrate
+CN101045704A|33 65|dimethylamino-methyl-carbazolone
+CN101045704A|39 74|ondansetron hydrochloride dihydrate
+CN101045708A|234 240|acetyl
+CN101045708A|47 80|helicid -huperzine methylal imine
+CN101045708A|0 31|Helicid hydrastine acetali mine
+CN101049302A|132 149|anethol trithione
+CN101049302A|19 36|anethol trithione
+CN101049302A|0 17|Anethol trithione
+CN101049362A|121 131|boric acid
+CN101049362A|133 145|benzoic acid
+CN101050216B|122 149|diphenyl methylchlorosilane
+CN101050216B|199 218|cyclohexyl methanol
+CN101058610A|41 48|sulfate
+CN101058610A|425 444|chlorosulfonic acid
+CN101058610A|449 457|pyridine
+CN101058610A|35 42|sulfate
+CN101062049A|268 289|dimethyl ethanolamine
+CN101062049A|366 384|potassium chloride
+CN101062049A|386 394|sulphate
+CN101062049A|399 407|sulphate
+CN101062052A|627 644|calcium hydroxide
+CN101062052A|646 665|magnesium hydroxide
+CN101062052A|667 681|zinc hydroxide
+CN101062052A|789 802|stannic oxide
+CN101062052A|804 814|lead oxide
+CN101062194B|197 203|copper
+CN101062293A|248 264|atropine sulfate
+CN101069680B|32 70|2-hydroxy-4-methylbenzenesulfonic acid
+CN101069680B|7 45|2-hydroxyl-methyl benzenesulfonic acid
+CN101073581A|101 105|iron
+CN101073581A|218 222|iron
+CN101073581A|548 552|iron
+CN101073581A|21 25|iron
+CN101074227B|188 196|nitrogen
+CN101074227B|225 233|nitrogen
+CN101074259A|265 281|dimethyl benzene
+CN101081204A|150 168|sodium hyaluronate
+CN101081204A|242 260|sodium hyaluronate
+CN101081204A|282 294|carbodiimide
+CN101081204A|298 306|carboxyl
+CN101081204A|469 487|sodium hyaluronate
+CN101081204A|69 87|sodium hyaluronate
+CN101081204A|40 62|hyaluronic acid sodium
+CN101081208A|259 267|platinum
+CN101081208A|83 91|platinum
+CN101081208A|72 80|platinum
+CN101081211A|90 111|Tosufloxacin besilate
+CN101084892A|116 122|methyl
+CN101084892A|139 158|dimethylaminomethyl
+CN101084892A|176 188|acetoacetate
+CN101084892A|83 90|hydroxy
+CN101084892A|99 106|bromine
+CN101084906A|37 51|phenanthridine
+CN101084906A|392 400|hydrogen
+CN101084906A|402 409|hydroxy
+CN101084906A|411 417|carbon
+CN101084906A|453 459|carbon
+CN101084906A|478 485|acyloxy
+CN101084906A|493 502|benzyloxy
+CN101084906A|504 512|chlorine
+CN101084906A|538 543|amino
+CN101084906A|551 559|methylol
+CN101084906A|577 585|carbonyl
+CN101084906A|587 595|acetonyl
+CN101084906A|597 604|carboxy
+CN101084906A|606 616|sulacyloxy
+CN101084906A|618 646|4-methyl-benzenesulfonyloxyl
+CN101084906A|665 685|diphenylphosphonoxyl
+CN101084906A|705 713|hydrogen
+CN101084906A|715 721|methyl
+CN101084906A|725 731|oxygen
+CN101084906A|767 775|hydrogen
+CN101084906A|779 785|methyl
+CN101084906A|31 55|benzophen [C] anthridine
+CN101085370A|120 130|silver ion
+CN101085370A|212 222|Silver ion
+CN101088997A|108 157|N-(5-aminothienyl-2-formoxyl)-L-diethyl glutarate
+CN101088997A|162 175|methyl iodide
+CN101088997A|281 295|sodium sulfide
+CN101088997A|300 304|iron
+CN101088997A|429 437|methanol
+CN101088997A|519 548|5-nitrothienyl-2-formaldehyde
+CN101088997A|580 587|bromine
+CN101091705B|231 246|isosulfocyanate
+CN101091705B|92 107|isosulfocyanate
+CN101092433A|225 262|trans-1R, 2R-1, 2-cyclohexane diamine
+CN101092433A|274 292|cis-[Pt (II) A2I2]
+CN101092433A|376 409|disodium beta-phenyl isosuccinate
+CN101092433A|46 126|cis-[(trans-1R,2R-1,2-cyclohexane diamine).(beta-phenyl isosuccinic acid)Pt(II)]
+CN101092433A|757 768|carboplatin
+CN101095675A|130 142|thiazolidine
+CN101095675A|146 157|pyrrolidine
+CN101099744A|231 245|5-fluorouracil
+CN101100453A|122 136|copper bromide
+CN101100453A|147 157|copper ion
+CN101100453A|187 226|1-(4-oxyphenyl)-2-bromopropane-1-ketone
+CN101100453A|255 272|4-benzyl pyridine
+CN101100453A|333 408|1-(4-hydroxy-phenyl)-2-(4-benzyl pyridine) propane-1-keto-hydro-bromic acid
+CN101100453A|58 82|4-hydroxy-phenpropionate
+CN101103992A|359 375|sodium phosphate
+CN101103992A|402 425|Ethyl p-hydroxybenzoate
+CN101103992A|449 464|sodium chloride
+CN101103992A|490 508|sodium hyaluronate
