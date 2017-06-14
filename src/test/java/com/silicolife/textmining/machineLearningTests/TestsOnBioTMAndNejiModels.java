@@ -53,7 +53,7 @@ import pt.ua.tm.neji.writer.BC2Writer;
 public class TestsOnBioTMAndNejiModels {
 
 //	private String corpusDir= "src/test/resources/chemdner/devFiles";//"src/test/resources/chemdner/trainFile";
-	private String modelClassType= "MULTIPLE";
+	private String modelClassType= "FAMILY";
 //	private String modelDir="tests/ourModel/"+ modelClassType+".gz";
 //	private String sentencesFile = corpusDir +"/textFiles_1500.txt";//text_1000.txt
 //	private String annotationsFile = corpusDir +"annotations_1500.tsv";//"/train_1000.tsv";
@@ -82,7 +82,7 @@ public class TestsOnBioTMAndNejiModels {
 	
 	
 
-	@Test
+//	@Test
 	public void createOurModel() throws BioTMLException{
 
 		System.out.println("Loading the BioTMLCorpus...");
@@ -305,7 +305,7 @@ public class TestsOnBioTMAndNejiModels {
 		return annotationsTest;
 
 	}
-	//@Test
+	@Test
 	public void createConditionsToRunNeji() throws IOException{
 		//		classTest.convertBioCreativeTExtFilesIntoBC2(sentencesFile, nejiSentencesFile);
 
@@ -338,7 +338,7 @@ public class TestsOnBioTMAndNejiModels {
 	}
 
 
-	@Test
+//	@Test
 	public void evaluateourmodel() throws BioTMLException{
 		//		evaluateOurModel(modelClassType);
 		evaluateNejiAnnotations("FAMILY", "/home/tiagoalves/workspace/development/generalMain/output/neji/ABBREVIATIONtextFiles_1500.bc2");

@@ -81,15 +81,31 @@ public class MLBioTMLModelVSNejiUtils {
 
 		}
 	}
-	
-	public void evaluateNejiAnnotations(String groupType, String nejiAnnotationsDir, String goldAnnotationsFile) throws BioTMLException{
+
+	public static void evaluateNejiAnnotations(String groupType, String nejiAnnotationsDir, String goldAnnotationsFile) throws BioTMLException{
 		List<IBioTMLEntity> annotations = loadAnnotationsFromBC2AnnotationsFolder(nejiAnnotationsDir, groupType);
 		List<IBioTMLEntity> goldAnnotations = loadGoldAnnotationsFromTSVFile(goldAnnotationsFile);
 		System.out.println("Results for:" + groupType.toUpperCase() +"\n");
 		evaluateAnnotation(goldAnnotations,annotations);
 
 	}
-	
+
+
+	public static void createFileWithAnnotations(List<IBioTMLEntity> goldAnnotations, List<IBioTMLEntity> toCompareAnnotations, String destinFilePath) throws IOException{
+		PrintWriter analisysFile=new PrintWriter(new File(destinFilePath));
+		analisysFile.println("Gold Annotations\n");
+		for (IBioTMLEntity anotation:goldAnnotations){
+			analisysFile.println(anotation);
+		}
+		analisysFile.println();
+		analisysFile.println("To Compare Annotations\n");
+		for (IBioTMLEntity anotation:toCompareAnnotations){
+			analisysFile.println(anotation);
+		}
+		analisysFile.close();
+	}
+
+
 	// --------------------------FEATURES GENERATOR --------------------------//
 
 	public static BioTMLFeatureGeneratorConfiguratorImpl loadfeatures(){
@@ -138,6 +154,12 @@ public class MLBioTMLModelVSNejiUtils {
 		//				features.add("OPENNLPPOS");
 		//				features.add("OPENNLPCHUNK");
 		//				features.add("OPENNLPCHUNKPARSING");
+		return new BioTMLFeatureGeneratorConfiguratorImpl(features);
+	}
+
+	public static BioTMLFeatureGeneratorConfiguratorImpl loadWordFeaturesForTest(){
+		Set<String> features = new TreeSet<String>();
+		features.add("WORD");
 		return new BioTMLFeatureGeneratorConfiguratorImpl(features);
 	}
 
@@ -203,9 +225,8 @@ public class MLBioTMLModelVSNejiUtils {
 			return annotations;
 		} catch (IOException exc) {
 			throw new BioTMLException(exc);
-		} 
+		}
 	}
-
 
 	public static List<IBioTMLEntity> loadAnnotationsFromGroupedBC2File (String annotationsFile) throws BioTMLException{
 		File annotationFile = new File(annotationsFile);
@@ -391,7 +412,7 @@ public class MLBioTMLModelVSNejiUtils {
 			}
 		}
 	}
-	
+
 	public static void convertJoChemDictToNejiFormat(String joChemPath, String joChemDestinPath) throws IOException{
 		File file = new File(joChemPath);
 		if (!file.exists() || !file.canRead()) {
@@ -496,7 +517,7 @@ public class MLBioTMLModelVSNejiUtils {
 
 
 	// --------------------------PRIVATE METHODS SECTION --------------------------//
-	
+
 	private static long getLastDocID(Map<String, Long> mapDocNameToDocID){
 		List<Integer> docIDs=new ArrayList<>();
 		if (mapDocNameToDocID.keySet().size()>0){
@@ -526,7 +547,7 @@ public class MLBioTMLModelVSNejiUtils {
 		br.close();
 		return null;
 	}
-	
+
 	private static String createBioCAnnotationsFileForASpecificGroup(File biocreativeFile,String group, String destinationPath) throws IOException{
 		FileInputStream is = new FileInputStream(biocreativeFile);
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -560,5 +581,5 @@ public class MLBioTMLModelVSNejiUtils {
 
 		return destinationFilePath;
 	}
-	
+
 }
