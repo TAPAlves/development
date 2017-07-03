@@ -1,4 +1,4 @@
-package com.silicolife.textmining.LinnaeusExtension;
+package main.java.com.silicolife.textmining.LinnaeusExtension;
 
 import java.util.GregorianCalendar;
 import java.util.List;

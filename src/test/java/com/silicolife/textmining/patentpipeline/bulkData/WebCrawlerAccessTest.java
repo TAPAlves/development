@@ -1,4 +1,4 @@
-package com.silicolife.textmining.patentpipeline.bulkData;
+package test.java.com.silicolife.textmining.patentpipeline.bulkData;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.silicolife.textmining.patentpipeline.bulkData;
+package test.java.com.silicolife.textmining.patentpipeline.bulkData;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,7 +15,8 @@ import org.xml.sax.SAXException;
 import com.silicolife.textmining.core.datastructures.documents.PublicationImpl;
 import com.silicolife.textmining.core.datastructures.documents.PublicationSourcesDefaultEnum;
 import com.silicolife.textmining.core.interfaces.core.document.IPublication;
-import com.silicolife.textmining.patentpipeline.bulkData.bdss.BDSSUtils;
+
+import main.java.com.silicolife.textmining.patentpipeline.bulkData.bdss.BDSSUtils;
 
 public class MainTest {
 

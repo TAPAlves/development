@@ -1,5 +1,5 @@
 
-package com.silicolife.textmining.machineLearningTests;
+package test.java.com.silicolife.textmining.machineLearningTests;
 
 
 import java.io.FileWriter;
@@ -19,7 +19,6 @@ import com.silicolife.textmining.machinelearning.biotml.core.BioTMLModelLabelTyp
 import com.silicolife.textmining.machinelearning.biotml.core.corpora.BioTMLCorpusImpl;
 import com.silicolife.textmining.machinelearning.biotml.core.evaluation.BioTMLEvaluator;
 import com.silicolife.textmining.machinelearning.biotml.core.evaluation.datastrucures.BioTMLEvaluationImpl;
-import com.silicolife.textmining.machinelearning.biotml.core.evaluation.datastrucures.BioTMLModelEvaluationConfiguratorImpl;
 import com.silicolife.textmining.machinelearning.biotml.core.exception.BioTMLException;
 import com.silicolife.textmining.machinelearning.biotml.core.features.BioTMLFeatureGeneratorConfiguratorImpl;
 import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLConfusionMatrix;
@@ -31,10 +30,8 @@ import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLE
 import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLFeatureGeneratorConfigurator;
 import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLModel;
 import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLModelConfigurator;
-import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLModelEvaluationConfigurator;
 import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLModelReader;
 import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLModelWriter;
-import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLMultiEvaluation;
 import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLToken;
 import com.silicolife.textmining.machinelearning.biotml.core.mllibraries.BioTMLAlgorithm;
 import com.silicolife.textmining.machinelearning.biotml.core.mllibraries.mallet.features.CorpusWithFeatures2TokenSequence;
@@ -64,8 +61,11 @@ public class BioCreativeTest {
 
 		//		String trainingDocs = "src/test/resources/biocreative/small_test.txt";
 		//		String trainingAnnots = "src/test/resources/biocreative/small_test.tsv";	
-		String trainingDocs = "src/test/resources/biocreative/chemdner_patents_train_text.txt";
-		String trainingAnnots = "src/test/resources/biocreative/chemdner_cemp_gold_standard_train.tsv";
+		//		String trainingDocs = "src/test/resources/chemdner/train/chemdner_patents_train_text.txt";
+		//		String trainingAnnots = "src/test/resources/chemdner/train/chemdner_cemp_gold_standard_train.tsv";
+		String trainingDocs = "/home/tiagoalves/workspace/development/generalMain/train/trainSentences/FAMILYchemdner_patents_train_text.txt";
+		String trainingAnnots = "/home/tiagoalves/workspace/development/generalMain/train/trainAnnotations/FAMILYchemdner_cemp_gold_standard_train.tsv";
+
 
 		System.out.println("Read training corpus...");
 		IBioTMLCorpus corpus = loadCorpus(trainingDocs, trainingAnnots);
@@ -77,10 +77,10 @@ public class BioCreativeTest {
 		//		writeModel(model, modelpath);
 		//		IBioTMLModel model = readModel(modelpath);
 
-		IBioTMLModelEvaluationConfigurator configuration = new BioTMLModelEvaluationConfiguratorImpl();
-		configuration.setCrossValidationByCorpusDoc(10);
-		IBioTMLMultiEvaluation eval1 = model.evaluate(corpus, configuration);
-		System.out.println(eval1);
+		//		IBioTMLModelEvaluationConfigurator configuration = new BioTMLModelEvaluationConfiguratorImpl();
+		//		configuration.setCrossValidationByCorpusDoc(10);
+		//		IBioTMLMultiEvaluation eval1 = model.evaluate(corpus, configuration);
+		//		System.out.println(eval1);
 
 
 		IBioTMLEvaluation eval = evaluateModel(corpus, model);
@@ -149,6 +149,9 @@ public class BioCreativeTest {
 
 	private IBioTMLModel createModel(IBioTMLCorpus corpus, String classType, BioTMLAlgorithm modelAlgorithm) throws BioTMLException{
 		IBioTMLModelConfigurator modelConfiguration = new BioTMLModelConfiguratorImpl(classType, BioTMLConstants.ner.toString());
+		modelConfiguration.getTransducerConfiguration().setForbiddenTransitionStates(null);
+		//		modelConfiguration.getTransducerConfiguration().setAllowedTransitionStates(null);
+
 		//		modelConfiguration.setModelOrder(2);
 		//		Set<String> featuresUIDs = BioTMLFeaturesManager.getInstance().getNERRecomendedFeatures();
 		Set<String> featuresUIDs = new HashSet<>();

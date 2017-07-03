@@ -1,4 +1,4 @@
-package com.silicolife.textmining.machineLearningTests;
+package test.java.com.silicolife.textmining.machineLearningTests;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.silicolife.textmining.machineLearningMains.MLBioTMLModelVSNejiUtils;
 import com.silicolife.textmining.machinelearning.biotml.core.BioTMLConstants;
 import com.silicolife.textmining.machinelearning.biotml.core.annotator.BioTMLMalletAnnotatorImpl;
 import com.silicolife.textmining.machinelearning.biotml.core.corpora.BioTMLCorpusImpl;
@@ -17,11 +16,12 @@ import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLE
 import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLModel;
 import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLModelReader;
 import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLModelWriter;
-import com.silicolife.textmining.machinelearning.biotml.core.models.mallet.MalletClassifierModel;
-import com.silicolife.textmining.machinelearning.biotml.core.models.mallet.MalletTransducerModel;
+import com.silicolife.textmining.machinelearning.biotml.core.models.mallet.BioTMLMalletTransducerModelImpl;
 import com.silicolife.textmining.machinelearning.biotml.reader.BioTMLCorpusReaderImpl;
 import com.silicolife.textmining.machinelearning.biotml.reader.BioTMLModelReaderImpl;
 import com.silicolife.textmining.machinelearning.biotml.writer.BioTMLModelWriterImpl;
+
+import main.java.com.silicolife.textmining.machineLearningMains.MLBioTMLModelVSNejiUtils;
 
 public class ExecuteBioTMLTest {
 
@@ -37,7 +37,7 @@ public class ExecuteBioTMLTest {
 
 	private IBioTMLModel createCRFModel(IBioTMLCorpus corpus, String dirToSave, String modelClassType) throws BioTMLException{
 //		IBioTMLModel crf = new MalletTransducerModel(MLBioTMLModelVSNejiUtils.loadWordFeaturesForTest(), MLBioTMLModelVSNejiUtils.defaultCRFConfiguration(modelClassType, BioTMLConstants.ner.toString()));
-		IBioTMLModel crf = new MalletTransducerModel(MLBioTMLModelVSNejiUtils.loadfeatures(), MLBioTMLModelVSNejiUtils.defaultCRFConfiguration(modelClassType, BioTMLConstants.ner.toString()));
+		IBioTMLModel crf = new BioTMLMalletTransducerModelImpl(MLBioTMLModelVSNejiUtils.loadfeatures(), MLBioTMLModelVSNejiUtils.defaultCRFConfiguration(modelClassType, BioTMLConstants.ner.toString()));
 		crf.train(corpus);
 		if (!new File(new File(dirToSave).getParent()).exists()){
 			new File(new File(dirToSave).getParent()).mkdirs();
@@ -53,7 +53,7 @@ public class ExecuteBioTMLTest {
 //	F1: 0.4575170033499137
 
 	private IBioTMLModel createSVMModel(IBioTMLCorpus corpus, String dirToSave, String modelClassType) throws BioTMLException{
-		IBioTMLModel svm = new MalletClassifierModel(MLBioTMLModelVSNejiUtils.loadWordFeaturesForTest(), MLBioTMLModelVSNejiUtils.defaultSVMConfiguration(modelClassType, BioTMLConstants.ner.toString()));
+		IBioTMLModel svm = new BioTMLMalletTransducerModelImpl(MLBioTMLModelVSNejiUtils.loadWordFeaturesForTest(), MLBioTMLModelVSNejiUtils.defaultSVMConfiguration(modelClassType, BioTMLConstants.ner.toString()));
 		svm.train(corpus);
 		if (!new File(new File(dirToSave).getParent()).exists()){
 			new File(new File(dirToSave).getParent()).mkdirs();

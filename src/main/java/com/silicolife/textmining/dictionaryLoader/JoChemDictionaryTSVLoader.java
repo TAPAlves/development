@@ -1,4 +1,4 @@
-package com.silicolife.textmining.dictionaryLoader;
+package main.java.com.silicolife.textmining.dictionaryLoader;
 
 import java.io.BufferedReader;
 import java.io.File;

@@ -1,4 +1,4 @@
-package com.silicolife.textmining.patentpipeline.bulkData;
+package test.java.com.silicolife.textmining.patentpipeline.bulkData;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,7 +12,8 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import com.silicolife.textmining.core.interfaces.core.document.IPublication;
-import com.silicolife.textmining.patentpipeline.bulkData.bdss.BDSSUtils;
+
+import main.java.com.silicolife.textmining.patentpipeline.bulkData.bdss.BDSSUtils;
 
 public class GetFilenamesTest {
 

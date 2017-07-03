@@ -1,4 +1,4 @@
-package com.silicolife.textmining.machineLearningTests;
+package test.java.com.silicolife.textmining.machineLearningTests;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -12,7 +12,6 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
-import com.silicolife.textmining.machineLearningMains.MLBioTMLModelVSNejiUtils;
 import com.silicolife.textmining.machinelearning.biotml.core.BioTMLConstants;
 import com.silicolife.textmining.machinelearning.biotml.core.annotator.BioTMLMalletAnnotatorImpl;
 import com.silicolife.textmining.machinelearning.biotml.core.exception.BioTMLException;
@@ -22,11 +21,12 @@ import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLE
 import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLModel;
 import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLModelReader;
 import com.silicolife.textmining.machinelearning.biotml.core.interfaces.IBioTMLModelWriter;
-import com.silicolife.textmining.machinelearning.biotml.core.models.mallet.MalletClassifierModel;
+import com.silicolife.textmining.machinelearning.biotml.core.models.mallet.BioTMLMalletTransducerModelImpl;
 import com.silicolife.textmining.machinelearning.biotml.reader.BioTMLCorpusReaderImpl;
 import com.silicolife.textmining.machinelearning.biotml.reader.BioTMLModelReaderImpl;
 import com.silicolife.textmining.machinelearning.biotml.writer.BioTMLModelWriterImpl;
 
+import main.java.com.silicolife.textmining.machineLearningMains.MLBioTMLModelVSNejiUtils;
 import pt.ua.tm.neji.core.module.Reader;
 import pt.ua.tm.neji.core.module.Writer;
 import pt.ua.tm.neji.core.parser.Parser;
@@ -90,7 +90,7 @@ public class TestsOnBioTMAndNejiModels {
 		BioTMLCorpusReaderImpl reader = new BioTMLCorpusReaderImpl();
 		IBioTMLCorpus corpus = reader.readBioTMLCorpusFromBioCFiles(sentencesFile, annotationsFile, "nlp4j");
 
-		IBioTMLModel svm = new MalletClassifierModel(MLBioTMLModelVSNejiUtils.loadfeatures(), MLBioTMLModelVSNejiUtils.defaultSVMConfiguration(modelClassType, BioTMLConstants.ner.toString()));
+		IBioTMLModel svm = new BioTMLMalletTransducerModelImpl(MLBioTMLModelVSNejiUtils.loadfeatures(), MLBioTMLModelVSNejiUtils.defaultSVMConfiguration(modelClassType, BioTMLConstants.ner.toString()));
 
 		svm.train(corpus);
 		new File(modelDir).mkdirs();
@@ -269,7 +269,7 @@ public class TestsOnBioTMAndNejiModels {
 		BioTMLCorpusReaderImpl reader = new BioTMLCorpusReaderImpl();
 		IBioTMLCorpus corpus = loadCorpus(sentencesFile, annotationsFile);
 
-		IBioTMLModel svm = new MalletClassifierModel(MLBioTMLModelVSNejiUtils.loadfeatures(), MLBioTMLModelVSNejiUtils.defaultSVMConfiguration(modelClassType, BioTMLConstants.ner.toString()));
+		IBioTMLModel svm = new BioTMLMalletTransducerModelImpl(MLBioTMLModelVSNejiUtils.loadfeatures(), MLBioTMLModelVSNejiUtils.defaultSVMConfiguration(modelClassType, BioTMLConstants.ner.toString()));
 
 		svm.train(corpus);
 		new File(modelDir).mkdirs();

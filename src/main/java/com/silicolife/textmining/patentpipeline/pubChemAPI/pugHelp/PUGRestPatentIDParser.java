@@ -1,4 +1,4 @@
-package com.silicolife.textmining.patentpipeline.pubChemAPI.pugHelp;
+package main.java.com.silicolife.textmining.patentpipeline.pubChemAPI.pugHelp;
 
 import java.util.HashSet;
 import java.util.Map;

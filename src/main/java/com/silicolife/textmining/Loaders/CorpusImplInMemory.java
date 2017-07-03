@@ -1,4 +1,4 @@
-package com.silicolife.textmining.Loaders;
+package main.java.com.silicolife.textmining.Loaders;
 
 import java.util.ArrayList;
 import java.util.List;

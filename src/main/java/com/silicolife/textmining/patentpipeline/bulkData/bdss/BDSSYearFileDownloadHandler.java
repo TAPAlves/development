@@ -1,4 +1,4 @@
-package com.silicolife.textmining.patentpipeline.bulkData.bdss;
+package main.java.com.silicolife.textmining.patentpipeline.bulkData.bdss;
 
 import java.io.File;
 import java.io.FileOutputStream;
