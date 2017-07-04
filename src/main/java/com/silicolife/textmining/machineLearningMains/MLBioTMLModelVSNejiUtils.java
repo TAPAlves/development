@@ -53,6 +53,9 @@ public class MLBioTMLModelVSNejiUtils {
 		BioTMLModelConfiguratorImpl configuration = new BioTMLModelConfiguratorImpl(modelClassType, modelIEType);
 		configuration.setAlgorithmType(BioTMLAlgorithm.malletcrf);
 		configuration.setNumThreads(5);
+//		configuration.getTransducerConfiguration().setAllowedTransitionStates(null);
+		configuration.getTransducerConfiguration().setForbiddenTransitionStates(null);
+		configuration.getTransducerConfiguration().setModelOrder(1);
 		return configuration;
 	}
 

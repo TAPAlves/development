@@ -25,19 +25,19 @@ import main.java.com.silicolife.textmining.machineLearningMains.MLBioTMLModelVSN
 
 public class ExecuteBioTMLTest {
 
-	private IBioTMLCorpus loadCorpus(String documentfile, String annotationfile) throws BioTMLException {
+	private IBioTMLCorpus loadCorpus(String documentfile, String annotationfile, String modelClassType) throws BioTMLException {
 		BioTMLCorpusReaderImpl reader = new BioTMLCorpusReaderImpl();
 		if (annotationfile==null || annotationfile.isEmpty()){
-			IBioTMLCorpus corpus = reader.readBioTMLCorpusFromBioCFiles(documentfile, "nlp4j");
+			IBioTMLCorpus corpus = reader.readBioTMLCorpusFromBioCFiles(documentfile,"nlp4j");
 			return corpus;
 		}
-		IBioTMLCorpus corpus = reader.readBioTMLCorpusFromBioCFiles(documentfile, annotationfile, "nlp4j");
+		IBioTMLCorpus corpus = reader.readBioTMLCorpusFromBioCFiles(documentfile, annotationfile, modelClassType, "nlp4j");
 		return corpus;
 	}
 
 	private IBioTMLModel createCRFModel(IBioTMLCorpus corpus, String dirToSave, String modelClassType) throws BioTMLException{
-//		IBioTMLModel crf = new MalletTransducerModel(MLBioTMLModelVSNejiUtils.loadWordFeaturesForTest(), MLBioTMLModelVSNejiUtils.defaultCRFConfiguration(modelClassType, BioTMLConstants.ner.toString()));
-		IBioTMLModel crf = new BioTMLMalletTransducerModelImpl(MLBioTMLModelVSNejiUtils.loadfeatures(), MLBioTMLModelVSNejiUtils.defaultCRFConfiguration(modelClassType, BioTMLConstants.ner.toString()));
+		IBioTMLModel crf = new BioTMLMalletTransducerModelImpl(MLBioTMLModelVSNejiUtils.loadWordFeaturesForTest(), MLBioTMLModelVSNejiUtils.defaultCRFConfiguration(modelClassType, BioTMLConstants.ner.toString()));
+//		IBioTMLModel crf = new BioTMLMalletTransducerModelImpl(MLBioTMLModelVSNejiUtils.loadfeatures(), MLBioTMLModelVSNejiUtils.defaultCRFConfiguration(modelClassType, BioTMLConstants.ner.toString()));
 		crf.train(corpus);
 		if (!new File(new File(dirToSave).getParent()).exists()){
 			new File(new File(dirToSave).getParent()).mkdirs();
@@ -83,13 +83,13 @@ public class ExecuteBioTMLTest {
 
 	@Test
 	public void main() throws BioTMLException, IOException {
-		//		String trainingDocumentsFile = "src/test/resources/chemdner/train/chemdner_patents_train_text.txt";
-		//		String trainingAnnotationsFile = "src/test/resources/chemdner/train/chemdner_cemp_gold_standard_train.tsv";
+				String trainingDocumentsFile = "src/test/resources/chemdner/train/chemdner_patents_train_text.txt";
+				String trainingAnnotationsFile = "src/test/resources/chemdner/train/chemdner_cemp_gold_standard_train.tsv";
 //				String devDocumentsFile = "src/test/resources/chemdner/dev/chemdner_patents_development_text.txt";
 //				String devAnnotationsFile = "src/test/resources/chemdner/dev/chemdner_cemp_gold_standard_development_v03.tsv";
 
-		String trainingDocumentsFile = "/home/tiagoalves/workspace/development/generalMain/train/trainSentences/FAMILYchemdner_patents_train_text.txt";
-		String trainingAnnotationsFile = "/home/tiagoalves/workspace/development/generalMain/train/trainAnnotations/FAMILYchemdner_cemp_gold_standard_train.tsv";
+//		String trainingDocumentsFile = "/home/tiagoalves/workspace/development/generalMain/train/trainSentences/FAMILYchemdner_patents_train_text.txt";
+//		String trainingAnnotationsFile = "/home/tiagoalves/workspace/development/generalMain/train/trainAnnotations/FAMILYchemdner_cemp_gold_standard_train.tsv";
 		String devDocumentsFile ="/home/tiagoalves/workspace/development/generalMain/development/developmentSentences/FAMILYchemdner_patents_development_text.txt";
 		String devAnnotationsFile = "/home/tiagoalves/workspace/development/generalMain/development/developmentAnnotations/FAMILYchemdner_cemp_gold_standard_development_v03.tsv";
 		
@@ -103,14 +103,14 @@ public class ExecuteBioTMLTest {
 		String modelDir = "generalMain/OurModel/"+ modelClassType+"7000_family_CRF.gz";
 
 		System.out.println("Loading the training BioTMLCorpus...");
-		IBioTMLCorpus trainingCorpus = loadCorpus(trainingDocumentsFile, trainingAnnotationsFile);
-//		IBioTMLModel model = createCRFModel(trainingCorpus, modelDir, modelClassType);
-		//		IBioTMLModel model = createSVMModel(trainingCorpus, modelDir, modelClassType);
-				IBioTMLModel model = readModel(modelDir);
-//		evaluateOurModel(trainingCorpus, model, testModelOnTrainSetFile);
+		IBioTMLCorpus trainingCorpus = loadCorpus(trainingDocumentsFile, trainingAnnotationsFile, modelClassType);
+		IBioTMLModel model = createCRFModel(trainingCorpus, modelDir, modelClassType);
+//				IBioTMLModel model = createSVMModel(trainingCorpus, modelDir, modelClassType);
+//				IBioTMLModel model = readModel(modelDir);
+		evaluateOurModel(trainingCorpus, model, testModelOnTrainSetFile);
 
 		System.out.println("Loading the development BioTMLCorpus...");
-		IBioTMLCorpus devCorpus = loadCorpus(devDocumentsFile, devAnnotationsFile);
+		IBioTMLCorpus devCorpus = loadCorpus(devDocumentsFile, devAnnotationsFile, modelClassType);
 		evaluateOurModel(devCorpus, model, testModelOnTestSetFile);
 	}
 }
