@@ -19,6 +19,7 @@ import java.util.TreeSet;
 
 import com.silicolife.textmining.core.datastructures.utils.FileHandling;
 import com.silicolife.textmining.core.datastructures.utils.GenerateRandomId;
+import com.silicolife.textmining.machinelearning.biotml.core.BioTMLModelLabelType;
 import com.silicolife.textmining.machinelearning.biotml.core.corpora.BioTMLDocumentImpl;
 import com.silicolife.textmining.machinelearning.biotml.core.corpora.BioTMLEntityImpl;
 import com.silicolife.textmining.machinelearning.biotml.core.evaluation.BioTMLEvaluator;
@@ -52,10 +53,11 @@ public class MLBioTMLModelVSNejiUtils {
 	public static IBioTMLModelConfigurator defaultCRFConfiguration(String modelClassType, String modelIEType) {
 		BioTMLModelConfiguratorImpl configuration = new BioTMLModelConfiguratorImpl(modelClassType, modelIEType);
 		configuration.setAlgorithmType(BioTMLAlgorithm.malletcrf);
-		configuration.setNumThreads(5);
+		configuration.setNumThreads(8);
 //		configuration.getTransducerConfiguration().setAllowedTransitionStates(null);
 		configuration.getTransducerConfiguration().setForbiddenTransitionStates(null);
 		configuration.getTransducerConfiguration().setModelOrder(1);
+//		configuration.setModelLabelType(BioTMLModelLabelType.bio);
 		return configuration;
 	}
 

@@ -1,4 +1,4 @@
-package test.java.com.silicolife.textmining.LinneausTaggerToMemoryRun;
+package test.java.com.silicolife.textmining.linneausTaggerToMemoryRun;
 
 import static org.junit.Assert.assertTrue;
 

@@ -18,7 +18,7 @@ import com.silicolife.textmining.core.interfaces.process.IE.io.export.Delimiter;
 import com.silicolife.textmining.core.interfaces.process.IE.io.export.TextDelimiter;
 import com.silicolife.textmining.core.interfaces.resource.IResourceElement;
 
-import main.java.com.silicolife.textmining.dictionaryLoader.JoChemDictionaryTSVLoader;
+import main.java.com.silicolife.textmining.patentpipeline.loaders.JoChemDictionaryTSVLoader;
 
 public class testJoChemDictLoader {
 

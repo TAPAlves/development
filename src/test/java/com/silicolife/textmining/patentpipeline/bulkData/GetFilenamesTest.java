@@ -13,7 +13,7 @@ import org.xml.sax.SAXException;
 
 import com.silicolife.textmining.core.interfaces.core.document.IPublication;
 
-import main.java.com.silicolife.textmining.patentpipeline.bulkData.bdss.BDSSUtils;
+import main.java.com.silicolife.textmining.patentpipeline.searchSourcesModule.bulkData.bdss.BDSSUtils;
 
 public class GetFilenamesTest {
 

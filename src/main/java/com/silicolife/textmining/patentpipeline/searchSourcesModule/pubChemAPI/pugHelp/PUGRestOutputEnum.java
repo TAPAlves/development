@@ -1,4 +1,4 @@
-package main.java.com.silicolife.textmining.patentpipeline.pubChemAPI.pugHelp;
+package main.java.com.silicolife.textmining.patentpipeline.searchSourcesModule.pubChemAPI.pugHelp;
 
 public enum PUGRestOutputEnum {
 
