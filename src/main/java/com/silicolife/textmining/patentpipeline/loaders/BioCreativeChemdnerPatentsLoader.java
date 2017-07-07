@@ -122,6 +122,7 @@ public class BioCreativeChemdnerPatentsLoader {
 			}
 		}
 		else{
+			
 			sortedList=sortMapByLenght(allMap);
 		}
 

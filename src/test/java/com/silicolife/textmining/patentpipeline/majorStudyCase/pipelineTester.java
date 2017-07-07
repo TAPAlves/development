@@ -7,7 +7,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -20,24 +19,25 @@ import java.util.Properties;
 import org.junit.Test;
 
 import com.silicolife.textmining.core.datastructures.documents.PDFtoText;
+import com.silicolife.textmining.core.datastructures.exceptions.process.InvalidConfigurationException;
+import com.silicolife.textmining.core.datastructures.init.exception.InvalidDatabaseAccess;
 import com.silicolife.textmining.core.datastructures.textprocessing.NormalizationForm;
 import com.silicolife.textmining.core.datastructures.textprocessing.TermSeparator;
+import com.silicolife.textmining.core.init.DatabaseConnectionInit;
 import com.silicolife.textmining.core.interfaces.core.configuration.IProxy;
+import com.silicolife.textmining.core.interfaces.core.dataaccess.database.DataBaseTypeEnum;
 import com.silicolife.textmining.core.interfaces.core.dataaccess.exception.ANoteException;
 import com.silicolife.textmining.core.interfaces.core.document.IPublication;
+import com.silicolife.textmining.core.interfaces.process.IR.exception.InternetConnectionProblemException;
 import com.silicolife.textmining.processes.ir.patentpipeline.PatentPipelineException;
+import com.silicolife.textmining.processes.ir.patentpipeline.PatentPiplineSearch;
 import com.silicolife.textmining.processes.ir.patentpipeline.components.metainfomodules.ops.IROPSPatentMetaInformationRetrievalConfigurationImpl;
 import com.silicolife.textmining.processes.ir.patentpipeline.components.metainfomodules.ops.OPSPatentMetaInformationRetrieval;
-import com.silicolife.textmining.processes.ir.patentpipeline.components.metainfomodules.wipo.IRWIPOPatentMetaInformationRetrievalConfigurationImpl;
-import com.silicolife.textmining.processes.ir.patentpipeline.components.metainfomodules.wipo.WIPOPatentMetaInformationRetrieval;
+import com.silicolife.textmining.processes.ir.patentpipeline.components.metainfomodules.patentrepository.IRPatentRepositoryPatentMetaInformationRetrievalConfigurationImpl;
+import com.silicolife.textmining.processes.ir.patentpipeline.components.metainfomodules.patentrepository.PatentRepositoryPatentMetaInformationRetrieval;
 import com.silicolife.textmining.processes.ir.patentpipeline.components.retrievalmodules.ops.IROPSPatentRetrievalConfigurationImpl;
 import com.silicolife.textmining.processes.ir.patentpipeline.components.retrievalmodules.ops.OPSPatentRetrieval;
-import com.silicolife.textmining.processes.ir.patentpipeline.components.searchmodule.bing.BingSearchPatentIDRecoverSource;
-import com.silicolife.textmining.processes.ir.patentpipeline.components.searchmodule.bing.IRPatentIDRetrievalBingSearchConfigurationImpl;
-import com.silicolife.textmining.processes.ir.patentpipeline.components.searchmodule.epo.EPOSearchPatentIDRecoverSource;
-import com.silicolife.textmining.processes.ir.patentpipeline.components.searchmodule.epo.IRPatentIDRetrievalEPOSearchConfigurationImpl;
-import com.silicolife.textmining.processes.ir.patentpipeline.components.searchmodule.googlesearch.GoogleSearchPatentIDRecoverSource;
-import com.silicolife.textmining.processes.ir.patentpipeline.components.searchmodule.googlesearch.IRPatentIDRetrievalGoogleSearchConfigurationImpl;
+import com.silicolife.textmining.processes.ir.patentpipeline.configuration.IIRPatentPipelineConfiguration;
 import com.silicolife.textmining.processes.ir.patentpipeline.configuration.IIRPatentPipelineSearchConfiguration;
 import com.silicolife.textmining.processes.ir.patentpipeline.configuration.IIRPatentPipelineSearchStepsConfiguration;
 import com.silicolife.textmining.processes.ir.patentpipeline.configuration.IRPatentPipelineSearchConfigurationImpl;
@@ -46,13 +46,11 @@ import com.silicolife.textmining.processes.ir.patentpipeline.core.PatentPipeline
 import com.silicolife.textmining.processes.ir.patentpipeline.core.metainfomodule.IIRPatentMetaInformationRetrievalConfiguration;
 import com.silicolife.textmining.processes.ir.patentpipeline.core.metainfomodule.IIRPatentMetainformationRetrievalSource;
 import com.silicolife.textmining.processes.ir.patentpipeline.core.metainfomodule.WrongIRPatentMetaInformationRetrievalConfigurationException;
-import com.silicolife.textmining.processes.ir.patentpipeline.core.ocrmodule.WrongOCRPipelineConfigurationException;
 import com.silicolife.textmining.processes.ir.patentpipeline.core.retrievalmodule.IIRPatentRetrieval;
 import com.silicolife.textmining.processes.ir.patentpipeline.core.retrievalmodule.IIRPatentRetrievalConfiguration;
 import com.silicolife.textmining.processes.ir.patentpipeline.core.retrievalmodule.IIRPatentRetrievalReport;
 import com.silicolife.textmining.processes.ir.patentpipeline.core.retrievalmodule.WrongIRPatentRetrievalConfigurationException;
-import com.silicolife.textmining.processes.ir.patentpipeline.core.searchmodule.IIRPatentIDRetrievalModuleConfiguration;
-import com.silicolife.textmining.processes.ir.patentpipeline.core.searchmodule.IIRPatentIDRetrievalSource;
+import com.silicolife.textmining.processes.ir.patentpipeline.core.searchmodule.IRPatentSearchConfigurationImpl;
 import com.silicolife.textmining.processes.ir.patentpipeline.core.searchmodule.WrongIRPatentIDRecoverConfigurationException;
 
 import main.java.com.silicolife.textmining.dictionaryLoader.loaderDatastructures.BioCreativeChemdnerPatentsLoaderConfigurationImpl;
@@ -60,149 +58,103 @@ import main.java.com.silicolife.textmining.dictionaryLoader.loaderInterfaces.IBi
 import main.java.com.silicolife.textmining.dictionaryLoader.loaderInterfaces.WrongBioCreativeChemdnerPatentsLoaderConfigurationException;
 import main.java.com.silicolife.textmining.patentpipeline.loaders.BioCreativeChemdnerPatentsLoader;
 import main.java.com.silicolife.textmining.patentpipeline.pdfToTextModule.OCREvaluator;
-import net.sourceforge.tess4j.TesseractException;
 
 public class pipelineTester {
 
 	@Test
 
-	public static void test1() throws WrongIRPatentMetaInformationRetrievalConfigurationException, WrongIRPatentIDRecoverConfigurationException, MalformedURLException
+	public void test1() throws WrongIRPatentMetaInformationRetrievalConfigurationException, WrongIRPatentIDRecoverConfigurationException, WrongBioCreativeChemdnerPatentsLoaderConfigurationException, IOException, WrongIRPatentRetrievalConfigurationException, PatentPipelineException, ANoteException, InvalidDatabaseAccess, InvalidConfigurationException, InternetConnectionProblemException
 	{
 
-		//1st step - load Biocreative Files (ID and abstract)
+		// ################################ CONFIGURATIONS SECTION ################################
+		
+		
+		DatabaseConnectionInit.init(DataBaseTypeEnum.MYSQL, "localhost", "3306", "PatPipeTests", "root", "admin");
 
-		//2nd step - Extract metainformation
+		String accessTokenOPS = "LLCAsGwQHRQAi9sKU3L83tMcKszoVnhi:q9sxdjCvGbLDsWrc";
 
-		//3rd step - Extract PDF files
+		String usernamePatentRepository="guest";
+		String passwordPatentRepository="r3p03i7oriUP@tantes!";
+		String serverURLPatentRepository="http://mendel.di.uminho.pt:8080/patentrepository";	
 
-		//4th step - Use this files to get corpus with OCR
-
-		//5th step - Do NER to Abstracts and to Full Texts
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		String query = "";
-
-		IIRPatentPipelineSearchConfiguration patentPipelineSearchConfiguration = new IRPatentPipelineSearchConfigurationImpl(query);
-		IIRPatentPipelineSearchStepsConfiguration configurationPipeline=new IRPatentPipelineSearchStepsConfigurationImpl();
-
-		//Step 1 - Retrived Patents Ids
-		String accessTokenBing = "Ju0WWwspaT9tVXY+JhWeftB2Om9yQeCCz2cRpA+fGCE";
-		IIRPatentIDRetrievalModuleConfiguration configurationBing = new IRPatentIDRetrievalBingSearchConfigurationImpl(accessTokenBing);
-		IIRPatentIDRetrievalSource patentIDrecoverSourceBing = new BingSearchPatentIDRecoverSource(configurationBing);
-		configurationPipeline.addIRPatentIDRecoverSource(patentIDrecoverSourceBing);
-
-
-		String accessTokenGoogle ="AIzaSyD60IrjYQBKEnotVTYWpcWTBVffY6l0XOU";
-		String customSearchIDGoogle = "017027245643975829422:oimxfoxonzc";
-		IIRPatentIDRetrievalModuleConfiguration configurationGoogle = new IRPatentIDRetrievalGoogleSearchConfigurationImpl(accessTokenGoogle, customSearchIDGoogle);
-		IIRPatentIDRetrievalSource patentIDrecoverSourceGoogle = new GoogleSearchPatentIDRecoverSource(configurationGoogle);
-		configurationPipeline.addIRPatentIDRecoverSource(patentIDrecoverSourceGoogle);
-
-
-		String accessTokenOPS ="LLCAsGwQHRQAi9sKU3L83tMcKszoVnhi:q9sxdjCvGbLDsWrc";
-		IIRPatentIDRetrievalModuleConfiguration configurationEPO = new IRPatentIDRetrievalEPOSearchConfigurationImpl(accessTokenOPS);
-		IIRPatentIDRetrievalSource patentIDrecoverSourceEPO = new EPOSearchPatentIDRecoverSource(configurationEPO);
-		configurationPipeline.addIRPatentIDRecoverSource(patentIDrecoverSourceEPO);
-
-
-
-		//Step 2 - Retrived Meta Information
 		IProxy proxy = null;
 		Properties prop=null;
 
-		String usernameWIPO = "silicolife";
-		String pwdWIPO = "zTi8iF0qh";
+//		String usernameWIPO = "silicolife";
+//		String pwdWIPO = "zTi8iF0qh";
 
-		IIRPatentMetaInformationRetrievalConfiguration configurationWIPO = new IRWIPOPatentMetaInformationRetrievalConfigurationImpl(usernameWIPO, pwdWIPO, proxy );
-		IIRPatentMetainformationRetrievalSource wipoMetaInformationRetrieval = new WIPOPatentMetaInformationRetrieval(configurationWIPO);
-		configurationPipeline.addIRPatentRetrievalMetaInformation(wipoMetaInformationRetrieval);
+		String queryName="MajorStudyCasePatentPipelineTest";
+		String query="Patent Pipeline Test Using Biocreative V CHEMDNER task training set";
+		String bioCreativeFilePath="src/test/resources/chemdner/train/chemdner_patents_train_text.txt";
+		String outputDir="Resultados_StudyCase";
+		String txtDirName="MajorStudyCase";
+		int numberOfPatentsToDownload=7000;
+		List<String> countryCodes=new ArrayList<>(); //empty to include all predefined
+		boolean englishPatents = false;
 
 
-		String accessTokenOPSMetaRetrieval = "LLCAsGwQHRQAi9sKU3L83tMcKszoVnhi:q9sxdjCvGbLDsWrc";
-		IIRPatentMetaInformationRetrievalConfiguration configurationOPS=new IROPSPatentMetaInformationRetrievalConfigurationImpl(proxy, accessTokenOPSMetaRetrieval);
-		IIRPatentMetainformationRetrievalSource opsMetaInformationretrieval = new OPSPatentMetaInformationRetrieval(configurationOPS);
+
+
+		//		 ################################ 1ST STEP - LOAD BIOCREATIVE FILES (ID AND ABSTRACT) ################################
+
+
+		IBioCreativeChemdnerPatentsLoaderConfiguration configurationBioCreativeLoader = new BioCreativeChemdnerPatentsLoaderConfigurationImpl(bioCreativeFilePath,numberOfPatentsToDownload,englishPatents,countryCodes);
+		BioCreativeChemdnerPatentsLoader mapClass = new BioCreativeChemdnerPatentsLoader(configurationBioCreativeLoader);
+		Map<String, ArrayList<String>> map = mapClass.extractPatentIDs();//set de teste
+
+		Map<String, IPublication> mapPatentIDPublication = PatentPipeline.createSimplePublicationMaps(map.keySet());		
+		long starttime1 = System.currentTimeMillis();
+
+
+
+
+
+		//################################ 2ND STEP - EXTRACT METAINFORMATION (1ST STEP OMITTED) ################################
+
+
+		IIRPatentPipelineSearchStepsConfiguration configurationPipeline=new IRPatentPipelineSearchStepsConfigurationImpl();
+
+		//		IIRPatentMetaInformationRetrievalConfiguration configurationWIPO = new IRWIPOPatentMetaInformationRetrievalConfigurationImpl(usernameWIPO, pwdWIPO, proxy );
+		//		IIRPatentMetainformationRetrievalSource wipoMetaInformationRetrieval = new WIPOPatentMetaInformationRetrieval(configurationWIPO);
+		//		configurationPipeline.addIRPatentRetrievalMetaInformation(wipoMetaInformationRetrieval);
+
+		IIRPatentMetaInformationRetrievalConfiguration configurationPatentRepository=new IRPatentRepositoryPatentMetaInformationRetrievalConfigurationImpl(proxy, serverURLPatentRepository, usernamePatentRepository, passwordPatentRepository);
+		IIRPatentMetainformationRetrievalSource patentMetainformationPatentRepositoryRecoverSource= new PatentRepositoryPatentMetaInformationRetrieval(configurationPatentRepository);
+		configurationPipeline.addIRPatentRetrievalMetaInformation(patentMetainformationPatentRepositoryRecoverSource);
+
+		IIRPatentMetaInformationRetrievalConfiguration configurationOPSMetaInfoRetrieval=new IROPSPatentMetaInformationRetrievalConfigurationImpl(proxy, accessTokenOPS);
+		IIRPatentMetainformationRetrievalSource opsMetaInformationretrieval = new OPSPatentMetaInformationRetrieval(configurationOPSMetaInfoRetrieval);
 		configurationPipeline.addIRPatentRetrievalMetaInformation(opsMetaInformationretrieval);
 
-	}
+		IIRPatentPipelineSearchConfiguration searchConf= new IRPatentPipelineSearchConfigurationImpl(query);
+		IIRPatentPipelineConfiguration configuration = new IRPatentSearchConfigurationImpl(searchConf,queryName,prop,configurationPipeline);
+
+		PatentPiplineSearch runnerIQueryMaker = new PatentPiplineSearch();
+		runnerIQueryMaker.search(configuration);
+		//		List<IPublication> publications = runnerIQueryMaker.getPublicationDocuments();
 
 
-	public static void main(String[] args) throws WrongIRPatentRetrievalConfigurationException, PatentPipelineException, ANoteException, WrongBioCreativeChemdnerPatentsLoaderConfigurationException, IOException, WrongOCRPipelineConfigurationException, TesseractException {
-		String accessTokenOPS = "LLCAsGwQHRQAi9sKU3L83tMcKszoVnhi:q9sxdjCvGbLDsWrc";
-		String username = "silicolife";
-		String pwd = "zTi8iF0qh";
-		//		String outputDir = "DownloadAndOCRTestBetterOCR";
-		//		String outputDir= "DownloadAndOCRTestHugo/DownloadAndOCRTest";
 
-		String outputDir="Resultados";
-		String txtDirName="1approach";
-		IProxy proxy = null;
-		String path="src/test/resources/data/ALL_patent_abstracts_biocreative.txt";
-		int numberOfPatentsToDownload=1000;
-		List<String> countryCodes=new ArrayList<>();
-		boolean englishPatents = true;
-		countryCodes.add("AU");
-		countryCodes.add("BZ");
-		countryCodes.add("CA");
-		countryCodes.add("CB");
-		countryCodes.add("IE");
-		countryCodes.add("JM");
-		countryCodes.add("NZ");
-		countryCodes.add("PH");
-		countryCodes.add("ZA");
-		countryCodes.add("TT");
-		countryCodes.add("GB");
-		countryCodes.add("US");
-		//		countryCodes.add("WO");//some patents are in chinese
-
-		PatentPipeline patentPipeline = new PatentPipeline();
+		// ################################ 3RD STEP - EXTRACT PDF FILES ################################
 
 		//		IIRPatentRetrievalConfiguration configurationWIPO = new IRWIPOPatentRetrievalConfigurationImpl(username, pwd, outputDir, proxy );
 		//		IIRPatentRetrieval WIPOpatentRetrievalProcess = new WIPOPatentRetrieval(configurationWIPO);
 		//		patentPipeline.addPatentIDRetrieval(WIPOpatentRetrievalProcess);
 
-		IIRPatentRetrievalConfiguration configurationOPS = new IROPSPatentRetrievalConfigurationImpl(outputDir, proxy, accessTokenOPS);
-		IIRPatentRetrieval OPSpatentRetrievalProcess = new OPSPatentRetrieval(configurationOPS);
-		patentPipeline.addPatentIDRetrieval(OPSpatentRetrievalProcess);
-
-		IBioCreativeChemdnerPatentsLoaderConfiguration configurationBioCreativeLoader = new BioCreativeChemdnerPatentsLoaderConfigurationImpl(path,numberOfPatentsToDownload,englishPatents,countryCodes);
-		BioCreativeChemdnerPatentsLoader mapClass = new BioCreativeChemdnerPatentsLoader(configurationBioCreativeLoader);
-		Map<String, ArrayList<String>> map = mapClass.extractPatentIDs();//set de teste
-
-		Map<String, IPublication> mapPatentIDPublication = patentPipeline.createSimplePublicationMaps(map.keySet());		
-		long starttime1 = System.currentTimeMillis();
+		PatentPipeline patentPipeline = new PatentPipeline();
+		IIRPatentRetrievalConfiguration configurationOPSPDFRetrieval = new IROPSPatentRetrievalConfigurationImpl(outputDir, proxy, accessTokenOPS);
+		IIRPatentRetrieval OPSpatentRetrievalProcess = new OPSPatentRetrieval(configurationOPSPDFRetrieval);
+		patentPipeline.addPatentIDRetrieval(OPSpatentRetrievalProcess);		
 		IIRPatentRetrievalReport pdfDownload = patentPipeline.executePatentRetrievalPDFStep(mapPatentIDPublication);//set OCR
 		System.out.println("Retrieved PatentIds:\n"+pdfDownload.getRetrievedPatents().toString());
 		System.out.println("Not Retrieved PatentIds:\n"+pdfDownload.getNotRetrievedPatents().toString());
 		System.out.println("Percentage of Total Retrieved Patents:\n"+((float)pdfDownload.getRetrievedPatents().size()/(float)(pdfDownload.getNotRetrievedPatents().size()+pdfDownload.getRetrievedPatents().size()))*100+"%");
 		long endtime1 = System.currentTimeMillis();
 		System.out.println("\nTIME:"+(float)((endtime1-starttime1)/1000)+"s\n");
+
+
+
+		// ################################ 4TH STEP - PDF TO TEXT CONVERSION PROCESS CREATING CORPUS ################################
 
 		Map<String,String> setTest=new HashMap<>();
 
@@ -224,7 +176,7 @@ public class pipelineTester {
 			setTest.put(patentID,txtName);
 			System.out.println("Patent processed:"+patentID);
 		}
-		FileWriter arq = new FileWriter(outputDir+"\\"+txtDirName+"\\"+"1000PatentsResults.txt");
+		FileWriter arq = new FileWriter(outputDir+"\\"+txtDirName+"\\"+"TrainPatentsResults.txt");
 		PrintWriter gravarArq = new PrintWriter(arq);
 		List<Double> setPrecision = new ArrayList<Double>();
 		List<Double> setRecall = new ArrayList<Double>();
@@ -273,7 +225,12 @@ public class pipelineTester {
 		gravarArq.println("Recall: " + mediaRecall);
 		gravarArq.println("F1 measure: " + 2*((mediaPrecision*mediaRecall)/(mediaPrecision+mediaRecall)));
 		arq.close();
+
+
+		//5th step - Do NER to Abstracts and to Full Texts
+
 	}
+
 
 	private static String[] arrayConstruct(String text,String SEPARATOR){
 		String[] tokens = text.split(SEPARATOR);
@@ -303,4 +260,3 @@ public class pipelineTester {
 	}
 
 }
-
