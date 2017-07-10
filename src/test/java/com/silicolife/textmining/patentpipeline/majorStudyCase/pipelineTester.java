@@ -71,7 +71,10 @@ public class pipelineTester {
 		
 		DatabaseConnectionInit.init(DataBaseTypeEnum.MYSQL, "localhost", "3306", "PatPipeTests", "root", "admin");
 
-		String accessTokenOPS = "LLCAsGwQHRQAi9sKU3L83tMcKszoVnhi:q9sxdjCvGbLDsWrc";
+//		String accessTokenOPS = "LLCAsGwQHRQAi9sKU3L83tMcKszoVnhi:q9sxdjCvGbLDsWrc";
+//		String accessTokenOPS="y1MBmtZjwRm6ia1eNdjeAJh7NxAkyhUG:I81FKAgUAY4GLivF";
+//		String 	accessTokenOPS= "n6gwaIONHZKUf63Dv3zgRXrtgkhJjA4m:6zB0g9o4k3fgl3vq";
+		String accessTokenOPS= "pmRQIWtNkfJbxNt2wg7GnGL0kP7aB18Y:btjR8acGUMh3aMVf";
 
 		String usernamePatentRepository="guest";
 		String passwordPatentRepository="r3p03i7oriUP@tantes!";
@@ -118,13 +121,13 @@ public class pipelineTester {
 		//		IIRPatentMetainformationRetrievalSource wipoMetaInformationRetrieval = new WIPOPatentMetaInformationRetrieval(configurationWIPO);
 		//		configurationPipeline.addIRPatentRetrievalMetaInformation(wipoMetaInformationRetrieval);
 
-		IIRPatentMetaInformationRetrievalConfiguration configurationPatentRepository=new IRPatentRepositoryPatentMetaInformationRetrievalConfigurationImpl(proxy, serverURLPatentRepository, usernamePatentRepository, passwordPatentRepository);
-		IIRPatentMetainformationRetrievalSource patentMetainformationPatentRepositoryRecoverSource= new PatentRepositoryPatentMetaInformationRetrieval(configurationPatentRepository);
-		configurationPipeline.addIRPatentRetrievalMetaInformation(patentMetainformationPatentRepositoryRecoverSource);
-
 		IIRPatentMetaInformationRetrievalConfiguration configurationOPSMetaInfoRetrieval=new IROPSPatentMetaInformationRetrievalConfigurationImpl(proxy, accessTokenOPS);
 		IIRPatentMetainformationRetrievalSource opsMetaInformationretrieval = new OPSPatentMetaInformationRetrieval(configurationOPSMetaInfoRetrieval);
 		configurationPipeline.addIRPatentRetrievalMetaInformation(opsMetaInformationretrieval);
+		
+		IIRPatentMetaInformationRetrievalConfiguration configurationPatentRepository=new IRPatentRepositoryPatentMetaInformationRetrievalConfigurationImpl(proxy, serverURLPatentRepository, usernamePatentRepository, passwordPatentRepository);
+		IIRPatentMetainformationRetrievalSource patentMetainformationPatentRepositoryRecoverSource= new PatentRepositoryPatentMetaInformationRetrieval(configurationPatentRepository);
+		configurationPipeline.addIRPatentRetrievalMetaInformation(patentMetainformationPatentRepositoryRecoverSource);
 
 		IIRPatentPipelineSearchConfiguration searchConf= new IRPatentPipelineSearchConfigurationImpl(query);
 		IIRPatentPipelineConfiguration configuration = new IRPatentSearchConfigurationImpl(searchConf,queryName,prop,configurationPipeline);
@@ -159,15 +162,15 @@ public class pipelineTester {
 		Map<String,String> setTest=new HashMap<>();
 
 		for (String patentID :pdfDownload.getRetrievedPatents()){
-			Path docPath = Paths.get(outputDir+"\\" + txtDirName+ "\\");//);	
+			Path docPath = Paths.get(outputDir+"/" + txtDirName);//);	
 			if (!Files.exists(docPath))
 				Files.createDirectories(docPath);
-			String txtName = docPath+ "\\"+patentID+".txt";
+			String txtName = docPath+ "/"+patentID+".txt";
 			File verifyFileExistence = new File(txtName);
 			if (!verifyFileExistence.exists()){
 				long starttime = System.currentTimeMillis();
 				System.out.println("Started new OCR for: "+patentID);
-				String file = PDFtoText.convertPDFDocument(outputDir+"\\"+patentID+".pdf");
+				String file = PDFtoText.convertPDFDocument(outputDir+"/"+patentID+".pdf");
 				String ocrTermSep=TermSeparator.termSeparator(file);
 				createTXTFile(txtName, NormalizationForm.removeOffsetProblemSituation(ocrTermSep));
 				long endtime = System.currentTimeMillis();
@@ -176,7 +179,7 @@ public class pipelineTester {
 			setTest.put(patentID,txtName);
 			System.out.println("Patent processed:"+patentID);
 		}
-		FileWriter arq = new FileWriter(outputDir+"\\"+txtDirName+"\\"+"TrainPatentsResults.txt");
+		FileWriter arq = new FileWriter(outputDir+"/"+txtDirName+"/"+"TrainPatentsResults.txt");
 		PrintWriter gravarArq = new PrintWriter(arq);
 		List<Double> setPrecision = new ArrayList<Double>();
 		List<Double> setRecall = new ArrayList<Double>();
