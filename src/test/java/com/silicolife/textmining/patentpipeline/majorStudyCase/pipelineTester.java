@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -58,6 +59,7 @@ import main.java.com.silicolife.textmining.dictionaryLoader.loaderInterfaces.IBi
 import main.java.com.silicolife.textmining.dictionaryLoader.loaderInterfaces.WrongBioCreativeChemdnerPatentsLoaderConfigurationException;
 import main.java.com.silicolife.textmining.patentpipeline.loaders.BioCreativeChemdnerPatentsLoader;
 import main.java.com.silicolife.textmining.patentpipeline.pdfToTextModule.OCREvaluator;
+import main.java.com.silicolife.textmining.patentpipeline.pdfToTextModule.PatentRepositoryFT;
 
 public class pipelineTester {
 
@@ -67,13 +69,13 @@ public class pipelineTester {
 	{
 
 		// ################################ CONFIGURATIONS SECTION ################################
-		
-		
+
+
 		DatabaseConnectionInit.init(DataBaseTypeEnum.MYSQL, "localhost", "3306", "PatPipeTests", "root", "admin");
 
-//		String accessTokenOPS = "LLCAsGwQHRQAi9sKU3L83tMcKszoVnhi:q9sxdjCvGbLDsWrc";
-//		String accessTokenOPS="y1MBmtZjwRm6ia1eNdjeAJh7NxAkyhUG:I81FKAgUAY4GLivF";
-//		String 	accessTokenOPS= "n6gwaIONHZKUf63Dv3zgRXrtgkhJjA4m:6zB0g9o4k3fgl3vq";
+		//		String accessTokenOPS = "LLCAsGwQHRQAi9sKU3L83tMcKszoVnhi:q9sxdjCvGbLDsWrc";
+		//		String accessTokenOPS="y1MBmtZjwRm6ia1eNdjeAJh7NxAkyhUG:I81FKAgUAY4GLivF";
+		//		String 	accessTokenOPS= "n6gwaIONHZKUf63Dv3zgRXrtgkhJjA4m:6zB0g9o4k3fgl3vq";
 		String accessTokenOPS= "pmRQIWtNkfJbxNt2wg7GnGL0kP7aB18Y:btjR8acGUMh3aMVf";
 
 		String usernamePatentRepository="guest";
@@ -83,8 +85,8 @@ public class pipelineTester {
 		IProxy proxy = null;
 		Properties prop=null;
 
-//		String usernameWIPO = "silicolife";
-//		String pwdWIPO = "zTi8iF0qh";
+		//		String usernameWIPO = "silicolife";
+		//		String pwdWIPO = "zTi8iF0qh";
 
 		String queryName="MajorStudyCasePatentPipelineTest";
 		String query="Patent Pipeline Test Using Biocreative V CHEMDNER task training set";
@@ -124,7 +126,7 @@ public class pipelineTester {
 		IIRPatentMetaInformationRetrievalConfiguration configurationOPSMetaInfoRetrieval=new IROPSPatentMetaInformationRetrievalConfigurationImpl(proxy, accessTokenOPS);
 		IIRPatentMetainformationRetrievalSource opsMetaInformationretrieval = new OPSPatentMetaInformationRetrieval(configurationOPSMetaInfoRetrieval);
 		configurationPipeline.addIRPatentRetrievalMetaInformation(opsMetaInformationretrieval);
-		
+
 		IIRPatentMetaInformationRetrievalConfiguration configurationPatentRepository=new IRPatentRepositoryPatentMetaInformationRetrievalConfigurationImpl(proxy, serverURLPatentRepository, usernamePatentRepository, passwordPatentRepository);
 		IIRPatentMetainformationRetrievalSource patentMetainformationPatentRepositoryRecoverSource= new PatentRepositoryPatentMetaInformationRetrieval(configurationPatentRepository);
 		configurationPipeline.addIRPatentRetrievalMetaInformation(patentMetainformationPatentRepositoryRecoverSource);
@@ -138,7 +140,17 @@ public class pipelineTester {
 
 
 
-		// ################################ 3RD STEP - EXTRACT PDF FILES ################################
+		// ################################ 3RD STEP - TRY TO EXTRACT FULL TEXT FROM PATENT REPOSITORY AVOIDING DOWNLOAD ALL PDF FILES ################################
+
+		PatentRepositoryFT patentRepositoryFT = new PatentRepositoryFT(serverURLPatentRepository, map.keySet(), outputDir+"/"+txtDirName);
+		Set<String> patentsFTRetrievedUsingPatentRepository = patentRepositoryFT.retrievePatentsFullTextFromPatentRepository();
+		for (String patent: patentsFTRetrievedUsingPatentRepository){
+			mapPatentIDPublication.remove(patent);
+		}
+
+
+
+		// ################################ 4th STEP - EXTRACT PDF FILES ################################
 
 		//		IIRPatentRetrievalConfiguration configurationWIPO = new IRWIPOPatentRetrievalConfigurationImpl(username, pwd, outputDir, proxy );
 		//		IIRPatentRetrieval WIPOpatentRetrievalProcess = new WIPOPatentRetrieval(configurationWIPO);
@@ -157,7 +169,7 @@ public class pipelineTester {
 
 
 
-		// ################################ 4TH STEP - PDF TO TEXT CONVERSION PROCESS CREATING CORPUS ################################
+		// ################################ 5TH STEP - PDF TO TEXT CONVERSION PROCESS CREATING CORPUS ################################
 
 		Map<String,String> setTest=new HashMap<>();
 
