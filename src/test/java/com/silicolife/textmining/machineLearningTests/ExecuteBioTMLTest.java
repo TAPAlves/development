@@ -1,4 +1,4 @@
-package test.java.com.silicolife.textmining.machineLearningTests;
+package com.silicolife.textmining.machineLearningTests;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.silicolife.textmining.machineLearningMains.MLBioTMLModelVSNejiUtils;
 import com.silicolife.textmining.machinelearning.biotml.core.BioTMLConstants;
 import com.silicolife.textmining.machinelearning.biotml.core.annotator.BioTMLMalletAnnotatorImpl;
 import com.silicolife.textmining.machinelearning.biotml.core.corpora.BioTMLCorpusImpl;
@@ -21,8 +22,6 @@ import com.silicolife.textmining.machinelearning.biotml.core.models.mallet.BioTM
 import com.silicolife.textmining.machinelearning.biotml.reader.BioTMLCorpusReaderImpl;
 import com.silicolife.textmining.machinelearning.biotml.reader.BioTMLModelReaderImpl;
 import com.silicolife.textmining.machinelearning.biotml.writer.BioTMLModelWriterImpl;
-
-import main.java.com.silicolife.textmining.machineLearningMains.MLBioTMLModelVSNejiUtils;
 
 public class ExecuteBioTMLTest {
 

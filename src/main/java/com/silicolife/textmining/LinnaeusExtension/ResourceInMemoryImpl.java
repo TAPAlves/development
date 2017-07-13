@@ -1,4 +1,4 @@
-package main.java.com.silicolife.textmining.LinnaeusExtension;
+package com.silicolife.textmining.LinnaeusExtension;
 
 import java.util.ArrayList;
 import java.util.HashSet;

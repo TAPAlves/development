@@ -1,4 +1,4 @@
-package main.java.com.silicolife.textmining.patentpipeline.searchSourcesModule.pubChemAPI.pugHelp;
+package com.silicolife.textmining.patentpipeline.searchSourcesModule.pubChemAPI.pugHelp;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;

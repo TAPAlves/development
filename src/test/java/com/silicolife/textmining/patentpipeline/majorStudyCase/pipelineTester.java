@@ -1,4 +1,4 @@
-package test.java.com.silicolife.textmining.patentpipeline.majorStudyCase;
+package com.silicolife.textmining.patentpipeline.majorStudyCase;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -24,12 +24,13 @@ import com.silicolife.textmining.core.datastructures.exceptions.process.InvalidC
 import com.silicolife.textmining.core.datastructures.init.exception.InvalidDatabaseAccess;
 import com.silicolife.textmining.core.datastructures.textprocessing.NormalizationForm;
 import com.silicolife.textmining.core.datastructures.textprocessing.TermSeparator;
-import com.silicolife.textmining.core.init.DatabaseConnectionInit;
 import com.silicolife.textmining.core.interfaces.core.configuration.IProxy;
-import com.silicolife.textmining.core.interfaces.core.dataaccess.database.DataBaseTypeEnum;
 import com.silicolife.textmining.core.interfaces.core.dataaccess.exception.ANoteException;
 import com.silicolife.textmining.core.interfaces.core.document.IPublication;
 import com.silicolife.textmining.core.interfaces.process.IR.exception.InternetConnectionProblemException;
+import com.silicolife.textmining.patentpipeline.loaders.BioCreativeChemdnerPatentsLoader;
+import com.silicolife.textmining.patentpipeline.pdfToTextModule.OCREvaluator;
+import com.silicolife.textmining.patentpipeline.pdfToTextModule.PatentRepositoryFT;
 import com.silicolife.textmining.processes.ir.patentpipeline.PatentPipelineException;
 import com.silicolife.textmining.processes.ir.patentpipeline.PatentPiplineSearch;
 import com.silicolife.textmining.processes.ir.patentpipeline.components.metainfomodules.ops.IROPSPatentMetaInformationRetrievalConfigurationImpl;
@@ -57,9 +58,6 @@ import com.silicolife.textmining.processes.ir.patentpipeline.core.searchmodule.W
 import main.java.com.silicolife.textmining.dictionaryLoader.loaderDatastructures.BioCreativeChemdnerPatentsLoaderConfigurationImpl;
 import main.java.com.silicolife.textmining.dictionaryLoader.loaderInterfaces.IBioCreativeChemdnerPatentsLoaderConfiguration;
 import main.java.com.silicolife.textmining.dictionaryLoader.loaderInterfaces.WrongBioCreativeChemdnerPatentsLoaderConfigurationException;
-import main.java.com.silicolife.textmining.patentpipeline.loaders.BioCreativeChemdnerPatentsLoader;
-import main.java.com.silicolife.textmining.patentpipeline.pdfToTextModule.OCREvaluator;
-import main.java.com.silicolife.textmining.patentpipeline.pdfToTextModule.PatentRepositoryFT;
 
 public class pipelineTester {
 
@@ -71,12 +69,12 @@ public class pipelineTester {
 		// ################################ CONFIGURATIONS SECTION ################################
 
 
-		DatabaseConnectionInit.init(DataBaseTypeEnum.MYSQL, "localhost", "3306", "PatPipeTests", "root", "admin");
+//		DatabaseConnectionInit.init(DataBaseTypeEnum.MYSQL, "localhost", "3306", "PatPipeTests", "root", "admin");
 
-		//		String accessTokenOPS = "LLCAsGwQHRQAi9sKU3L83tMcKszoVnhi:q9sxdjCvGbLDsWrc";
-		//		String accessTokenOPS="y1MBmtZjwRm6ia1eNdjeAJh7NxAkyhUG:I81FKAgUAY4GLivF";
+//				String accessTokenOPS = "LLCAsGwQHRQAi9sKU3L83tMcKszoVnhi:q9sxdjCvGbLDsWrc";
+				String accessTokenOPS="y1MBmtZjwRm6ia1eNdjeAJh7NxAkyhUG:I81FKAgUAY4GLivF";
 		//		String 	accessTokenOPS= "n6gwaIONHZKUf63Dv3zgRXrtgkhJjA4m:6zB0g9o4k3fgl3vq";
-		String accessTokenOPS= "pmRQIWtNkfJbxNt2wg7GnGL0kP7aB18Y:btjR8acGUMh3aMVf";
+//		String accessTokenOPS= "pmRQIWtNkfJbxNt2wg7GnGL0kP7aB18Y:btjR8acGUMh3aMVf";
 
 		String usernamePatentRepository="guest";
 		String passwordPatentRepository="r3p03i7oriUP@tantes!";
@@ -135,7 +133,7 @@ public class pipelineTester {
 		IIRPatentPipelineConfiguration configuration = new IRPatentSearchConfigurationImpl(searchConf,queryName,prop,configurationPipeline);
 
 		PatentPiplineSearch runnerIQueryMaker = new PatentPiplineSearch();
-		runnerIQueryMaker.search(configuration);
+//		runnerIQueryMaker.search(configuration);
 		//		List<IPublication> publications = runnerIQueryMaker.getPublicationDocuments();
 
 

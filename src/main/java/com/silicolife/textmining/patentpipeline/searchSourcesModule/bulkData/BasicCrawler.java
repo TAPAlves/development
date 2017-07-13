@@ -1,4 +1,4 @@
-package main.java.com.silicolife.textmining.patentpipeline.searchSourcesModule.bulkData;
+package com.silicolife.textmining.patentpipeline.searchSourcesModule.bulkData;
 
 import java.util.Set;
 import java.util.regex.Pattern;

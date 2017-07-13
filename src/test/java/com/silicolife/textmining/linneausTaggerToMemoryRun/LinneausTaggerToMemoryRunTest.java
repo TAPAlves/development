@@ -1,4 +1,4 @@
-package test.java.com.silicolife.textmining.linneausTaggerToMemoryRun;
+package com.silicolife.textmining.linneausTaggerToMemoryRun;
 
 import static org.junit.Assert.assertTrue;
 
@@ -10,6 +10,8 @@ import java.util.regex.Pattern;
 
 import org.junit.Test;
 
+import com.silicolife.textmining.LinnaeusExtension.LinnaeusTaggerMemoryRun;
+import com.silicolife.textmining.LinnaeusExtension.ResourceInMemoryImpl;
 import com.silicolife.textmining.core.datastructures.exceptions.process.InvalidConfigurationException;
 import com.silicolife.textmining.core.datastructures.init.InitConfiguration;
 import com.silicolife.textmining.core.datastructures.init.exception.InvalidDatabaseAccess;
@@ -24,15 +26,12 @@ import com.silicolife.textmining.core.interfaces.process.IR.exception.InternetCo
 import com.silicolife.textmining.core.interfaces.resource.IResource;
 import com.silicolife.textmining.core.interfaces.resource.IResourceElement;
 import com.silicolife.textmining.core.interfaces.resource.lexicalwords.ILexicalWords;
+import com.silicolife.textmining.dictionaryLoader.testJoChemDictLoader;
 import com.silicolife.textmining.machinelearning.DatabaseConnectionInit;
 import com.silicolife.textmining.processes.ie.ner.linnaeus.adapt.uk.ac.man.entitytagger.matching.Matcher.Disambiguation;
 import com.silicolife.textmining.processes.ie.ner.linnaeus.configuration.INERLinnaeusConfiguration;
 import com.silicolife.textmining.processes.ie.ner.linnaeus.configuration.NERLinnaeusConfigurationImpl;
 import com.silicolife.textmining.processes.ie.ner.linnaeus.configuration.NERLinnaeusPreProcessingEnum;
-
-import main.java.com.silicolife.textmining.LinnaeusExtension.LinnaeusTaggerMemoryRun;
-import main.java.com.silicolife.textmining.LinnaeusExtension.ResourceInMemoryImpl;
-import test.java.com.silicolife.textmining.dictionaryLoader.testJoChemDictLoader;
 
 public class LinneausTaggerToMemoryRunTest {
 

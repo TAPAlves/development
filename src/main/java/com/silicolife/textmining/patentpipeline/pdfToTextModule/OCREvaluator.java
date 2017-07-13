@@ -1,4 +1,4 @@
-package main.java.com.silicolife.textmining.patentpipeline.pdfToTextModule;
+package com.silicolife.textmining.patentpipeline.pdfToTextModule;
 
 import java.util.ArrayList;
 import java.util.Arrays;

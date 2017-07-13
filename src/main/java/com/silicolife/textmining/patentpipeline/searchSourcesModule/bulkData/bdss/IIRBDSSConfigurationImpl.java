@@ -1,4 +1,4 @@
-package main.java.com.silicolife.textmining.patentpipeline.searchSourcesModule.bulkData.bdss;
+package com.silicolife.textmining.patentpipeline.searchSourcesModule.bulkData.bdss;
 
 import java.util.ArrayList;
 import java.util.List;

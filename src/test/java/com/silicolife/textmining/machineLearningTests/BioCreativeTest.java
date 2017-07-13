@@ -1,5 +1,5 @@
 
-package test.java.com.silicolife.textmining.machineLearningTests;
+package com.silicolife.textmining.machineLearningTests;
 
 
 import java.io.FileWriter;

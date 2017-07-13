@@ -1,4 +1,4 @@
-package test.java.com.silicolife.textmining.dictionaryLoader;
+package com.silicolife.textmining.dictionaryLoader;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,8 +17,7 @@ import com.silicolife.textmining.core.interfaces.process.IE.io.export.DefaultDel
 import com.silicolife.textmining.core.interfaces.process.IE.io.export.Delimiter;
 import com.silicolife.textmining.core.interfaces.process.IE.io.export.TextDelimiter;
 import com.silicolife.textmining.core.interfaces.resource.IResourceElement;
-
-import main.java.com.silicolife.textmining.patentpipeline.loaders.JoChemDictionaryTSVLoader;
+import com.silicolife.textmining.patentpipeline.loaders.JoChemDictionaryTSVLoader;
 
 public class testJoChemDictLoader {
 

@@ -1,4 +1,4 @@
-package test.java.com.silicolife.textmining.linneausTaggerToMemoryRun;
+package com.silicolife.textmining.linneausTaggerToMemoryRun;
 
 import static org.junit.Assert.assertTrue;
 
@@ -12,6 +12,9 @@ import java.util.Set;
 
 import org.junit.Test;
 
+import com.silicolife.textmining.Loaders.CHEMDNERLoaderInMemory;
+import com.silicolife.textmining.Loaders.CorpusCreationInMemory;
+import com.silicolife.textmining.Loaders.CorpusImplInMemory;
 import com.silicolife.textmining.core.datastructures.corpora.CorpusCreateConfigurationImpl;
 import com.silicolife.textmining.core.datastructures.process.IEProcessImpl;
 import com.silicolife.textmining.core.datastructures.process.ProcessOriginImpl;
@@ -29,10 +32,6 @@ import com.silicolife.textmining.core.interfaces.core.report.corpora.ICorpusCrea
 import com.silicolife.textmining.core.interfaces.process.IProcessOrigin;
 import com.silicolife.textmining.core.interfaces.process.IE.IIEProcess;
 import com.silicolife.textmining.processes.corpora.loaders.CHEMDNERCorpusLoader;
-
-import main.java.com.silicolife.textmining.Loaders.CHEMDNERLoaderInMemory;
-import main.java.com.silicolife.textmining.Loaders.CorpusCreationInMemory;
-import main.java.com.silicolife.textmining.Loaders.CorpusImplInMemory;
 
 public class CHEMDNERCorpusToLinneausTaggerInMemory {
 	@Test

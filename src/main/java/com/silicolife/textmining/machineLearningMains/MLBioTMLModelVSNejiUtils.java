@@ -1,4 +1,4 @@
-package main.java.com.silicolife.textmining.machineLearningMains;
+package com.silicolife.textmining.machineLearningMains;
 
 import java.io.BufferedReader;
 import java.io.File;

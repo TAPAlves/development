@@ -1,4 +1,4 @@
-package main.java.com.silicolife.textmining.patentpipeline.searchSourcesModule.bulkData.bdss;
+package com.silicolife.textmining.patentpipeline.searchSourcesModule.bulkData.bdss;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;

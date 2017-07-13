@@ -1,4 +1,4 @@
-package test.java.com.silicolife.textmining.patentpipeline.bulkData;
+package com.silicolife.textmining.patentpipeline.bulkData;
 
 import java.util.Properties;
 
@@ -11,6 +11,10 @@ import com.silicolife.textmining.core.interfaces.core.dataaccess.exception.ANote
 import com.silicolife.textmining.core.interfaces.core.report.processes.ir.IIRSearchProcessReport;
 import com.silicolife.textmining.core.interfaces.process.IR.exception.InternetConnectionProblemException;
 import com.silicolife.textmining.machinelearning.DatabaseConnectionInit;
+import com.silicolife.textmining.patentpipeline.searchSourcesModule.pubChemAPI.IIRPubChemPatentIDRetrievalConfiguration;
+import com.silicolife.textmining.patentpipeline.searchSourcesModule.pubChemAPI.IRPubChemPatentIDRetrieval;
+import com.silicolife.textmining.patentpipeline.searchSourcesModule.pubChemAPI.IRPubChemPatentIDRetrievalConfigurationImpl;
+import com.silicolife.textmining.patentpipeline.searchSourcesModule.pubChemAPI.pugHelp.PUGRestInputEnum;
 import com.silicolife.textmining.processes.ir.patentpipeline.PatentPiplineSearch;
 import com.silicolife.textmining.processes.ir.patentpipeline.components.metainfomodules.ops.IROPSPatentMetaInformationRetrievalConfigurationImpl;
 import com.silicolife.textmining.processes.ir.patentpipeline.components.metainfomodules.ops.OPSPatentMetaInformationRetrieval;
@@ -24,11 +28,6 @@ import com.silicolife.textmining.processes.ir.patentpipeline.core.metainfomodule
 import com.silicolife.textmining.processes.ir.patentpipeline.core.metainfomodule.WrongIRPatentMetaInformationRetrievalConfigurationException;
 import com.silicolife.textmining.processes.ir.patentpipeline.core.searchmodule.IRPatentSearchConfigurationImpl;
 import com.silicolife.textmining.processes.ir.patentpipeline.core.searchmodule.WrongIRPatentIDRecoverConfigurationException;
-
-import main.java.com.silicolife.textmining.patentpipeline.searchSourcesModule.pubChemAPI.IIRPubChemPatentIDRetrievalConfiguration;
-import main.java.com.silicolife.textmining.patentpipeline.searchSourcesModule.pubChemAPI.IRPubChemPatentIDRetrieval;
-import main.java.com.silicolife.textmining.patentpipeline.searchSourcesModule.pubChemAPI.IRPubChemPatentIDRetrievalConfigurationImpl;
-import main.java.com.silicolife.textmining.patentpipeline.searchSourcesModule.pubChemAPI.pugHelp.PUGRestInputEnum;
 
 public class TestPUGRestInterlinkedWithAnote {
 

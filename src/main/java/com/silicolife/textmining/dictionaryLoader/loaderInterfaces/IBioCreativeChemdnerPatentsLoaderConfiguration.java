@@ -1,4 +1,4 @@
-package main.java.com.silicolife.textmining.dictionaryLoader.loaderInterfaces;
+package com.silicolife.textmining.dictionaryLoader.loaderInterfaces;
 
 import java.util.List;
 

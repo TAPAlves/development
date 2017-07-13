@@ -1,4 +1,4 @@
-package main.java.com.silicolife.textmining.patentpipeline.loaders;
+package com.silicolife.textmining.patentpipeline.loaders;
 
 import java.io.BufferedReader;
 import java.io.File;

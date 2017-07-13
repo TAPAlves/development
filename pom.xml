@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>devTest</groupId>
   <artifactId>devTest</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0.0</version>
   
   	<repositories>
 		<repository>
@@ -27,7 +27,7 @@
   
   
   <build>
-    <sourceDirectory>src</sourceDirectory>
+    <sourceDirectory>src/main/java</sourceDirectory>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>

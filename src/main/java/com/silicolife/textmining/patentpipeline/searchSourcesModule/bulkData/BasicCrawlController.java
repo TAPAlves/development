@@ -1,4 +1,4 @@
-package main.java.com.silicolife.textmining.patentpipeline.searchSourcesModule.bulkData;
+package com.silicolife.textmining.patentpipeline.searchSourcesModule.bulkData;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package main.java.com.silicolife.textmining.dictionaryLoader.loaderInterfaces;
+package com.silicolife.textmining.dictionaryLoader.loaderInterfaces;
 
 public class WrongBioCreativeChemdnerPatentsLoaderConfigurationException extends Exception{
 

@@ -1,4 +1,4 @@
-package main.java.com.silicolife.textmining.LinnaeusExtension;
+package com.silicolife.textmining.LinnaeusExtension;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

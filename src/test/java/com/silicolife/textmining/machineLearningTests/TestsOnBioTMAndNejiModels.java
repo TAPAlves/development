@@ -1,4 +1,4 @@
-package test.java.com.silicolife.textmining.machineLearningTests;
+package com.silicolife.textmining.machineLearningTests;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -12,6 +12,7 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
+import com.silicolife.textmining.machineLearningMains.MLBioTMLModelVSNejiUtils;
 import com.silicolife.textmining.machinelearning.biotml.core.BioTMLConstants;
 import com.silicolife.textmining.machinelearning.biotml.core.annotator.BioTMLMalletAnnotatorImpl;
 import com.silicolife.textmining.machinelearning.biotml.core.exception.BioTMLException;
@@ -26,7 +27,6 @@ import com.silicolife.textmining.machinelearning.biotml.reader.BioTMLCorpusReade
 import com.silicolife.textmining.machinelearning.biotml.reader.BioTMLModelReaderImpl;
 import com.silicolife.textmining.machinelearning.biotml.writer.BioTMLModelWriterImpl;
 
-import main.java.com.silicolife.textmining.machineLearningMains.MLBioTMLModelVSNejiUtils;
 import pt.ua.tm.neji.core.module.Reader;
 import pt.ua.tm.neji.core.module.Writer;
 import pt.ua.tm.neji.core.parser.Parser;

@@ -1,10 +1,10 @@
-package test.java.com.silicolife.textmining.machineLearningTests;
+package com.silicolife.textmining.machineLearningTests;
 
 import java.io.IOException;
 
 import org.junit.Test;
 
-import main.java.com.silicolife.textmining.machineLearningMains.MLBioTMLModelVSNejiUtils;
+import com.silicolife.textmining.machineLearningMains.MLBioTMLModelVSNejiUtils;
 
 public class TESTE {
 
